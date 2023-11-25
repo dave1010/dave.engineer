@@ -1,0 +1,117 @@
+:root {
+    --color-pink: #f037f6;
+    --color-pink-faded: #f037f680;
+    --color-light-blue: #56b6f0;
+    --color-midnight-blue: #10151e;
+    --color-white: #d4d6e1;
+    --color-black: #000000;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f2f5f8;
+    padding: 50px 0;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto 100vh;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff99;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.left-col, .right-col {
+    flex: 1;
+    padding: 40px;
+}
+
+.avatar {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.link-block {
+    display: block;
+    background-color: #f9fafb;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.link-block img {
+    width: 40px;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.link-block h3 {
+    display: inline-block;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.link-block:hover {
+    background-color: #dadde0;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-col, .right-col {
+        padding: 20px;
+    }
+
+    .avatar {
+        width: 100px;
+        margin: 0 auto 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .link-block {
+        margin: 10px 0;
+    }
+}
+
+#canvasIframe {
+    position: fixed;
+    top: -50%;
+    left: -10%;
+    width: 120%;
+    height: 150%;
+    z-index: -1;
+}
