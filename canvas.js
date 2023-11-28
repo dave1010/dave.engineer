@@ -3,7 +3,7 @@
 const canvas = document.getElementById('gameOfLifeCanvas');
 const ctx = canvas.getContext('2d');
 
-let cellSize = 5;
+let cellSize = 8;
 let rows, cols;
 let hue = 300
 var alpha = 0.17; // accessible to parent window
