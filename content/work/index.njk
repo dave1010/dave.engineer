@@ -1,0 +1,70 @@
+---
+layout: base.njk
+title: Work - Dave Hulbert
+---
+<main class="px-6 py-16 sm:px-10">
+  <div class="mx-auto flex max-w-5xl flex-col gap-16">
+    <header class="space-y-6 text-center sm:text-left">
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">Selected work</h1>
+      <p class="text-lg text-slate-300">
+        A collection of experiments, products, and collaborations. Featured projects showcase the tools I'm most
+        excited about right now, with more explorations listed below.
+      </p>
+    </header>
+
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        {% for item in collections.workItems %}
+          {% if item.data.featured %}
+          <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
+            <div class="space-y-3">
+              <h3 class="text-xl font-semibold text-slate-100">
+                <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
+              </h3>
+              {% if item.data.description %}
+              <p class="text-sm text-slate-300">{{ item.data.description }}</p>
+              {% endif %}
+            </div>
+            {% if item.data.externalUrl %}
+            <div class="flex flex-wrap gap-3 text-sm">
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+                href="{{ item.url }}"
+              >
+                Learn more
+              </a>
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
+                href="{{ item.data.externalUrl }}"
+                target="_blank"
+                rel="noopener"
+              >
+                Visit project
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            {% endif %}
+          </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">More work</h2>
+      <ul class="space-y-3 text-slate-300">
+        {% for item in collections.workItems %}
+          {% if not item.data.featured %}
+          <li>
+            <a class="font-semibold text-slate-100 transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
+            {% if item.data.description %}
+            <span class="text-slate-400">— {{ item.data.description }}</span>
+            {% endif %}
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+</main>
