@@ -7,7 +7,9 @@ tags:
 
 Quick strace command that I use all the time to see what files a process is opening:
 
-    strace -f <command> 2>&1 | grep ^open
+```sh
+strace -f <command> 2>&1 | grep ^open
+```
 
 Really useful to see what config files something is reading (and the order) or to see what PHP (or similar) files are being included.
 
