@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Notes on designing through mocking"
-date:   2014-10-30 21:44:07
-categories: design php
+title: "Notes on designing through mocking"
+date: 2014-10-30
+tags:
+  - design
+  - php
 ---
 
 My notes on Everzet's talk "Design how your objects talk through mocking" at PHPNW14

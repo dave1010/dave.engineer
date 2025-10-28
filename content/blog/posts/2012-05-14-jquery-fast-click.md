@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "New jQuery plugin for mobile browsers: jQuery Fast Click"
-date:   2012-05-14 12:24:07
-categories: javascript mobile
+title: "New jQuery plugin for mobile browsers: jQuery Fast Click"
+date: 2012-05-14
+tags:
+  - javascript
+  - mobile
 ---
 
 Mobile browsers delay browser clicks (or, more accurately, taps) by 300ms so they can detect double taps. This can be great but if you want to speed up clicks in your mobile site or app, you can use my plugin: [jQuery Fast Click](http://dave1010.github.com/jquery-fast-click/).

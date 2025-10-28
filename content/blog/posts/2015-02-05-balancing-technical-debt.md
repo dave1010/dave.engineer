@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Balancing Technical Debt and Clean Code talk at the BCS"
-date:   2015-02-05 07:14:07
-categories: talk technical-debt
+title: "Balancing Technical Debt and Clean Code talk at the BCS"
+date: 2015-02-05
+tags:
+  - talk
+  - technical-debt
 ---
 
 Last week I gave a [talk at BCS Dorset](http://www.dorset.bcs.org/events/base-balancing-technical-debt) about technical debt:

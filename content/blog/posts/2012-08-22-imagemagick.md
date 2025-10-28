@@ -1,8 +1,10 @@
 ---
-layout: post
-title:  "Batch converting images with ImageMagick"
-date:   2012-08-22 21:24:07
-categories: bash shell linux
+title: "Batch converting images with ImageMagick"
+date: 2012-08-22
+tags:
+  - bash
+  - shell
+  - linux
 ---
 
 

@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Taking Responsive Design a few steps forwards"
-date:   2012-05-18 12:24:07
-categories: css web
+title: "Taking Responsive Design a few steps forwards"
+date: 2012-05-18
+tags:
+  - css
+  - web
 ---
 
 Responsive design today is great: different layouts can be served to different screen sizes. In the future, extra media queries could be available to web developers and designers to allow the content of a page respond to a whole range of capabilities.
