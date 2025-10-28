@@ -5,14 +5,18 @@
   "main": "eleventy.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "eleventy",
-    "dev": "eleventy --serve"
+    "tailwind:build": "tailwindcss -i ./src/styles/tailwind.css -o ./public/style.css --minify",
+    "tailwind:watch": "tailwindcss -i ./src/styles/tailwind.css -o ./public/style.css --watch",
+    "build": "npm run tailwind:build && eleventy",
+    "dev": "concurrently -k \"npm:tailwind:watch\" \"eleventy --serve\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "concurrently": "^8.2.2",
+    "tailwindcss": "^3.4.10"
   }
 }

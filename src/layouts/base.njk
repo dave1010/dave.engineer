@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full bg-slate-950">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="https://avatars.githubusercontent.com/u/50682?v=4">
 </head>
-<body>
-  {{ content | safe }}
+<body class="h-full bg-slate-950 text-slate-100 font-sans antialiased">
+  <div class="min-h-screen">
+    {{ content | safe }}
+  </div>
   {% if scripts %}
     {{ scripts | safe }}
   {% endif %}
