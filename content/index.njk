@@ -1,63 +1,109 @@
 ---
 layout: base.njk
 title: Dave Hulbert - Engineer
-scripts: '<script src="/iframe.js"></script>'
 ---
-<iframe src="/canvas.html" id="canvasIframe"></iframe>
+<main class="px-6 py-16 sm:px-10">
+  <div class="mx-auto max-w-5xl space-y-16">
+    <section class="flex flex-col gap-10 lg:flex-row lg:items-center">
+      <div class="flex flex-col items-center text-center lg:w-64 lg:items-start lg:text-left">
+        <img
+          class="h-40 w-40 rounded-full border border-slate-800 shadow-2xl"
+          src="https://avatars.githubusercontent.com/u/50682?v=4"
+          alt="Dave Hulbert's Avatar"
+        >
+        <div class="mt-6 space-y-2">
+          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Dave Hulbert</h1>
+          <p class="text-lg text-slate-300">Engineering leader • AI strategist • Compliance advocate</p>
+        </div>
+      </div>
 
-<div class="container">
-  <div class="left-col">
-    <img class="avatar" src="https://avatars.githubusercontent.com/u/50682?v=4" alt="Dave Hulbert&#39;s Avatar">
-    <h1>Dave Hulbert</h1>
-    <h2>Engineer and AI Expert</h2>
-    <p>
-      Specializing in Engineering, AI, Strategy, and Compliance.
-      Proudly working at <a href="https://passenger.tech/">Passenger</a>. Based in Poole, Bournemouth, UK.
-    </p>
-    <h3>
-      What are all the colours?
-    </h3>
-    <p>
-      This is <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway&#39;s Game of Life</a>,
-      a cellular automaton where each cell in a grid lives, dies or multiplies depending on how many
-      neighbours it has.
-    </p>
-    <p>
-      The incredibly simple rules result in chaotic systems, depicting the vastness of global interactions,
-      the intricate workings of teams and organizations, and the complexity of software engineering.
-    </p>
-    <p>Scroll down, then move your mouse to create life. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion#user_preferences">Disable motion</a>.</p>
+      <div class="flex-1 space-y-5 text-lg text-slate-300">
+        <p>
+          I design resilient socio-technical systems and lead teams that deliver trustworthy software.
+          My work spans engineering leadership, AI strategy, and navigating the ever-shifting world of
+          governance and regulation.
+        </p>
+        <p>
+          I'm currently shaping the future of public transport technology at
+          <a class="text-sky-400 hover:text-sky-300" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
+          in Poole, Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems,
+          automation, and the craft of well-run teams.
+        </p>
+        <p>
+          Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply
+          looking for pragmatic advice, I'd love to connect.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Find me around the web</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <a
+          href="https://medium.com/@dave1010"
+          target="_blank"
+          rel="noopener"
+          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+        >
+          <img src="/img/Medium_black.png" alt="Medium Icon" width="40" height="40" class="shrink-0">
+          <div>
+            <h3 class="text-xl font-semibold text-slate-100">Medium</h3>
+            <p class="mt-1 text-sm text-slate-400">Read essays on leadership, AI, and systems thinking.</p>
+          </div>
+        </a>
+
+        <a
+          href="https://github.com/dave1010"
+          target="_blank"
+          rel="noopener"
+          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+        >
+          <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40" class="shrink-0">
+          <div>
+            <h3 class="text-xl font-semibold text-slate-100">GitHub</h3>
+            <p class="mt-1 text-sm text-slate-400">Browse experiments, utilities, and longer-lived projects.</p>
+          </div>
+        </a>
+
+        <a
+          href="https://til.dave.engineer"
+          target="_blank"
+          rel="noopener"
+          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+        >
+          <img src="/img/RSS_black.png" alt="RSS Icon" width="40" height="40" class="shrink-0">
+          <div>
+            <h3 class="text-xl font-semibold text-slate-100">Today I Learned</h3>
+            <p class="mt-1 text-sm text-slate-400">A running log of the curious details I collect each day.</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/dave1010/"
+          target="_blank"
+          rel="noopener"
+          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+        >
+          <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40" class="shrink-0">
+          <div>
+            <h3 class="text-xl font-semibold text-slate-100">LinkedIn</h3>
+            <p class="mt-1 text-sm text-slate-400">Say hello or talk about your next engineering challenge.</p>
+          </div>
+        </a>
+
+        <a
+          href="https://twitter.com/dave1010"
+          target="_blank"
+          rel="noopener"
+          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+        >
+          <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40" class="shrink-0">
+          <div>
+            <h3 class="text-xl font-semibold text-slate-100">Twitter</h3>
+            <p class="mt-1 text-sm text-slate-400">Follow <code>@dave1010</code> for occasional musings.</p>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
-
-  <div class="right-col">
-    <a href="https://medium.com/@dave1010" class="link-block" target="_blank">
-      <img src="/img/Medium_black.png" alt="Medium Icon" width="40" height="40">
-      <h3>Medium</h3>
-      <p>Read my articles and stories.</p>
-    </a>
-
-    <a href="https://github.com/dave1010" class="link-block" target="_blank">
-      <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40">
-      <h3>GitHub</h3>
-      <p>Check out my code and projects.</p>
-    </a>
-
-    <a href="https://til.dave.engineer" class="link-block" target="_blank">
-      <img src="/img/RSS_black.png" alt="RSS Icon" width="40" height="40">
-      <h3>Today I Learned</h3>
-      <p>Random things I&#39;m learning every day.</p>
-    </a>
-
-    <a href="https://www.linkedin.com/in/dave1010/" class="link-block" target="_blank">
-      <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40">
-      <h3>LinkedIn</h3>
-      <p>Connect on LinkedIn.</p>
-    </a>
-
-    <a href="https://twitter.com/dave1010" class="link-block" target="_blank">
-      <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40">
-      <h3>Twitter</h3>
-      <p>Follow <code>@dave1010</code></p>
-    </a>
-  </div>
-</div>
+</main>
