@@ -15,15 +15,11 @@ title: Dave Hulbert - Blog
       {% for post in collections.blog | reverse %}
       <article class="group flex flex-col gap-3 px-6 py-6 transition hover:bg-slate-900/70 sm:px-8">
         <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
-          <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-          {% if post.data.categories %}
-            {% set categoryList = post.data.categories %}
-            {% if categoryList is string %}
-              {% set categoryList = categoryList | split(' ') %}
-            {% endif %}
+          <time datetime="{{ post.data.isoDate }}">{{ post.data.displayDate }}</time>
+          {% if post.data.topicTags and post.data.topicTags | length %}
             <ul class="flex flex-wrap gap-2">
-              {% for category in categoryList %}
-              <li class="rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs uppercase tracking-wide text-slate-300">{{ category }}</li>
+              {% for tag in post.data.topicTags %}
+              <li class="rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs uppercase tracking-wide text-slate-300">{{ tag }}</li>
               {% endfor %}
             </ul>
           {% endif %}

@@ -1,8 +1,10 @@
 ---
-layout: post
-title:  "Should I use global variables?"
-date:   2014-11-04 22:44:07
-categories: design php solid
+title: "Should I use global variables?"
+date: 2014-11-04
+tags:
+  - design
+  - php
+  - solid
 ---
 
 Someone [posted a question](http://www.reddit.com/r/PHP/comments/2lct7y/question_do_you_use_globals_or_not/) about using global variables on [r/php](http://www.reddit.com/r/PHP), which I answered. Copied here for posterity.

@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Better Dependency Injection in Laravel"
-date:   2012-01-18 12:24:07
-categories: php laravel
+title: "Better Dependency Injection in Laravel"
+date: 2012-01-18
+tags:
+  - php
+  - laravel
 ---
 
 We all love using Dependency Injection but often Laravel’s facades and IoC container are used more like a static service locator, which (despite being testable) can easily lead to violations of the [Dependency Inversion Principle](http://en.wikipedia.org/wiki/Dependency_inversion_principle) (the D in [SOLID](http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29)).

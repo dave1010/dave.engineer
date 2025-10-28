@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Immediately-Invoked Function Expressions in PHP"
-date:   2012-07-30 08:14:07
-categories: php javascript
+title: "Immediately-Invoked Function Expressions in PHP"
+date: 2012-07-30
+tags:
+  - php
+  - javascript
 ---
 
 

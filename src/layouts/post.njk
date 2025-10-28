@@ -7,21 +7,17 @@ layout: base.njk
       <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="/blog/">Blog</a>
       <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ title }}</h1>
       <p class="text-base text-slate-400">
-        <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+        <time datetime="{{ isoDate }}">{{ displayDate }}</time>
       </p>
-      {% if categories %}
-      {% set categoryList = categories %}
-      {% if categoryList is string %}
-        {% set categoryList = categoryList | split(' ') %}
-      {% endif %}
+      {% if topicTags and topicTags | length %}
       <ul class="flex flex-wrap gap-2 text-sm text-slate-300">
-        {% for category in categoryList %}
-        <li class="rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1">{{ category }}</li>
+        {% for tag in topicTags %}
+        <li class="rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1">{{ tag }}</li>
         {% endfor %}
       </ul>
       {% endif %}
     </header>
-    <div class="blog-post__content space-y-6 text-lg leading-relaxed text-slate-200">
+    <div class="prose prose-invert prose-lg max-w-none">
       {{ content | safe }}
     </div>
   </article>

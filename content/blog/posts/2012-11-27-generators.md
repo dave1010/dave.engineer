@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  "Generators in PHP 5.5 (with PDO)"
-date:   2012-11-27 08:14:07
-categories: php
+title: "Generators in PHP 5.5 (with PDO)"
+date: 2012-11-27
+tags:
+  - php
 ---
 
 As the first alpha of PHP 5.5 has been released, now is a great time to play with its new features. The first new feature is [generators](https://wiki.php.net/rfc/generators). Generators are like very simple iterators.

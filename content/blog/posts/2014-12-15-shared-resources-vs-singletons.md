@@ -1,8 +1,10 @@
 ---
-layout: post
-title:  "Singletons: bad. Shared resources in a DIC: good."
-date:   2014-12-15 07:44:07
-categories: design php solid
+title: "Singletons: bad. Shared resources in a DIC: good."
+date: 2014-12-15
+tags:
+  - design
+  - php
+  - solid
 ---
 
 ## Singletons
