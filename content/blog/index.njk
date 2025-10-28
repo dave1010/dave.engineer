@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: Dave Hulbert - Blog
+---
+<main class="px-6 py-16 sm:px-10">
+  <div class="mx-auto flex max-w-4xl flex-col gap-12">
+    <header class="space-y-4">
+      <p class="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Archive</p>
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">Writing and Essays</h1>
+      <p class="text-lg text-slate-300">
+        A collection of posts from my previous blog, spanning engineering, leadership, and experiments.
+      </p>
+    </header>
+    <div class="flex flex-col divide-y divide-slate-800/80 border border-slate-800/60 bg-slate-900/40">
+      {% for post in collections.blog | reverse %}
+      <article class="group flex flex-col gap-3 px-6 py-6 transition hover:bg-slate-900/70 sm:px-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
+          <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+          {% if post.data.categories %}
+            {% set categoryList = post.data.categories %}
+            {% if categoryList is string %}
+              {% set categoryList = categoryList | split(' ') %}
+            {% endif %}
+            <ul class="flex flex-wrap gap-2">
+              {% for category in categoryList %}
+              <li class="rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs uppercase tracking-wide text-slate-300">{{ category }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">
+          <a class="hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
+        </h2>
+        {% if post.templateContent %}
+        {% set summary = post.templateContent | striptags | truncate(220, true, '…') %}
+        <p class="text-base text-slate-300">{{ summary }}</p>
+        {% endif %}
+        <a class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" href="{{ post.url }}">
+          Read more
+          <span aria-hidden="true">→</span>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</main>
