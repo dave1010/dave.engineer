@@ -1,3 +1,26 @@
+import slugify from "../../../scripts/slugify.js";
+
+const normaliseType = (type) => {
+  if (typeof type !== "string") {
+    return "post";
+  }
+
+  const value = type.toLowerCase();
+  return value === "til" ? "til" : "post";
+};
+
+const getTopicTags = (tags) => {
+  if (Array.isArray(tags)) {
+    return tags.filter((tag) => tag !== "blog");
+  }
+
+  if (typeof tags === "string") {
+    return tags === "blog" ? [] : [tags];
+  }
+
+  return [];
+};
+
 export default {
   layout: "post.njk",
   tags: ["blog"],
@@ -43,13 +66,19 @@ export default {
         year: "numeric",
       });
     },
-    topicTags: (data) => {
-      const tags = Array.isArray(data.tags)
-        ? data.tags
-        : typeof data.tags === "string"
-          ? [data.tags]
-          : [];
-      return tags.filter((tag) => tag !== "blog");
+    type: (data) => normaliseType(data.type),
+    typeLabel: (data) => (normaliseType(data.type) === "til" ? "Today I Learned" : "Blog Post"),
+    topicTags: (data) => getTopicTags(data.tags),
+    topicTagLinks: (data) => {
+      const tags = getTopicTags(data.tags);
+      return tags.map((tag) => {
+        const slug = slugify(tag);
+        return {
+          name: tag,
+          slug,
+          url: `/blog/tag/${slug}/`,
+        };
+      });
     },
   },
 };

@@ -1,0 +1,143 @@
+---
+layout: base.njk
+---
+{% set postsToRender = posts | default([]) %}
+{% if (postsToRender | length) == 0 and collections.blog %}
+  {% set postsToRender = collections.blog | reverse %}
+{% endif %}
+{% set typeGroups = collections.blogPostsByType | default([]) %}
+{% set totalCount = 0 %}
+{% for group in typeGroups %}
+  {% set totalCount = totalCount + (group.count | default(group.items | length)) %}
+{% endfor %}
+{% set tagList = collections.blogTags | default([]) %}
+<main class="px-6 py-16 sm:px-10">
+  <div class="mx-auto flex max-w-4xl flex-col gap-12">
+    <header class="space-y-4">
+      <a
+        class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
+        href="/"
+      >
+        <span aria-hidden="true">←</span>
+        Back to home
+      </a>
+      <p class="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Archive</p>
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ listTitle or "Writing" }}</h1>
+      {% if listDescription %}
+        <p class="text-lg text-slate-300">{{ listDescription }}</p>
+      {% endif %}
+    </header>
+
+    {% if typeGroups | length %}
+    <nav aria-label="Filter posts by type" class="flex flex-col gap-3">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Filter by type</p>
+      <ul class="flex flex-wrap gap-2">
+        <li>
+          {% set isAllActive = not currentType %}
+          <a
+            href="/blog/"
+            class="inline-flex items-center gap-2 rounded-full border border-slate-800/70 bg-slate-900/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition hover:border-slate-700 hover:text-slate-100 {{ "border-sky-500/80 text-sky-200" if isAllActive }}"
+            {% if isAllActive %}aria-current="page"{% endif %}
+          >
+            All
+            <span class="rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400">{{ totalCount }}</span>
+          </a>
+        </li>
+        {% for group in typeGroups %}
+        <li>
+          {% set isActive = currentType == group.type %}
+          {% set badgeClasses = "border-sky-500/80 text-sky-200" if group.type == "post" else "border-lime-500/80 text-lime-200" %}
+          <a
+            href="{{ group.permalink }}"
+            class="inline-flex items-center gap-2 rounded-full border border-slate-800/70 bg-slate-900/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition hover:border-slate-700 hover:text-slate-100 {{ badgeClasses if isActive }}"
+            {% if isActive %}aria-current="page"{% endif %}
+          >
+            {{ group.label }}
+            <span class="rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400">{{ group.count }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}
+
+    {% if tagList | length %}
+    <section class="space-y-3">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by tag</p>
+      <div class="flex flex-wrap gap-2">
+        {% for tag in tagList %}
+        {% set isCurrentTag = currentTagSlug and currentTagSlug == tag.slug %}
+        <a
+          href="{{ tag.permalink }}"
+          class="inline-flex items-center gap-2 rounded-full border border-slate-800/70 bg-slate-900/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-700 hover:text-slate-100 {{ "border-sky-500/80 text-sky-200" if isCurrentTag }}"
+          {% if isCurrentTag %}aria-current="page"{% endif %}
+        >
+          {{ tag.name }}
+          <span class="rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400">{{ tag.count }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if content | trim %}
+      <div class="prose prose-invert max-w-none">{{ content | safe }}</div>
+    {% endif %}
+
+    <div class="flex flex-col divide-y divide-slate-800/80 border border-slate-800/60 bg-slate-900/40">
+      {% if postsToRender | length %}
+        {% for post in postsToRender %}
+        <article class="group flex flex-col gap-3 px-6 py-6 transition hover:bg-slate-900/70 sm:px-8">
+          <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
+            <div class="flex flex-wrap items-center gap-3">
+              {% set typeClass = "border-sky-400/40 bg-sky-500/10 text-sky-200" %}
+              {% if post.data.type == "til" %}
+                {% set typeClass = "border-lime-400/40 bg-lime-400/10 text-lime-100" %}
+              {% endif %}
+              {% set typeLabel = post.data.typeLabel %}
+              {% if not typeLabel %}
+                {% if post.data.type == "til" %}
+                  {% set typeLabel = "Today I Learned" %}
+                {% else %}
+                  {% set typeLabel = "Blog Post" %}
+                {% endif %}
+              {% endif %}
+              <span class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide {{ typeClass }}">
+                {{ typeLabel }}
+              </span>
+              <time datetime="{{ post.data.isoDate }}">{{ post.data.displayDate }}</time>
+            </div>
+            {% if post.data.topicTagLinks and post.data.topicTagLinks | length %}
+            <ul class="flex flex-wrap gap-2">
+              {% for tag in post.data.topicTagLinks %}
+              <li>
+                <a
+                  class="inline-flex items-center rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs uppercase tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100"
+                  href="{{ tag.url }}"
+                >
+                  {{ tag.name }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          <h2 class="text-2xl font-semibold tracking-tight text-slate-100">
+            <a class="hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
+          </h2>
+          {% if post.templateContent %}
+          {% set summary = post.templateContent | striptags | truncate(220, true, "…") %}
+          <p class="text-base text-slate-300">{{ summary }}</p>
+          {% endif %}
+          <a class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" href="{{ post.url }}">
+            Read more
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+        {% endfor %}
+      {% else %}
+        <p class="px-6 py-10 text-center text-sm text-slate-400 sm:px-8">No posts found.</p>
+      {% endif %}
+    </div>
+  </div>
+</main>
