@@ -85,6 +85,23 @@ export default function (eleventyConfig) {
     return tags.sort((a, b) => a.name.localeCompare(b.name));
   });
 
+  eleventyConfig.addCollection("workItems", (collectionApi) => {
+    const items = collectionApi.getFilteredByTag("work");
+
+    items.sort((a, b) => {
+      const orderA = Number.isFinite(a.data.order) ? a.data.order : Number.MAX_SAFE_INTEGER;
+      const orderB = Number.isFinite(b.data.order) ? b.data.order : Number.MAX_SAFE_INTEGER;
+
+      if (orderA === orderB) {
+        return a.data.title.localeCompare(b.data.title);
+      }
+
+      return orderA - orderB;
+    });
+
+    return items;
+  });
+
   eleventyConfig.addFilter("slugify", slugify);
 
   return {

@@ -1,0 +1,30 @@
+---
+layout: base.njk
+---
+<main class="px-6 py-16 sm:px-10">
+  <article class="mx-auto flex max-w-3xl flex-col gap-10">
+    <header class="space-y-4">
+      <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="/work/">Work</a>
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ title }}</h1>
+      {% if description %}
+      <p class="text-lg text-slate-300">{{ description }}</p>
+      {% endif %}
+      {% if externalUrl %}
+      <div>
+        <a
+          class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-4 py-2 text-sm font-semibold text-sky-300 transition hover:bg-sky-500/10"
+          href="{{ externalUrl }}"
+          target="_blank"
+          rel="noopener"
+        >
+          View project
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      {% endif %}
+    </header>
+    <div class="prose prose-invert prose-lg max-w-none">
+      {{ content | safe }}
+    </div>
+  </article>
+</main>
