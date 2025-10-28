@@ -8,6 +8,6 @@ export default function(eleventyConfig) {
     },
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
-    templateFormats: ["njk", "md", "markdown"]
+    templateFormats: ["njk", "md"]
   };
 }
