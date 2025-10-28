@@ -32,12 +32,16 @@ I wasn't sure about this but I think it's worth mentioning. It's not something t
 
 The HTTP spec says that
 
-    Cache-Control: no-cache
-    Cache-Control: private
+```http
+Cache-Control: no-cache
+Cache-Control: private
+```
 
 is the same as
 
-    Cache-Control: no-cache, private
+```http
+Cache-Control: no-cache, private
+```
 
 If a request comes in like the former, then should it be transformed into the latter by PHP when proxying the request? What about requests with different case header names? The HTTP spec is explicit in these cases and it makes sense in 99% of cases for PSR-7 to follow this. 
 

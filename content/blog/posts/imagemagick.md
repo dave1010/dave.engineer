@@ -18,8 +18,10 @@ ImageMagick’s main commands are `convert` (create a new file) and `mogrify` (o
 
 If you need to reduce the file size of some jpgs (eg so their more suitable for the web), you can mogrify all images in the current directory like this:
 
-    # give all jpg images a quality of 70
-    mogrify -quality 70 *.jpg
+```bash
+# give all jpg images a quality of 70
+mogrify -quality 70 *.jpg
+```
 
 The 70 here is the quality, which can be anything from 0 to 100. Unfortunately increasing the quality of a low quality image has no effect, [unless you’re CSI](http://www.lolwtfcomics.com/upload/uploads/1317571091.jpg).
 
@@ -27,18 +29,22 @@ The 70 here is the quality, which can be anything from 0 to 100. Unfortunately i
 
 To shrink large images (8MP images are common on today’s smartphones), use the `-resize` option instead of (or as well as) `-quality`:
 
-    # shrink to 1/4 original size
-    mogrify -resize 25% photo.jpg 
-    # resize to fit in a box 1024x768
-    mogrify -resize 1024x768 photo.jpg 
-    # resize to max width 800px, keeping aspect ratio, reducing quality to 60
-    mogrify -resize 800 -quality 60 photo.jpg
+```bash
+# shrink to 1/4 original size
+mogrify -resize 25% photo.jpg
+# resize to fit in a box 1024x768
+mogrify -resize 1024x768 photo.jpg
+# resize to max width 800px, keeping aspect ratio, reducing quality to 60
+mogrify -resize 800 -quality 60 photo.jpg
+```
 
 ## Convert between JPG / PNG / GIF
 
 Unlike `mogrify`, `convert` takes input and output file parameters. This means converting between different formats is as simple as choosing a different output format:
 
-    convert image.png image.jpg
+```bash
+convert image.png image.jpg
+```
 
 If you’re dealing with PNG images, [Pngcrush](http://pmt.sourceforge.net/pngcrush/) is useful too.
 
