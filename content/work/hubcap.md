@@ -8,5 +8,11 @@ tags:
 featured: true
 order: 4
 ---
-Hubcap demonstrates how far a compact AI agent can go in just a few lines of code. It reads repositories, reasons about
-changes, submits fixes, and makes external API calls while keeping developers in control of the workflow.
+
+Hubcap was my first AI coding agent, built as a working proof of concept in August 2023.
+
+Just like Claude Code (released Feb 2025), OpenAI Codex CLI (April 2025), and others, you can give Hubcap a goal and it will keep going until its done.
+
+Hubcap works surprisingly well but isn't safe or as useful as more modern coding agents.
+
+Hubcap demonstrates how far a compact AI agent can go in just a few lines of code.
