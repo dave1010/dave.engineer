@@ -6,7 +6,8 @@ websiteUrl: https://ceo-bench.dave.engineer/
 githubUrl: https://github.com/dave1010/ceo-bench
 tags:
   - work
-order: 6
+featured: true
+order: 3
 ---
 CEO Bench evaluates how reliably large language models can respond to complex leadership scenarios. The benchmark generates
 realistic executive-level questions, collects model answers, and scores them against an automatic rubric so teams can compare

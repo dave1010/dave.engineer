@@ -6,7 +6,8 @@ websiteUrl: https://tools.dave.engineer/
 githubUrl: https://github.com/dave1010/tools
 tags:
   - work
-order: 0.5
+featured: true
+order: 1
 ---
 The Tools Library brings together quick, focused utilities that remove friction from day-to-day development and content tasks. Most tools run entirely in the browser with no accounts or tracking, so you can convert formats, debug data, or explore ideas without sacrificing privacy.
 
