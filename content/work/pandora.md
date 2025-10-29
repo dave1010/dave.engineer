@@ -6,7 +6,7 @@ githubUrl: https://github.com/dave1010/pandora
 tags:
   - work
 featured: true
-order: 1
+order: 2
 ---
 
 Back in June 2023, before ChatGPT had "GPTs", OpenAI created a plugin system that allowed the model to call tools via APIs. My idea was that the most powerful and flexible tool is the command line, so why not give ChatGPT access to tyour shell?

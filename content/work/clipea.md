@@ -5,7 +5,6 @@ description: "Like Clippy but for the CLI. A blazing fast AI helper for your com
 githubUrl: https://github.com/dave1010/clipea
 tags:
   - work
-featured: true
 order: 2
 ---
 Clipea brings an AI assistant directly into the terminal. It understands the current context, suggests commands, and helps

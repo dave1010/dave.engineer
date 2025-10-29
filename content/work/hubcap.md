@@ -5,7 +5,6 @@ description: "AI agent in just 25 lines of code. It can read your code and fix y
 githubUrl: https://github.com/dave1010/hubcap
 tags:
   - work
-featured: true
 order: 4
 ---
 

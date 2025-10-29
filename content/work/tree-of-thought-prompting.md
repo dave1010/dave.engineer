@@ -6,7 +6,7 @@ githubUrl: https://github.com/dave1010/tree-of-thought-prompting
 tags:
   - work
 featured: true
-order: 3
+order: 4
 ---
 Tree of Thought Prompting explores strategies for guiding language models through branching reasoning paths. The project
 combines research write-ups with practical experiments that showcase how structured prompts improve complex problem solving.
