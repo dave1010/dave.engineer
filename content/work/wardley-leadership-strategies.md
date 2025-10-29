@@ -9,10 +9,8 @@ tags:
 featured: true
 order: 0
 ---
-Wardley Leadership Strategies turns the theory of Wardley Maps into actionable leadership guidance. I curate and maintain the
-playbook, distilling community insights into concrete moves that leaders can try immediately. The entire site and content are
-published under a Creative Commons license so other teams can remix and build on the material.
+Wardley Leadership Strategies turns the theory of Wardley Maps into actionable leadership guidance. The site now has detailed, practical guidance on over 60 different strategies, as well as some interactive tools to explore strategies and test their fit.
 
-The project stays close to the community. Each pattern is tested through conversations with practitioners, and readers are
-encouraged to contribute their own tactics through GitHub. By keeping the code and content open, Wardley Leadership Strategies
-serves as both a living reference and a collaboration hub for strategic leadership experiments.
+I built and maintain the
+site, distilling insights into concrete moves that leaders can try immediately. The entire site and content are
+published under a Creative Commons license so other teams can remix and build on the material.
