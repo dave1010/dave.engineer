@@ -6,7 +6,25 @@ const normaliseType = (type) => {
   }
 
   const value = type.toLowerCase();
-  return value === "til" ? "til" : "post";
+  if (value === "til") {
+    return "til";
+  }
+  if (value === "external") {
+    return "external";
+  }
+
+  return "post";
+};
+
+const getTypeLabel = (type) => {
+  switch (normaliseType(type)) {
+    case "til":
+      return "Today I Learned";
+    case "external":
+      return "Elsewhere";
+    default:
+      return "Blog Post";
+  }
 };
 
 const getTopicTags = (tags) => {
@@ -22,9 +40,9 @@ const getTopicTags = (tags) => {
 };
 
 export default {
-  layout: "post.njk",
   tags: ["blog"],
   eleventyComputed: {
+    layout: (data) => (normaliseType(data.type) === "external" ? "external-post.njk" : "post.njk"),
     permalink: (data) => {
       const slug = (data.page.fileSlug || "")
         .replace(/^\d{4}-\d{2}-\d{2}-/, "")
@@ -37,6 +55,14 @@ export default {
             : undefined;
       const year = date?.getUTCFullYear();
       const month = date ? String(date.getUTCMonth() + 1).padStart(2, "0") : undefined;
+      const type = normaliseType(data.type);
+
+      if (type === "external") {
+        if (year) {
+          return `/blog/external/${year}/${slug || data.page.fileSlug}/`;
+        }
+        return `/blog/external/${slug || data.page.fileSlug}/`;
+      }
 
       if (year && month) {
         return `/blog/${year}/${month}/${slug || data.page.fileSlug}/`;
@@ -67,7 +93,7 @@ export default {
       });
     },
     type: (data) => normaliseType(data.type),
-    typeLabel: (data) => (normaliseType(data.type) === "til" ? "Today I Learned" : "Blog Post"),
+    typeLabel: (data) => getTypeLabel(data.type),
     topicTags: (data) => getTopicTags(data.tags),
     topicTagLinks: (data) => {
       const tags = getTopicTags(data.tags);

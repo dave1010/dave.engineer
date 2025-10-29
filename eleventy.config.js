@@ -14,6 +14,12 @@ const typeMetadata = {
     description: "Short notes capturing day-to-day learnings.",
     permalink: "/blog/type/til/",
   },
+  external: {
+    type: "external",
+    label: "Elsewhere",
+    description: "Writing published on other platforms like Medium.",
+    permalink: "/blog/type/external/",
+  },
 };
 
 const normaliseType = (type) => {
@@ -22,7 +28,14 @@ const normaliseType = (type) => {
   }
 
   const value = type.toLowerCase();
-  return value === "til" ? "til" : "post";
+  if (value === "til") {
+    return "til";
+  }
+  if (value === "external") {
+    return "external";
+  }
+
+  return "post";
 };
 
 export default function (eleventyConfig) {

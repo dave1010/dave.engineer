@@ -7,6 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="https://avatars.githubusercontent.com/u/50682?v=4">
+  {% if headExtra %}
+    {{ headExtra | safe }}
+  {% endif %}
 </head>
 <body class="h-full bg-slate-950 text-slate-100 font-sans antialiased">
   <div class="min-h-screen flex flex-col">
