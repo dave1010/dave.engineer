@@ -7,5 +7,4 @@ tags:
   - work
 order: 12
 ---
-This implementation of the proposed PSR-8 HTTP interfaces showcases how PHP applications can share request and response
-objects. It acted as a proving ground for the standard and informed feedback within the PHP-FIG community.
+This implementation of the proposed PSR-8 interfaces showcases how different PHP applications can have interoperable objects that follow the PSR-8 behaviour. It acted as a proving ground for the standard and provided reusable traits to extend behaviour of other implementations.
