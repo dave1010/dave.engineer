@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: XML Data Integrity Checksum (XDIC)
-description: A standard for embedding checksums in XML files.
+description: "A standard for embedding checksums in XML files."
 externalUrl: https://github.com/dave1010/XML-Data-Integrity-Checksum
 tags:
   - work

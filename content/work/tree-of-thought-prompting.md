@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: Tree of Thought Prompting
-description: Experiments and a write up of a new prompting technique for Large Language Models like ChatGPT.
+description: "Experiments and a write up of a new prompting technique for Large Language Models like ChatGPT."
 externalUrl: https://github.com/dave1010/tree-of-thought-prompting
 tags:
   - work

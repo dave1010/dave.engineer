@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: Clipea
-description: Like Clippy but for the CLI. A blazing fast AI helper for your command line.
+description: "Like Clippy but for the CLI. A blazing fast AI helper for your command line."
 externalUrl: https://github.com/dave1010/clipea
 tags:
   - work
