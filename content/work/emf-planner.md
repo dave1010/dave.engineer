@@ -8,9 +8,7 @@ tags:
   - work
 order: 8
 ---
-EMF Planner helps attendees plan their time at Electromagnetic Field. The web app turns the sprawling festival lineup into a
+EMF Planner helps attendees plan their time at [Electromagnetic Field](https://www.emfcamp.org/). The web app turns the sprawling festival lineup into a
 clean two-dimensional timetable, making it easy to spot overlaps, filter by interests, and pin must-see sessions. Everything
 updates as the programme shifts so you can keep your schedule accurate right up to the event.
 
-The tool is built for community contributions. Talks, workshops, and map data live in version control, and deployment happens
-through a lightweight Vercel pipeline. That makes it simple to keep the planner fresh year after year.
