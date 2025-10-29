@@ -9,4 +9,6 @@ featured: true
 order: 2
 ---
 Clipea brings an AI assistant directly into the terminal. It understands the current context, suggests commands, and helps
-shell users automate repetitive tasks without leaving their workflows.
+shell users automate complex tasks without leaving their workflows.
+
+Clipea was built in September 2023 and was one of the first tools of its kind. It still works well but now there are better alternatives, like Github Copilot CLI and Amazon Q CLI.
