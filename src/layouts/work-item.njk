@@ -9,17 +9,30 @@ layout: base.njk
       {% if description %}
       <p class="text-lg text-slate-300">{{ description }}</p>
       {% endif %}
-      {% if externalUrl %}
-      <div>
+      {% if websiteUrl or githubUrl %}
+      <div class="flex flex-wrap gap-3 text-sm">
+        {% if websiteUrl %}
         <a
-          class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-4 py-2 text-sm font-semibold text-sky-300 transition hover:bg-sky-500/10"
-          href="{{ externalUrl }}"
+          class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-4 py-2 font-semibold text-sky-300 transition hover:bg-sky-500/10"
+          href="{{ websiteUrl }}"
           target="_blank"
           rel="noopener"
         >
-          View project
+          Visit site
           <span aria-hidden="true">↗</span>
         </a>
+        {% endif %}
+        {% if githubUrl %}
+        <a
+          class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-4 py-2 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+          href="{{ githubUrl }}"
+          target="_blank"
+          rel="noopener"
+        >
+          View source
+          <span aria-hidden="true">↗</span>
+        </a>
+        {% endif %}
       </div>
       {% endif %}
     </header>

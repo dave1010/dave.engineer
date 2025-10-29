@@ -26,7 +26,6 @@ title: Work - Dave Hulbert
               <p class="text-sm text-slate-300">{{ item.data.description }}</p>
               {% endif %}
             </div>
-            {% if item.data.externalUrl %}
             <div class="flex flex-wrap gap-3 text-sm">
               <a
                 class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
@@ -34,17 +33,29 @@ title: Work - Dave Hulbert
               >
                 Learn more
               </a>
+              {% if item.data.websiteUrl %}
               <a
                 class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-                href="{{ item.data.externalUrl }}"
+                href="{{ item.data.websiteUrl }}"
                 target="_blank"
                 rel="noopener"
               >
-                Visit project
+                Visit site
                 <span aria-hidden="true">↗</span>
               </a>
+              {% endif %}
+              {% if item.data.githubUrl %}
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+                href="{{ item.data.githubUrl }}"
+                target="_blank"
+                rel="noopener"
+              >
+                View source
+                <span aria-hidden="true">↗</span>
+              </a>
+              {% endif %}
             </div>
-            {% endif %}
           </article>
           {% endif %}
         {% endfor %}
