@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tools.dave.engineer</title>
+  <meta name="description" content="A curated collection of tiny, high-utility web tools crafted by Dave Hulbert for developers and curious humans alike.">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/assets/tw.css">
+  <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body class="bg-black text-slate-100 antialiased">
+  <div class="relative isolate min-h-screen">
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-90">
+      <div class="absolute inset-x-[-30%] top-[-25%] hidden h-[60vh] rounded-full bg-gradient-to-r from-fuchsia-600/50 via-purple-500/40 to-cyan-500/40 blur-3xl sm:block"></div>
+      <div class="absolute inset-x-[-30%] bottom-[-30%] hidden h-[55vh] rounded-full bg-gradient-to-r from-cyan-500/40 via-blue-500/30 to-fuchsia-600/50 blur-3xl sm:block"></div>
+      <div class="absolute inset-0 block bg-[radial-gradient(ellipse_at_top,_rgba(217,70,239,0.32),_rgba(14,165,233,0.12)_60%,_transparent_82%)] blur-3xl sm:hidden"></div>
+      <div class="absolute inset-0 block bg-[radial-gradient(ellipse_at_bottom,_rgba(34,211,238,0.28),_rgba(79,70,229,0.1)_55%,_transparent_85%)] blur-3xl sm:hidden"></div>
+    </div>
+
+    <main class="relative mx-auto max-w-5xl space-y-16 px-4 py-12 font-sans sm:px-6 md:py-20 lg:px-8">
+      <header class="space-y-12 text-center">
+        <div class="space-y-6">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-1 text-sm font-medium text-fuchsia-100 ring-1 ring-inset ring-white/10">
+            <span class="size-2 rounded-full bg-cyan-400"></span>
+            New tools added regularly
+          </span>
+          <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">tools.dave.engineer</h1>
+          <p class="mx-auto max-w-2xl text-lg text-slate-100/80">
+            A library of handy utilities made by
+            <a href="https://dave.engineer/" class="font-semibold text-cyan-200 transition hover:text-white">Dave Hulbert</a>.
+            Lightweight, fast, and privacy-friendly by default. No accounts, tracking, or ads. Just useful utilities.
+          </p>
+          <div class="flex flex-col items-center justify-center gap-3 text-sm sm:flex-row sm:gap-4">
+            <p class="text-fuchsia-100 sm:text-left">
+              Contribute ideas or code on GitHub and shape the toolkit.
+            </p>
+            <a href="https://github.com/dave1010/tools" class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 transition hover:text-white">
+              <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.22.7-3.9-1.55-3.9-1.55-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.22 1.78 1.22 1.04 1.8 2.73 1.28 3.4.98.11-.76.41-1.28.75-1.57-2.57-.3-5.27-1.29-5.27-5.74 0-1.27.46-2.31 1.21-3.12-.12-.3-.53-1.52.12-3.17 0 0 .99-.32 3.25 1.19a11.3 11.3 0 0 1 5.92 0c2.26-1.51 3.25-1.19 3.25-1.19.65 1.65.24 2.87.12 3.17.76.81 1.21 1.85 1.21 3.12 0 4.47-2.71 5.43-5.3 5.72.42.37.8 1.1.8 2.22 0 1.6-.02 2.9-.02 3.3 0 .31.21.67.8.55A11.5 11.5 0 0 0 12 .5Z" />
+              </svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+      </header>
+
+      <section id="all-tools" class="space-y-8 text-left">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div class="space-y-2">
+            <h2 class="text-3xl font-semibold text-white">Explore the collection</h2>
+            <p class="max-w-2xl text-base text-white/70">Handy converters, debuggers, and tiny experiments ready for your next workflow.</p>
+          </div>
+          <a href="https://github.com/dave1010/tools/issues/new" class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 transition hover:text-white">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14" />
+            </svg>
+            Suggest a tool
+          </a>
+        </div>
+        <div class="space-y-6">
+          <div class="overflow-hidden rounded-3xl border border-white/10 bg-slate-950/60 backdrop-blur">
+            <div
+              class="flex flex-wrap gap-1 rounded-t-3xl border-b border-white/10 bg-white/5 p-1 text-sm font-semibold text-white/70"
+              role="tablist"
+              aria-label="Browse tools"
+            >
+              <button
+                type="button"
+                id="tab-category"
+                data-tab="category"
+                class="tab-button relative rounded-2xl px-5 py-2 text-white/60 transition duration-200 ease-out hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-0 focus-visible:ring-offset-transparent after:absolute after:left-2 after:right-2 after:-bottom-[10px] after:h-2 after:rounded-b-full after:bg-transparent after:transition after:duration-200 after:content-['']"
+                role="tab"
+                aria-controls="panel-category"
+              >
+                By category
+              </button>
+              <button
+                type="button"
+                id="tab-az"
+                data-tab="az"
+                class="tab-button relative rounded-2xl px-5 py-2 text-white/60 transition duration-200 ease-out hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-0 focus-visible:ring-offset-transparent after:absolute after:left-2 after:right-2 after:-bottom-[10px] after:h-2 after:rounded-b-full after:bg-transparent after:transition after:duration-200 after:content-['']"
+                role="tab"
+                aria-controls="panel-az"
+              >
+                A–Z
+              </button>
+            </div>
+            <div
+              id="panel-category"
+              data-panel="category"
+              class="space-y-8 p-6"
+              role="tabpanel"
+              aria-labelledby="tab-category"
+            >
+          <nav class="flex flex-wrap gap-2" aria-label="Tool categories">
+            <a href="#category-browser" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Browser</a>
+            <a href="#category-developer" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Developer</a>
+            <a href="#category-text" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Text</a>
+            <a href="#category-encoding" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Encoding</a>
+            <a href="#category-measurement" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Measurement</a>
+            <a href="#category-conversion" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Conversion</a>
+            <a href="#category-visualization" class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-sm font-medium text-white/80 transition hover:border-cyan-400/60 hover:text-white">Visualization</a>
+          </nav>
+
+      <section id="category-browser" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Browser</h3>
+          <span class="text-sm font-medium text-white/60">3 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/device-browser-info" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Device &amp; Browser Info</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Display current device and browser details</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/local-storage-viewer" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Local Storage Viewer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Inspect and manage browser localStorage</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/origin-private-file-system-viewer" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Origin Private File System Viewer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Browse and manage Origin Private File System</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+
+      <section id="category-developer" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Developer</h3>
+          <span class="text-sm font-medium text-white/60">5 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/cerebras-llm-inference" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Cerebras LLM Inference</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Chat with Cerebras models via the built-in proxy worker</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/dns-lookup" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">DNS Lookup</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Query DNS records using Cloudflare&#39;s resolver</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/github-device-login" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">GitHub Device Login</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Start the GitHub device flow and store the resulting access token locally.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/json-formatter" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">JSON Formatter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Format and validate JSON data</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/prompt-to-web-page" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Prompt to Web Page</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Turn a short idea into a rendered web page</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+
+      <section id="category-text" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Text</h3>
+          <span class="text-sm font-medium text-white/60">5 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/bible-browser" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Bible Verse Explorer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Browse NET Bible passages by book and chapter.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/markdown-to-html" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Markdown to HTML Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Convert Markdown content into HTML</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/rich-text-to-markdown" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Rich Text to Markdown Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Paste formatted content and copy the Markdown result</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/scratch-pad" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Scratch Pad</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Quick notes with local storage</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/word-character-count" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Word &amp; Character Count</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Count words and characters instantly</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+
+      <section id="category-encoding" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Encoding</h3>
+          <span class="text-sm font-medium text-white/60">3 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/basic-qr-code" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Basic QR Code Generator</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Generate QR codes from text</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/morse-code-to-text" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Morse Code to Text</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Tap or hold to transcribe Morse code into plain text</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/qr-code-reader" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">QR Code Reader</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Upload QR code image and extract text/URL</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+
+      <section id="category-measurement" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Measurement</h3>
+          <span class="text-sm font-medium text-white/60">3 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/ambient-noise-profiler" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Ambient Noise Profiler</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Real-time ambient frequency visualizer</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/bubble-level" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Bubble Level</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Simple digital bubble level</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/compass" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Compass</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Heading indicator with magnetometer data</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+
+      <section id="category-conversion" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Conversion</h3>
+          <span class="text-sm font-medium text-white/60">5 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/area-size-comparator" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">2D Size Comparator</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Visualize and compare rectangular dimensions with overlays.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/csv-markdown-table" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">CSV ⇄ Markdown Table Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Convert tables between CSV and Markdown</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/lux-to-ansi-throw" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Lux to ANSI Throw Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Estimate projector throw from lux readings</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/running-pace-planner" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Running Pace Planner</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Plan running pace, splits, and finish time</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/speed-unit-converter" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Speed Unit Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Convert speed units instantly</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+
+      <section id="category-visualization" class="space-y-4">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-2xl font-semibold text-white">Visualization</h3>
+          <span class="text-sm font-medium text-white/60">2 tools</span>
+        </div>
+        <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/2d-vector-visualizer" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">2D Vector Visualizer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Plot 2D vectors with live metrics.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/3d-game-of-life" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">3D Game of Life</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Explore animated voxel life simulation</p>
+          </a>
+        </li>
+        </ul>
+      </section>
+            </div>
+            <div
+              id="panel-az"
+              data-panel="az"
+              class="hidden space-y-8 p-6"
+              role="tabpanel"
+              aria-labelledby="tab-az"
+              aria-hidden="true"
+            >
+              <ul class="grid gap-4 sm:grid-cols-2">
+        <li>
+          <a href="/tools/area-size-comparator" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">2D Size Comparator</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Visualize and compare rectangular dimensions with overlays.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/2d-vector-visualizer" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">2D Vector Visualizer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Plot 2D vectors with live metrics.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/3d-game-of-life" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">3D Game of Life</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Explore animated voxel life simulation</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/ambient-noise-profiler" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Ambient Noise Profiler</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Real-time ambient frequency visualizer</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/basic-qr-code" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Basic QR Code Generator</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Generate QR codes from text</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/bible-browser" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Bible Verse Explorer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Browse NET Bible passages by book and chapter.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/bubble-level" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Bubble Level</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Simple digital bubble level</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/cerebras-llm-inference" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Cerebras LLM Inference</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Chat with Cerebras models via the built-in proxy worker</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/compass" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Compass</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Heading indicator with magnetometer data</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/csv-markdown-table" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">CSV ⇄ Markdown Table Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Convert tables between CSV and Markdown</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/device-browser-info" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Device &amp; Browser Info</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Display current device and browser details</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/dns-lookup" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">DNS Lookup</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Query DNS records using Cloudflare&#39;s resolver</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/github-device-login" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">GitHub Device Login</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Start the GitHub device flow and store the resulting access token locally.</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/json-formatter" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">JSON Formatter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Format and validate JSON data</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/local-storage-viewer" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Local Storage Viewer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Inspect and manage browser localStorage</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/lux-to-ansi-throw" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Lux to ANSI Throw Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Estimate projector throw from lux readings</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/markdown-to-html" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Markdown to HTML Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Convert Markdown content into HTML</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/morse-code-to-text" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Morse Code to Text</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Tap or hold to transcribe Morse code into plain text</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/origin-private-file-system-viewer" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Origin Private File System Viewer</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Browse and manage Origin Private File System</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/prompt-to-web-page" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Prompt to Web Page</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Turn a short idea into a rendered web page</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/qr-code-reader" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">QR Code Reader</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Upload QR code image and extract text/URL</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/rich-text-to-markdown" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Rich Text to Markdown Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Paste formatted content and copy the Markdown result</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/running-pace-planner" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Running Pace Planner</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Plan running pace, splits, and finish time</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/scratch-pad" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Scratch Pad</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Quick notes with local storage</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/speed-unit-converter" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Speed Unit Converter</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Convert speed units instantly</p>
+          </a>
+        </li>
+        <li>
+          <a href="/tools/word-character-count" class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fuchsia-500/30 bg-white/5 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-lg font-semibold text-white transition-colors duration-200 group-hover:text-cyan-200">Word &amp; Character Count</span>
+              <span aria-hidden="true" class="rounded-full bg-fuchsia-500/20 p-2 text-fuchsia-200 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-white/70">Count words and characters instantly</p>
+          </a>
+        </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="border-t border-white/10 pt-8 text-sm text-white/60">
+        <p>
+          Lovingly machine crafted by AI. Inspired by
+          <a href="https://github.com/simonw/tools" class="font-semibold text-fuchsia-200 transition hover:text-white">simonw/tools</a>.
+          Have an idea?
+          <a href="https://github.com/dave1010/tools/issues" class="font-semibold text-cyan-200 transition hover:text-white">Open an issue</a>.
+        </p>
+        <p class="mt-4">
+          <a href="https://dave.engineer/" class="font-semibold text-cyan-200 transition hover:text-white">dave.engineer</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+  <script>
+    const tabButtons = Array.from(document.querySelectorAll('[data-tab]'));
+    const panels = Array.from(document.querySelectorAll('[data-panel]'));
+
+    const activateTab = (name) => {
+      tabButtons.forEach((button) => {
+        const isActive = button.dataset.tab === name;
+        button.classList.toggle('bg-gradient-to-r', isActive);
+        button.classList.toggle('from-cyan-500/40', isActive);
+        button.classList.toggle('via-blue-500/25', isActive);
+        button.classList.toggle('to-fuchsia-500/40', isActive);
+        button.classList.toggle('text-white', isActive);
+        button.classList.toggle('text-white/60', !isActive);
+        button.classList.toggle('shadow-lg', isActive);
+        button.classList.toggle('ring-1', isActive);
+        button.classList.toggle('ring-inset', isActive);
+        button.classList.toggle('ring-white/30', isActive);
+        button.classList.toggle('after:bg-slate-950/70', isActive);
+        button.setAttribute('aria-selected', String(isActive));
+        button.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+      panels.forEach((panel) => {
+        const isActive = panel.dataset.panel === name;
+        panel.classList.toggle('hidden', !isActive);
+        panel.setAttribute('aria-hidden', String(!isActive));
+      });
+    };
+
+    if (tabButtons.length && panels.length) {
+      activateTab('category');
+      tabButtons.forEach((button) => {
+        button.addEventListener('click', () => activateTab(button.dataset.tab));
+      });
+    }
+  </script>
+</body>
+</html>

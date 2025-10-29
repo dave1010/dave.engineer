@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSV ⇄ Markdown Table Converter</title>
+    <link rel="stylesheet" href="/assets/tw.css" />
+  </head>
+  <body class="bg-gradient-to-b from-brand-50/60 to-white">
+    <main class="mx-auto max-w-3xl space-y-6 p-4 font-sans md:p-6 lg:max-w-5xl">
+      <header class="space-y-2 text-center">
+        <h1 class="text-3xl font-semibold text-gray-900">CSV ⇄ Markdown Table Converter</h1>
+        <p class="text-gray-600">Convert data between CSV and GitHub-flavored Markdown tables.</p>
+      </header>
+
+      <div class="card mx-auto w-full space-y-8 p-6 shadow-soft md:p-8">
+        <div class="grid gap-6 lg:grid-cols-2">
+          <section class="space-y-3">
+            <h2 class="text-xl font-semibold text-gray-900">CSV</h2>
+            <textarea
+              id="csv-input"
+              class="h-60 w-full rounded-xl border border-gray-200 bg-white p-4 font-mono text-sm leading-6 shadow-soft focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
+              placeholder="name,age&#10;Ada,36&#10;Grace,45"
+            ></textarea>
+            <div class="flex flex-wrap gap-3">
+              <button id="csv-to-md" class="bg-brand-600 text-white rounded-lg px-3 py-1.5 hover:bg-brand-700">Convert CSV → Markdown</button>
+              <button
+                id="clear-csv"
+                class="rounded-lg border border-gray-200 px-3 py-1.5 font-medium text-gray-700 hover:border-brand-500 hover:text-brand-600"
+              >
+                Clear
+              </button>
+            </div>
+          </section>
+
+          <section class="space-y-3">
+            <h2 class="text-xl font-semibold text-gray-900">Markdown table</h2>
+            <textarea
+              id="markdown-input"
+              class="h-60 w-full rounded-xl border border-gray-200 bg-white p-4 font-mono text-sm leading-6 shadow-soft focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
+              placeholder="| name | age |&#10;| --- | --- |&#10;| Ada | 36 |&#10;| Grace | 45 |"
+            ></textarea>
+            <div class="flex flex-wrap gap-3">
+              <button id="md-to-csv" class="bg-brand-600 text-white rounded-lg px-3 py-1.5 hover:bg-brand-700">Convert Markdown → CSV</button>
+              <button
+                id="clear-md"
+                class="rounded-lg border border-gray-200 px-3 py-1.5 font-medium text-gray-700 hover:border-brand-500 hover:text-brand-600"
+              >
+                Clear
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <div
+          id="status"
+          class="hidden rounded-xl border px-4 py-3 text-sm font-medium"
+          hidden
+          role="status"
+        ></div>
+      </div>
+
+      <footer class="text-center text-sm text-gray-600">
+        <p>Everything happens locally in your browser. Paste, convert, and share your tables with ease.</p>
+        <p>
+          <a href="https://tools.dave.engineer" class="font-medium text-brand-700 hover:text-brand-600">&larr; Back to tools.dave.engineer</a>
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      const csvInput = document.getElementById("csv-input");
+      const markdownInput = document.getElementById("markdown-input");
+      const csvToMarkdownButton = document.getElementById("csv-to-md");
+      const markdownToCsvButton = document.getElementById("md-to-csv");
+      const clearCsvButton = document.getElementById("clear-csv");
+      const clearMarkdownButton = document.getElementById("clear-md");
+      const statusBox = document.getElementById("status");
+
+      const showStatus = (message, isError = false) => {
+        statusBox.textContent = message;
+        statusBox.hidden = false;
+        statusBox.classList.toggle("bg-brand-50", !isError);
+        statusBox.classList.toggle("border-brand-100", !isError);
+        statusBox.classList.toggle("text-brand-700", !isError);
+        statusBox.classList.toggle("bg-red-50", isError);
+        statusBox.classList.toggle("border-red-200", isError);
+        statusBox.classList.toggle("text-red-700", isError);
+      };
+
+      const hideStatus = () => {
+        statusBox.hidden = true;
+        statusBox.textContent = "";
+        statusBox.classList.remove(
+          "bg-brand-50",
+          "border-brand-100",
+          "text-brand-700",
+          "bg-red-50",
+          "border-red-200",
+          "text-red-700"
+        );
+      };
+
+      const parseCSV = (text) => {
+        const cleaned = text.replace(/\r\n?/g, "\n").trim();
+        if (!cleaned) {
+          return [];
+        }
+
+        const rows = [];
+        let currentCell = "";
+        let currentRow = [];
+        let inQuotes = false;
+
+        for (let i = 0; i < cleaned.length; i += 1) {
+          const char = cleaned[i];
+          const nextChar = cleaned[i + 1];
+
+          if (char === "\"") {
+            if (inQuotes && nextChar === "\"") {
+              currentCell += "\"";
+              i += 1;
+            } else {
+              inQuotes = !inQuotes;
+            }
+            continue;
+          }
+
+          if (char === "," && !inQuotes) {
+            currentRow.push(currentCell);
+            currentCell = "";
+            continue;
+          }
+
+          if (char === "\n" && !inQuotes) {
+            currentRow.push(currentCell);
+            rows.push(currentRow);
+            currentCell = "";
+            currentRow = [];
+            continue;
+          }
+
+          currentCell += char;
+        }
+
+        currentRow.push(currentCell);
+        rows.push(currentRow);
+
+        return rows;
+      };
+
+      const escapeCSVCell = (value) => {
+        if (value === null || value === undefined) {
+          return "";
+        }
+
+        const stringValue = String(value);
+        if (/[,"\n]/.test(stringValue)) {
+          return `"${stringValue.replace(/"/g, '""')}"`;
+        }
+        return stringValue;
+      };
+
+      const arrayToCSV = (rows) =>
+        rows.map((row) => row.map(escapeCSVCell).join(",")).join("\n");
+
+      const calculateColumnWidths = (rows) => {
+        const widths = [];
+        rows.forEach((row) => {
+          row.forEach((cell, index) => {
+            const length = String(cell ?? "").length;
+            widths[index] = Math.max(widths[index] ?? 3, length);
+          });
+        });
+        return widths;
+      };
+
+      const padCell = (value, width) => {
+        const stringValue = String(value ?? "");
+        const padding = Math.max(width - stringValue.length, 0);
+        return ` ${stringValue}${" ".repeat(padding)} `;
+      };
+
+      const arrayToMarkdown = (rows) => {
+        if (!rows.length) {
+          return "";
+        }
+
+        const normalizedRows = rows.map((row) => row.map((cell) => String(cell ?? "").trim()));
+        const widths = calculateColumnWidths(normalizedRows);
+        const header = normalizedRows[0] ?? [];
+        const body = normalizedRows.slice(1);
+
+        const headerLine = `|${header.map((cell, index) => padCell(cell, widths[index])).join("|")}|`;
+        const separatorLine = `|${widths
+          .map((width) => ` ${"-".repeat(Math.max(width, 3))} `)
+          .join("|")}|`;
+        const bodyLines = body.map(
+          (row) => `|${widths.map((width, index) => padCell(row[index] ?? "", width)).join("|")}|`
+        );
+
+        return [headerLine, separatorLine, ...bodyLines].join("\n");
+      };
+
+      const parseMarkdownTable = (text) => {
+        const lines = text
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter((line) => line.length > 0);
+
+        if (!lines.length) {
+          return [];
+        }
+
+        const rows = [];
+
+        const isDivider = (cells) =>
+          cells.every((cell) => /^:?-{3,}:?$/.test(cell.replace(/\s+/g, "")));
+
+        lines.forEach((line) => {
+          const trimmed = line.replace(/^\|/, "").replace(/\|$/, "");
+          const cells = trimmed.split("|").map((cell) => cell.trim());
+          if (!cells.length || (cells.length === 1 && cells[0] === "")) {
+            return;
+          }
+
+          if (isDivider(cells)) {
+            return;
+          }
+
+          rows.push(cells);
+        });
+
+        return rows;
+      };
+
+      const convertCsvToMarkdown = () => {
+        try {
+          const rows = parseCSV(csvInput.value);
+          if (!rows.length) {
+            markdownInput.value = "";
+            showStatus("No CSV data found to convert.");
+            return;
+          }
+
+          markdownInput.value = arrayToMarkdown(rows);
+          showStatus("Converted CSV to Markdown table.");
+        } catch (error) {
+          showStatus(`Couldn't convert CSV: ${error.message}`, true);
+        }
+      };
+
+      const convertMarkdownToCsv = () => {
+        try {
+          const rows = parseMarkdownTable(markdownInput.value);
+          if (!rows.length) {
+            csvInput.value = "";
+            showStatus("No Markdown table data found to convert.");
+            return;
+          }
+
+          csvInput.value = arrayToCSV(rows);
+          showStatus("Converted Markdown table to CSV.");
+        } catch (error) {
+          showStatus(`Couldn't convert Markdown table: ${error.message}`, true);
+        }
+      };
+
+      const clearCsv = () => {
+        csvInput.value = "";
+        hideStatus();
+      };
+
+      const clearMarkdown = () => {
+        markdownInput.value = "";
+        hideStatus();
+      };
+
+      csvToMarkdownButton.addEventListener("click", convertCsvToMarkdown);
+      markdownToCsvButton.addEventListener("click", convertMarkdownToCsv);
+      clearCsvButton.addEventListener("click", clearCsv);
+      clearMarkdownButton.addEventListener("click", clearMarkdown);
+
+      csvInput.addEventListener("input", hideStatus);
+      markdownInput.addEventListener("input", hideStatus);
+    </script>
+  </body>
+</html>

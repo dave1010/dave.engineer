@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic QR Code Generator</title>
+    <link rel="stylesheet" href="/assets/tw.css" />
+  </head>
+  <body class="bg-gradient-to-b from-brand-50/60 to-white">
+    <main class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center space-y-4 p-4 font-sans md:p-6">
+      <div class="card mx-auto w-full max-w-lg space-y-4 text-center">
+        <h1 class="text-3xl font-semibold text-gray-900">Basic QR Code Generator</h1>
+        <div class="space-y-2 text-left">
+          <label for="qr-text" class="font-medium text-gray-700">Text to encode</label>
+          <textarea
+            id="qr-text"
+            class="w-full rounded-xl border bg-white p-3 text-base shadow-soft focus:border-brand-500 focus:ring-2 focus:ring-brand-500"
+            placeholder="Paste a URL, text snippet, or anything you want to encode"
+            autofocus
+          ></textarea>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button id="generate" class="bg-brand-600 text-white rounded-lg px-3 py-1.5 hover:bg-brand-700">Generate QR Code</button>
+          <button id="download" disabled class="bg-brand-600 text-white rounded-lg px-3 py-1.5 hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60">Download PNG</button>
+        </div>
+        <div id="qr-container" class="mx-auto flex min-h-[280px] w-fit items-center justify-center rounded-xl border border-gray-200 bg-white p-4">
+          <p class="text-center text-sm text-gray-500">Your QR code will appear here.</p>
+        </div>
+        <footer class="text-sm text-gray-500">
+          Powered by
+          <a href="https://cdnjs.com/libraries/qrcodejs" target="_blank" rel="noreferrer" class="font-medium">QRCode.js</a>
+          ·
+          <a href="https://tools.dave.engineer" class="font-medium text-brand-700 hover:text-brand-600">&larr; Back to tools.dave.engineer</a>
+        </footer>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+      const textInput = document.getElementById("qr-text");
+      const generateButton = document.getElementById("generate");
+      const downloadButton = document.getElementById("download");
+      const qrContainer = document.getElementById("qr-container");
+      let qrCodeInstance = null;
+
+      const ensureQrInstance = () => {
+        if (!qrCodeInstance) {
+          qrCodeInstance = new QRCode(qrContainer, {
+            text: "",
+            width: 256,
+            height: 256,
+            colorDark: "#111827",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H,
+          });
+        }
+      };
+
+      const setDownloadState = (enabled) => {
+        downloadButton.disabled = !enabled;
+      };
+
+      const updateDownloadButton = () => {
+        const canvas = qrContainer.querySelector("canvas");
+        if (canvas) {
+          setDownloadState(true);
+        } else {
+          const img = qrContainer.querySelector("img");
+          if (!img) {
+            setDownloadState(false);
+            return;
+          }
+
+          const tempCanvas = document.createElement("canvas");
+          tempCanvas.width = img.width;
+          tempCanvas.height = img.height;
+          const context = tempCanvas.getContext("2d");
+          context.drawImage(img, 0, 0);
+          qrContainer.replaceChildren(tempCanvas);
+          setDownloadState(true);
+        }
+      };
+
+      const clearQr = () => {
+        qrContainer.innerHTML = "";
+        qrCodeInstance = null;
+        setDownloadState(false);
+      };
+
+      const renderQr = () => {
+        const value = textInput.value.trim();
+        if (!value) {
+          clearQr();
+          qrContainer.innerHTML = '<p class="text-center text-sm text-gray-500">Enter something to generate a QR code.</p>';
+          return;
+        }
+
+        ensureQrInstance();
+        qrCodeInstance.clear();
+        qrCodeInstance.makeCode(value);
+
+        requestAnimationFrame(updateDownloadButton);
+      };
+
+      generateButton.addEventListener("click", renderQr);
+      textInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
+          renderQr();
+        }
+      });
+
+      downloadButton.addEventListener("click", () => {
+        const canvas = qrContainer.querySelector("canvas");
+        if (!canvas) {
+          setDownloadState(false);
+          return;
+        }
+
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "qr-code.png";
+        link.click();
+      });
+    </script>
+  </body>
+</html>

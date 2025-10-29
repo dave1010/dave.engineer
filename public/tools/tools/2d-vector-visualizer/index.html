@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2D Vector Visualizer</title>
+    <meta
+      name="description"
+      content="Plot 2D vectors from any origin, inspect their magnitude and angle, and see the results on an interactive plane."
+    />
+    <link rel="stylesheet" href="/assets/tw.css" />
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-50">
+    <main class="mx-auto flex min-h-screen max-w-5xl flex-col space-y-6 px-4 py-6 font-sans md:space-y-10 md:px-6 md:py-10">
+      <header class="space-y-4 text-center md:text-left">
+        <span class="inline-flex items-center gap-2 self-center rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-200 md:self-start">
+          Visualization
+        </span>
+        <h1 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">2D Vector Visualizer</h1>
+        <p class="mx-auto max-w-3xl text-base text-slate-200/80 md:mx-0 md:text-lg">
+          Explore vectors on an interactive Cartesian plane. Adjust components, move the origin, and instantly see magnitude,
+          angle, and direction updates while the canvas redraws in real time.
+        </p>
+      </header>
+
+      <section class="grid gap-6 lg:grid-cols-[minmax(0,340px)_1fr]">
+        <form
+          id="vectorForm"
+          class="space-y-6 rounded-2xl border border-white/10 bg-white/5 p-5 shadow-xl shadow-cyan-900/10 backdrop-blur"
+        >
+          <fieldset class="space-y-4">
+            <legend class="text-sm font-semibold uppercase tracking-wide text-cyan-200">Vector components</legend>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <label class="space-y-1">
+                <span class="text-sm font-medium text-slate-200">Δx</span>
+                <input
+                  id="componentX"
+                  name="componentX"
+                  type="number"
+                  step="0.1"
+                  value="3"
+                  class="w-full rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 text-base text-white shadow-inner focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+                />
+              </label>
+              <label class="space-y-1">
+                <span class="text-sm font-medium text-slate-200">Δy</span>
+                <input
+                  id="componentY"
+                  name="componentY"
+                  type="number"
+                  step="0.1"
+                  value="2"
+                  class="w-full rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 text-base text-white shadow-inner focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+                />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="space-y-4">
+            <legend class="text-sm font-semibold uppercase tracking-wide text-cyan-200">Vector origin</legend>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <label class="space-y-1">
+                <span class="text-sm font-medium text-slate-200">Origin x</span>
+                <input
+                  id="originX"
+                  name="originX"
+                  type="number"
+                  step="0.1"
+                  value="0"
+                  class="w-full rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 text-base text-white shadow-inner focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+                />
+              </label>
+              <label class="space-y-1">
+                <span class="text-sm font-medium text-slate-200">Origin y</span>
+                <input
+                  id="originY"
+                  name="originY"
+                  type="number"
+                  step="0.1"
+                  value="0"
+                  class="w-full rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2 text-base text-white shadow-inner focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+                />
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="space-y-3">
+            <label for="scale" class="flex items-center justify-between text-sm font-medium text-slate-200">
+              <span>Scale</span>
+              <span id="scaleValue" class="font-semibold text-cyan-200">60 px per unit</span>
+            </label>
+            <input
+              id="scale"
+              name="scale"
+              type="range"
+              min="20"
+              max="120"
+              step="5"
+              value="60"
+              class="w-full accent-cyan-400"
+            />
+            <p class="text-xs text-slate-300/80">Adjust how many pixels represent a single unit on the grid.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button
+              id="resetButton"
+              type="button"
+              class="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+            >
+              Reset
+            </button>
+            <p id="zeroNotice" class="hidden text-xs text-amber-200/80">
+              Vector components are both zero, so only the origin is shown.
+            </p>
+          </div>
+        </form>
+
+        <div class="flex flex-col gap-6">
+          <div class="rounded-2xl border border-white/10 bg-slate-900/60 p-4 shadow-xl shadow-fuchsia-900/10">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h2 class="text-lg font-semibold text-white">Interactive plane</h2>
+              <p id="componentSummary" class="text-xs font-mono text-cyan-200/80"></p>
+            </div>
+            <div class="mt-3 overflow-hidden rounded-xl border border-white/10 bg-slate-950/80">
+              <div class="relative aspect-square">
+                <canvas
+                  id="vectorCanvas"
+                  class="absolute inset-0 h-full w-full"
+                  role="img"
+                  aria-label="Interactive canvas showing the plotted vector"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-cyan-900/10">
+            <h2 class="text-base font-semibold text-white">Vector details</h2>
+            <dl class="mt-3 grid gap-3 sm:grid-cols-3">
+              <div class="rounded-xl border border-white/10 bg-slate-950/60 p-3">
+                <dt class="text-xs uppercase tracking-wide text-slate-300/70">Magnitude</dt>
+                <dd id="magnitude" class="text-lg font-semibold text-cyan-200">0</dd>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-slate-950/60 p-3">
+                <dt class="text-xs uppercase tracking-wide text-slate-300/70">Angle</dt>
+                <dd class="text-sm font-mono text-slate-100">
+                  <span id="angleDeg" class="text-base font-semibold text-fuchsia-200">0°</span>
+                  <span class="ml-2 text-xs text-slate-400/80">(<span id="angleRad">0</span> rad)</span>
+                </dd>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-slate-950/60 p-3">
+                <dt class="text-xs uppercase tracking-wide text-slate-300/70">Direction</dt>
+                <dd id="direction" class="text-base font-semibold text-emerald-200">None</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <footer class="border-t border-white/10 pt-6 text-center text-sm text-slate-400/80">
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/" class="font-medium text-cyan-200 transition hover:text-white">&larr; Back to tools.dave.engineer</a>
+          <a href="https://github.com/dave1010/tools/tree/main/tools/2d-vector-visualizer" class="font-medium text-cyan-200 transition hover:text-white">About</a>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const dxInput = document.getElementById('componentX');
+      const dyInput = document.getElementById('componentY');
+      const originXInput = document.getElementById('originX');
+      const originYInput = document.getElementById('originY');
+      const scaleInput = document.getElementById('scale');
+      const scaleValue = document.getElementById('scaleValue');
+      const magnitudeEl = document.getElementById('magnitude');
+      const angleDegEl = document.getElementById('angleDeg');
+      const angleRadEl = document.getElementById('angleRad');
+      const directionEl = document.getElementById('direction');
+      const componentSummaryEl = document.getElementById('componentSummary');
+      const zeroNotice = document.getElementById('zeroNotice');
+      const canvas = document.getElementById('vectorCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const defaults = {
+        dx: 3,
+        dy: 2,
+        originX: 0,
+        originY: 0,
+        scale: 60,
+      };
+
+      const toNumber = (value, fallback = 0) => {
+        const parsed = Number.parseFloat(value);
+        return Number.isFinite(parsed) ? parsed : fallback;
+      };
+
+      const formatNumber = (value) => {
+        if (Math.abs(value) >= 1000 || Math.abs(value) < 0.0001) {
+          return value.toExponential(2);
+        }
+        const rounded = Math.round(value * 1000) / 1000;
+        return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(3);
+      };
+
+      const getDirectionLabel = (degrees) => {
+        const headings = [
+          { label: 'East', min: 337.5, max: 360 },
+          { label: 'East', min: 0, max: 22.5 },
+          { label: 'North-East', min: 22.5, max: 67.5 },
+          { label: 'North', min: 67.5, max: 112.5 },
+          { label: 'North-West', min: 112.5, max: 157.5 },
+          { label: 'West', min: 157.5, max: 202.5 },
+          { label: 'South-West', min: 202.5, max: 247.5 },
+          { label: 'South', min: 247.5, max: 292.5 },
+          { label: 'South-East', min: 292.5, max: 337.5 },
+        ];
+
+        const normalised = ((degrees % 360) + 360) % 360;
+        for (const heading of headings) {
+          if (heading.min > heading.max) {
+            if (normalised >= heading.min || normalised < heading.max) {
+              return heading.label;
+            }
+          } else if (normalised >= heading.min && normalised < heading.max) {
+            return heading.label;
+          }
+        }
+        return 'Direction';
+      };
+
+      const drawVector = () => {
+        const dx = toNumber(dxInput.value, defaults.dx);
+        const dy = toNumber(dyInput.value, defaults.dy);
+        const originX = toNumber(originXInput.value, defaults.originX);
+        const originY = toNumber(originYInput.value, defaults.originY);
+        const scale = Math.min(Math.max(Number.parseFloat(scaleInput.value) || defaults.scale, 10), 200);
+
+        scaleValue.textContent = `${Math.round(scale)} px per unit`;
+        componentSummaryEl.textContent = `⟨${formatNumber(dx)}, ${formatNumber(dy)}⟩ from (${formatNumber(originX)}, ${formatNumber(originY)})`;
+
+        const magnitude = Math.sqrt(dx * dx + dy * dy);
+        const angleRadians = Math.atan2(dy, dx);
+        const angleDegrees = ((angleRadians * 180) / Math.PI + 360) % 360;
+
+        const isZeroVector = magnitude < 1e-6;
+        zeroNotice.classList.toggle('hidden', !isZeroVector);
+
+        magnitudeEl.textContent = isZeroVector ? '0' : formatNumber(magnitude);
+        angleDegEl.textContent = isZeroVector ? '0°' : `${formatNumber(angleDegrees)}°`;
+        angleRadEl.textContent = isZeroVector ? '0' : formatNumber(angleRadians);
+        directionEl.textContent = isZeroVector ? 'No direction' : getDirectionLabel(angleDegrees);
+
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        const width = Math.max(rect.width, 300);
+        const height = Math.max(rect.height, 300);
+
+        if (canvas.width !== Math.round(width * dpr) || canvas.height !== Math.round(height * dpr)) {
+          canvas.width = Math.round(width * dpr);
+          canvas.height = Math.round(height * dpr);
+        }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        ctx.clearRect(0, 0, width, height);
+        const gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, 'rgba(14, 116, 144, 0.3)');
+        gradient.addColorStop(1, 'rgba(76, 29, 149, 0.35)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        ctx.save();
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+        ctx.lineWidth = 1;
+
+        const maxLinesX = Math.ceil(width / (2 * scale)) + 1;
+        for (let x = -maxLinesX; x <= maxLinesX; x++) {
+          const xPos = centerX + x * scale;
+          ctx.beginPath();
+          ctx.moveTo(xPos, 0);
+          ctx.lineTo(xPos, height);
+          ctx.stroke();
+        }
+
+        const maxLinesY = Math.ceil(height / (2 * scale)) + 1;
+        for (let y = -maxLinesY; y <= maxLinesY; y++) {
+          const yPos = centerY + y * scale;
+          ctx.beginPath();
+          ctx.moveTo(0, yPos);
+          ctx.lineTo(width, yPos);
+          ctx.stroke();
+        }
+
+        ctx.restore();
+
+        ctx.save();
+        ctx.strokeStyle = 'rgba(165, 243, 252, 0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(0, centerY);
+        ctx.lineTo(width, centerY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(centerX, 0);
+        ctx.lineTo(centerX, height);
+        ctx.stroke();
+        ctx.restore();
+
+        const toCanvas = (x, y) => ({
+          x: centerX + x * scale,
+          y: centerY - y * scale,
+        });
+
+        const start = toCanvas(originX, originY);
+        const end = toCanvas(originX + dx, originY + dy);
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(14, 165, 233, 0.85)';
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.95)';
+        ctx.lineWidth = 3;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        if (!isZeroVector) {
+          ctx.beginPath();
+          ctx.moveTo(start.x, start.y);
+          ctx.lineTo(end.x, end.y);
+          ctx.stroke();
+
+          const headLength = Math.min(Math.max(scale * 0.35, 12), 30);
+          const angle = Math.atan2(end.y - start.y, end.x - start.x);
+          ctx.beginPath();
+          ctx.moveTo(end.x, end.y);
+          ctx.lineTo(
+            end.x - Math.cos(angle - Math.PI / 8) * headLength,
+            end.y - Math.sin(angle - Math.PI / 8) * headLength
+          );
+          ctx.lineTo(
+            end.x - Math.cos(angle + Math.PI / 8) * headLength,
+            end.y - Math.sin(angle + Math.PI / 8) * headLength
+          );
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(250, 204, 21, 0.9)';
+        ctx.arc(start.x, start.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (!isZeroVector) {
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.95)';
+          ctx.arc(end.x, end.y, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        ctx.save();
+        ctx.font = '12px "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace';
+        ctx.fillStyle = 'rgba(226, 232, 240, 0.85)';
+        ctx.textBaseline = 'top';
+        ctx.fillText(`Start (${formatNumber(originX)}, ${formatNumber(originY)})`, start.x + 8, start.y + 8);
+        if (!isZeroVector) {
+          ctx.fillText(`End (${formatNumber(originX + dx)}, ${formatNumber(originY + dy)})`, end.x + 8, end.y + 8);
+        }
+        ctx.restore();
+      };
+
+      const handleInput = () => {
+        window.requestAnimationFrame(drawVector);
+      };
+
+      document.getElementById('vectorForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+      });
+
+      for (const input of [dxInput, dyInput, originXInput, originYInput, scaleInput]) {
+        input.addEventListener('input', handleInput);
+        input.addEventListener('change', handleInput);
+      }
+
+      document.getElementById('resetButton').addEventListener('click', () => {
+        dxInput.value = defaults.dx;
+        dyInput.value = defaults.dy;
+        originXInput.value = defaults.originX;
+        originYInput.value = defaults.originY;
+        scaleInput.value = defaults.scale;
+        handleInput();
+      });
+
+      window.addEventListener('resize', handleInput);
+
+      handleInput();
+    </script>
+  </body>
+</html>

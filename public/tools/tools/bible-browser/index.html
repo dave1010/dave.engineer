@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bible Verse Explorer</title>
+    <link rel="stylesheet" href="/assets/tw.css" />
+    <style>
+      .verse-card {
+        border-radius: 0.75rem;
+        border: 1px solid rgb(229 231 235);
+        background: white;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      .verse-number {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        color: rgb(30 64 175);
+        margin-right: 0.5rem;
+      }
+
+      .status-banner {
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .status-banner[data-type="info"] {
+        background: rgb(239 246 255);
+        color: rgb(30 64 175);
+        border: 1px solid rgb(191 219 254);
+      }
+
+      .status-banner[data-type="success"] {
+        background: rgb(240 253 244);
+        color: rgb(22 101 52);
+        border: 1px solid rgb(187 247 208);
+      }
+
+      .status-banner[data-type="error"] {
+        background: rgb(254 242 242);
+        color: rgb(185 28 28);
+        border: 1px solid rgb(254 202 202);
+      }
+
+    </style>
+  </head>
+  <body class="bg-gradient-to-b from-brand-50/60 to-white">
+    <main class="mx-auto max-w-3xl p-4 md:p-6 space-y-6 font-sans">
+      <header class="space-y-2 text-center">
+        <h1 class="text-3xl font-semibold text-gray-900">Bible Verse Explorer</h1>
+      </header>
+
+      <div id="status" class="status-banner" data-type="info" hidden>
+        <span class="font-medium">Loading</span>
+        <span class="text-sm" id="status-message">Preparing resources…</span>
+      </div>
+
+      <section class="space-y-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-soft md:p-6">
+        <div>
+          <div class="flex flex-wrap gap-2 rounded-xl border border-gray-200 bg-gray-50 p-1 text-sm font-medium text-gray-600">
+            <button
+              class="tab-trigger flex-1 rounded-lg px-3 py-2 text-center transition data-[active='true']:bg-white data-[active='true']:text-brand-700"
+              type="button"
+              data-tab-target="select"
+              data-active="true"
+            >
+              Select
+            </button>
+            <button
+              class="tab-trigger flex-1 rounded-lg px-3 py-2 text-center transition data-[active='true']:bg-white data-[active='true']:text-brand-700"
+              type="button"
+              data-tab-target="browse"
+            >
+              Browse
+            </button>
+            <button
+              class="tab-trigger flex-1 rounded-lg px-3 py-2 text-center transition data-[active='true']:bg-white data-[active='true']:text-brand-700"
+              type="button"
+              data-tab-target="reference"
+            >
+              Reference
+            </button>
+            <button
+              class="tab-trigger flex-1 rounded-lg px-3 py-2 text-center transition data-[active='true']:bg-white data-[active='true']:text-brand-700"
+              type="button"
+              data-tab-target="search"
+            >
+              Search
+            </button>
+          </div>
+
+          <div class="mt-4 space-y-4">
+            <div data-tab-panel="select">
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="space-y-2">
+                  <span class="sr-only">Book</span>
+                  <select
+                    id="book-select"
+                    class="w-full rounded-lg border border-gray-300 bg-white p-2 text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                    disabled
+                    aria-label="Book"
+                  ></select>
+                </label>
+                <label class="space-y-2">
+                  <span class="sr-only">Chapter</span>
+                  <select
+                    id="chapter-select"
+                    class="w-full rounded-lg border border-gray-300 bg-white p-2 text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                    disabled
+                    aria-label="Chapter"
+                  ></select>
+                </label>
+              </div>
+            </div>
+
+            <div data-tab-panel="browse" hidden>
+              <div class="space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div class="flex gap-2">
+                    <button
+                      class="browse-order rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 data-[active='true']:border-brand-200 data-[active='true']:bg-brand-50 data-[active='true']:text-brand-700"
+                      type="button"
+                      data-browse-order="canonical"
+                      data-active="true"
+                    >
+                      By Testament
+                    </button>
+                    <button
+                      class="browse-order rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 data-[active='true']:border-brand-200 data-[active='true']:bg-brand-50 data-[active='true']:text-brand-700"
+                      type="button"
+                      data-browse-order="alphabetical"
+                    >
+                      A–Z
+                    </button>
+                  </div>
+                </div>
+                <div id="browse-book-list" class="space-y-4"></div>
+                <div id="browse-chapter-list" class="flex flex-wrap gap-2 text-sm text-gray-500">
+                  Select a book to view its chapters.
+                </div>
+              </div>
+            </div>
+
+            <div data-tab-panel="reference" hidden>
+              <div class="space-y-3">
+                <label class="flex flex-col gap-2">
+                  <span class="font-medium text-gray-700">Reference</span>
+                  <input
+                    id="reference-input"
+                    type="text"
+                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                    placeholder="Try “John 3:16” or “2 Ki 1”"
+                    disabled
+                    autocomplete="off"
+                  />
+                </label>
+                <div id="reference-results" class="text-sm text-gray-500 space-y-2">
+                  <p>Start typing a book name, chapter, or verse to jump directly to a passage.</p>
+                </div>
+              </div>
+            </div>
+            <div data-tab-panel="search" hidden>
+              <div class="space-y-3">
+                <label class="flex flex-col gap-2">
+                  <span class="font-medium text-gray-700">Search</span>
+                  <input
+                    id="text-search-input"
+                    type="text"
+                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                    placeholder="Try “love your neighbor”"
+                    disabled
+                    autocomplete="off"
+                  />
+                </label>
+                <div id="text-search-results" class="text-sm text-gray-500 space-y-2">
+                  <p>Type to search every verse. Showing up to 50 results.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 rounded-xl bg-gray-50 p-3 text-sm text-gray-600">
+          <div id="current-reference" class="font-medium text-gray-700">Genesis 1</div>
+          <div class="flex gap-2">
+            <button
+              id="previous-chapter"
+              class="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled
+              type="button"
+            >
+              ← Previous
+            </button>
+            <button
+              id="next-chapter"
+              class="bg-brand-600 text-white rounded-lg px-3 py-1.5 text-sm font-medium hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled
+              type="button"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-3" id="verse-list">
+          <div class="text-sm text-gray-500">Select a book and chapter to view verses.</div>
+        </div>
+      </section>
+
+      <footer class="py-6 text-center text-sm text-gray-500">
+        <a href="/" class="font-medium text-brand-700 hover:text-brand-600">← Back to tools.dave.engineer</a>
+      </footer>
+    </main>
+
+    <script type="module">
+      const statusBanner = document.getElementById("status");
+      const statusMessage = document.getElementById("status-message");
+      const tabButtons = document.querySelectorAll(".tab-trigger");
+      const tabPanels = document.querySelectorAll("[data-tab-panel]");
+      const bookSelect = document.getElementById("book-select");
+      const chapterSelect = document.getElementById("chapter-select");
+      const verseList = document.getElementById("verse-list");
+      const currentReference = document.getElementById("current-reference");
+      const previousButton = document.getElementById("previous-chapter");
+      const nextButton = document.getElementById("next-chapter");
+      const browseBookList = document.getElementById("browse-book-list");
+      const browseChapterList = document.getElementById("browse-chapter-list");
+      const browseOrderButtons = document.querySelectorAll(".browse-order");
+      const referenceInput = document.getElementById("reference-input");
+      const referenceResults = document.getElementById("reference-results");
+      const textSearchInput = document.getElementById("text-search-input");
+      const textSearchResults = document.getElementById("text-search-results");
+
+      let sqlite3;
+      let db;
+      let chaptersForCurrentBook = [];
+      let currentBookId = null;
+      let currentView = null;
+      let browseOrder = "canonical";
+
+      const books = [
+        { id: 1, name: "Genesis", testament: "OT", aliases: ["genesis", "gen", "ge"] },
+        { id: 2, name: "Exodus", testament: "OT", aliases: ["exodus", "exo", "ex"] },
+        { id: 3, name: "Leviticus", testament: "OT", aliases: ["leviticus", "lev", "lv"] },
+        { id: 4, name: "Numbers", testament: "OT", aliases: ["numbers", "num", "nu"] },
+        { id: 5, name: "Deuteronomy", testament: "OT", aliases: ["deuteronomy", "deut", "dt"] },
+        { id: 6, name: "Joshua", testament: "OT", aliases: ["joshua", "josh", "jos"] },
+        { id: 7, name: "Judges", testament: "OT", aliases: ["judges", "judg", "jdg"] },
+        { id: 8, name: "Ruth", testament: "OT", aliases: ["ruth", "ru", "rth"] },
+        { id: 9, name: "1 Samuel", testament: "OT", aliases: ["1 samuel", "1 sam", "1sa", "i samuel", "1sam"] },
+        { id: 10, name: "2 Samuel", testament: "OT", aliases: ["2 samuel", "2 sam", "2sa", "ii samuel", "2sam"] },
+        { id: 11, name: "1 Kings", testament: "OT", aliases: ["1 kings", "1 ki", "1ki", "1kgs", "1kings", "i kings"] },
+        { id: 12, name: "2 Kings", testament: "OT", aliases: ["2 kings", "2 ki", "2ki", "2kgs", "2kings", "ii kings"] },
+        { id: 13, name: "1 Chronicles", testament: "OT", aliases: ["1 chronicles", "1 chron", "1ch", "1chr", "i chronicles"] },
+        { id: 14, name: "2 Chronicles", testament: "OT", aliases: ["2 chronicles", "2 chron", "2ch", "2chr", "ii chronicles"] },
+        { id: 15, name: "Ezra", testament: "OT", aliases: ["ezra", "ezr"] },
+        { id: 16, name: "Nehemiah", testament: "OT", aliases: ["nehemiah", "neh"] },
+        { id: 17, name: "Esther", testament: "OT", aliases: ["esther", "est"] },
+        { id: 18, name: "Job", testament: "OT", aliases: ["job"] },
+        { id: 19, name: "Psalms", testament: "OT", aliases: ["psalms", "psalm", "ps", "psa"] },
+        { id: 20, name: "Proverbs", testament: "OT", aliases: ["proverbs", "prov", "prv", "pro"] },
+        { id: 21, name: "Ecclesiastes", testament: "OT", aliases: ["ecclesiastes", "eccl", "ecc"] },
+        { id: 22, name: "Song of Songs", testament: "OT", aliases: ["song of songs", "song", "song of solomon", "sos"] },
+        { id: 23, name: "Isaiah", testament: "OT", aliases: ["isaiah", "isa"] },
+        { id: 24, name: "Jeremiah", testament: "OT", aliases: ["jeremiah", "jer"] },
+        { id: 25, name: "Lamentations", testament: "OT", aliases: ["lamentations", "lam"] },
+        { id: 26, name: "Ezekiel", testament: "OT", aliases: ["ezekiel", "ezek", "ezk"] },
+        { id: 27, name: "Daniel", testament: "OT", aliases: ["daniel", "dan", "dn"] },
+        { id: 28, name: "Hosea", testament: "OT", aliases: ["hosea", "hos"] },
+        { id: 29, name: "Joel", testament: "OT", aliases: ["joel", "joe", "jl"] },
+        { id: 30, name: "Amos", testament: "OT", aliases: ["amos", "amo", "am"] },
+        { id: 31, name: "Obadiah", testament: "OT", aliases: ["obadiah", "obad", "ob"] },
+        { id: 32, name: "Jonah", testament: "OT", aliases: ["jonah", "jon"] },
+        { id: 33, name: "Micah", testament: "OT", aliases: ["micah", "mic", "mc"] },
+        { id: 34, name: "Nahum", testament: "OT", aliases: ["nahum", "nah", "na"] },
+        { id: 35, name: "Habakkuk", testament: "OT", aliases: ["habakkuk", "hab"] },
+        { id: 36, name: "Zephaniah", testament: "OT", aliases: ["zephaniah", "zeph", "zep"] },
+        { id: 37, name: "Haggai", testament: "OT", aliases: ["haggai", "hag", "hg"] },
+        { id: 38, name: "Zechariah", testament: "OT", aliases: ["zechariah", "zech", "zec"] },
+        { id: 39, name: "Malachi", testament: "OT", aliases: ["malachi", "mal", "ml"] },
+        { id: 40, name: "Matthew", testament: "NT", aliases: ["matthew", "matt", "mt"] },
+        { id: 41, name: "Mark", testament: "NT", aliases: ["mark", "mk", "mrk"] },
+        { id: 42, name: "Luke", testament: "NT", aliases: ["luke", "luk", "lk"] },
+        { id: 43, name: "John", testament: "NT", aliases: ["john", "jn", "jhn"] },
+        { id: 44, name: "Acts", testament: "NT", aliases: ["acts", "act", "ac"] },
+        { id: 45, name: "Romans", testament: "NT", aliases: ["romans", "rom", "ro"] },
+        { id: 46, name: "1 Corinthians", testament: "NT", aliases: ["1 corinthians", "1 cor", "1co", "1cor", "i corinthians"] },
+        { id: 47, name: "2 Corinthians", testament: "NT", aliases: ["2 corinthians", "2 cor", "2co", "2cor", "ii corinthians"] },
+        { id: 48, name: "Galatians", testament: "NT", aliases: ["galatians", "gal", "ga"] },
+        { id: 49, name: "Ephesians", testament: "NT", aliases: ["ephesians", "eph", "ep"] },
+        { id: 50, name: "Philippians", testament: "NT", aliases: ["philippians", "phil", "php"] },
+        { id: 51, name: "Colossians", testament: "NT", aliases: ["colossians", "col", "cl"] },
+        { id: 52, name: "1 Thessalonians", testament: "NT", aliases: ["1 thessalonians", "1 thes", "1th", "1thess", "i thessalonians"] },
+        { id: 53, name: "2 Thessalonians", testament: "NT", aliases: ["2 thessalonians", "2 thes", "2th", "2thess", "ii thessalonians"] },
+        { id: 54, name: "1 Timothy", testament: "NT", aliases: ["1 timothy", "1 tim", "1ti", "1tim", "i timothy"] },
+        { id: 55, name: "2 Timothy", testament: "NT", aliases: ["2 timothy", "2 tim", "2ti", "2tim", "ii timothy"] },
+        { id: 56, name: "Titus", testament: "NT", aliases: ["titus", "tit", "ti"] },
+        { id: 57, name: "Philemon", testament: "NT", aliases: ["philemon", "philem", "phm"] },
+        { id: 58, name: "Hebrews", testament: "NT", aliases: ["hebrews", "heb"] },
+        { id: 59, name: "James", testament: "NT", aliases: ["james", "jas", "jm"] },
+        { id: 60, name: "1 Peter", testament: "NT", aliases: ["1 peter", "1 pet", "1pe", "1pet", "i peter"] },
+        { id: 61, name: "2 Peter", testament: "NT", aliases: ["2 peter", "2 pet", "2pe", "2pet", "ii peter"] },
+        { id: 62, name: "1 John", testament: "NT", aliases: ["1 john", "1 jn", "1jo", "1jn", "i john"] },
+        { id: 63, name: "2 John", testament: "NT", aliases: ["2 john", "2 jn", "2jo", "2jn", "ii john"] },
+        { id: 64, name: "3 John", testament: "NT", aliases: ["3 john", "3 jn", "3jo", "3jn", "iii john"] },
+        { id: 65, name: "Jude", testament: "NT", aliases: ["jude", "jud"] },
+        { id: 66, name: "Revelation", testament: "NT", aliases: ["revelation", "rev", "re"] }
+      ];
+
+      const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      const aliasPatterns = books
+        .flatMap((book) =>
+          book.aliases.map((alias) => ({
+            alias,
+            bookId: book.id,
+            regex: new RegExp(`^${escapeRegex(alias)}(?=\\b|\\s|\\d|:|$)`, "i")
+          }))
+        )
+        .sort((a, b) => b.alias.length - a.alias.length);
+
+      const debounce = (fn, delay) => {
+        let timeoutId;
+        return (...args) => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => fn(...args), delay);
+        };
+      };
+
+      const setStatus = (message, type = "info") => {
+        statusMessage.textContent = message;
+        statusBanner.dataset.type = type;
+        statusBanner.hidden = false;
+      };
+
+      const hideStatus = () => {
+        statusBanner.hidden = true;
+      };
+
+      const populateBooks = () => {
+        const fragment = document.createDocumentFragment();
+        for (const book of books) {
+          const option = document.createElement("option");
+          option.value = String(book.id);
+          option.textContent = book.name;
+          fragment.appendChild(option);
+        }
+        bookSelect.appendChild(fragment);
+      };
+
+      const buildBrowseBookButton = (book) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.bookId = String(book.id);
+        button.className =
+          "book-button rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60";
+        button.textContent = book.name;
+        return button;
+      };
+
+      const renderBrowseBooks = () => {
+        browseBookList.innerHTML = "";
+        if (browseOrder === "alphabetical") {
+          const container = document.createElement("div");
+          container.className = "grid gap-2 sm:grid-cols-2";
+          const sorted = [...books].sort((a, b) => a.name.localeCompare(b.name));
+          for (const book of sorted) {
+            container.appendChild(buildBrowseBookButton(book));
+          }
+          browseBookList.appendChild(container);
+        } else {
+          const testaments = [
+            { id: "OT", label: "Old Testament" },
+            { id: "NT", label: "New Testament" }
+          ];
+          for (const group of testaments) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "space-y-2";
+            const heading = document.createElement("h4");
+            heading.className = "text-sm font-semibold text-gray-700";
+            heading.textContent = group.label;
+            wrapper.appendChild(heading);
+            const grid = document.createElement("div");
+            grid.className = "grid gap-2 sm:grid-cols-2";
+            for (const book of books.filter((item) => item.testament === group.id)) {
+              grid.appendChild(buildBrowseBookButton(book));
+            }
+            wrapper.appendChild(grid);
+            browseBookList.appendChild(wrapper);
+          }
+        }
+        highlightBrowseBook(currentBookId);
+      };
+
+      const setBrowseOrder = (order) => {
+        if (browseOrder === order) return;
+        browseOrder = order;
+        for (const button of browseOrderButtons) {
+          const isActive = button.dataset.browseOrder === order;
+          button.dataset.active = String(isActive);
+        }
+        renderBrowseBooks();
+      };
+
+      const renderBrowseChapters = (bookId, chapters) => {
+        browseChapterList.innerHTML = "";
+        if (!db || !bookId || !chapters?.length) {
+          browseChapterList.textContent = "Select a book to view its chapters.";
+          return;
+        }
+        const fragment = document.createDocumentFragment();
+        for (const chapter of chapters) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.dataset.chapter = String(chapter);
+          button.className =
+            "chapter-button rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60";
+          button.textContent = `Ch. ${chapter}`;
+          fragment.appendChild(button);
+        }
+        browseChapterList.appendChild(fragment);
+        highlightBrowseChapter(Number(chapterSelect.value));
+      };
+
+      const highlightBrowseBook = (bookId) => {
+        for (const button of browseBookList.querySelectorAll(".book-button")) {
+          if (Number(button.dataset.bookId) === bookId) {
+            button.classList.add("border-brand-300", "bg-brand-50", "text-brand-700");
+          } else {
+            button.classList.remove("border-brand-300", "bg-brand-50", "text-brand-700");
+          }
+        }
+      };
+
+      const highlightBrowseChapter = (chapter) => {
+        for (const button of browseChapterList.querySelectorAll(".chapter-button")) {
+          if (Number(button.dataset.chapter) === chapter) {
+            button.classList.add("border-brand-300", "bg-brand-50", "text-brand-700");
+          } else {
+            button.classList.remove("border-brand-300", "bg-brand-50", "text-brand-700");
+          }
+        }
+      };
+
+      const getBookById = (bookId) => books.find((book) => book.id === bookId);
+
+      const selectBookById = (bookId) => {
+        bookSelect.value = String(bookId);
+      };
+
+      const queryDistinctChapters = (bookId) => {
+        const chapters = [];
+        const stmt = db.prepare(
+          "SELECT DISTINCT chapter FROM verses WHERE book = ? ORDER BY chapter"
+        );
+        try {
+          stmt.bind([bookId]);
+          while (stmt.step()) {
+            chapters.push(stmt.get(0));
+          }
+        } finally {
+          stmt.finalize();
+        }
+        return chapters;
+      };
+
+      const queryVerses = (bookId, chapter) => {
+        const verses = [];
+        const stmt = db.prepare(
+          "SELECT verse, text FROM verses WHERE book = ? AND chapter = ? ORDER BY verse"
+        );
+        try {
+          stmt.bind([bookId, chapter]);
+          while (stmt.step()) {
+            verses.push({ number: stmt.get(0), text: stmt.get(1) });
+          }
+        } finally {
+          stmt.finalize();
+        }
+        return verses;
+      };
+
+      const setBrowseButtonsDisabled = (disabled) => {
+        for (const button of browseBookList.querySelectorAll("button")) {
+          button.disabled = disabled;
+        }
+        for (const button of browseChapterList.querySelectorAll("button")) {
+          button.disabled = disabled;
+        }
+      };
+
+      const setControlsDisabled = (disabled) => {
+        bookSelect.disabled = disabled;
+        chapterSelect.disabled = disabled;
+        previousButton.disabled = disabled;
+        nextButton.disabled = disabled;
+        referenceInput.disabled = disabled;
+        textSearchInput.disabled = disabled;
+        setBrowseButtonsDisabled(disabled);
+      };
+
+      const setActiveTab = (target) => {
+        for (const button of tabButtons) {
+          const isActive = button.dataset.tabTarget === target;
+          button.dataset.active = String(isActive);
+        }
+        for (const panel of tabPanels) {
+          panel.hidden = panel.dataset.tabPanel !== target;
+        }
+      };
+
+      const renderVerses = (context, verses) => {
+        verseList.innerHTML = "";
+        if (!verses.length) {
+          const empty = document.createElement("div");
+          empty.className = "text-sm text-gray-500";
+          empty.textContent = "No verses were found for this selection.";
+          verseList.appendChild(empty);
+          currentReference.textContent = `${context.bookName} ${context.chapter}`;
+          return;
+        }
+
+        const isPartial =
+          context.startVerse > 1 || context.endVerse < context.maxVerse;
+        if (isPartial) {
+          const notice = document.createElement("div");
+          notice.className =
+            "flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-100 bg-brand-50 p-3 text-sm text-brand-700";
+          const rangeText =
+            context.startVerse === context.endVerse
+              ? `${context.startVerse}`
+              : `${context.startVerse}-${context.endVerse}`;
+          const message = document.createElement("span");
+          message.className = "font-medium";
+          message.textContent = `Showing ${context.bookName} ${context.chapter}:${rangeText}`;
+          notice.appendChild(message);
+
+          const actions = document.createElement("div");
+          actions.className = "flex flex-wrap gap-2";
+          if (context.startVerse > 1) {
+            const expandStart = document.createElement("button");
+            expandStart.type = "button";
+            expandStart.className =
+              "rounded-lg border border-brand-200 bg-white px-3 py-1 text-sm font-medium text-brand-700 shadow-sm hover:bg-brand-50";
+            expandStart.textContent = "Expand to start";
+            expandStart.addEventListener("click", () => {
+              displayPassage(context.bookId, context.chapter, {
+                startVerse: 1,
+                endVerse: context.endVerse
+              });
+            });
+            actions.appendChild(expandStart);
+          }
+          if (context.endVerse < context.maxVerse) {
+            const expandEnd = document.createElement("button");
+            expandEnd.type = "button";
+            expandEnd.className =
+              "rounded-lg border border-brand-200 bg-white px-3 py-1 text-sm font-medium text-brand-700 shadow-sm hover:bg-brand-50";
+            expandEnd.textContent = "Expand to end";
+            expandEnd.addEventListener("click", () => {
+              displayPassage(context.bookId, context.chapter, {
+                startVerse: context.startVerse,
+                endVerse: context.maxVerse
+              });
+            });
+            actions.appendChild(expandEnd);
+          }
+          if (context.startVerse > 1 || context.endVerse < context.maxVerse) {
+            const expandFull = document.createElement("button");
+            expandFull.type = "button";
+            expandFull.className =
+              "rounded-lg border border-brand-200 bg-white px-3 py-1 text-sm font-medium text-brand-700 shadow-sm hover:bg-brand-50";
+            expandFull.textContent = "Show full chapter";
+            expandFull.addEventListener("click", () => {
+              displayPassage(context.bookId, context.chapter);
+            });
+            actions.appendChild(expandFull);
+          }
+          notice.appendChild(actions);
+          verseList.appendChild(notice);
+        }
+
+        for (const verse of verses) {
+          const card = document.createElement("article");
+          card.className = "verse-card";
+          const row = document.createElement("div");
+          row.className = "flex items-start gap-3";
+          const number = document.createElement("span");
+          number.className = "verse-number";
+          number.textContent = verse.number;
+          const text = document.createElement("p");
+          text.className = "flex-1 leading-relaxed text-gray-700";
+          text.textContent = verse.text;
+          row.appendChild(number);
+          row.appendChild(text);
+          card.appendChild(row);
+          verseList.appendChild(card);
+        }
+
+        const baseReference = `${context.bookName} ${context.chapter}`;
+        if (context.startVerse === 1 && context.endVerse === context.maxVerse) {
+          currentReference.textContent = baseReference;
+        } else {
+          const rangeText =
+            context.startVerse === context.endVerse
+              ? `${context.startVerse}`
+              : `${context.startVerse}-${context.endVerse}`;
+          currentReference.textContent = `${baseReference}:${rangeText}`;
+        }
+      };
+
+      const updateChapterNavigation = () => {
+        if (!chaptersForCurrentBook.length || !currentView) {
+          previousButton.disabled = true;
+          nextButton.disabled = true;
+          return;
+        }
+        const chapterIndex = chaptersForCurrentBook.findIndex(
+          (ch) => ch === currentView.chapter
+        );
+        previousButton.disabled = chapterIndex <= 0;
+        nextButton.disabled = chapterIndex === chaptersForCurrentBook.length - 1;
+      };
+
+      const displayPassage = (bookId, chapter, options = {}) => {
+        if (!db) return false;
+        const book = getBookById(bookId);
+        const bookName = book?.name ?? `Book ${bookId}`;
+        const allVerses = queryVerses(bookId, chapter);
+        if (!allVerses.length) {
+          currentView = null;
+          verseList.innerHTML = "";
+          const empty = document.createElement("div");
+          empty.className = "text-sm text-gray-500";
+          empty.textContent = "No verses were found for this selection.";
+          verseList.appendChild(empty);
+          currentReference.textContent = `${bookName} ${chapter}`;
+          updateChapterNavigation();
+          return false;
+        }
+        const maxVerse = allVerses[allVerses.length - 1].number;
+        const startVerse = Math.max(1, options.startVerse ?? 1);
+        const endVerse = Math.min(options.endVerse ?? maxVerse, maxVerse);
+        const versesToShow =
+          startVerse === 1 && endVerse === maxVerse
+            ? allVerses
+            : allVerses.filter(
+                (verse) => verse.number >= startVerse && verse.number <= endVerse
+              );
+        currentView = {
+          bookId,
+          chapter,
+          bookName,
+          startVerse,
+          endVerse,
+          maxVerse
+        };
+        renderVerses(currentView, versesToShow);
+        highlightBrowseBook(bookId);
+        highlightBrowseChapter(chapter);
+        updateChapterNavigation();
+        return true;
+      };
+
+      const setBook = (bookId, { targetChapter } = {}) => {
+        if (!db) return null;
+        const bookChanged = currentBookId !== bookId;
+        if (bookChanged) {
+          chaptersForCurrentBook = queryDistinctChapters(bookId);
+          renderChapters(chaptersForCurrentBook);
+          renderBrowseChapters(bookId, chaptersForCurrentBook);
+        }
+        currentBookId = bookId;
+        selectBookById(bookId);
+        highlightBrowseBook(bookId);
+        const defaultChapter = chaptersForCurrentBook[0] ?? 1;
+        let chapterToSelect = targetChapter ?? Number(chapterSelect.value);
+        if (!chapterToSelect) {
+          chapterToSelect = defaultChapter;
+        }
+        if (!chaptersForCurrentBook.includes(chapterToSelect)) {
+          chapterToSelect = defaultChapter;
+        }
+        chapterSelect.value = String(chapterToSelect);
+        highlightBrowseChapter(chapterToSelect);
+        return chapterToSelect;
+      };
+
+      const renderChapters = (chapters) => {
+        chapterSelect.innerHTML = "";
+        const fragment = document.createDocumentFragment();
+        for (const chapter of chapters) {
+          const option = document.createElement("option");
+          option.value = String(chapter);
+          option.textContent = `Chapter ${chapter}`;
+          fragment.appendChild(option);
+        }
+        chapterSelect.appendChild(fragment);
+      };
+
+      const deserializeToMemoryDb = (sqlite3, bytes) => {
+        const memoryDb = new sqlite3.oo1.DB();
+        const pData = sqlite3.wasm.allocFromTypedArray(bytes);
+        const rc = sqlite3.capi.sqlite3_deserialize(
+          memoryDb.pointer,
+          "main",
+          pData,
+          bytes.byteLength,
+          bytes.byteLength,
+          sqlite3.capi.SQLITE_DESERIALIZE_FREEONCLOSE
+        );
+        if (rc !== sqlite3.capi.SQLITE_OK) {
+          const message = sqlite3.capi.sqlite3_js_rc_str(rc);
+          memoryDb.close();
+          throw new Error(`Failed to load SQLite database: ${message}`);
+        }
+        return memoryDb;
+      };
+
+      const loadDatabase = async () => {
+        const response = await fetch("/data/net.sqlite");
+        if (!response.ok) {
+          throw new Error(`Could not fetch Bible database (status ${response.status}).`);
+        }
+        const buffer = await response.arrayBuffer();
+        const bytes = new Uint8Array(buffer);
+        if (sqlite3.oo1?.OpfsDb) {
+          try {
+            await sqlite3.oo1.OpfsDb.importDb("net.sqlite", bytes);
+            return new sqlite3.oo1.OpfsDb("net.sqlite");
+          } catch (error) {
+            console.warn("Falling back to in-memory database:", error);
+          }
+        }
+        return deserializeToMemoryDb(sqlite3, bytes);
+      };
+
+      const parseReference = (input) => {
+        const value = input.trim().replace(/[\u2013\u2014]/g, "-");
+        if (!value) {
+          return { kind: "empty" };
+        }
+        let matchedBook = null;
+        for (const entry of aliasPatterns) {
+          const match = value.match(entry.regex);
+          if (match) {
+            matchedBook = {
+              id: entry.bookId,
+              name: getBookById(entry.bookId)?.name ?? match[0],
+              rawMatch: match[0],
+              remainder: value.slice(match[0].length).trim()
+            };
+            break;
+          }
+        }
+        if (!matchedBook) {
+          return {
+            kind: "error",
+            code: "no-book-match",
+            message: "No matching book yet. Keep typing a book name."
+          };
+        }
+        if (!matchedBook.remainder) {
+          return {
+            kind: "partial",
+            bookId: matchedBook.id,
+            bookName: matchedBook.name,
+            message: `Add a chapter number for ${matchedBook.name}.`
+          };
+        }
+        const remainder = matchedBook.remainder;
+        const chapterMatch = remainder.match(/^(\d+)/);
+        if (!chapterMatch) {
+          return {
+            kind: "partial",
+            bookId: matchedBook.id,
+            bookName: matchedBook.name,
+            message: "Start with a chapter number after the book."
+          };
+        }
+        const chapter = Number(chapterMatch[1]);
+        if (!Number.isInteger(chapter) || chapter <= 0) {
+          return {
+            kind: "error",
+            message: "Chapters must be positive numbers."
+          };
+        }
+        const afterChapter = remainder.slice(chapterMatch[0].length).trim();
+        if (!afterChapter) {
+          return {
+            kind: "complete",
+            bookId: matchedBook.id,
+            bookName: matchedBook.name,
+            chapter
+          };
+        }
+        const versePart = afterChapter.replace(/^[:\s]+/, "");
+        if (!versePart) {
+          return {
+            kind: "partial",
+            bookId: matchedBook.id,
+            bookName: matchedBook.name,
+            chapter,
+            message: "Add a verse number to finish the reference."
+          };
+        }
+        const rangeParts = versePart.split(/\s*[-–]\s*/);
+        const startVerse = Number(rangeParts[0]);
+        if (!Number.isInteger(startVerse) || startVerse <= 0) {
+          return {
+            kind: "error",
+            message: "Verses must be positive numbers."
+          };
+        }
+        let endVerse = startVerse;
+        if (rangeParts.length > 1) {
+          if (!rangeParts[1]) {
+            return {
+              kind: "partial",
+              bookId: matchedBook.id,
+              bookName: matchedBook.name,
+              chapter,
+              startVerse,
+              message: "Finish entering the verse range."
+            };
+          }
+          endVerse = Number(rangeParts[1]);
+          if (!Number.isInteger(endVerse) || endVerse <= 0) {
+            return {
+              kind: "error",
+              message: "Verses must be positive numbers."
+            };
+          }
+          if (endVerse < startVerse) {
+            return {
+              kind: "error",
+              message: "Verse ranges should increase."
+            };
+          }
+        }
+        return {
+          kind: "complete",
+          bookId: matchedBook.id,
+          bookName: matchedBook.name,
+          chapter,
+          startVerse,
+          endVerse
+        };
+      };
+
+      const describeReference = (result) => {
+        if (!result) return "";
+        const base = `${result.bookName} ${result.chapter}`;
+        if (!result.startVerse) {
+          return base;
+        }
+        if (result.startVerse === result.endVerse) {
+          return `${base}:${result.startVerse}`;
+        }
+        return `${base}:${result.startVerse}-${result.endVerse}`;
+      };
+
+      const searchVersesByText = (value, limit = 50) => {
+        const trimmed = value.trim();
+        if (!trimmed) {
+          return [];
+        }
+        const terms = trimmed.split(/\s+/).filter(Boolean);
+        if (!terms.length) {
+          return [];
+        }
+        const conditions = terms
+          .map(() => "text LIKE ? COLLATE NOCASE")
+          .join(" AND ");
+        const sql =
+          `SELECT book, chapter, verse, text FROM verses WHERE ${conditions} ORDER BY book, chapter, verse LIMIT ?`;
+        const params = [...terms.map((term) => `%${term}%`), limit];
+        const results = [];
+        const stmt = db.prepare(sql);
+        try {
+          stmt.bind(params);
+          while (stmt.step()) {
+            results.push({
+              book: stmt.get(0),
+              chapter: stmt.get(1),
+              verse: stmt.get(2),
+              text: stmt.get(3)
+            });
+          }
+        } finally {
+          stmt.finalize();
+        }
+        return results;
+      };
+
+      const handleTextSearch = (value) => {
+        if (!db) return;
+        const trimmed = value.trim();
+        if (!trimmed) {
+          textSearchResults.innerHTML = "";
+          const message = document.createElement("p");
+          message.textContent = "Type to search every verse. Showing up to 50 results.";
+          textSearchResults.appendChild(message);
+          return;
+        }
+        const results = searchVersesByText(trimmed, 50);
+        if (!results.length) {
+          textSearchResults.textContent = `No verses matched “${trimmed}”.`;
+          return;
+        }
+        textSearchResults.innerHTML = "";
+        const summary = document.createElement("div");
+        summary.className = "text-sm text-gray-600";
+        summary.textContent =
+          results.length >= 50
+            ? "Showing the first 50 results. Refine your search to narrow it down."
+            : `Found ${results.length} result${results.length === 1 ? "" : "s"}.`;
+        textSearchResults.appendChild(summary);
+        const list = document.createElement("div");
+        list.className = "space-y-2";
+        for (const result of results) {
+          const bookName = getBookById(result.book)?.name ?? `Book ${result.book}`;
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className =
+            "w-full text-left rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm transition hover:border-brand-300 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500/40";
+          const title = document.createElement("div");
+          title.className = "text-sm font-semibold text-gray-800";
+          title.textContent = `${bookName} ${result.chapter}:${result.verse}`;
+          const verseText = document.createElement("div");
+          verseText.className = "mt-1 text-sm text-gray-600";
+          verseText.textContent = result.text;
+          button.appendChild(title);
+          button.appendChild(verseText);
+          button.addEventListener("click", () => {
+            const chapter = setBook(result.book, { targetChapter: result.chapter });
+            displayPassage(result.book, chapter);
+          });
+          list.appendChild(button);
+        }
+        textSearchResults.appendChild(list);
+      };
+
+      const getBookSuggestions = (value) => {
+        const trimmed = value.trimStart();
+        if (!trimmed) {
+          return [];
+        }
+        const normalized = trimmed.toLowerCase().replace(/\s+/g, " ");
+        if (!normalized) {
+          return [];
+        }
+        const normalizedTight = normalized.trimEnd();
+        const queries = new Set([normalizedTight]);
+        if (normalized !== normalizedTight) {
+          queries.add(normalized);
+        }
+        const seen = new Set();
+        const suggestions = [];
+        for (const book of books) {
+          const name = book.name.toLowerCase();
+          const aliasList = book.aliases.map((alias) => alias.toLowerCase());
+          const matches = Array.from(queries).some((query) => {
+            if (!query) return false;
+            return (
+              name.startsWith(query) ||
+              aliasList.some((alias) => alias.startsWith(query))
+            );
+          });
+          if (matches && !seen.has(book.id)) {
+            suggestions.push(book);
+            seen.add(book.id);
+          }
+        }
+        return suggestions;
+      };
+
+      const renderBookSuggestions = (value) => {
+        const suggestions = getBookSuggestions(value);
+        if (!suggestions.length) {
+          referenceResults.textContent =
+            "No books match that yet. Keep typing a book name.";
+          return;
+        }
+        referenceResults.innerHTML = "";
+        const intro = document.createElement("div");
+        intro.className = "text-sm text-gray-600";
+        intro.textContent = "Possible books:";
+        referenceResults.appendChild(intro);
+        const list = document.createElement("div");
+        list.className = "flex flex-wrap gap-2";
+        for (const suggestion of suggestions) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className =
+            "rounded-full border border-gray-200 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500/40";
+          button.textContent = suggestion.name;
+          button.addEventListener("click", () => {
+            referenceInput.value = `${suggestion.name} `;
+            referenceInput.focus();
+            handleReferenceInput(referenceInput.value);
+          });
+          list.appendChild(button);
+        }
+        referenceResults.appendChild(list);
+      };
+
+      const handleReferenceInput = (value) => {
+        if (!db) return;
+        const parsed = parseReference(value);
+        if (parsed.kind === "empty") {
+          referenceResults.textContent =
+            "Start typing a book name, chapter, or verse to jump directly to a passage.";
+          return;
+        }
+        if (parsed.kind === "error") {
+          if (parsed.code === "no-book-match") {
+            renderBookSuggestions(value);
+            return;
+          }
+          referenceResults.textContent = parsed.message;
+          return;
+        }
+        if (parsed.kind === "partial") {
+          if (parsed.bookId) {
+            const chapter = setBook(parsed.bookId, { targetChapter: parsed.chapter });
+            if (chapter != null) {
+              const options = {};
+              if (parsed.startVerse) {
+                options.startVerse = parsed.startVerse;
+                options.endVerse = parsed.startVerse;
+              }
+              displayPassage(parsed.bookId, chapter, options);
+            }
+          }
+          referenceResults.textContent = parsed.message;
+          return;
+        }
+        if (parsed.kind === "complete") {
+          const { bookId, chapter, startVerse, endVerse } = parsed;
+          const selectedChapter = setBook(bookId, { targetChapter: chapter });
+          const loaded = displayPassage(bookId, selectedChapter, {
+            startVerse,
+            endVerse
+          });
+          if (!loaded) {
+            referenceResults.textContent =
+              "That reference was not found. Check the chapter and verse numbers.";
+            return;
+          }
+          referenceResults.textContent = `Showing ${describeReference(parsed)}.`;
+        }
+      };
+
+      const shiftChapter = (direction) => {
+        if (!chaptersForCurrentBook.length || !currentView) {
+          return;
+        }
+        const chapterIndex = chaptersForCurrentBook.findIndex(
+          (ch) => ch === currentView.chapter
+        );
+        const nextIndex = chapterIndex + direction;
+        if (nextIndex < 0 || nextIndex >= chaptersForCurrentBook.length) {
+          return;
+        }
+        const nextChapter = chaptersForCurrentBook[nextIndex];
+        setBook(currentBookId, { targetChapter: nextChapter });
+        displayPassage(currentBookId, nextChapter);
+      };
+
+      const initializeTabs = () => {
+        for (const button of tabButtons) {
+          button.addEventListener("click", () => {
+            setActiveTab(button.dataset.tabTarget);
+          });
+        }
+      };
+
+      const initializeBrowseControls = () => {
+        for (const button of browseOrderButtons) {
+          button.addEventListener("click", () => {
+            setBrowseOrder(button.dataset.browseOrder);
+          });
+        }
+        browseBookList.addEventListener("click", (event) => {
+          if (!db) return;
+          const button = event.target.closest("button[data-book-id]");
+          if (!button) return;
+          const bookId = Number(button.dataset.bookId);
+          const chapter = setBook(bookId);
+          displayPassage(bookId, chapter);
+        });
+        browseChapterList.addEventListener("click", (event) => {
+          if (!db) return;
+          const button = event.target.closest("button[data-chapter]");
+          if (!button) return;
+          const chapter = Number(button.dataset.chapter);
+          setBook(currentBookId, { targetChapter: chapter });
+          displayPassage(currentBookId, chapter);
+        });
+      };
+
+      const initializeReferenceSearch = () => {
+        referenceInput.addEventListener("input", (event) => {
+          handleReferenceInput(event.target.value);
+        });
+      };
+
+      const initializeTextSearch = () => {
+        const debouncedSearch = debounce((value) => {
+          handleTextSearch(value);
+        }, 300);
+        textSearchInput.addEventListener("input", (event) => {
+          debouncedSearch(event.target.value);
+        });
+      };
+
+      const initialize = async () => {
+        setStatus("Loading SQLite and Bible data…", "info");
+        populateBooks();
+        renderBrowseBooks();
+        setControlsDisabled(true);
+
+        let sqliteModule;
+        try {
+          sqliteModule = await import(
+            "https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@3.46.1-build4/sqlite-wasm/jswasm/sqlite3.mjs"
+          );
+        } catch (error) {
+          alert(
+            "Failed to load: https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@3.46.1-build4/sqlite-wasm/jswasm/sqlite3.mjs"
+          );
+          throw error;
+        }
+
+        const sqlite3InitModule = sqliteModule.default;
+        sqlite3 = await sqlite3InitModule({
+          print: console.log,
+          printErr: console.error
+        });
+
+        db = await loadDatabase();
+        window.sqliteBibleDb = db;
+        setControlsDisabled(false);
+
+        const initialBookId = 43;
+        const initialChapter = 3;
+        setBook(initialBookId, { targetChapter: initialChapter });
+        displayPassage(initialBookId, initialChapter);
+        hideStatus();
+      };
+
+      tabButtons.forEach((button) => {
+        button.dataset.active = String(button.dataset.tabTarget === "select");
+      });
+      tabPanels.forEach((panel) => {
+        panel.hidden = panel.dataset.tabPanel !== "select";
+      });
+
+      initializeTabs();
+      initializeBrowseControls();
+      initializeReferenceSearch();
+      initializeTextSearch();
+
+      bookSelect.addEventListener("change", () => {
+        if (!db) return;
+        const bookId = Number(bookSelect.value);
+        const chapter = setBook(bookId);
+        displayPassage(bookId, chapter);
+      });
+
+      chapterSelect.addEventListener("change", () => {
+        if (!db) return;
+        const chapter = Number(chapterSelect.value);
+        setBook(currentBookId, { targetChapter: chapter });
+        displayPassage(currentBookId, chapter);
+      });
+
+      previousButton.addEventListener("click", () => {
+        shiftChapter(-1);
+      });
+
+      nextButton.addEventListener("click", () => {
+        shiftChapter(1);
+      });
+
+      initialize().catch((error) => {
+        console.error(error);
+        setStatus(error.message ?? "Failed to initialize Bible explorer.", "error");
+        setControlsDisabled(true);
+      });
+    </script>
+  </body>
+</html>
