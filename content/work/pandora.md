@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: Pandora
-description: Powerful coding companion ChatGPT plugin and API: edit local files, run commands, manage Docker.
+description: "Powerful coding companion ChatGPT plugin and API: edit local files, run commands, manage Docker."
 externalUrl: https://github.com/dave1010/pandora
 tags:
   - work

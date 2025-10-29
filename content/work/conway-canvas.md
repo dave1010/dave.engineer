@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: Conway's Game of Life in JS
-description: A JavaScript canvas implementation of Conway's cellular autonoma.
+description: "A JavaScript canvas implementation of Conway's cellular autonoma."
 externalUrl: https://github.com/dave1010/conway-canvas
 tags:
   - work

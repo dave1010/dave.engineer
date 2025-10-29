@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: PHP-FIG PSR-8
-description: The first (and maybe only) implementation of PSR-8.
+description: "The first (and maybe only) implementation of PSR-8."
 externalUrl: https://github.com/dave1010/php-fig-psr-8
 tags:
   - work

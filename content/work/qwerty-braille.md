@@ -1,7 +1,7 @@
 ---
 layout: work-item.njk
 title: Qwerty Braille
-description: Use a normal keyboard to type Braille characters.
+description: "Use a normal keyboard to type Braille characters."
 externalUrl: https://github.com/dave1010/qwerty-braille
 tags:
   - work
