@@ -7,5 +7,6 @@ tags:
   - work
 order: 9
 ---
-Emoji Chaos! is a party-friendly VR quiz where players compete by aiming their phones at floating emoji. It's chaotic, fast,
-and designed to make group trivia feel playful and immersive.
+Emoji Chaos! is a party-friendly VR quiz where players compete by aiming their phones at floating emoji to find answers for a quiz. Team members have to work together and enure no one gets left behind. Multiple teams compete, which often results in everyone shouting over eachother, saying thigns like *"Its the fish!* or *"The unicorn is behind you!"*.
+
+It's chaotic, fast, noisey and best played on swivel chair if you're on a video call.
