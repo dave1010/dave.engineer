@@ -6,7 +6,7 @@ externalUrl: https://medium.com/@dave1010/the-power-of-zero-why-simple-is-better
 guid: e58f83a5a284
 tags: []
 excerpt: >-
-  Simplicity scales; multiplying by zero beats complexity every time.
+  Failure cascades in multiplicative systems when any factor drops to zero, so design to avoid single points of failure.
 ---
 
 > Read the full article on Medium: [The Power of Zero: Why simple is better](https://medium.com/@dave1010/the-power-of-zero-why-simple-is-better-e58f83a5a284).
