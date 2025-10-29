@@ -12,5 +12,6 @@ CEO Bench evaluates how reliably large language models can respond to complex le
 realistic executive-level questions, collects model answers, and scores them against an automatic rubric so teams can compare
 performance over time. Everything is transparent: the prompts, responses, and scoring scripts live in the open.
 
-The project is designed for iteration. Researchers can plug in new models, tweak the rubric, or propose entirely new scenarios
-via GitHub. The resulting leaderboard makes it easy to spot strengths, weaknesses, and regressions as the field advances.
+The project started off as a tongue in cheek variation on the idea of CEO's using AI to replace workers' jobs but turned into something useful to evaluate LLMs.
+
+I then instructed combination of the best performing LLMs to write a [paper](https://ceo-bench.dave.engineer/CEO%20Bench%20-%20Can%20AI%20Replace%20the%20C-Suite%20-%20Dave%20Hulbert.pdf) evaluating the results.
