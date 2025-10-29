@@ -4,7 +4,9 @@ date: 2024-09-29
 type: external
 externalUrl: https://medium.com/@dave1010/your-jagged-circle-of-competence-4214c04cd7b8
 guid: 4214c04cd7b8
-tags: []
+tags:
+  - personal
+  - artificial-intelligence
 excerpt: >-
   Personal growth sits where human strengths and AI capabilities intersect.
 ---

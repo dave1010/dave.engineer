@@ -4,7 +4,9 @@ date: 2023-03-16
 type: external
 externalUrl: https://medium.com/@dave1010/slow-is-smooth-and-smooth-is-fast-162f45eb5b1b
 guid: 162f45eb5b1b
-tags: []
+tags:
+  - leadership
+  - company-culture
 excerpt: >-
   Fostering an environment where mistakes are less likely.
 ---
