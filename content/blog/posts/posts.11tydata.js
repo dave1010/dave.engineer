@@ -39,6 +39,21 @@ const getTopicTags = (tags) => {
   return [];
 };
 
+const getDate = (data) => {
+  const value =
+    data.page?.date instanceof Date
+      ? data.page.date
+      : data.page?.date
+        ? new Date(data.page.date)
+        : undefined;
+
+  if (!value || Number.isNaN(value.getTime?.())) {
+    throw new Error(`Blog posts must have a valid date: ${data.page?.inputPath}`);
+  }
+
+  return value;
+};
+
 export default {
   tags: ["blog"],
   eleventyComputed: {
@@ -47,51 +62,21 @@ export default {
       const slug = (data.page.fileSlug || "")
         .replace(/^\d{4}-\d{2}-\d{2}-/, "")
         .replace(/\/+$/, "");
-      const date =
-        data.page?.date instanceof Date
-          ? data.page.date
-          : data.page?.date
-            ? new Date(data.page.date)
-            : undefined;
-      const year = date?.getUTCFullYear();
-      const month = date ? String(date.getUTCMonth() + 1).padStart(2, "0") : undefined;
-      const type = normaliseType(data.type);
+      const date = getDate(data);
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, "0");
 
-      if (type === "external") {
-        if (year) {
-          return `/blog/external/${year}/${slug || data.page.fileSlug}/`;
-        }
-        return `/blog/external/${slug || data.page.fileSlug}/`;
-      }
-
-      if (year && month) {
-        return `/blog/${year}/${month}/${slug || data.page.fileSlug}/`;
-      }
-
-      return `/blog/${slug || data.page.fileSlug}/`;
+      return `/blog/${year}/${month}/${slug || data.page.fileSlug}/`;
     },
-    isoDate: (data) => {
-      const date =
-        data.page?.date instanceof Date
-          ? data.page.date
-          : data.page?.date
-            ? new Date(data.page.date)
-            : undefined;
-      return date?.toISOString().split("T")[0];
-    },
-    displayDate: (data) => {
-      const date =
-        data.page?.date instanceof Date
-          ? data.page.date
-          : data.page?.date
-            ? new Date(data.page.date)
-            : undefined;
-      return date?.toLocaleDateString("en-GB", {
+    isoDate: (data) => getDate(data).toISOString().split("T")[0],
+    displayDate: (data) =>
+      getDate(data).toLocaleDateString("en-GB", {
         month: "long",
         day: "numeric",
         year: "numeric",
-      });
-    },
+      }),
+    year: (data) => String(getDate(data).getUTCFullYear()),
+    month: (data) => String(getDate(data).getUTCMonth() + 1).padStart(2, "0"),
     type: (data) => normaliseType(data.type),
     typeLabel: (data) => getTypeLabel(data.type),
     topicTags: (data) => getTopicTags(data.tags),
