@@ -4,7 +4,9 @@ date: 2023-05-22
 type: external
 externalUrl: https://medium.com/@dave1010/using-tree-of-thought-prompting-to-boost-chatgpts-reasoning-318914eb0e76
 guid: 318914eb0e76
-tags: []
+tags:
+  - artificial-intelligence
+  - openai
 excerpt: >-
   Tree-of-Thought prompting broadens ChatGPT’s reasoning by encouraging structured exploration of ideas.
 ---

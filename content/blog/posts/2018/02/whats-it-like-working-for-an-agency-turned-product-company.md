@@ -4,7 +4,9 @@ date: 2018-02-27
 type: external
 externalUrl: https://medium.com/@dave1010/whats-it-like-working-for-an-agency-turned-product-company-419864020221
 guid: 419864020221
-tags: []
+tags:
+  - company-culture
+  - personal
 excerpt: >-
   Our core product Passenger has been on a growth spurt, so we’re often on the lookout for new people to join our team at Base.
 ---

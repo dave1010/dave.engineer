@@ -4,7 +4,9 @@ date: 2023-08-04
 type: external
 externalUrl: https://medium.com/@dave1010/making-pandora-a-super-charged-coding-plugin-for-chatgpt-670bbb60469d
 guid: 670bbb60469d
-tags: []
+tags:
+  - artificial-intelligence
+  - openai
 excerpt: >-
   Pandora lets ChatGPT access the internet, code in any language, access local files and install any software.
 ---

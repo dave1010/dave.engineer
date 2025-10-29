@@ -4,7 +4,9 @@ date: 2019-08-22
 type: external
 externalUrl: https://medium.com/@dave1010/team-growth-c45a26881a26
 guid: c45a26881a26
-tags: []
+tags:
+  - leadership
+  - company-culture
 excerpt: >-
   A half-finished thought on growing teams that was still worth sharing.
 ---
