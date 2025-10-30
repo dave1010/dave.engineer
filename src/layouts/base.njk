@@ -1,30 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-950">
+<html lang="en" class="h-full scroll-smooth bg-slate-950">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "" }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="https://avatars.githubusercontent.com/u/50682?v=4">
   {% if headExtra %}
     {{ headExtra | safe }}
   {% endif %}
 </head>
-<body class="h-full bg-slate-950 text-slate-100 font-sans antialiased">
-  <div class="min-h-screen flex flex-col">
+<body class="relative min-h-screen bg-slate-950 font-sans text-slate-100 antialiased selection:bg-emerald-400/40 selection:text-slate-900">
+  <div class="fixed inset-0 -z-20 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.35),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(56,189,248,0.25),_transparent_60%)]"></div>
+    <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-3xl"></div>
+  </div>
+  <div class="pointer-events-none fixed inset-0 -z-10 opacity-60 mix-blend-screen">
+    <svg class="h-full w-full text-teal-300/20" viewBox="0 0 1600 900" aria-hidden="true" role="img">
+      <defs>
+        <pattern id="diagonal-grid" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="skewX(-20)">
+          <path d="M 0 200 L 200 0" fill="none" stroke="currentColor" stroke-width="1"/>
+          <path d="M -100 200 L 200 -100" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
+          <path d="M 100 200 L 200 100" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+        </pattern>
+        <linearGradient id="grid-glow" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stop-color="#0ea5e9" stop-opacity="0.35"/>
+          <stop offset="1" stop-color="#a855f7" stop-opacity="0.15"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#diagonal-grid)"/>
+      <rect width="1600" height="900" fill="url(#grid-glow)" opacity="0.35"/>
+    </svg>
+  </div>
+  <div class="relative z-10 flex min-h-screen flex-col">
+    <header class="px-6 pt-8 sm:px-10">
+      <div class="mx-auto flex max-w-6xl flex-col gap-4">
+        <div class="flex flex-wrap items-center justify-between gap-4 rounded-full border border-emerald-400/40 bg-slate-950/70 px-6 py-4 shadow-[0_0_40px_rgba(45,212,191,0.12)] backdrop-blur-xl">
+          <a class="font-mono text-xs uppercase tracking-[0.45em] text-emerald-300" href="/">dave.engineer</a>
+          <nav class="flex flex-wrap items-center gap-3 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-slate-300">
+            <a class="group relative rounded-full px-3 py-1 transition duration-300 hover:text-emerald-200" href="/">
+              <span class="absolute inset-0 rounded-full bg-emerald-400/0 blur-md transition group-hover:bg-emerald-400/20"></span>
+              <span class="relative">Home</span>
+            </a>
+            <a class="group relative rounded-full px-3 py-1 transition duration-300 hover:text-emerald-200" href="/blog/">
+              <span class="absolute inset-0 rounded-full bg-emerald-400/0 blur-md transition group-hover:bg-emerald-400/20"></span>
+              <span class="relative">Blog</span>
+            </a>
+            <a class="group relative rounded-full px-3 py-1 transition duration-300 hover:text-emerald-200" href="/work/">
+              <span class="absolute inset-0 rounded-full bg-emerald-400/0 blur-md transition group-hover:bg-emerald-400/20"></span>
+              <span class="relative">Work</span>
+            </a>
+            <a class="group relative rounded-full px-3 py-1 transition duration-300 hover:text-emerald-200" href="https://github.com/dave1010" target="_blank" rel="noopener">
+              <span class="absolute inset-0 rounded-full bg-emerald-400/0 blur-md transition group-hover:bg-emerald-400/20"></span>
+              <span class="relative">GitHub</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
     <main class="flex-1">
       {{ content | safe }}
     </main>
-    <footer class="border-t border-slate-800 bg-slate-900/60">
-      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-center sm:text-left">© Dave Hulbert <a class="font-mono text-fuchsia-400" href="/">dave.engineer</a></p>
-        <nav class="flex justify-center gap-6 sm:justify-end">
-          <a class="transition hover:text-slate-100" href="/">Home</a>
-          <a class="transition hover:text-slate-100" href="/blog/">Blog</a>
-          <a class="transition hover:text-slate-100" href="/work/">Work</a>
-          <a class="transition hover:text-slate-100" href="https://github.com/dave1010/dave.engineer">GitHub</a>
-        </nav>
+    <footer class="border-t border-slate-800/50 px-6 py-10 sm:px-10">
+      <div class="mx-auto flex max-w-6xl flex-col gap-8 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
+        <div class="space-y-2">
+          <p class="font-mono text-xs uppercase tracking-[0.35em] text-emerald-300">© Dave Hulbert</p>
+          <p class="max-w-md text-slate-400">Engineering, strategy, and humane technology leadership — crafted with curiosity and a bias for bold ideas.</p>
+        </div>
+        <div class="flex flex-col gap-3 text-right sm:items-end">
+          <p class="font-mono text-xs uppercase tracking-[0.35em] text-slate-500">Navigate</p>
+          <div class="flex flex-wrap justify-end gap-4 text-xs uppercase tracking-[0.25em] text-slate-300">
+            <a class="transition hover:text-emerald-200" href="/">Home</a>
+            <a class="transition hover:text-emerald-200" href="/blog/">Blog</a>
+            <a class="transition hover:text-emerald-200" href="/work/">Work</a>
+            <a class="transition hover:text-emerald-200" href="https://github.com/dave1010" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
       </div>
     </footer>
   </div>

@@ -5,7 +5,135 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --glow-emerald: 0 0 35px rgba(16, 185, 129, 0.35);
+    --glow-cyan: 0 0 45px rgba(34, 211, 238, 0.25);
+  }
+
+  html {
+    font-family:
+      "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI",
+      sans-serif;
+  }
+
   body {
-    @apply selection:bg-sky-500/30 selection:text-slate-100;
+    font-family:
+      "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI",
+      sans-serif;
+    @apply bg-slate-950 text-slate-100 selection:bg-emerald-400/40 selection:text-slate-900;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family:
+      "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-3xl border border-emerald-400/20 bg-slate-950/70 p-6 shadow-[0_20px_60px_rgba(15,118,110,0.18)] backdrop-blur-xl;
+  }
+  .glass-panel {
+    @apply rounded-[2.5rem] border border-emerald-400/30 bg-slate-950/70 shadow-[0_25px_70px_rgba(13,148,136,0.16)] backdrop-blur-2xl;
+  }
+
+  .glow-border {
+    position: relative;
+  }
+
+  .glow-border::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.4), rgba(59, 130, 246, 0.35));
+    opacity: 0.65;
+    filter: blur(18px);
+    z-index: -1;
+  }
+
+  .grid-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.45em] text-emerald-200;
+  }
+
+  .terminal-block {
+    @apply glass-card relative overflow-hidden border-emerald-400/30 p-6 font-mono text-[0.85rem] leading-relaxed;
+  }
+
+  .terminal-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(34, 197, 94, 0.08), rgba(56, 189, 248, 0.05));
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  @keyframes orbital-sway {
+    0% {
+      transform: rotate3d(0.3, -0.6, 0.1, 0deg) translate3d(0, 0, 0);
+    }
+    50% {
+      transform: rotate3d(0.3, -0.6, 0.1, 6deg) translate3d(0, -6px, 12px);
+    }
+    100% {
+      transform: rotate3d(0.3, -0.6, 0.1, 0deg) translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-orbital {
+    animation: orbital-sway 14s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 16s ease infinite;
+  }
+
+  .animate-soft-pulse {
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+
+  .perspective-1000 {
+    perspective: 1200px;
+  }
+
+  .text-neon {
+    text-shadow:
+      0 0 12px rgba(16, 185, 129, 0.55),
+      0 0 40px rgba(59, 130, 246, 0.45);
+  }
+
+  .backdrop-grid {
+    background-image:
+      linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(236, 72, 153, 0) 45%),
+      radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.12), transparent 55%),
+      radial-gradient(circle at 80% 10%, rgba(56, 189, 248, 0.18), transparent 60%);
   }
 }
