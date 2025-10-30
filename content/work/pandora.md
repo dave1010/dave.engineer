@@ -15,3 +15,5 @@ Pandora is a powerful coding companion that connects ChatGPT with your local dev
 run commands, manage Docker containers, send desktop notifications and manage sensitive information without it being sent to the LLM.
 
 ChatGPT plugins have been discontinued and the world has now moved on to MCP.
+
+I wrote more about Pandora in the blog post [Making Pandora, a super-charged coding plugin for ChatGPT](/blog/posts/2023/08/making-pandora-a-super-charged-coding-plugin-for-chatgpt/).
