@@ -4,26 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "" }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="https://avatars.githubusercontent.com/u/50682?v=4">
   {% if headExtra %}
     {{ headExtra | safe }}
   {% endif %}
 </head>
-<body class="h-full bg-slate-950 text-slate-100 font-sans antialiased">
-  <div class="min-h-screen flex flex-col">
+<body class="relative min-h-screen overflow-hidden">
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
+    <div class="grid-overlay"></div>
+    <div class="absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-sky-400/20 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-fuchsia-500/20 blur-3xl"></div>
+    <svg class="absolute -top-20 right-0 h-[540px] w-[540px] opacity-40" viewBox="0 0 400 400" fill="none">
+      <defs>
+        <linearGradient id="diagonalGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7D5AF0" stop-opacity="0.6" />
+          <stop offset="50%" stop-color="#13C2C2" stop-opacity="0.3" />
+          <stop offset="100%" stop-color="#19FFB6" stop-opacity="0.2" />
+        </linearGradient>
+      </defs>
+      <path d="M0 140 L400 0 L400 260 L0 400 Z" fill="url(#diagonalGradient)" />
+      <path d="M-40 120 L400 -20" stroke="#13C2C2" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="10 14" />
+      <path d="M-60 220 L420 60" stroke="#7D5AF0" stroke-width="1.5" stroke-opacity="0.5" stroke-dasharray="6 12" />
+    </svg>
+  </div>
+  <div class="relative z-10 flex min-h-screen flex-col">
+    <header class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 pb-8 pt-10 sm:px-10">
+      <a href="/" class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.35em] text-slate-200">
+        <span class="relative isolate">
+          <span class="absolute -inset-2 -skew-y-6 rounded-full bg-slate-900/80"></span>
+          <span class="relative font-mono text-[0.75rem] text-lime-300">v2.0</span>
+        </span>
+        <span class="text-gradient text-base">dave.engineer</span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-medium text-slate-200/90 sm:flex">
+        <a class="hover:text-lime-300" href="/">Console</a>
+        <a class="hover:text-lime-300" href="/blog/">Logs</a>
+        <a class="hover:text-lime-300" href="/work/">Deployments</a>
+        <a class="hover:text-lime-300" href="https://github.com/dave1010/dave.engineer">Source</a>
+      </nav>
+      <a
+        class="group hidden items-center gap-2 rounded-full border border-lime-400/50 bg-slate-900/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-lime-300 transition hover:border-lime-300 hover:text-lime-200 sm:flex"
+        href="mailto:dave@hulbert.uk"
+      >
+        Initiate Contact
+        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+      </a>
+    </header>
     <main class="flex-1">
       {{ content | safe }}
     </main>
-    <footer class="border-t border-slate-800 bg-slate-900/60">
-      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-center sm:text-left">© Dave Hulbert <a class="font-mono text-fuchsia-400" href="/">dave.engineer</a></p>
-        <nav class="flex justify-center gap-6 sm:justify-end">
-          <a class="transition hover:text-slate-100" href="/">Home</a>
-          <a class="transition hover:text-slate-100" href="/blog/">Blog</a>
-          <a class="transition hover:text-slate-100" href="/work/">Work</a>
-          <a class="transition hover:text-slate-100" href="https://github.com/dave1010/dave.engineer">GitHub</a>
+    <footer class="border-t border-slate-800/40 bg-slate-950/80">
+      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-6 py-10 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <p class="flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-slate-500">
+          <span class="inline-flex h-2 w-2 animate-pulse-slow rounded-full bg-lime-400"></span>
+          Systems nominal • Dave Hulbert
+        </p>
+        <nav class="flex flex-wrap items-center justify-start gap-4 text-slate-300">
+          <a class="hover:text-lime-300" href="/">Console</a>
+          <a class="hover:text-lime-300" href="/blog/">Logs</a>
+          <a class="hover:text-lime-300" href="/work/">Deployments</a>
+          <a class="hover:text-lime-300" href="https://github.com/dave1010/dave.engineer">Source</a>
+          <a class="hover:text-lime-300" href="mailto:dave@hulbert.uk">Contact</a>
         </nav>
       </div>
     </footer>
@@ -31,5 +79,6 @@
   {% if scripts %}
     {{ scripts | safe }}
   {% endif %}
+  <script type="module" src="/js/site.js"></script>
 </body>
 </html>

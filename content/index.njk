@@ -2,156 +2,300 @@
 layout: base.njk
 title: Dave Hulbert - Engineer
 ---
-<main class="px-6 py-16 sm:px-10">
-  <div class="mx-auto max-w-5xl space-y-16">
-    <section class="flex flex-col gap-10 lg:flex-row lg:items-center">
-      <div class="flex flex-col items-center text-center lg:w-64 lg:items-start lg:text-left">
-        <img
-          class="h-40 w-40 rounded-full border border-slate-800 shadow-2xl"
-          src="https://avatars.githubusercontent.com/u/50682?v=4"
-          alt="Dave Hulbert's Avatar"
-        >
-        <div class="mt-6 space-y-2">
-          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Dave Hulbert</h1>
-          <p class="text-lg text-slate-300">Engineering leader • AI, Strategy and Compliance</p>
+<main class="px-6 pb-24 pt-4 sm:px-10">
+  <div class="mx-auto max-w-6xl space-y-24">
+    <section class="relative overflow-hidden rounded-[2.75rem] border border-slate-800/60 bg-slate-950/70 p-10 pt-14 shadow-glow sm:p-16" data-parallax-root>
+      <div class="pointer-events-none absolute inset-0 opacity-50 parallax" data-parallax>
+        <svg class="absolute -top-32 left-1/2 h-[420px] -translate-x-1/2" viewBox="0 0 600 400" fill="none" data-parallax-depth="0.08">
+          <g stroke="rgba(125,90,240,0.4)" stroke-width="1">
+            <path d="M0 120 L580 0" />
+            <path d="M0 180 L580 60" />
+            <path d="M0 240 L580 120" />
+            <path d="M0 300 L580 180" />
+          </g>
+          <g stroke="rgba(25,255,182,0.25)" stroke-width="1" stroke-dasharray="12 16">
+            <path d="M40 400 L600 40" />
+            <path d="M120 420 L600 120" />
+          </g>
+        </svg>
+        <div class="absolute inset-0 -skew-y-3 bg-gradient-to-br from-slate-900/10 via-fuchsia-500/10 to-sky-500/10 mix-blend-screen" data-parallax-depth="0.05"></div>
+        <div class="absolute -bottom-24 left-12 h-44 w-44 rounded-full bg-sky-400/20 blur-3xl" data-parallax-depth="0.12"></div>
+        <div class="absolute -top-16 right-6 h-56 w-56 -skew-y-12 rounded-3xl border border-sky-300/40" data-parallax-depth="0.18"></div>
+      </div>
+      <div class="relative z-10 grid gap-16 lg:grid-cols-[minmax(0,1.15fr)_380px]">
+        <div class="space-y-10">
+          <div class="space-y-4">
+            <p class="inline-flex items-center gap-3 rounded-full border border-lime-400/40 bg-slate-900/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-lime-300">
+              <span class="inline-flex h-2 w-2 rounded-full bg-lime-300 shadow-glow"></span>
+              Systems Architect
+            </p>
+            <h1 class="text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+              <span class="text-gradient">Dave Hulbert</span>
+              designs resilient human + technical systems for teams who build with purpose.
+            </h1>
+          </div>
+          <div class="space-y-6 text-lg text-slate-300">
+            <p>
+              I lead engineering organisations through inflection points—aligning AI, strategy and delivery so the systems we ship are both trusted and transformative.
+            </p>
+            <p>
+              Currently orchestrating the next chapter of mobility at
+              <a class="font-semibold text-sky-300 hover:text-lime-200" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
+              in Bournemouth, UK. My curiosity lives where governance, automation and curious people intersect.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-5">
+            <a
+              class="inline-flex items-center gap-3 rounded-full border border-lime-400/60 bg-slate-900/80 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-lime-300 transition hover:border-lime-300 hover:text-lime-100"
+              href="mailto:dave@hulbert.uk"
+            >
+              Engage
+              <span aria-hidden="true" class="text-base">↗</span>
+            </a>
+            <a
+              class="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em] text-sky-300 transition hover:text-lime-200"
+              href="/blog/"
+            >
+              View Logs
+              <span aria-hidden="true" class="text-base">→</span>
+            </a>
+          </div>
+          <dl class="grid gap-6 text-sm text-slate-300 sm:grid-cols-3">
+            <div class="glow-card p-5">
+              <dt class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Latency reduced</dt>
+              <dd class="mt-2 text-2xl font-semibold text-lime-200">67%</dd>
+              <p class="mt-1 text-xs text-slate-400">for public transit ticketing infrastructure across UK networks.</p>
+            </div>
+            <div class="glow-card p-5">
+              <dt class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Teams scaled</dt>
+              <dd class="mt-2 text-2xl font-semibold text-lime-200">4 → 12</dd>
+              <p class="mt-1 text-xs text-slate-400">through leadership development and resilient delivery practices.</p>
+            </div>
+            <div class="glow-card p-5">
+              <dt class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Governance uptime</dt>
+              <dd class="mt-2 text-2xl font-semibold text-lime-200">99.95%</dd>
+              <p class="mt-1 text-xs text-slate-400">achieved with transparent AI assurance and compliance frameworks.</p>
+            </div>
+          </dl>
+        </div>
+        <div class="relative flex flex-col items-center justify-between gap-6">
+          <div class="perspective-1200 relative h-[340px] w-full max-w-[420px]">
+            <div class="absolute inset-0 rounded-[2rem] border border-slate-800/60 bg-hero-radial"></div>
+            <canvas id="hero-orb" class="relative h-full w-full rounded-[2rem]"></canvas>
+            <div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-fuchsia-500/20"></div>
+          </div>
+          <div class="terminal-panel w-full max-w-[420px]">
+            <div class="terminal-header">
+              <span></span>
+              <span></span>
+              <span></span>
+              <p class="ml-3 text-xs uppercase tracking-[0.4em] text-lime-200/80">status feed</p>
+            </div>
+            <div class="terminal-body">
+              <p><span class="text-sky-300">dave@systems</span>:~$ ship --ai --governance</p>
+              <p>▶ shipping responsibly accelerated AI initiatives across regulated teams.</p>
+              <p>▶ leading interdisciplinary squads &amp; mentoring engineering leaders.</p>
+              <p>▶ mapping complex sociotechnical systems to unlock strategic leverage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative space-y-16">
+      <div class="accent-stripe rounded-[2.5rem] border border-slate-800/50 bg-slate-950/60 p-10 shadow-glow sm:p-14">
+        <div class="grid gap-12 lg:grid-cols-3">
+          <div class="space-y-4">
+            <h2 class="text-3xl font-semibold text-slate-100">Operational focus</h2>
+            <p class="text-sm uppercase tracking-[0.35em] text-slate-500">Craft &amp; clarity</p>
+            <p class="text-base text-slate-300">
+              Each engagement blends code craft with deep care for the humans behind the systems. These are the vectors that consistently create compounding value.
+            </p>
+          </div>
+          <div class="glow-card space-y-4 border-lime-300/20 bg-slate-900/40">
+            <h3 class="text-lg font-semibold text-lime-200">Strategic AI deployment</h3>
+            <p class="text-sm text-slate-300">Connecting machine intelligence to measurable outcomes without compromising trust, ethics or pace.</p>
+            <ul class="space-y-2 text-xs font-mono uppercase tracking-[0.3em] text-slate-400">
+              <li>◎ roadmap orchestration</li>
+              <li>◎ policy design</li>
+              <li>◎ ethical guardrails</li>
+            </ul>
+          </div>
+          <div class="glow-card space-y-4 border-sky-300/20 bg-slate-900/40">
+            <h3 class="text-lg font-semibold text-sky-300">High-trust delivery</h3>
+            <p class="text-sm text-slate-300">Evolving teams and processes to stay adaptive, maintain compliance and retain flow even under pressure.</p>
+            <ul class="space-y-2 text-xs font-mono uppercase tracking-[0.3em] text-slate-400">
+              <li>◎ system sensing</li>
+              <li>◎ coaching loops</li>
+              <li>◎ incident ready</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="flex-1 space-y-5 text-lg text-slate-300">
-        <p>
-          I design systems and lead teams that deliver software that's trusted by millions.
-          My work spans engineering leadership, AI, strategy, software development and governance.
-        </p>
-        <p>
-          I'm currently shaping the future of public transport technology at
-          <a class="text-sky-400 hover:text-sky-300" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
-          in Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems,
-          automation, and the craft of well-run teams.
-        </p>
-        <p>
-          Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply
-          looking for pragmatic advice, I'd love to connect.
-        </p>
-        <div>
+      {% set hasFeaturedWork = false %}
+      {% for item in collections.workItems %}
+        {% if item.data.featured %}
+          {% set hasFeaturedWork = true %}
+        {% endif %}
+      {% endfor %}
+      {% if hasFeaturedWork %}
+      <section class="space-y-10">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div class="space-y-2">
+            <p class="text-xs uppercase tracking-[0.45em] text-slate-500">Deployments</p>
+            <h2 class="text-3xl font-semibold text-slate-100">Featured engagements</h2>
+          </div>
           <a
-            class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
-            href="/blog/"
+            class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-lime-300 hover:text-lime-200"
+            href="/work/"
           >
-            Visit the blog
+            View all
             <span aria-hidden="true">→</span>
           </a>
         </div>
-      </div>
-    </section>
-
-    {% set hasFeaturedWork = false %}
-    {% for item in collections.workItems %}
-      {% if item.data.featured %}
-        {% set hasFeaturedWork = true %}
+        <div class="grid gap-6 md:grid-cols-2">
+          {% for item in collections.workItems %}
+            {% if item.data.featured %}
+          <article class="glow-card flex h-full flex-col justify-between gap-6 border-slate-800/80">
+            <div class="space-y-3">
+              <p class="text-xs uppercase tracking-[0.4em] text-slate-500">{{ item.data.role or "Engagement" }}</p>
+              <h3 class="text-2xl font-semibold text-slate-100">
+                <a class="transition hover:text-lime-200" href="{{ item.url }}">{{ item.data.title }}</a>
+              </h3>
+              {% if item.data.description %}
+              <p class="text-sm text-slate-300">{{ item.data.description }}</p>
+              {% endif %}
+            </div>
+            <div class="flex flex-wrap gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-slate-300">
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold hover:border-lime-300 hover:text-lime-200"
+                href="{{ item.url }}"
+              >
+                Case file
+              </a>
+              {% if item.data.websiteUrl %}
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold text-sky-300 hover:border-sky-400 hover:text-sky-200"
+                href="{{ item.data.websiteUrl }}"
+                target="_blank"
+                rel="noopener"
+              >
+                Live site
+                <span aria-hidden="true">↗</span>
+              </a>
+              {% endif %}
+              {% if item.data.githubUrl %}
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold hover:border-lime-300 hover:text-lime-200"
+                href="{{ item.data.githubUrl }}"
+                target="_blank"
+                rel="noopener"
+              >
+                Source
+                <span aria-hidden="true">↗</span>
+              </a>
+              {% endif %}
+            </div>
+          </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
       {% endif %}
-    {% endfor %}
-    {% if hasFeaturedWork %}
-    <section class="space-y-6">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured work</h2>
-        <a
-          class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
-          href="/work/"
-        >
-          View all work
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {% for item in collections.workItems %}
-          {% if item.data.featured %}
-        <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
-          <div class="space-y-3">
-            <h3 class="text-xl font-semibold text-slate-100">
-              <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
-            </h3>
-            {% if item.data.description %}
-            <p class="text-sm text-slate-300">{{ item.data.description }}</p>
-            {% endif %}
-          </div>
-          <div class="flex flex-wrap gap-3 text-sm">
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-              href="{{ item.url }}"
-            >
-              Learn more
-            </a>
-            {% if item.data.websiteUrl %}
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-              href="{{ item.data.websiteUrl }}"
-              target="_blank"
-              rel="noopener"
-            >
-              Visit site
-              <span aria-hidden="true">↗</span>
-            </a>
-            {% endif %}
-            {% if item.data.githubUrl %}
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-              href="{{ item.data.githubUrl }}"
-              target="_blank"
-              rel="noopener"
-            >
-              View source
-              <span aria-hidden="true">↗</span>
-            </a>
-            {% endif %}
-          </div>
-        </article>
-          {% endif %}
-        {% endfor %}
-      </div>
     </section>
-    {% endif %}
 
-    <section>
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Find me around the web</h2>
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-        <a
-          href="https://github.com/dave1010"
-          target="_blank"
-          rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
-        >
-          <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40" class="shrink-0">
-          <div>
-            <h3 class="text-xl font-semibold text-slate-100">GitHub</h3>
-            <p class="mt-1 text-sm text-slate-400">Browse experiments, utilities, and longer-lived projects.</p>
+    <section class="relative rounded-[2.75rem] border border-slate-800/60 bg-slate-950/70 p-10 shadow-glow sm:p-16">
+      <div class="absolute inset-0 dot-matrix opacity-20"></div>
+      <div class="relative z-10 grid gap-10 lg:grid-cols-[1.1fr_1fr]">
+        <div class="space-y-6">
+          <p class="text-xs uppercase tracking-[0.45em] text-slate-500">Signal relay</p>
+          <h2 class="text-3xl font-semibold text-slate-100">Find me around the web</h2>
+          <p class="text-base text-slate-300">Outside mission control, I share experiments, frameworks and occasionally the odd synthesiser riff.</p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <a
+              href="https://github.com/dave1010"
+              target="_blank"
+              rel="noopener"
+              class="glow-card flex items-start gap-4 border-slate-700/60"
+            >
+              <img src="/img/Github_black.png" alt="GitHub Icon" width="42" height="42" class="shrink-0">
+              <div class="space-y-1">
+                <h3 class="text-lg font-semibold text-slate-100">GitHub</h3>
+                <p class="text-sm text-slate-300">Prototypes, utilities and resilient infrastructure blueprints.</p>
+              </div>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/dave1010/"
+              target="_blank"
+              rel="noopener"
+              class="glow-card flex items-start gap-4 border-slate-700/60"
+            >
+              <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="42" height="42" class="shrink-0">
+              <div class="space-y-1">
+                <h3 class="text-lg font-semibold text-slate-100">LinkedIn</h3>
+                <p class="text-sm text-slate-300">Connect to talk leadership, systems thinking and AI stewardship.</p>
+              </div>
+            </a>
+            <a
+              href="https://twitter.com/dave1010"
+              target="_blank"
+              rel="noopener"
+              class="glow-card flex items-start gap-4 border-slate-700/60"
+            >
+              <img src="/img/Twitter_black.png" alt="Twitter Icon" width="42" height="42" class="shrink-0">
+              <div class="space-y-1">
+                <h3 class="text-lg font-semibold text-slate-100">Twitter</h3>
+                <p class="text-sm text-slate-300">Occasional insights and commentary <code>@dave1010</code>.</p>
+              </div>
+            </a>
+            <a
+              href="mailto:dave@hulbert.uk"
+              class="glow-card flex items-start gap-4 border-slate-700/60"
+            >
+              <svg width="42" height="42" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+                <rect x="4" y="8" width="32" height="24" rx="4" stroke="#19FFB6" stroke-width="2" />
+                <path d="M6 10 L20 22 L34 10" stroke="#7D5AF0" stroke-width="2" />
+              </svg>
+              <div class="space-y-1">
+                <h3 class="text-lg font-semibold text-slate-100">Direct line</h3>
+                <p class="text-sm text-slate-300">Drop a message to explore collaboration and advisory work.</p>
+              </div>
+            </a>
           </div>
-        </a>
-
-        <a
-          href="https://www.linkedin.com/in/dave1010/"
-          target="_blank"
-          rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
-        >
-          <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40" class="shrink-0">
-          <div>
-            <h3 class="text-xl font-semibold text-slate-100">LinkedIn</h3>
-            <p class="mt-1 text-sm text-slate-400">Say hello or talk about your next engineering challenge.</p>
+        </div>
+        <div class="relative overflow-hidden rounded-[2.5rem] border border-slate-800/60 bg-slate-900/60">
+          <div class="absolute inset-0 grid grid-cols-12 gap-1 opacity-20">
+            {% for i in range(0, 96) %}
+            <span class="bg-slate-800/30"></span>
+            {% endfor %}
           </div>
-        </a>
-
-        <a
-          href="https://twitter.com/dave1010"
-          target="_blank"
-          rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
-        >
-          <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40" class="shrink-0">
-          <div>
-            <h3 class="text-xl font-semibold text-slate-100">Twitter</h3>
-            <p class="mt-1 text-sm text-slate-400">Follow <code>@dave1010</code> for occasional musings.</p>
+          <div class="relative space-y-6 p-10">
+            <p class="text-xs uppercase tracking-[0.4em] text-slate-500">Telemetry</p>
+            <h3 class="text-2xl font-semibold text-slate-100">Trusted by the systems that move millions</h3>
+            <p class="text-base text-slate-300">
+              From large-scale transport networks to highly regulated fintech platforms, I help teams cut through ambiguity with principled engineering leadership. Expect neon optimism, grounded governance and resilient delivery.
+            </p>
+            <div class="grid gap-4 text-sm text-slate-300 sm:grid-cols-2">
+              <div class="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4">
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Recent beats</p>
+                <ul class="mt-2 space-y-2 font-mono text-xs uppercase tracking-[0.25em] text-lime-200/80">
+                  <li>▲ Launched AI ethics board</li>
+                  <li>▲ Delivered safety-critical ops</li>
+                  <li>▲ Reduced incident MTTR</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4">
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Next horizon</p>
+                <ul class="mt-2 space-y-2 font-mono text-xs uppercase tracking-[0.25em] text-sky-300/80">
+                  <li>◆ Responsible automation</li>
+                  <li>◆ Parallax org design</li>
+                  <li>◆ Emergent team culture</li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     </section>
   </div>
