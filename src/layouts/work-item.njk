@@ -1,43 +1,44 @@
 ---
 layout: base.njk
 ---
-<main class="px-6 py-16 sm:px-10">
-  <article class="mx-auto flex max-w-3xl flex-col gap-10">
-    <header class="space-y-4">
-      <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="/work/">Work</a>
-      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ title }}</h1>
-      {% if description %}
-      <p class="text-lg text-slate-300">{{ description }}</p>
-      {% endif %}
-      {% if websiteUrl or githubUrl %}
-      <div class="flex flex-wrap gap-3 text-sm">
-        {% if websiteUrl %}
-        <a
-          class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-4 py-2 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-          href="{{ websiteUrl }}"
-          target="_blank"
-          rel="noopener"
-        >
-          Visit site
-          <span aria-hidden="true">↗</span>
+<div class="relative px-6 pb-24 pt-10 sm:px-10">
+  <article class="mx-auto flex max-w-3xl flex-col gap-12">
+    <header class="relative isolate overflow-hidden rounded-[2.5rem] border border-cyan-500/20 bg-slate-950/80 p-8 clip-diagonal">
+      <div class="pointer-events-none absolute inset-0 opacity-60">
+        <div class="absolute -right-16 top-8 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl"></div>
+        <div class="absolute -left-20 bottom-4 h-36 w-36 rotate-12 rounded-3xl border border-fuchsia-500/20"></div>
+      </div>
+      <div class="relative space-y-5">
+        <a class="inline-flex items-center gap-2 font-tech text-xs uppercase tracking-[0.45em] text-cyan-200/80 transition hover:text-cyan-100" href="/work/">
+          <span aria-hidden="true">←</span>
+          Work index
         </a>
-        {% endif %}
-        {% if githubUrl %}
-        <a
-          class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-4 py-2 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-          href="{{ githubUrl }}"
-          target="_blank"
-          rel="noopener"
-        >
-          View source
-          <span aria-hidden="true">↗</span>
-        </a>
+        <div class="space-y-4">
+          <h1 class="font-display text-4xl font-semibold text-slate-50 sm:text-5xl">{{ title }}</h1>
+          {% if description %}
+          <p class="text-base text-slate-300/90">{{ description }}</p>
+          {% endif %}
+        </div>
+        {% if websiteUrl or githubUrl %}
+        <div class="flex flex-wrap gap-3 text-xs">
+          {% if websiteUrl %}
+          <a class="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 px-4 py-2 font-tech uppercase tracking-[0.35em] text-emerald-200 transition hover:border-emerald-300 hover:text-emerald-100" href="{{ websiteUrl }}" target="_blank" rel="noopener">
+            Visit
+            <span aria-hidden="true">↗</span>
+          </a>
+          {% endif %}
+          {% if githubUrl %}
+          <a class="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/40 px-4 py-2 font-tech uppercase tracking-[0.35em] text-fuchsia-200 transition hover:border-fuchsia-300 hover:text-fuchsia-100" href="{{ githubUrl }}" target="_blank" rel="noopener">
+            Source
+            <span aria-hidden="true">↗</span>
+          </a>
+          {% endif %}
+        </div>
         {% endif %}
       </div>
-      {% endif %}
     </header>
-    <div class="prose prose-invert prose-lg max-w-none">
+    <div class="prose prose-invert prose-lg max-w-none rounded-3xl border border-slate-800/60 bg-slate-950/70 p-8 shadow-lg">
       {{ content | safe }}
     </div>
   </article>
-</main>
+</div>

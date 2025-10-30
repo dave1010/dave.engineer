@@ -1,30 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-950">
+<html lang="en" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "" }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="https://avatars.githubusercontent.com/u/50682?v=4">
   {% if headExtra %}
     {{ headExtra | safe }}
   {% endif %}
 </head>
-<body class="h-full bg-slate-950 text-slate-100 font-sans antialiased">
-  <div class="min-h-screen flex flex-col">
-    <main class="flex-1">
+<body class="relative min-h-screen overflow-x-hidden bg-slate-950 text-slate-100 font-sans antialiased">
+  <div class="pointer-events-none fixed inset-0 -z-20">
+    <div class="absolute inset-0 bg-radial-edge"></div>
+    <svg class="absolute inset-0 h-full w-full opacity-60 mix-blend-screen" aria-hidden="true">
+      <defs>
+        <pattern id="grid" width="120" height="120" patternUnits="userSpaceOnUse">
+          <path d="M 0 120 L 120 120 120 0" fill="none" stroke="rgba(94,234,212,0.1)" stroke-width="1"></path>
+          <circle cx="0" cy="0" r="2" fill="rgba(129,140,248,0.4)"></circle>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"></rect>
+    </svg>
+    <div class="absolute inset-0 bg-noise"></div>
+  </div>
+
+  <div class="relative flex min-h-screen flex-col">
+    <header class="px-6 py-6 sm:px-10">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6">
+        <a href="/" class="group relative inline-flex items-center gap-3 text-lg font-semibold text-cyan-200">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-cyan-500/60 bg-slate-900/70 text-sm font-mono uppercase tracking-[0.3em] shadow-neon-cyan transition-transform duration-300 group-hover:-translate-y-1">
+            DH
+          </span>
+          <span class="font-display text-2xl tracking-tight text-slate-100 drop-shadow-[0_0_20px_rgba(34,211,238,0.45)] transition group-hover:text-cyan-200">dave.engineer</span>
+        </a>
+        <nav class="flex flex-wrap items-center gap-3 sm:gap-4">
+          <a class="nav-chip" href="/">Home</a>
+          <a class="nav-chip" href="/blog/">Blog</a>
+          <a class="nav-chip" href="/work/">Work</a>
+          <a class="nav-chip" href="https://github.com/dave1010/dave.engineer" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative flex-1">
       {{ content | safe }}
     </main>
-    <footer class="border-t border-slate-800 bg-slate-900/60">
-      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-center sm:text-left">© Dave Hulbert <a class="font-mono text-fuchsia-400" href="/">dave.engineer</a></p>
-        <nav class="flex justify-center gap-6 sm:justify-end">
-          <a class="transition hover:text-slate-100" href="/">Home</a>
-          <a class="transition hover:text-slate-100" href="/blog/">Blog</a>
-          <a class="transition hover:text-slate-100" href="/work/">Work</a>
-          <a class="transition hover:text-slate-100" href="https://github.com/dave1010/dave.engineer">GitHub</a>
-        </nav>
+
+    <footer class="relative border-t border-cyan-500/10 bg-slate-950/60 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <p class="flex items-center gap-3 text-center font-tech text-xs uppercase tracking-[0.5em] text-slate-400 sm:text-left">
+          <span class="inline-block h-px w-10 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></span>
+          © Dave Hulbert — Crafted for the curious.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 font-tech text-[0.75rem] uppercase tracking-[0.3em] text-slate-400 sm:justify-end">
+          <a class="hover:text-cyan-300 transition" href="mailto:hello@dave.engineer">Contact</a>
+          <a class="hover:text-cyan-300 transition" href="/blog/">Latest writing</a>
+          <a class="hover:text-cyan-300 transition" href="/work/">Case studies</a>
+        </div>
       </div>
     </footer>
   </div>

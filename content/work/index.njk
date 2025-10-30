@@ -2,65 +2,72 @@
 layout: base.njk
 title: Work - Dave Hulbert
 ---
-<main class="px-6 py-16 sm:px-10">
-  <div class="mx-auto flex max-w-5xl flex-col gap-16">
-    <header class="space-y-6 text-center sm:text-left">
-      <a
-        class="mx-auto inline-flex items-center gap-2 text-sm font-medium text-sky-400 transition hover:text-sky-300 sm:mx-0"
-        href="/"
-      >
-        <span aria-hidden="true">←</span>
-        Back to home
-      </a>
-      <div class="space-y-4">
-        <h1 class="text-4xl font-semibold tracking-tight text-slate-100">Selected work</h1>
-        <p class="text-lg text-slate-300">
-          A collection of experiments, products, and collaborations. Featured projects showcase the tools I'm most
-          excited about right now, with more explorations listed below.
-        </p>
+<div class="relative px-6 pb-24 pt-10 sm:px-10">
+  <div class="mx-auto flex max-w-6xl flex-col gap-20">
+    <header class="relative isolate overflow-hidden rounded-[2.5rem] border border-fuchsia-500/20 bg-slate-950/70 p-10 clip-diagonal">
+      <div class="pointer-events-none absolute inset-0 opacity-60">
+        <div class="absolute -left-28 top-10 h-60 w-60 rounded-full bg-fuchsia-500/20 blur-3xl"></div>
+        <div class="absolute -right-20 bottom-10 h-60 w-60 rotate-12 rounded-3xl border border-cyan-500/20"></div>
+      </div>
+      <div class="relative flex flex-col gap-6 text-center sm:text-left">
+        <a class="mx-auto inline-flex items-center gap-2 font-tech text-xs uppercase tracking-[0.45em] text-fuchsia-200/80 transition hover:text-fuchsia-100 sm:mx-0" href="/">
+          <span aria-hidden="true">←</span>
+          Back to index
+        </a>
+        <div class="space-y-4">
+          <p class="font-tech text-xs uppercase tracking-[0.6em] text-fuchsia-200/70">Portfolio 02</p>
+          <h1 class="font-display text-4xl font-semibold text-slate-50 sm:text-5xl">Selected collaborations &amp; playgrounds</h1>
+          <p class="text-lg text-slate-300/90 sm:max-w-3xl">
+            From civic tech to generative experiments, these projects share a fascination with systems that feel alive. Each
+            engagement balances technical rigor with human context—because resilient software is designed for people first.
+          </p>
+        </div>
       </div>
     </header>
 
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
+    <section class="space-y-8">
+      <header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="font-tech text-xs uppercase tracking-[0.6em] text-cyan-200/70">Spotlight</p>
+          <h2 class="font-display text-3xl font-semibold text-slate-50 sm:text-4xl">Featured explorations</h2>
+        </div>
+        <p class="font-tech text-xs uppercase tracking-[0.45em] text-cyan-200/70">Curated for impact &amp; delight</p>
+      </header>
+      <div class="grid gap-6 lg:grid-cols-2">
         {% for item in collections.workItems %}
           {% if item.data.featured %}
-          <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
-            <div class="space-y-3">
-              <h3 class="text-xl font-semibold text-slate-100">
-                <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
+          <article class="group relative flex h-full flex-col justify-between overflow-hidden rounded-[2.25rem] border border-cyan-500/20 bg-slate-950/80 p-8 shadow-lg transition hover:border-cyan-400/40 hover:shadow-neon-cyan">
+            <div class="pointer-events-none absolute inset-0 opacity-70">
+              <div class="absolute -right-24 top-0 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl transition group-hover:bg-cyan-400/30"></div>
+              <svg class="absolute -left-16 bottom-0 h-48 w-48" viewBox="0 0 200 200" aria-hidden="true">
+                <path d="M0 120L180 20L200 150L40 200Z" fill="rgba(8,145,178,0.18)"></path>
+              </svg>
+            </div>
+            <div class="relative space-y-4">
+              {% if item.data.role %}
+              <p class="font-tech text-[0.7rem] uppercase tracking-[0.45em] text-cyan-200/80">{{ item.data.role }}</p>
+              {% endif %}
+              <h3 class="font-display text-2xl font-semibold text-slate-50">
+                <a class="transition hover:text-cyan-200" href="{{ item.url }}">{{ item.data.title }}</a>
               </h3>
               {% if item.data.description %}
-              <p class="text-sm text-slate-300">{{ item.data.description }}</p>
+              <p class="text-sm text-slate-300/90">{{ item.data.description }}</p>
               {% endif %}
             </div>
-            <div class="flex flex-wrap gap-3 text-sm">
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-                href="{{ item.url }}"
-              >
-                Learn more
+            <div class="relative mt-8 flex flex-wrap gap-3 text-xs">
+              <a class="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 px-4 py-2 font-tech uppercase tracking-[0.35em] text-cyan-200 transition hover:border-cyan-300 hover:text-cyan-100" href="{{ item.url }}">
+                Details
+                <span aria-hidden="true">→</span>
               </a>
               {% if item.data.websiteUrl %}
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-                href="{{ item.data.websiteUrl }}"
-                target="_blank"
-                rel="noopener"
-              >
-                Visit site
+              <a class="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 px-4 py-2 font-tech uppercase tracking-[0.35em] text-emerald-200 transition hover:border-emerald-300 hover:text-emerald-100" href="{{ item.data.websiteUrl }}" target="_blank" rel="noopener">
+                Visit
                 <span aria-hidden="true">↗</span>
               </a>
               {% endif %}
               {% if item.data.githubUrl %}
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-                href="{{ item.data.githubUrl }}"
-                target="_blank"
-                rel="noopener"
-              >
-                View source
+              <a class="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/40 px-4 py-2 font-tech uppercase tracking-[0.35em] text-fuchsia-200 transition hover:border-fuchsia-300 hover:text-fuchsia-100" href="{{ item.data.githubUrl }}" target="_blank" rel="noopener">
+                Source
                 <span aria-hidden="true">↗</span>
               </a>
               {% endif %}
@@ -71,46 +78,43 @@ title: Work - Dave Hulbert
       </div>
     </section>
 
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">More work</h2>
+    <section class="space-y-8">
+      <header class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="font-tech text-xs uppercase tracking-[0.6em] text-emerald-200/70">Archives</p>
+          <h2 class="font-display text-3xl font-semibold text-slate-50 sm:text-4xl">More experiments &amp; artifacts</h2>
+        </div>
+        <p class="font-tech text-xs uppercase tracking-[0.45em] text-emerald-200/70">Ongoing research</p>
+      </header>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {% for item in collections.workItems %}
           {% if not item.data.featured %}
-          <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-5 transition hover:border-slate-700 hover:bg-slate-900/60">
-            <div class="space-y-3">
-              <h3 class="text-lg font-semibold text-slate-100">
-                <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
+          <article class="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-950/70 p-6 transition hover:border-emerald-300/40">
+            <div class="pointer-events-none absolute inset-0 opacity-60">
+              <div class="absolute -left-16 top-12 h-36 w-36 rotate-12 rounded-3xl border border-emerald-400/30"></div>
+            </div>
+            <div class="relative space-y-3">
+              <h3 class="font-display text-lg font-semibold text-slate-50">
+                <a class="transition hover:text-emerald-200" href="{{ item.url }}">{{ item.data.title }}</a>
               </h3>
               {% if item.data.description %}
-              <p class="text-sm text-slate-300">{{ item.data.description }}</p>
+              <p class="text-sm text-slate-300/90">{{ item.data.description }}</p>
               {% endif %}
             </div>
-            <div class="mt-auto flex flex-wrap gap-3 text-xs sm:text-sm">
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-                href="{{ item.url }}"
-              >
+            <div class="relative mt-6 flex flex-wrap gap-2 text-[0.65rem] sm:text-xs">
+              <a class="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 px-3 py-1 font-tech uppercase tracking-[0.35em] text-emerald-200 transition hover:border-emerald-300 hover:text-emerald-100" href="{{ item.url }}">
                 Learn more
+                <span aria-hidden="true">→</span>
               </a>
               {% if item.data.websiteUrl %}
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-                href="{{ item.data.websiteUrl }}"
-                target="_blank"
-                rel="noopener"
-              >
-                Visit site
+              <a class="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 px-3 py-1 font-tech uppercase tracking-[0.35em] text-cyan-200 transition hover:border-cyan-300 hover:text-cyan-100" href="{{ item.data.websiteUrl }}" target="_blank" rel="noopener">
+                Visit
                 <span aria-hidden="true">↗</span>
               </a>
               {% endif %}
               {% if item.data.githubUrl %}
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-                href="{{ item.data.githubUrl }}"
-                target="_blank"
-                rel="noopener"
-              >
-                View source
+              <a class="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/40 px-3 py-1 font-tech uppercase tracking-[0.35em] text-fuchsia-200 transition hover:border-fuchsia-300 hover:text-fuchsia-100" href="{{ item.data.githubUrl }}" target="_blank" rel="noopener">
+                Source
                 <span aria-hidden="true">↗</span>
               </a>
               {% endif %}
@@ -121,4 +125,4 @@ title: Work - Dave Hulbert
       </div>
     </section>
   </div>
-</main>
+</div>
