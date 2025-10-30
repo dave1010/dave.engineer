@@ -7,24 +7,27 @@ const buildListingPagination = (pagination) => {
     return undefined;
   }
 
-  const currentIndex = Number.isFinite(pagination?.pageNumber) ? pagination.pageNumber : 0;
-  const pages = hrefs.map((url, index) => ({
-    number: index + 1,
-    url,
-    isCurrent: index === currentIndex,
-  }));
-
-  const totalPages = pages.length;
+  const rawIndex = Number.isFinite(pagination?.pageNumber) ? pagination.pageNumber : 0;
+  const totalPages = hrefs.length;
 
   if (totalPages <= 1) {
     return undefined;
   }
 
+  const currentIndex = Math.min(Math.max(rawIndex, 0), totalPages - 1);
+  const pages = hrefs.map((url, index) => ({
+    number: index + 1,
+    url,
+    isCurrent: index === currentIndex,
+  }));
+  const previousPage = currentIndex > 0 ? pages[currentIndex - 1] : undefined;
+  const nextPage = currentIndex < totalPages - 1 ? pages[currentIndex + 1] : undefined;
+
   return {
     currentPage: currentIndex + 1,
     totalPages,
-    previous: currentIndex > 0 ? { url: pages[currentIndex - 1].url } : undefined,
-    next: currentIndex < totalPages - 1 ? { url: pages[currentIndex + 1].url } : undefined,
+    previous: previousPage ? { url: previousPage.url } : undefined,
+    next: nextPage ? { url: nextPage.url } : undefined,
     pages,
   };
 };
