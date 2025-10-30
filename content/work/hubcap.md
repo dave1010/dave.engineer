@@ -16,4 +16,4 @@ Hubcap works surprisingly well but isn't safe or as useful as more modern coding
 
 Hubcap demonstrates how far a compact AI agent can go in just a few lines of code.
 
-I documented the original experiments in the blog post [Amazingly Alarming Autonomous AI Agents](/blog/posts/2023/08/amazingly-alarming-autonomous-ai-agents/).
+I documented the original experiments in the blog post [Amazingly Alarming Autonomous AI Agents](/blog/2023/08/amazingly-alarming-autonomous-ai-agents/).

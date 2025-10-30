@@ -12,4 +12,4 @@ shell users automate complex tasks without leaving their workflows.
 
 Clipea was built in September 2023 and was one of the first tools of its kind. It still works well but now there are better alternatives, like Github Copilot CLI and Amazon Q CLI.
 
-I shared the packaging journey in the blog post [Distributing Python Packages on PyPI](/blog/posts/2023/11/distributing-python-packages-on-pypi/).
+I shared the packaging journey in the blog post [Distributing Python Packages on PyPI](/blog/2023/11/distributing-python-packages-on-pypi/).
