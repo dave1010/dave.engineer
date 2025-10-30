@@ -13,6 +13,8 @@ layout: base.njk
 {% set tagList = collections.blogTags | default([]) %}
 {% set tagLinkClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
 {% set tagCountClasses = "rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400" %}
+{% set paginationButtonClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
+{% set paginationActiveClasses = "border-sky-500/80 text-sky-200" %}
 <main class="px-6 py-16 sm:px-10">
   <div class="mx-auto flex max-w-4xl flex-col gap-12">
     <header class="space-y-4">
@@ -171,5 +173,36 @@ layout: base.njk
         <p class="px-6 py-10 text-center text-sm text-slate-400 sm:px-8">No posts found.</p>
       {% endif %}
     </div>
+
+    {% if listingPagination and listingPagination.totalPages > 1 %}
+    <nav aria-label="Pagination" class="flex flex-col items-center gap-3 pt-6">
+      <p class="text-sm text-slate-400">Page {{ listingPagination.currentPage }} of {{ listingPagination.totalPages }}</p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        {% if listingPagination.previous %}
+        <a class="{{ paginationButtonClasses }}" href="{{ listingPagination.previous.url }}">
+          <span aria-hidden="true">←</span>
+          Newer posts
+        </a>
+        {% endif %}
+        <ul class="flex flex-wrap items-center gap-2">
+          {% for pageLink in listingPagination.pages %}
+          <li>
+            {% if pageLink.isCurrent %}
+            <span class="{{ paginationButtonClasses }} {{ paginationActiveClasses }}" aria-current="page">{{ pageLink.number }}</span>
+            {% else %}
+            <a class="{{ paginationButtonClasses }}" href="{{ pageLink.url }}">{{ pageLink.number }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% if listingPagination.next %}
+        <a class="{{ paginationButtonClasses }}" href="{{ listingPagination.next.url }}">
+          Older posts
+          <span aria-hidden="true">→</span>
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+    {% endif %}
   </div>
 </main>
