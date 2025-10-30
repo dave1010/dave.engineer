@@ -1,5 +1,23 @@
 import slugify from "../../../scripts/slugify.js";
 
+const EXTERNAL_SOURCE_META = {
+  medium: {
+    label: "Medium",
+    message: "This post lives on Medium.",
+    ctaLabel: "Read on Medium",
+  },
+  "wardley-leadership-strategies": {
+    label: "Wardley Leadership Strategies",
+    message: "This post lives on Wardley Leadership Strategies.",
+    ctaLabel: "Read on Wardley Leadership Strategies",
+  },
+  external: {
+    label: "External site",
+    message: "This post lives on another site.",
+    ctaLabel: "Read externally",
+  },
+};
+
 const normaliseType = (type) => {
   if (typeof type !== "string") {
     return "post";
@@ -25,6 +43,51 @@ const getTypeLabel = (type) => {
     default:
       return "Blog Post";
   }
+};
+
+const normaliseExternalSource = (value) => {
+  if (typeof value === "string" && value.trim()) {
+    return value.trim().toLowerCase();
+  }
+
+  return undefined;
+};
+
+const inferExternalSourceKey = (data) => {
+  const explicit = normaliseExternalSource(data.externalSource);
+  if (explicit) {
+    return explicit;
+  }
+
+  if (typeof data.externalUrl === "string" && data.externalUrl) {
+    try {
+      const host = new URL(data.externalUrl).hostname.toLowerCase();
+      if (host.includes("medium.com")) {
+        return "medium";
+      }
+      if (host.includes("wardleyleadershipstrategies.com")) {
+        return "wardley-leadership-strategies";
+      }
+    } catch (_error) {
+      // Ignore invalid URLs – we'll fall back to the default label.
+    }
+  }
+
+  return undefined;
+};
+
+const getExternalSourceInfo = (data) => {
+  if (normaliseType(data.type) !== "external") {
+    return undefined;
+  }
+
+  const key = inferExternalSourceKey(data) || "external";
+  const meta = EXTERNAL_SOURCE_META[key] || EXTERNAL_SOURCE_META.external;
+
+  return {
+    key,
+    ...meta,
+  };
 };
 
 const getTopicTags = (tags) => {
@@ -79,6 +142,7 @@ export default {
     month: (data) => String(getDate(data).getUTCMonth() + 1).padStart(2, "0"),
     type: (data) => normaliseType(data.type),
     typeLabel: (data) => getTypeLabel(data.type),
+    externalSourceInfo: (data) => getExternalSourceInfo(data),
     topicTags: (data) => getTopicTags(data.tags),
     topicTagLinks: (data) => {
       const tags = getTopicTags(data.tags);
