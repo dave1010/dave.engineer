@@ -36,12 +36,14 @@ module.exports = {
         glow: "0 0 30px rgba(125, 90, 240, 0.35)",
       },
       backgroundImage: {
-        "grid-glow": "linear-gradient(115deg, rgba(125,90,240,0.22) 0%, rgba(19,194,194,0.12) 35%, rgba(25,255,182,0.08) 100%)",
-        "hero-radial": "radial-gradient(circle at top, rgba(125, 90, 240, 0.3), rgba(9, 9, 17, 0.9))",
+        "grid-glow":
+          "linear-gradient(115deg, rgba(125,90,240,0.22) 0%, rgba(19,194,194,0.12) 35%, rgba(25,255,182,0.08) 100%)",
+        "hero-radial":
+          "radial-gradient(circle at top, rgba(125, 90, 240, 0.3), rgba(9, 9, 17, 0.9))",
       },
       animation: {
         "pulse-slow": "pulseSlow 6s ease-in-out infinite",
-        "float": "float 12s ease-in-out infinite",
+        float: "float 12s ease-in-out infinite",
         "grid-shift": "gridShift 18s linear infinite",
       },
       keyframes: {
