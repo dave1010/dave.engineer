@@ -2,46 +2,85 @@
 layout: base.njk
 title: Dave Hulbert - Engineer
 ---
-<main class="px-6 py-16 sm:px-10">
-  <div class="mx-auto max-w-5xl space-y-16">
-    <section class="flex flex-col gap-10 lg:flex-row lg:items-center">
-      <div class="flex flex-col items-center text-center lg:w-64 lg:items-start lg:text-left">
-        <img
-          class="h-40 w-40 rounded-full border border-slate-800 shadow-2xl"
-          src="https://avatars.githubusercontent.com/u/50682?v=4"
-          alt="Dave Hulbert's Avatar"
-        >
-        <div class="mt-6 space-y-2">
-          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Dave Hulbert</h1>
-          <p class="text-lg text-slate-300">Engineering leader • AI, Strategy and Compliance</p>
+<main class="relative overflow-hidden px-6 pb-24 pt-20 sm:px-10">
+  <div
+    class="pointer-events-none absolute left-1/2 top-24 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-sky-500/20 via-fuchsia-500/10 to-transparent blur-3xl"
+    aria-hidden="true"
+  ></div>
+  <div class="mx-auto max-w-5xl space-y-20">
+    <section class="hero-shell grid gap-12 p-8 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-center">
+      <div class="flex flex-col items-center gap-10 text-center lg:items-start lg:text-left">
+        <div class="relative inline-flex items-center justify-center rounded-full border border-sky-500/40 bg-slate-900/70 p-1 shadow-[0_25px_60px_-35px_rgba(56,189,248,0.65)]">
+          <span class="absolute inset-0 rounded-full bg-gradient-to-r from-sky-500/40 via-fuchsia-500/30 to-transparent blur-xl opacity-70" aria-hidden="true"></span>
+          <img
+            class="relative h-36 w-36 rounded-full border border-slate-700 shadow-2xl shadow-slate-950/70 sm:h-40 sm:w-40"
+            src="https://avatars.githubusercontent.com/u/50682?v=4"
+            alt="Dave Hulbert's Avatar"
+          >
         </div>
-      </div>
 
-      <div class="flex-1 space-y-5 text-lg text-slate-300">
-        <p>
-          I design systems and lead teams that deliver software that's trusted by millions.
-          My work spans engineering leadership, AI, strategy, software development and governance.
-        </p>
-        <p>
-          I'm currently shaping the future of public transport technology at
-          <a class="text-sky-400 hover:text-sky-300" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
-          in Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems,
-          automation, and the craft of well-run teams.
-        </p>
-        <p>
-          Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply
-          looking for pragmatic advice, I'd love to connect.
-        </p>
-        <div>
+        <div class="space-y-4">
+          <div class="space-y-1">
+            <p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Engineering leadership</p>
+            <h1 class="text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">Dave Hulbert</h1>
+            <p class="text-base text-slate-300 sm:text-lg">Designing resilient systems • AI strategy • Governance with heart</p>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-3 lg:justify-start">
+            <span class="floating-badge">Systems leadership</span>
+            <span class="floating-badge">AI strategy in production</span>
+            <span class="floating-badge">Operational excellence</span>
+          </div>
+        </div>
+
+        <div class="space-y-5 text-base text-slate-300 sm:text-lg">
+          <p>
+            I coach teams and craft architectures that ship reliable software at pace. Whether it's scaling a platform,
+            guiding AI adoption, or aligning technical strategy with real-world constraints, I bring clarity and calm.
+          </p>
+          <p>
+            I'm currently shaping the future of public transport technology at
+            <a class="font-medium text-sky-300 transition hover:text-sky-200" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
+            in Bournemouth, UK. Away from the roadmap you'll find me exploring how automation and human systems blend to
+            create purposeful, well-run teams.
+          </p>
+          <p>
+            If you're wrestling with responsible AI delivery, leading through scale, or need a thought partner for your
+            engineering organisation, let's talk.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-start">
           <a
-            class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
+            class="group inline-flex items-center gap-2 rounded-full border border-sky-500/50 bg-sky-500/10 px-6 py-2 text-sm font-semibold text-sky-200 transition hover:-translate-y-0.5 hover:border-sky-400/70 hover:bg-sky-500/20"
             href="/blog/"
           >
             Visit the blog
-            <span aria-hidden="true">→</span>
+            <span class="transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
+          </a>
+          <a
+            class="group inline-flex items-center gap-2 rounded-full border border-fuchsia-500/40 bg-fuchsia-500/10 px-6 py-2 text-sm font-semibold text-fuchsia-200 transition hover:-translate-y-0.5 hover:border-fuchsia-400/70 hover:bg-fuchsia-500/20"
+            href="/work/"
+          >
+            Explore the work
+            <span class="transition group-hover:translate-x-0.5" aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
+
+      <aside class="code-panel">
+        <span class="code-panel__label">operating-manifest</span>
+        <pre><code>// shipping resilient systems
+const dave = {
+  leadership: 'calm, intentional, outcome-driven',
+  interests: ['AI governance', 'team enablement', 'complex systems'],
+  currently: 'Director of Engineering @ Passenger'
+};
+
+if (you.needPartner({ clarity: true, pace: true })) {
+  reachOut("Let's build responsibly.");
+}</code></pre>
+      </aside>
     </section>
 
     {% set hasFeaturedWork = false %}
@@ -51,21 +90,24 @@ title: Dave Hulbert - Engineer
       {% endif %}
     {% endfor %}
     {% if hasFeaturedWork %}
-    <section class="space-y-6">
+    <section class="space-y-8">
       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured work</h2>
+        <div class="space-y-1">
+          <p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Selected output</p>
+          <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured work</h2>
+        </div>
         <a
-          class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
+          class="group inline-flex items-center gap-2 rounded-full border border-sky-500/50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-sky-300 transition hover:-translate-y-0.5 hover:border-sky-400/70"
           href="/work/"
         >
           View all work
-          <span aria-hidden="true">→</span>
+          <span class="transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
         </a>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         {% for item in collections.workItems %}
           {% if item.data.featured %}
-        <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
+        <article class="panel-surface flex h-full flex-col justify-between gap-4 p-6 shadow-xl shadow-slate-950/40">
           <div class="space-y-3">
             <h3 class="text-xl font-semibold text-slate-100">
               <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
@@ -76,14 +118,14 @@ title: Dave Hulbert - Engineer
           </div>
           <div class="flex flex-wrap gap-3 text-sm">
             <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+              class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
               href="{{ item.url }}"
             >
               Learn more
             </a>
             {% if item.data.websiteUrl %}
             <a
-              class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
+              class="inline-flex items-center gap-2 rounded-full border border-sky-500/80 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
               href="{{ item.data.websiteUrl }}"
               target="_blank"
               rel="noopener"
@@ -94,7 +136,7 @@ title: Dave Hulbert - Engineer
             {% endif %}
             {% if item.data.githubUrl %}
             <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+              class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
               href="{{ item.data.githubUrl }}"
               target="_blank"
               rel="noopener"
@@ -111,14 +153,18 @@ title: Dave Hulbert - Engineer
     </section>
     {% endif %}
 
-    <section>
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Find me around the web</h2>
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <p class="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Signals</p>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Find me around the web</h2>
+        <p class="text-sm text-slate-400">Drop a note, follow the work, or explore the thinking in progress.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
         <a
           href="https://github.com/dave1010"
           target="_blank"
           rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+          class="panel-surface group flex items-start gap-4 p-6"
         >
           <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40" class="shrink-0">
           <div>
@@ -131,7 +177,7 @@ title: Dave Hulbert - Engineer
           href="https://www.linkedin.com/in/dave1010/"
           target="_blank"
           rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+          class="panel-surface group flex items-start gap-4 p-6"
         >
           <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40" class="shrink-0">
           <div>
@@ -144,7 +190,7 @@ title: Dave Hulbert - Engineer
           href="https://twitter.com/dave1010"
           target="_blank"
           rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+          class="panel-surface group flex items-start gap-4 p-6"
         >
           <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40" class="shrink-0">
           <div>
