@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Import Medium posts as external blog entries."""
+"""Import Wardley Leadership Strategies posts as external blog entries."""
 from __future__ import annotations
 
 import argparse
@@ -16,9 +16,9 @@ from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 
-DEFAULT_FEED_URL = "https://medium.com/feed/@dave1010"
-EXTERNAL_SOURCE_KEY = "medium"
-EXTERNAL_SOURCE_LABEL = "Medium"
+DEFAULT_FEED_URL = "https://www.wardleyleadershipstrategies.com/blog/rss.xml"
+EXTERNAL_SOURCE_KEY = "wardley-leadership-strategies"
+EXTERNAL_SOURCE_LABEL = "Wardley Leadership Strategies"
 CONTENT_NS = "{http://purl.org/rss/1.0/modules/content/}"
 
 
@@ -91,12 +91,11 @@ def iter_items(feed: ET.Element) -> Iterable[dict[str, object]]:
 
 
 def derive_slug(link: str, guid: str | None, title: str) -> str:
-    """Choose a deterministic slug for a Medium post."""
+    """Choose a deterministic slug for a Wardley Leadership Strategies post."""
 
     parsed = urlparse(link)
     path_segment = ""
     if parsed.path:
-        # ``split`` keeps empty segments; filter them so ``/foo/`` works
         parts = [part for part in parsed.path.split("/") if part]
         if parts:
             path_segment = parts[-1]
@@ -159,7 +158,7 @@ def write_post(base_dir: Path, data: dict[str, object], overwrite: bool = False)
     return destination
 
 
-def import_medium_posts(feed_url: str, output: Path, overwrite: bool = False) -> list[Path]:
+def import_wardley_posts(feed_url: str, output: Path, overwrite: bool = False) -> list[Path]:
     try:
         raw = fetch_feed(feed_url)
     except HTTPError as exc:  # pragma: no cover - network failures reported to caller
@@ -177,11 +176,16 @@ def import_medium_posts(feed_url: str, output: Path, overwrite: bool = False) ->
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", nargs="?", type=Path, default=Path("content/blog/posts/external"))
-    parser.add_argument("--feed-url", dest="feed_url", default=DEFAULT_FEED_URL, help="Medium RSS feed URL")
+    parser.add_argument(
+        "--feed-url",
+        dest="feed_url",
+        default=DEFAULT_FEED_URL,
+        help="Wardley Leadership Strategies RSS feed URL",
+    )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing markdown files")
     args = parser.parse_args()
 
-    created = import_medium_posts(args.feed_url, args.output, overwrite=args.overwrite)
+    created = import_wardley_posts(args.feed_url, args.output, overwrite=args.overwrite)
     for path in created:
         print(path)
 

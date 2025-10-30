@@ -2,6 +2,9 @@
 layout: base.njk
 ---
 {% set redirectUrl = externalUrl %}
+{% set externalSource = externalSourceInfo %}
+{% set externalSourceMessage = externalSource ? externalSource.message : "This post lives on another site." %}
+{% set externalCtaLabel = externalSource ? externalSource.ctaLabel : "Read externally" %}
 {% if redirectUrl %}
   {% set headExtra %}
     <meta http-equiv="refresh" content="0; url={{ redirectUrl | escape }}">
@@ -26,7 +29,7 @@ layout: base.njk
       {% endif %}
     </header>
     <div class="space-y-6 rounded border border-amber-400/30 bg-amber-400/10 p-6 text-amber-100">
-      <p class="text-lg font-medium">This post lives on Medium.</p>
+      <p class="text-lg font-medium">{{ externalSourceMessage }}</p>
       <p class="text-base text-amber-50/80">
         {% if excerpt %}
           {{ excerpt }}
@@ -41,7 +44,7 @@ layout: base.njk
         rel="noopener noreferrer"
         target="_blank"
       >
-        Read on Medium
+        {{ externalCtaLabel }}
         <span aria-hidden="true">↗</span>
       </a>
       {% endif %}
