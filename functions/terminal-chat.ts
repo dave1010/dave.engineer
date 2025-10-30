@@ -10,8 +10,8 @@ type Env = {
 };
 
 type ChatPayload = {
-  model: string;
-  messages: Array<any>;
+  model?: string;
+  messages: unknown[];
   stream?: boolean;
   temperature?: number;
   top_p?: number;
@@ -23,10 +23,15 @@ type ChatPayload = {
 
 const DEFAULT_API_URL = "https://api.cerebras.ai/v1/chat/completions";
 
-/* ---------- small helpers ---------- */
+type ChatMessage = {
+  role: "system" | "user" | "assistant";
+  content: string;
+};
 
-const isFiniteNumber = (v: unknown): v is number =>
-  typeof v === "number" && Number.isFinite(v);
+const STATIC_SYSTEM_PROMPT =
+  "You are acting as a pretend Linux shell terminal. Respond to the user's shell commands with just the shell output. No other content. No code blocks or formatting needed.";
+
+/* ---------- small helpers ---------- */
 
 const readJSON = async <T>(req: Request): Promise<T | null> => {
   try {
@@ -54,13 +59,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ error: "Invalid JSON payload" }, 400);
   }
 
-  // todo: model should always be "llama3.1-8b"
-  const { model, messages } = payload;
-  if (!model || typeof model !== "string") {
-    return json({ error: "`model` is required" }, 400);
-  }
-
-  // todo: always prepend the static system prompt here
+  const { messages } = payload;
   if (!Array.isArray(messages) || messages.length === 0) {
     return json(
       { error: "`messages` must be a non-empty array" },
@@ -68,21 +67,34 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
-  const outgoing: Record<string, unknown> = {
-    model: model.trim(),
-    messages,
-    stream: payload.stream === true,
-  };
+  const outgoingMessages: ChatMessage[] = [
+    { role: "system", content: STATIC_SYSTEM_PROMPT },
+  ];
 
-  // todo: dont allow the request to change these
-  if (isFiniteNumber(payload.temperature)) outgoing.temperature = payload.temperature;
-  if (isFiniteNumber(payload.top_p)) outgoing.top_p = payload.top_p;
-  if (isFiniteNumber(payload.max_tokens)) outgoing.max_tokens = payload.max_tokens;
-  if (Array.isArray(payload.stop)) outgoing.stop = payload.stop;
-  if (isFiniteNumber(payload.seed)) outgoing.seed = payload.seed;
-  if (payload.response_format && typeof payload.response_format === "object") {
-    outgoing.response_format = payload.response_format;
+  for (const entry of messages) {
+    if (!entry || typeof entry !== "object") continue;
+    const role = typeof (entry as Record<string, unknown>).role === "string"
+      ? (entry as Record<string, unknown>).role.trim().toLowerCase()
+      : "";
+    const content = (entry as Record<string, unknown>).content;
+    if (role !== "user" && role !== "assistant") continue;
+    if (typeof content !== "string" || content.trim() === "") continue;
+
+    outgoingMessages.push({
+      role: role as "user" | "assistant",
+      content,
+    });
   }
+
+  if (!outgoingMessages.some((msg) => msg.role === "user")) {
+    return json({ error: "At least one user message is required" }, 400);
+  }
+
+  const outgoing: Record<string, unknown> = {
+    model: "llama3.1-8b",
+    messages: outgoingMessages,
+    stream: false,
+  };
 
   const apiURL = (env.CEREBRAS_API_URL?.trim() || DEFAULT_API_URL);
 
