@@ -24,15 +24,27 @@ title: Dave Hulbert - Engineer
       </div>
       <div class="relative z-10 grid gap-16 lg:grid-cols-[minmax(0,1.15fr)_380px]">
         <div class="space-y-10">
-          <div class="space-y-4">
+          <div class="space-y-6">
             <p class="inline-flex items-center gap-3 rounded-full border border-lime-400/40 bg-slate-900/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-lime-300">
               <span class="inline-flex h-2 w-2 rounded-full bg-lime-300 shadow-glow"></span>
-              Systems Architect
+              Engineering Leader
             </p>
-            <h1 class="text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              <span class="text-gradient">Dave Hulbert</span>
-              designs resilient human + technical systems for teams who build with purpose.
-            </h1>
+            <div class="flex flex-col gap-6 sm:flex-row sm:items-center">
+              <img
+                src="https://github.com/dave1010.png"
+                alt="Dave Hulbert"
+                width="132"
+                height="132"
+                class="h-28 w-28 rounded-full border border-lime-300/40 bg-slate-900/60 object-cover shadow-glow"
+                loading="lazy"
+              >
+              <div class="space-y-4">
+                <h1 class="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-100 sm:text-5xl lg:text-6xl">
+                  Dave Hulbert
+                </h1>
+                <p class="text-lg font-medium uppercase tracking-[0.3em] text-slate-300">AI, Strategy and Compliance</p>
+              </div>
+            </div>
           </div>
           <div class="space-y-6 text-lg text-slate-300">
             <p>
@@ -56,7 +68,7 @@ title: Dave Hulbert - Engineer
               class="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em] text-sky-300 transition hover:text-lime-200"
               href="/blog/"
             >
-              View Logs
+              Read Blog
               <span aria-hidden="true" class="text-base">→</span>
             </a>
           </div>
@@ -109,7 +121,7 @@ title: Dave Hulbert - Engineer
             <h2 class="text-3xl font-semibold text-slate-100">Operational focus</h2>
             <p class="text-sm uppercase tracking-[0.35em] text-slate-500">Craft &amp; clarity</p>
             <p class="text-base text-slate-300">
-              Each engagement blends code craft with deep care for the humans behind the systems. These are the vectors that consistently create compounding value.
+              Each piece of work blends code craft with deep care for the humans behind the systems. These are the vectors that consistently create compounding value.
             </p>
           </div>
           <div class="glow-card space-y-4 border-lime-300/20 bg-slate-900/40">
@@ -143,14 +155,14 @@ title: Dave Hulbert - Engineer
       <section class="space-y-10">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div class="space-y-2">
-            <p class="text-xs uppercase tracking-[0.45em] text-slate-500">Deployments</p>
-            <h2 class="text-3xl font-semibold text-slate-100">Featured engagements</h2>
+            <p class="text-xs uppercase tracking-[0.45em] text-slate-500">Work</p>
+            <h2 class="text-3xl font-semibold text-slate-100">Featured work</h2>
           </div>
           <a
             class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-lime-300 hover:text-lime-200"
             href="/work/"
           >
-            View all
+            View all work
             <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -159,7 +171,7 @@ title: Dave Hulbert - Engineer
             {% if item.data.featured %}
           <article class="glow-card flex h-full flex-col justify-between gap-6 border-slate-800/80">
             <div class="space-y-3">
-              <p class="text-xs uppercase tracking-[0.4em] text-slate-500">{{ item.data.role or "Engagement" }}</p>
+              <p class="text-xs uppercase tracking-[0.4em] text-slate-500">{{ item.data.role or "Work" }}</p>
               <h3 class="text-2xl font-semibold text-slate-100">
                 <a class="transition hover:text-lime-200" href="{{ item.url }}">{{ item.data.title }}</a>
               </h3>
