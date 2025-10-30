@@ -5,7 +5,176 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   body {
     @apply selection:bg-sky-500/30 selection:text-slate-100;
+    font-family: "Space Grotesk", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(120% 120% at 50% 0%, #1d1a3a 0%, #050514 55%, #020109 100%);
+    min-height: 100vh;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: "JetBrains Mono", "Fira Code", "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative inline-flex items-center gap-2 rounded-full border border-transparent px-4 py-2 transition;
+    z-index: 0;
+  }
+
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: linear-gradient(120deg, rgba(56, 189, 248, 0.12), rgba(244, 114, 182, 0.12));
+    opacity: 0;
+    transition: opacity 250ms ease;
+    z-index: -1;
+  }
+
+  .nav-link:hover::before,
+  .nav-link:focus-visible::before {
+    opacity: 1;
+  }
+
+  .nav-link span {
+    @apply text-[0.65rem];
+  }
+
+  .shadow-glow {
+    box-shadow: 0 30px 90px rgba(56, 189, 248, 0.2), 0 0 120px rgba(244, 114, 182, 0.12);
+  }
+
+  .terminal-card {
+    @apply relative overflow-hidden rounded-[2rem] border border-cyan-500/30 bg-slate-950/70 p-6 backdrop-blur;
+    box-shadow: inset 0 1px 0 rgba(56, 189, 248, 0.35), 0 40px 80px rgba(8, 47, 73, 0.35);
+    z-index: 0;
+  }
+
+  .terminal-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.25), transparent 50%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .glow-card {
+    @apply relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-950/70 p-8 transition duration-500;
+    z-index: 0;
+  }
+
+  .glow-card::after {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    background: conic-gradient(from 90deg, rgba(56, 189, 248, 0.15), rgba(244, 114, 182, 0.2), rgba(251, 191, 36, 0.12), rgba(56, 189, 248, 0.15));
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    filter: blur(60px);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 1.2s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .glow-card:hover::after,
+  .glow-card:focus-within::after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(20deg);
+  }
+
+  .diagonal-panel {
+    @apply relative isolate overflow-hidden rounded-[3rem] border border-slate-800/50 bg-slate-950/80 px-8 py-16 shadow-xl;
+    z-index: 0;
+  }
+
+  .diagonal-panel::before {
+    content: "";
+    position: absolute;
+    inset: -20% -40%;
+    background: linear-gradient(120deg, rgba(56, 189, 248, 0.15), rgba(56, 189, 248, 0)), linear-gradient(300deg, rgba(244, 114, 182, 0.25), rgba(244, 114, 182, 0));
+    transform: skewY(-8deg);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .parallax-layer {
+    position: absolute;
+    inset: -20% -20% 0 -20%;
+    background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.18), transparent 55%), radial-gradient(circle at 80% 30%, rgba(244, 114, 182, 0.2), transparent 65%), radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.16), transparent 70%);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@layer utilities {
+  .text-neon {
+    color: #c4f4ff;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.55), 0 0 40px rgba(14, 116, 144, 0.45);
+    letter-spacing: 0.35em;
+  }
+
+  .text-gradient {
+    background: linear-gradient(120deg, #34d399 0%, #60a5fa 40%, #f472b6 70%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-grid {
+    background-image: linear-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0, 0 0;
+  }
+
+  .animate-slow-pan {
+    animation: slow-pan 60s linear infinite;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 10s ease-in-out infinite;
+  }
+
+  .animate-tilt-loop {
+    animation: tilt-loop 14s ease-in-out infinite;
+  }
+}
+
+@keyframes slow-pan {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-120px, -120px, 0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes tilt-loop {
+  0%,
+  100% {
+    transform: rotate3d(1, -1, 0, 8deg);
+  }
+  50% {
+    transform: rotate3d(-0.5, 1, 0, 8deg);
   }
 }

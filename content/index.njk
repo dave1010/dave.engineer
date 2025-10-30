@@ -2,157 +2,207 @@
 layout: base.njk
 title: Dave Hulbert - Engineer
 ---
-<main class="px-6 py-16 sm:px-10">
-  <div class="mx-auto max-w-5xl space-y-16">
-    <section class="flex flex-col gap-10 lg:flex-row lg:items-center">
-      <div class="flex flex-col items-center text-center lg:w-64 lg:items-start lg:text-left">
-        <img
-          class="h-40 w-40 rounded-full border border-slate-800 shadow-2xl"
-          src="https://avatars.githubusercontent.com/u/50682?v=4"
-          alt="Dave Hulbert's Avatar"
-        >
-        <div class="mt-6 space-y-2">
-          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Dave Hulbert</h1>
-          <p class="text-lg text-slate-300">Engineering leader • AI, Strategy and Compliance</p>
-        </div>
+<main class="relative px-6 pb-24 pt-12 sm:px-10 lg:pt-16">
+  <div class="pointer-events-none absolute left-1/2 top-16 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[140px]" data-parallax-depth="0.18"></div>
+  <div class="pointer-events-none absolute right-4 top-1/3 h-60 w-60 rounded-full bg-fuchsia-500/20 blur-[120px] sm:right-12" data-parallax-depth="0.08"></div>
+
+  <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:items-center">
+    <section class="space-y-10">
+      <div class="inline-flex items-center gap-3 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-5 py-2 font-mono text-xs uppercase tracking-[0.35em] text-cyan-200 shadow-glow animate-float-slow" data-parallax-depth="0.12">
+        <span class="inline-flex h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
+        <span>Engineering Signal v2.0</span>
       </div>
 
-      <div class="flex-1 space-y-5 text-lg text-slate-300">
-        <p>
-          I design systems and lead teams that deliver software that's trusted by millions.
-          My work spans engineering leadership, AI, strategy, software development and governance.
-        </p>
-        <p>
-          I'm currently shaping the future of public transport technology at
-          <a class="text-sky-400 hover:text-sky-300" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
-          in Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems,
-          automation, and the craft of well-run teams.
-        </p>
-        <p>
-          Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply
-          looking for pragmatic advice, I'd love to connect.
-        </p>
-        <div>
-          <a
-            class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
-            href="/blog/"
-          >
-            Visit the blog
-            <span aria-hidden="true">→</span>
-          </a>
+      <h1 class="text-4xl font-semibold tracking-tight text-gradient sm:text-6xl">
+        Designing luminous systems for teams who keep the world moving.
+      </h1>
+
+      <p class="max-w-2xl text-lg leading-relaxed text-slate-300">
+        I'm Dave Hulbert — an engineering leader crafting human-centred, resilient platforms. I connect AI strategy, organisational design, and dependable software delivery so ambitious teams can operate with clarity and confidence.
+      </p>
+
+      <div class="terminal-card max-w-xl">
+        <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-slate-400">
+          <span>~/dave.engineer</span>
+          <span>Terminal · Ready</span>
+        </div>
+        <pre class="mt-4 overflow-x-auto text-sm text-cyan-200">$ deploy focus --axis leadership --axis ai-governance --axis delivery
+&gt; synthesising strategy ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%
+&gt; outcome: trusted systems, aligned teams, real momentum
+</pre>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <a class="group inline-flex items-center gap-3 rounded-full border border-cyan-500/60 bg-cyan-500/15 px-6 py-3 font-mono text-xs uppercase tracking-[0.3em] text-cyan-100 transition hover:border-cyan-400 hover:bg-cyan-500/25" href="/blog/">
+          <span>Read Field Notes</span>
+          <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </a>
+        <a class="group inline-flex items-center gap-3 rounded-full border border-fuchsia-400/60 bg-fuchsia-500/10 px-6 py-3 font-mono text-xs uppercase tracking-[0.3em] text-fuchsia-100 transition hover:border-fuchsia-300 hover:bg-fuchsia-500/20" href="/work/">
+          <span>See the Work</span>
+          <span aria-hidden="true" class="transition-transform duration-300 group-hover:-translate-y-0.5">↗</span>
+        </a>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="glow-card" data-tilt>
+          <p class="font-mono text-xs uppercase tracking-[0.4em] text-slate-400">01 · Leadership</p>
+          <h2 class="mt-3 text-xl font-semibold text-slate-100">Operating cadence that unlocks teams.</h2>
+        </div>
+        <div class="glow-card" data-tilt>
+          <p class="font-mono text-xs uppercase tracking-[0.4em] text-slate-400">02 · Intelligence</p>
+          <h2 class="mt-3 text-xl font-semibold text-slate-100">Responsible AI woven into strategy &amp; delivery.</h2>
+        </div>
+        <div class="glow-card" data-tilt>
+          <p class="font-mono text-xs uppercase tracking-[0.4em] text-slate-400">03 · Systems</p>
+          <h2 class="mt-3 text-xl font-semibold text-slate-100">Platform thinking, reliable foundations, real outcomes.</h2>
         </div>
       </div>
     </section>
 
-    {% set hasFeaturedWork = false %}
-    {% for item in collections.workItems %}
-      {% if item.data.featured %}
-        {% set hasFeaturedWork = true %}
-      {% endif %}
-    {% endfor %}
-    {% if hasFeaturedWork %}
-    <section class="space-y-6">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured work</h2>
-        <a
-          class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
-          href="/work/"
-        >
-          View all work
-          <span aria-hidden="true">→</span>
-        </a>
+    <aside class="relative flex justify-center lg:justify-end">
+      <div class="absolute -left-10 top-10 h-24 w-24 rounded-full bg-emerald-500/30 blur-[120px] sm:-left-16" data-parallax-depth="0.22"></div>
+      <div class="relative flex h-[420px] w-full max-w-[420px] items-center justify-center">
+        <div class="pointer-events-none absolute inset-0 rounded-[3rem] border border-cyan-500/40 opacity-40" data-parallax-depth="0.25"></div>
+        <div class="pointer-events-none absolute inset-10 rounded-[3rem] border border-fuchsia-400/30 opacity-30" data-parallax-depth="0.3"></div>
+        <div id="hero-3d" class="relative aspect-square w-full max-w-[380px] rounded-[3rem] border border-slate-800/60 bg-slate-950/70 shadow-2xl shadow-cyan-500/30"></div>
+        <div class="pointer-events-none absolute bottom-10 left-1/2 w-[220px] -translate-x-1/2 rounded-full border border-emerald-400/60 bg-emerald-500/10 px-5 py-2 text-center font-mono text-[0.65rem] uppercase tracking-[0.35em] text-emerald-200" data-parallax-depth="0.18">
+          Vector space: leadership × ai × trust
+        </div>
       </div>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {% for item in collections.workItems %}
-          {% if item.data.featured %}
-        <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
-          <div class="space-y-3">
-            <h3 class="text-xl font-semibold text-slate-100">
-              <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
-            </h3>
-            {% if item.data.description %}
-            <p class="text-sm text-slate-300">{{ item.data.description }}</p>
-            {% endif %}
+    </aside>
+  </div>
+
+  <section class="relative mt-28">
+    <div class="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent opacity-50" aria-hidden="true"></div>
+    <div class="diagonal-panel">
+      <div class="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[1.1fr_minmax(0,1fr)] lg:items-center">
+        <div class="space-y-6">
+          <p class="font-mono text-xs uppercase tracking-[0.35em] text-slate-400">Operating Principles</p>
+          <h2 class="text-3xl font-semibold text-slate-100">Depth in technology, empathy in leadership, clarity in outcomes.</h2>
+          <p class="text-base leading-relaxed text-slate-300">
+            From transit technology to fintech compliance, I guide teams through complex problem spaces. We build tight feedback loops, integrate AI responsibly, and deliver software ecosystems that stay resilient long after launch day.
+          </p>
+        </div>
+        <div class="grid gap-4">
+          <div class="glow-card" data-tilt>
+            <p class="font-mono text-xs uppercase tracking-[0.35em] text-cyan-200">System Rhythm</p>
+            <p class="mt-3 text-sm text-slate-300">Adaptive rituals, reliable flow, and instrumentation that makes progress visible.</p>
           </div>
-          <div class="flex flex-wrap gap-3 text-sm">
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-              href="{{ item.url }}"
-            >
-              Learn more
+          <div class="glow-card" data-tilt>
+            <p class="font-mono text-xs uppercase tracking-[0.35em] text-emerald-200">Human Interface</p>
+            <p class="mt-3 text-sm text-slate-300">Psychological safety, inclusive collaboration, and vibrant engineering culture.</p>
+          </div>
+          <div class="glow-card" data-tilt>
+            <p class="font-mono text-xs uppercase tracking-[0.35em] text-fuchsia-200">Strategic Mesh</p>
+            <p class="mt-3 text-sm text-slate-300">Cross-functional alignment, intelligent automation, and governance you can trust.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% set hasFeaturedWork = false %}
+  {% for item in collections.workItems %}
+    {% if item.data.featured %}
+      {% set hasFeaturedWork = true %}
+    {% endif %}
+  {% endfor %}
+  {% if hasFeaturedWork %}
+  <section class="mt-32 space-y-12">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.35em] text-slate-400">Featured Work</p>
+        <h2 class="mt-3 text-3xl font-semibold text-slate-100">Case studies from the systems desk.</h2>
+      </div>
+      <a class="group inline-flex items-center gap-2 rounded-full border border-slate-700/60 px-5 py-3 font-mono text-xs uppercase tracking-[0.3em] text-slate-200 transition hover:border-cyan-400 hover:text-cyan-200" href="/work/">
+        <span>View Full Archive</span>
+        <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+    <div class="grid gap-8 lg:grid-cols-2">
+      {% for item in collections.workItems %}
+        {% if item.data.featured %}
+      <article class="group relative overflow-hidden rounded-[2.75rem] border border-slate-800/60 bg-slate-950/70 p-10 shadow-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-400/70">
+        <div class="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100" aria-hidden="true">
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/15 via-transparent to-fuchsia-500/20"></div>
+        </div>
+        <div class="relative space-y-6">
+          <div class="flex items-center justify-between">
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.35em] text-slate-400">{{ item.data.role or "Systems" }}</p>
+            <span class="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-emerald-200">In Flight</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-slate-100">
+            <a class="transition hover:text-cyan-200" href="{{ item.url }}">{{ item.data.title }}</a>
+          </h3>
+          {% if item.data.description %}
+          <p class="text-sm leading-relaxed text-slate-300">{{ item.data.description }}</p>
+          {% endif %}
+          <div class="flex flex-wrap gap-3 text-[0.7rem]">
+            <a class="inline-flex items-center gap-2 rounded-full border border-cyan-400/60 px-4 py-2 font-mono uppercase tracking-[0.3em] text-cyan-100 transition hover:border-cyan-300 hover:text-cyan-50" href="{{ item.url }}">
+              Deep Dive
             </a>
             {% if item.data.websiteUrl %}
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-              href="{{ item.data.websiteUrl }}"
-              target="_blank"
-              rel="noopener"
-            >
-              Visit site
+            <a class="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/60 px-4 py-2 font-mono uppercase tracking-[0.3em] text-fuchsia-100 transition hover:border-fuchsia-300 hover:text-fuchsia-50" href="{{ item.data.websiteUrl }}" target="_blank" rel="noopener">
+              Visit Site
               <span aria-hidden="true">↗</span>
             </a>
             {% endif %}
             {% if item.data.githubUrl %}
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-              href="{{ item.data.githubUrl }}"
-              target="_blank"
-              rel="noopener"
-            >
-              View source
+            <a class="inline-flex items-center gap-2 rounded-full border border-slate-700/60 px-4 py-2 font-mono uppercase tracking-[0.3em] text-slate-200 transition hover:border-cyan-300 hover:text-cyan-100" href="{{ item.data.githubUrl }}" target="_blank" rel="noopener">
+              View Source
               <span aria-hidden="true">↗</span>
             </a>
             {% endif %}
           </div>
-        </article>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </section>
-    {% endif %}
+        </div>
+      </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
 
-    <section>
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Find me around the web</h2>
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-        <a
-          href="https://github.com/dave1010"
-          target="_blank"
-          rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
-        >
-          <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40" class="shrink-0">
-          <div>
+  <section class="mt-32">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.35em] text-slate-400">Signal Boost</p>
+        <h2 class="mt-3 text-3xl font-semibold text-slate-100">Find me around the web.</h2>
+      </div>
+      <p class="max-w-xl text-sm text-slate-400">Prefer a quick DM, a detailed memo, or a pair-programming jam session? Pick the channel that fits.</p>
+    </div>
+    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+      <a href="https://github.com/dave1010" target="_blank" rel="noopener" class="group glow-card flex flex-col gap-4" data-tilt>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40" class="shrink-0">
             <h3 class="text-xl font-semibold text-slate-100">GitHub</h3>
-            <p class="mt-1 text-sm text-slate-400">Browse experiments, utilities, and longer-lived projects.</p>
           </div>
-        </a>
+          <span aria-hidden="true" class="text-2xl text-cyan-200 transition duration-300 group-hover:translate-x-1">→</span>
+        </div>
+        <p class="text-sm text-slate-300">Explore experiments, tooling, and long-running infrastructure projects.</p>
+      </a>
 
-        <a
-          href="https://www.linkedin.com/in/dave1010/"
-          target="_blank"
-          rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
-        >
-          <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40" class="shrink-0">
-          <div>
+      <a href="https://www.linkedin.com/in/dave1010/" target="_blank" rel="noopener" class="group glow-card flex flex-col gap-4" data-tilt>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40" class="shrink-0">
             <h3 class="text-xl font-semibold text-slate-100">LinkedIn</h3>
-            <p class="mt-1 text-sm text-slate-400">Say hello or talk about your next engineering challenge.</p>
           </div>
-        </a>
+          <span aria-hidden="true" class="text-2xl text-cyan-200 transition duration-300 group-hover:-translate-y-1">↗</span>
+        </div>
+        <p class="text-sm text-slate-300">Let's collaborate on the next engineering leap or talk about resilient teams.</p>
+      </a>
 
-        <a
-          href="https://twitter.com/dave1010"
-          target="_blank"
-          rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
-        >
-          <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40" class="shrink-0">
-          <div>
+      <a href="https://twitter.com/dave1010" target="_blank" rel="noopener" class="group glow-card flex flex-col gap-4" data-tilt>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40" class="shrink-0">
             <h3 class="text-xl font-semibold text-slate-100">Twitter</h3>
-            <p class="mt-1 text-sm text-slate-400">Follow <code>@dave1010</code> for occasional musings.</p>
           </div>
-        </a>
-      </div>
-    </section>
-  </div>
+          <span aria-hidden="true" class="text-2xl text-cyan-200 transition duration-300 group-hover:-translate-y-1">~</span>
+        </div>
+        <p class="text-sm text-slate-300">Occasional threads on strategy, AI, leadership craft, and playful prototypes.</p>
+      </a>
+    </div>
+  </section>
 </main>
