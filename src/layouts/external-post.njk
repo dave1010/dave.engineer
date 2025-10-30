@@ -3,8 +3,14 @@ layout: base.njk
 ---
 {% set redirectUrl = externalUrl %}
 {% set externalSource = externalSourceInfo %}
-{% set externalSourceMessage = externalSource ? externalSource.message : "This post lives on another site." %}
-{% set externalCtaLabel = externalSource ? externalSource.ctaLabel : "Read externally" %}
+{% set externalSourceMessage = "This post lives on another site." %}
+{% if externalSource and externalSource.message %}
+  {% set externalSourceMessage = externalSource.message %}
+{% endif %}
+{% set externalCtaLabel = "Read externally" %}
+{% if externalSource and externalSource.ctaLabel %}
+  {% set externalCtaLabel = externalSource.ctaLabel %}
+{% endif %}
 {% if redirectUrl %}
   {% set headExtra %}
     <meta http-equiv="refresh" content="0; url={{ redirectUrl | escape }}">
