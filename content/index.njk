@@ -4,42 +4,62 @@ title: Dave Hulbert - Engineer
 ---
 <main class="px-6 py-16 sm:px-10">
   <div class="mx-auto max-w-5xl space-y-16">
-    <section class="flex flex-col gap-10 lg:flex-row lg:items-center">
-      <div class="flex flex-col items-center text-center lg:w-64 lg:items-start lg:text-left">
-        <img
-          class="h-40 w-40 rounded-full border border-slate-800 shadow-2xl"
-          src="https://avatars.githubusercontent.com/u/50682?v=4"
-          alt="Dave Hulbert's Avatar"
-        >
-        <div class="mt-6 space-y-2">
-          <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Dave Hulbert</h1>
-          <p class="text-lg text-slate-300">Engineering leader • AI, Strategy and Compliance</p>
-        </div>
+    <section class="relative overflow-hidden rounded-3xl border border-slate-800/70 bg-slate-900/60 px-6 py-12 shadow-2xl shadow-slate-950/40 backdrop-blur lg:px-12">
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute -right-24 top-10 hidden h-72 w-72 rounded-full bg-glow-conic opacity-70 blur-3xl animate-aurora sm:block"></div>
+        <div class="absolute inset-x-0 bottom-0 h-px w-full animate-pulse-line bg-gradient-to-r from-transparent via-sky-400/50 to-transparent"></div>
       </div>
+      <div class="relative flex flex-col gap-10 lg:flex-row lg:items-center">
+        <div class="flex flex-col items-center text-center lg:w-64 lg:items-start lg:text-left">
+          <div class="relative">
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-md"></div>
+            <img
+              class="relative h-40 w-40 rounded-full border border-slate-700/70 shadow-2xl shadow-slate-950/60"
+              src="https://avatars.githubusercontent.com/u/50682?v=4"
+              alt="Dave Hulbert's Avatar"
+            >
+          </div>
+          <div class="mt-6 space-y-2">
+            <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+              <span class="bg-gradient-to-r from-sky-300 via-fuchsia-200 to-sky-200 bg-clip-text text-transparent animate-aurora bg-[length:200%_200%]">
+                Dave Hulbert
+              </span>
+            </h1>
+            <p class="text-sm font-mono uppercase tracking-[0.3em] text-slate-400">Engineering leader • AI • Strategy • Compliance</p>
+          </div>
+        </div>
 
-      <div class="flex-1 space-y-5 text-lg text-slate-300">
-        <p>
-          I design systems and lead teams that deliver software that's trusted by millions.
-          My work spans engineering leadership, AI, strategy, software development and governance.
-        </p>
-        <p>
-          I'm currently shaping the future of public transport technology at
-          <a class="text-sky-400 hover:text-sky-300" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
-          in Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems,
-          automation, and the craft of well-run teams.
-        </p>
-        <p>
-          Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply
-          looking for pragmatic advice, I'd love to connect.
-        </p>
-        <div>
-          <a
-            class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
-            href="/blog/"
-          >
-            Visit the blog
-            <span aria-hidden="true">→</span>
-          </a>
+        <div class="flex-1 space-y-6 text-lg text-slate-300">
+          <p class="leading-relaxed">
+            I design systems and lead teams that deliver software that's trusted by millions. My work spans engineering
+            leadership, AI, strategy, software development and governance.
+          </p>
+          <p class="leading-relaxed">
+            I'm currently shaping the future of public transport technology at
+            <a class="text-sky-300 underline decoration-sky-500/40 underline-offset-4 transition hover:text-sky-200" href="https://passenger.tech/" target="_blank" rel="noopener">Passenger</a>
+            in Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems, automation, and the craft of
+            well-run teams.
+          </p>
+          <p class="leading-relaxed">
+            Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply looking for pragmatic advice,
+            I'd love to connect.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              class="group inline-flex items-center gap-2 rounded-full border border-sky-500/40 bg-slate-950/60 px-5 py-2 text-sm font-semibold text-sky-100 transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:text-white"
+              href="/blog/"
+            >
+              Visit the blog
+              <span aria-hidden="true" class="translate-x-0 transition group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              class="group inline-flex items-center gap-2 rounded-full border border-fuchsia-500/30 bg-slate-950/50 px-5 py-2 text-sm font-semibold text-fuchsia-100 transition duration-200 hover:-translate-y-0.5 hover:border-fuchsia-400 hover:text-white"
+              href="/work/"
+            >
+              Explore work
+              <span aria-hidden="true" class="translate-x-0 transition group-hover:translate-x-1">↗</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -53,20 +73,30 @@ title: Dave Hulbert - Engineer
     {% if hasFeaturedWork %}
     <section class="space-y-6">
       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured work</h2>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-100">
+          <span class="relative inline-flex items-center">
+            <span class="absolute -left-16 hidden h-px w-14 bg-gradient-to-r from-fuchsia-500/40 to-transparent sm:block"></span>
+            <span class="bg-gradient-to-r from-sky-200 via-slate-100 to-fuchsia-200 bg-clip-text text-transparent">
+              Featured work
+            </span>
+          </span>
+        </h2>
         <a
-          class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
+          class="group inline-flex items-center gap-2 text-sm font-medium text-sky-300 transition hover:text-sky-200"
           href="/work/"
         >
           View all work
-          <span aria-hidden="true">→</span>
+          <span aria-hidden="true" class="translate-x-0 transition group-hover:translate-x-1">→</span>
         </a>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         {% for item in collections.workItems %}
           {% if item.data.featured %}
-        <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
-          <div class="space-y-3">
+        <article class="group relative flex h-full flex-col justify-between gap-4 overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/70 p-6 shadow-lg shadow-slate-950/50 transition duration-300 hover:-translate-y-1 hover:border-sky-500/60 hover:shadow-2xl">
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-fuchsia-500/10"></div>
+          </div>
+          <div class="relative space-y-3">
             <h3 class="text-xl font-semibold text-slate-100">
               <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
             </h3>
@@ -74,16 +104,16 @@ title: Dave Hulbert - Engineer
             <p class="text-sm text-slate-300">{{ item.data.description }}</p>
             {% endif %}
           </div>
-          <div class="flex flex-wrap gap-3 text-sm">
+          <div class="relative flex flex-wrap gap-3 text-sm">
             <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+              class="inline-flex items-center gap-2 rounded-full border border-slate-700/70 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
               href="{{ item.url }}"
             >
               Learn more
             </a>
             {% if item.data.websiteUrl %}
             <a
-              class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
+              class="inline-flex items-center gap-2 rounded-full border border-sky-500/60 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10"
               href="{{ item.data.websiteUrl }}"
               target="_blank"
               rel="noopener"
@@ -94,7 +124,7 @@ title: Dave Hulbert - Engineer
             {% endif %}
             {% if item.data.githubUrl %}
             <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+              class="inline-flex items-center gap-2 rounded-full border border-slate-700/70 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
               href="{{ item.data.githubUrl }}"
               target="_blank"
               rel="noopener"
@@ -112,14 +142,19 @@ title: Dave Hulbert - Engineer
     {% endif %}
 
     <section>
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Find me around the web</h2>
+      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">
+        <span class="bg-gradient-to-r from-sky-200 to-fuchsia-200 bg-clip-text text-transparent">Find me around the web</span>
+      </h2>
       <div class="mt-6 grid gap-4 sm:grid-cols-2">
         <a
           href="https://github.com/dave1010"
           target="_blank"
           rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+          class="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/50 p-6 transition hover:border-sky-500/60 hover:bg-slate-900/80"
         >
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-fuchsia-500/10"></div>
+          </div>
           <img src="/img/Github_black.png" alt="GitHub Icon" width="40" height="40" class="shrink-0">
           <div>
             <h3 class="text-xl font-semibold text-slate-100">GitHub</h3>
@@ -131,8 +166,11 @@ title: Dave Hulbert - Engineer
           href="https://www.linkedin.com/in/dave1010/"
           target="_blank"
           rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+          class="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/50 p-6 transition hover:border-sky-500/60 hover:bg-slate-900/80"
         >
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-fuchsia-500/10"></div>
+          </div>
           <img src="/img/LinkedIN_black.png" alt="LinkedIn Icon" width="40" height="40" class="shrink-0">
           <div>
             <h3 class="text-xl font-semibold text-slate-100">LinkedIn</h3>
@@ -144,8 +182,11 @@ title: Dave Hulbert - Engineer
           href="https://twitter.com/dave1010"
           target="_blank"
           rel="noopener"
-          class="group flex items-start gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-sky-500 hover:bg-slate-900"
+          class="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/50 p-6 transition hover:border-sky-500/60 hover:bg-slate-900/80"
         >
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-fuchsia-500/10"></div>
+          </div>
           <img src="/img/Twitter_black.png" alt="Twitter Icon" width="40" height="40" class="shrink-0">
           <div>
             <h3 class="text-xl font-semibold text-slate-100">Twitter</h3>
