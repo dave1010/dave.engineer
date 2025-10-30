@@ -1,76 +1,84 @@
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
-import slugify from "./scripts/slugify.js";
+import slugify from "./src/slugify.js";
 
-const typeMetadata = {
-  post: {
-    type: "post",
-    label: "Blog Posts",
-    description: "Long-form writing, essays, and updates.",
-    permalink: "/blog/type/post/",
-  },
-  til: {
-    type: "til",
-    label: "Today I Learned",
-    description: "Short notes capturing day-to-day learnings.",
-    permalink: "/blog/type/til/",
-  },
-  external: {
-    type: "external",
-    label: "Elsewhere",
-    description: "Writing published on other platforms like Medium.",
-    permalink: "/blog/type/external/",
-  },
-};
+const DEFAULT_TYPE = "post";
+
+const typeMetadata = new Map(
+  Object.entries({
+    post: {
+      type: "post",
+      label: "Blog Posts",
+      description: "Long-form writing, essays, and updates.",
+      permalink: "/blog/type/post/",
+    },
+    til: {
+      type: "til",
+      label: "Today I Learned",
+      description: "Short notes capturing day-to-day learnings.",
+      permalink: "/blog/type/til/",
+    },
+    external: {
+      type: "external",
+      label: "Elsewhere",
+      description: "Writing published on other platforms like Medium.",
+      permalink: "/blog/type/external/",
+    },
+  }),
+);
 
 const normaliseType = (type) => {
   if (typeof type !== "string") {
-    return "post";
+    return DEFAULT_TYPE;
   }
 
-  const value = type.toLowerCase();
-  if (value === "til") {
-    return "til";
-  }
-  if (value === "external") {
-    return "external";
-  }
-
-  return "post";
+  const normalised = type.toLowerCase();
+  return typeMetadata.has(normalised) ? normalised : DEFAULT_TYPE;
 };
+
+const ensureTypeMetadata = (type) =>
+  typeMetadata.get(type) ?? typeMetadata.get(DEFAULT_TYPE);
+
+const getTypeGroups = () => {
+  const groups = new Map();
+  for (const metadata of typeMetadata.values()) {
+    groups.set(metadata.type, { ...metadata, items: [] });
+  }
+  return groups;
+};
+
+const sortPostsByDate = (items) =>
+  [...items].sort((a, b) => b.date - a.date);
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy({ public: "." });
 
   eleventyConfig.addCollection("blogPostsByType", (collectionApi) => {
-    const posts = collectionApi.getFilteredByTag("blog");
-    const groups = new Map();
+    const groups = getTypeGroups();
 
-    for (const metadata of Object.values(typeMetadata)) {
-      groups.set(metadata.type, { ...metadata, items: [] });
-    }
-
-    for (const post of posts) {
+    for (const post of collectionApi.getFilteredByTag("blog")) {
       const type = normaliseType(post.data.type);
-      if (!groups.has(type)) {
-        groups.set(type, { ...typeMetadata.post, type, items: [] });
-      }
-      groups.get(type).items.push(post);
+      const group = groups.get(type) ?? {
+        // Unknown types reuse the "post" metadata so the build stays resilient while we surface the new type label.
+        ...ensureTypeMetadata(type),
+        type,
+        items: [],
+      };
+      group.items.push(post);
+      groups.set(type, group);
     }
 
-    for (const group of groups.values()) {
-      group.items.sort((a, b) => b.date - a.date);
-      group.count = group.items.length;
-    }
-
-    return Array.from(groups.values());
+    return Array.from(groups.values()).map((group) => ({
+      ...group,
+      items: sortPostsByDate(group.items),
+      count: group.items.length,
+    }));
   });
 
   eleventyConfig.addCollection("blogTags", (collectionApi) => {
-    const posts = collectionApi.getFilteredByTag("blog");
     const tagMap = new Map();
 
-    for (const post of posts) {
+    for (const post of collectionApi.getFilteredByTag("blog")) {
       const tags = Array.isArray(post.data.topicTags) ? post.data.topicTags : [];
       for (const tag of tags) {
         const name = String(tag || "").toLowerCase();
@@ -87,16 +95,13 @@ export default function (eleventyConfig) {
       }
     }
 
-    const tags = Array.from(tagMap.values()).map((tag) => ({
-      ...tag,
-      items: tag.items.sort((a, b) => b.date - a.date),
-    }));
-
-    for (const tag of tags) {
-      tag.count = tag.items.length;
-    }
-
-    return tags.sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(tagMap.values())
+      .map((tag) => ({
+        ...tag,
+        items: sortPostsByDate(tag.items),
+        count: tag.items.length,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   });
 
   eleventyConfig.addCollection("workItems", (collectionApi) => {
