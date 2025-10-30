@@ -7,6 +7,9 @@ let pointerX = 0;
 let pointerY = 0;
 let animationFrameId = null;
 
+const PARALLAX_POINTER_MULTIPLIER = 120;
+const PARALLAX_SCROLL_MULTIPLIER = 160;
+
 const applyParallax = () => {
   animationFrameId = null;
   const scrollFactor = window.scrollY / window.innerHeight || 0;
@@ -14,8 +17,9 @@ const applyParallax = () => {
   parallaxLayers.forEach((layer) => {
     const depth = parseFloat(layer.dataset.parallaxDepth || "0");
     if (Number.isNaN(depth)) return;
-    const translateX = pointerX * depth * 40;
-    const translateY = pointerY * depth * 40 + scrollFactor * depth * -60;
+    const translateX = pointerX * depth * PARALLAX_POINTER_MULTIPLIER;
+    const translateY =
+      pointerY * depth * PARALLAX_POINTER_MULTIPLIER + scrollFactor * depth * -PARALLAX_SCROLL_MULTIPLIER;
     layer.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
   });
 };
@@ -29,8 +33,8 @@ const scheduleParallax = () => {
 window.addEventListener(
   "mousemove",
   (event) => {
-    pointerX = clamp(event.clientX / window.innerWidth - 0.5, -0.6, 0.6) * 2;
-    pointerY = clamp(event.clientY / window.innerHeight - 0.5, -0.6, 0.6) * 2;
+    pointerX = clamp(event.clientX / window.innerWidth - 0.5, -0.75, 0.75) * 2;
+    pointerY = clamp(event.clientY / window.innerHeight - 0.5, -0.75, 0.75) * 2;
     scheduleParallax();
   },
   { passive: true },
