@@ -177,12 +177,20 @@ const terminalForm = document.querySelector("[data-terminal-form]");
 if (terminalForm) {
   const terminalInput = terminalForm.querySelector("[data-terminal-input]");
   const terminalOutput = document.querySelector("[data-terminal-output]");
+  const terminalPanel = terminalForm.closest("[data-terminal-root]");
 
   if (terminalInput instanceof HTMLInputElement && terminalOutput instanceof HTMLElement) {
     const conversation = [
       { role: "user", content: "ls" },
       { role: "assistant", content: "hello.txt" },
     ];
+    const MAX_HISTORY = 50;
+
+    const trimConversation = () => {
+      if (conversation.length > MAX_HISTORY) {
+        conversation.splice(0, conversation.length - MAX_HISTORY);
+      }
+    };
 
     const scrollToBottom = () => {
       window.requestAnimationFrame(() => {
@@ -193,10 +201,23 @@ if (terminalForm) {
     };
 
     const focusInput = () => {
+      if (terminalInput.disabled) return;
       window.requestAnimationFrame(() => {
-        terminalInput.focus();
+        if (!terminalInput.disabled) {
+          terminalInput.focus();
+        }
       });
     };
+
+    if (terminalPanel instanceof HTMLElement) {
+      terminalPanel.addEventListener("pointerup", (event) => {
+        if (!(event.target instanceof HTMLElement)) return;
+        if (event.target.closest("input, textarea, button, a")) return;
+        const selection = window.getSelection();
+        if (selection?.toString()) return;
+        focusInput();
+      });
+    }
 
     const appendCommandLine = (command) => {
       const line = document.createElement("div");
@@ -267,7 +288,7 @@ if (terminalForm) {
       const pendingBlock = appendBlock("", "terminal-block--pending");
       pendingBlock.textContent = "▌";
 
-      const payloadMessages = conversation.concat({ role: "user", content: command });
+      const payloadMessages = conversation.slice(-MAX_HISTORY).concat({ role: "user", content: command });
 
       try {
         const response = await fetch("/terminal-chat", {
@@ -286,6 +307,7 @@ if (terminalForm) {
 
         conversation.push({ role: "user", content: command });
         conversation.push({ role: "assistant", content: assistantReply });
+        trimConversation();
       } catch (error) {
         pendingBlock.classList.remove("terminal-block--pending");
         pendingBlock.classList.add("terminal-block--error");
@@ -298,6 +320,5 @@ if (terminalForm) {
       }
     });
 
-    focusInput();
   }
 }

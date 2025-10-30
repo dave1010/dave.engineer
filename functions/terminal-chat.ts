@@ -23,6 +23,9 @@ type ChatPayload = {
 };
 
 const DEFAULT_API_URL = "https://api.cerebras.ai/v1/chat/completions";
+const MAX_HISTORY_MESSAGES = 50;
+const MAX_MESSAGE_LENGTH = 2000;
+const THINK_PATTERN = /<think>[\s\S]*?<\/think>/g;
 
 type ChatMessage = {
   role: "system" | "user" | "assistant";
@@ -65,9 +68,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     );
   }
 
-  const outgoingMessages: ChatMessage[] = [
-    { role: "system", content: TERMINAL_SYSTEM_PROMPT },
-  ];
+  const sanitizedMessages: ChatMessage[] = [];
 
   for (const entry of messages) {
     if (!entry || typeof entry !== "object") continue;
@@ -78,15 +79,26 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     if (role !== "user" && role !== "assistant") continue;
     if (typeof content !== "string" || content.trim() === "") continue;
 
-    outgoingMessages.push({
-      role: role as "user" | "assistant",
-      content,
+    const normalizedRole = role as "user" | "assistant";
+    const cleanedContent =
+      normalizedRole === "assistant" ? stripThinkingSegments(content) : content;
+
+    sanitizedMessages.push({
+      role: normalizedRole,
+      content: truncateContent(cleanedContent),
     });
   }
 
-  if (!outgoingMessages.some((msg) => msg.role === "user")) {
+  const recentMessages = sanitizedMessages.slice(-MAX_HISTORY_MESSAGES);
+
+  if (!recentMessages.some((msg) => msg.role === "user")) {
     return json({ error: "At least one user message is required" }, 400);
   }
+
+  const outgoingMessages: ChatMessage[] = [
+    { role: "system", content: TERMINAL_SYSTEM_PROMPT },
+    ...recentMessages,
+  ];
 
   const outgoing: Record<string, unknown> = {
     model: "qwen-3-32b",
@@ -133,9 +145,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const text = await upstream.text();
+  const sanitizedText = sanitizeUpstreamText(text);
   // Ensure JSON content-type for non-streamed responses
   if (!headers.has("content-type")) headers.set("content-type", "application/json");
-  return new Response(text, {
+  return new Response(sanitizedText, {
     status: upstream.status,
     statusText: upstream.statusText,
     headers,
@@ -152,4 +165,82 @@ function json(
     status,
     headers: { "content-type": "application/json", ...headers },
   });
+}
+
+function truncateContent(text: string): string {
+  return text.length > MAX_MESSAGE_LENGTH ? text.slice(0, MAX_MESSAGE_LENGTH) : text;
+}
+
+function stripThinkingSegments(text: string): string {
+  return text.replace(THINK_PATTERN, "").trim();
+}
+
+function sanitizeUpstreamText(raw: string): string {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw) as Record<string, unknown>;
+  } catch {
+    return stripThinkingSegments(raw);
+  }
+
+  if (!parsed || typeof parsed !== "object") {
+    return stripThinkingSegments(raw);
+  }
+
+  let mutated = false;
+  const data = parsed as Record<string, unknown>;
+
+  if (typeof data.message === "string") {
+    const cleaned = stripThinkingSegments(data.message);
+    if (cleaned !== data.message) {
+      data.message = cleaned;
+      mutated = true;
+    }
+  }
+
+  const choices = (data as { choices?: unknown[] }).choices;
+  if (Array.isArray(choices)) {
+    for (const choice of choices) {
+      if (!choice || typeof choice !== "object") continue;
+      const choiceRecord = choice as Record<string, unknown>;
+
+      if (typeof choiceRecord.text === "string") {
+        const cleaned = stripThinkingSegments(choiceRecord.text);
+        if (cleaned !== choiceRecord.text) {
+          choiceRecord.text = cleaned;
+          mutated = true;
+        }
+      }
+
+      if (choiceRecord.message && typeof choiceRecord.message === "object") {
+        const message = choiceRecord.message as Record<string, unknown>;
+        if (typeof message.content === "string") {
+          const cleaned = stripThinkingSegments(message.content);
+          if (cleaned !== message.content) {
+            message.content = cleaned;
+            mutated = true;
+          }
+        }
+      }
+    }
+  }
+
+  const response = (data as { response?: { output_text?: unknown } }).response;
+  if (response && typeof response === "object") {
+    const outputText = (response as { output_text?: unknown }).output_text;
+    if (Array.isArray(outputText)) {
+      for (let index = 0; index < outputText.length; index += 1) {
+        const entry = outputText[index];
+        if (typeof entry === "string") {
+          const cleaned = stripThinkingSegments(entry);
+          if (cleaned !== entry) {
+            outputText[index] = cleaned;
+            mutated = true;
+          }
+        }
+      }
+    }
+  }
+
+  return mutated ? JSON.stringify(data) : raw;
 }
