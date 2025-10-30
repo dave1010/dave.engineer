@@ -125,7 +125,17 @@ title: Dave Hulbert - Engineer
         <div class="grid gap-6 md:grid-cols-2">
           {% for item in collections.workItems %}
             {% if item.data.featured %}
-          <article class="glow-card flex h-full flex-col justify-between gap-6 border-slate-800/80">
+          <article class="glow-card flex h-full flex-col gap-6 border-slate-800/80">
+            {% if item.data.image %}
+            <div class="overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60">
+              <img
+                src="{{ item.data.image }}"
+                alt="{{ item.data.imageAlt or item.data.title }}"
+                class="h-44 w-full object-cover"
+                loading="lazy"
+              >
+            </div>
+            {% endif %}
             <div class="space-y-3">
               <p class="text-xs uppercase tracking-[0.4em] text-slate-500">{{ item.data.role or "Work" }}</p>
               <h3 class="text-2xl font-semibold text-slate-100">
@@ -135,7 +145,7 @@ title: Dave Hulbert - Engineer
               <p class="text-sm text-slate-300">{{ item.data.description }}</p>
               {% endif %}
             </div>
-            <div class="flex flex-wrap gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-slate-300">
+            <div class="mt-auto flex flex-wrap gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-slate-300">
               <a
                 class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold hover:border-lime-300 hover:text-lime-200"
                 href="{{ item.url }}"

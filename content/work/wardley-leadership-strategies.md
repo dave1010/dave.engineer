@@ -4,6 +4,8 @@ title: Wardley Leadership Strategies
 description: "A practical, community-driven guide for applying Wardley leadership practices in the real world."
 websiteUrl: https://www.wardleyleadershipstrategies.com/
 githubUrl: https://github.com/dave1010/wardley-leadership-strategies
+image: /img/work/wardley-leadership-strategies.png
+imageAlt: Screenshot of the Wardley Leadership Strategies website homepage, highlighting mapped strategy cards.
 tags:
   - work
 featured: true

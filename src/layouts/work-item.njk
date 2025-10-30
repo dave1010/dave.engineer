@@ -36,6 +36,16 @@ layout: base.njk
       </div>
       {% endif %}
     </header>
+    {% if image %}
+    <figure class="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/60">
+      <img
+        src="{{ image }}"
+        alt="{{ imageAlt or title }}"
+        class="w-full object-cover"
+        loading="lazy"
+      >
+    </figure>
+    {% endif %}
     <div class="prose prose-invert prose-lg max-w-none">
       {{ content | safe }}
     </div>
