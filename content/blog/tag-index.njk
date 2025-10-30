@@ -1,0 +1,40 @@
+---
+layout: base.njk
+title: Dave Hulbert - Blog tags
+permalink: /blog/tag/
+---
+{% set tagList = collections.blogTags | default([]) %}
+{% set tagLinkClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
+{% set tagCountClasses = "rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400" %}
+<main class="px-6 py-16 sm:px-10">
+  <div class="mx-auto flex max-w-4xl flex-col gap-12">
+    <header class="space-y-4">
+      <a class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" href="/blog/">
+        <span aria-hidden="true">←</span>
+        Back to blog
+      </a>
+      <p class="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Tags</p>
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">Browse every topic</h1>
+      <p class="text-lg text-slate-300">
+        Every tag used across the blog, listed alphabetically. Choose a tag to explore the posts that mention it.
+      </p>
+    </header>
+
+    {% if tagList | length %}
+    <section class="rounded-3xl border border-slate-800/60 bg-slate-900/40">
+      <ul class="flex flex-wrap gap-2 px-6 py-8 sm:px-8">
+        {% for tag in tagList %}
+        <li>
+          <a class="{{ tagLinkClasses }}" href="{{ tag.permalink }}">
+            {{ tag.name | lower }}
+            <span class="{{ tagCountClasses }}">{{ tag.count }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% else %}
+    <p class="text-base text-slate-400">No tags available yet.</p>
+    {% endif %}
+  </div>
+</main>

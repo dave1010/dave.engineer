@@ -11,6 +11,8 @@ layout: base.njk
   {% set totalCount = totalCount + (group.count | default(group.items | length)) %}
 {% endfor %}
 {% set tagList = collections.blogTags | default([]) %}
+{% set tagLinkClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
+{% set tagCountClasses = "rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400" %}
 <main class="px-6 py-16 sm:px-10">
   <div class="mx-auto flex max-w-4xl flex-col gap-12">
     <header class="space-y-4">
@@ -69,18 +71,22 @@ layout: base.njk
     {% endif %}
 
     {% if tagList | length %}
+    {% set tagPreview = tagList.slice(0, 12) %}
     <section class="space-y-3">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by tag</p>
+      <div class="flex items-center justify-between gap-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by tag</p>
+        <a class="text-xs font-semibold tracking-wide text-sky-300 transition hover:text-sky-200" href="/blog/tag/">View all tags →</a>
+      </div>
       <div class="flex flex-wrap gap-2">
-        {% for tag in tagList %}
+        {% for tag in tagPreview %}
         {% set isCurrentTag = currentTagSlug and currentTagSlug == tag.slug %}
         <a
           href="{{ tag.permalink }}"
-          class="inline-flex items-center gap-2 rounded-full border border-slate-800/70 bg-slate-900/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-300 transition hover:border-slate-700 hover:text-slate-100 {{ "border-sky-500/80 text-sky-200" if isCurrentTag }}"
+          class="{{ tagLinkClasses }} {{ "border-sky-500/80 text-sky-200" if isCurrentTag }}"
           {% if isCurrentTag %}aria-current="page"{% endif %}
         >
-          {{ tag.name }}
-          <span class="rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400">{{ tag.count }}</span>
+          {{ tag.name | lower }}
+          <span class="{{ tagCountClasses }}">{{ tag.count }}</span>
         </a>
         {% endfor %}
       </div>
@@ -123,10 +129,10 @@ layout: base.njk
               {% for tag in post.data.topicTagLinks %}
               <li>
                 <a
-                  class="inline-flex items-center rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs uppercase tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100"
+                  class="{{ tagLinkClasses }}"
                   href="{{ tag.url }}"
                 >
-                  {{ tag.name }}
+                  {{ tag.name | lower }}
                 </a>
               </li>
               {% endfor %}
@@ -134,7 +140,7 @@ layout: base.njk
             {% endif %}
           </div>
           <h2 class="text-2xl font-semibold tracking-tight text-slate-100">
-            <a class="hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
+            <a class="block transition hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
           </h2>
           {% set summary = post.data.excerpt %}
           {% if not summary and post.templateContent %}

@@ -90,13 +90,21 @@ const getExternalSourceInfo = (data) => {
   };
 };
 
+const normaliseTagName = (tag) => String(tag || "").toLowerCase();
+
 const getTopicTags = (tags) => {
   if (Array.isArray(tags)) {
-    return tags.filter((tag) => tag !== "blog");
+    return tags
+      .filter((tag) => tag !== "blog")
+      .map((tag) => normaliseTagName(tag));
   }
 
   if (typeof tags === "string") {
-    return tags === "blog" ? [] : [tags];
+    if (tags === "blog") {
+      return [];
+    }
+
+    return [normaliseTagName(tags)];
   }
 
   return [];

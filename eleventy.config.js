@@ -73,10 +73,11 @@ export default function (eleventyConfig) {
     for (const post of posts) {
       const tags = Array.isArray(post.data.topicTags) ? post.data.topicTags : [];
       for (const tag of tags) {
-        const slug = slugify(tag);
+        const name = String(tag || "").toLowerCase();
+        const slug = slugify(name);
         if (!tagMap.has(slug)) {
           tagMap.set(slug, {
-            name: tag,
+            name,
             slug,
             items: [],
             permalink: `/blog/tag/${slug}/`,
