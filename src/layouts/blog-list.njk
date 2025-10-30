@@ -149,7 +149,10 @@ layout: base.njk
           {% set ctaAttributes = "" %}
           {% if post.data.type == "external" and post.data.externalUrl %}
             {% set ctaUrl = post.data.externalUrl %}
-            {% set ctaLabel = sourceInfo ? sourceInfo.ctaLabel : "Read externally" %}
+            {% set ctaLabel = "Read externally" %}
+            {% if sourceInfo and sourceInfo.ctaLabel %}
+              {% set ctaLabel = sourceInfo.ctaLabel %}
+            {% endif %}
             {% set ctaAttributes = " rel=\"noopener noreferrer\" target=\"_blank\"" %}
           {% endif %}
           <a class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" href="{{ ctaUrl }}"{{ ctaAttributes | safe }}>
