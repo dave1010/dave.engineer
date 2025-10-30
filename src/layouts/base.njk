@@ -11,12 +11,62 @@
     {{ headExtra | safe }}
   {% endif %}
 </head>
-<body class="h-full bg-slate-950 text-slate-100 font-sans antialiased">
+<body class="font-sans">
   <div class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-20 border-b border-slate-800/60 bg-slate-950/70 backdrop-blur">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+        <a class="group flex items-center gap-3 text-slate-200" href="/">
+          <span class="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-slate-800/60 bg-slate-900/80 shadow-lg shadow-slate-950/60">
+            <span class="absolute inset-0 bg-gradient-to-br from-sky-500/30 via-transparent to-fuchsia-500/40 opacity-60 blur-xl"></span>
+            <span class="absolute inset-0 animate-[scan_8s_linear_infinite] bg-gradient-to-b from-transparent via-sky-500/30 to-transparent"></span>
+            <span class="relative font-mono text-[0.8rem] uppercase tracking-[0.3em] text-slate-100">d/e</span>
+          </span>
+          <div class="text-xs leading-snug">
+            <span class="block font-semibold tracking-wide text-slate-100">Dave Hulbert</span>
+            <span class="block text-slate-400">Engineering Leadership</span>
+          </div>
+        </a>
+        <div class="flex items-center gap-4">
+          <nav class="hidden items-center gap-7 text-sm font-medium text-slate-300 md:flex">
+            <a class="group relative transition hover:text-sky-300" href="/">
+              <span>Home</span>
+              <span class="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+            <a class="group relative transition hover:text-sky-300" href="/blog/">
+              <span>Blog</span>
+              <span class="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+            <a class="group relative transition hover:text-sky-300" href="/work/">
+              <span>Work</span>
+              <span class="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+            <a class="group relative transition hover:text-sky-300" href="https://github.com/dave1010/dave.engineer">
+              <span>Repo</span>
+              <span class="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent transition-transform duration-300 group-hover:scale-x-100"></span>
+            </a>
+          </nav>
+          <nav class="flex items-center gap-4 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-slate-500 md:hidden">
+            <a class="transition hover:text-sky-300" href="/blog/">Blog</a>
+            <a class="transition hover:text-sky-300" href="/work/">Work</a>
+            <a class="transition hover:text-sky-300" href="/">Home</a>
+          </nav>
+          <a
+            class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-sky-500/60 bg-sky-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-sky-200 transition hover:border-fuchsia-500/60 hover:text-fuchsia-200"
+            href="https://www.linkedin.com/in/dave1010/"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="absolute inset-0 translate-y-full bg-gradient-to-r from-sky-500/0 via-sky-500/30 to-fuchsia-500/0 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100"></span>
+            <span class="relative">Let's talk</span>
+            <span class="relative text-base" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </header>
     <main class="flex-1">
       {{ content | safe }}
     </main>
-    <footer class="border-t border-slate-800 bg-slate-900/60">
+    <footer class="border-t border-slate-800/60 bg-slate-950/70 backdrop-blur">
       <div class="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
         <p class="text-center sm:text-left">© Dave Hulbert <a class="font-mono text-fuchsia-400" href="/">dave.engineer</a></p>
         <nav class="flex justify-center gap-6 sm:justify-end">
