@@ -179,7 +179,10 @@ if (terminalForm) {
   const terminalOutput = document.querySelector("[data-terminal-output]");
 
   if (terminalInput instanceof HTMLInputElement && terminalOutput instanceof HTMLElement) {
-    const conversation = [];
+    const conversation = [
+      { role: "user", content: "ls" },
+      { role: "assistant", content: "hello.txt" },
+    ];
 
     const scrollToBottom = () => {
       window.requestAnimationFrame(() => {

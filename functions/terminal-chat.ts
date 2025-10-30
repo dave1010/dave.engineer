@@ -1,5 +1,6 @@
 // functions/terminal-chat.ts
 import type { PagesFunction } from "@cloudflare/workers-types";
+import { TERMINAL_SYSTEM_PROMPT } from "./terminal-system-prompt";
 
 type Env = {
   CEREBRAS_API_KEY?: string;
@@ -27,9 +28,6 @@ type ChatMessage = {
   role: "system" | "user" | "assistant";
   content: string;
 };
-
-const STATIC_SYSTEM_PROMPT =
-  "You are acting as a pretend Linux shell terminal. Respond to the user's shell commands with just the shell output. No other content. No code blocks or formatting needed.";
 
 /* ---------- small helpers ---------- */
 
@@ -68,7 +66,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const outgoingMessages: ChatMessage[] = [
-    { role: "system", content: STATIC_SYSTEM_PROMPT },
+    { role: "system", content: TERMINAL_SYSTEM_PROMPT },
   ];
 
   for (const entry of messages) {
@@ -91,7 +89,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const outgoing: Record<string, unknown> = {
-    model: "llama3.1-8b",
+    model: "qwen-3-32b",
     messages: outgoingMessages,
     stream: false,
   };

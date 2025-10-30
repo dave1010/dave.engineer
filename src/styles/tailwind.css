@@ -104,11 +104,11 @@
   }
 
   .terminal-body {
-    @apply flex flex-col gap-4 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
+    @apply flex flex-col gap-0 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
   }
 
   .terminal-output {
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-0;
   }
 
   .terminal-line {
@@ -129,7 +129,8 @@
   }
 
   .terminal-form {
-    @apply border-t border-lime-400/20 pt-3;
+    @apply pt-0;
+    border-top-width: 0;
   }
 
   .terminal-input-row {
