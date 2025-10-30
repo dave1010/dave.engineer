@@ -104,7 +104,49 @@
   }
 
   .terminal-body {
-    @apply space-y-2 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
+    @apply flex flex-col gap-4 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
+  }
+
+  .terminal-output {
+    @apply flex flex-col gap-3;
+  }
+
+  .terminal-line {
+    @apply flex items-start gap-2 whitespace-pre-wrap;
+  }
+
+  .terminal-line__prompt {
+    @apply select-none text-lime-200/80;
+  }
+
+  .terminal-line__command {
+    @apply text-fuchsia-300;
+  }
+
+  .terminal-block {
+    @apply whitespace-pre-wrap break-words text-lime-100/90;
+    margin: 0;
+  }
+
+  .terminal-form {
+    @apply border-t border-lime-400/20 pt-3;
+  }
+
+  .terminal-input-row {
+    @apply flex items-center gap-2;
+  }
+
+  .terminal-input {
+    @apply flex-1 bg-transparent font-mono text-sm text-lime-100 placeholder:text-lime-100/40 focus:outline-none;
+    caret-color: rgba(186, 230, 253, 0.9);
+  }
+
+  .terminal-block--pending {
+    @apply opacity-70;
+  }
+
+  .terminal-block--error {
+    @apply text-red-300;
   }
 
   .terminal-links {

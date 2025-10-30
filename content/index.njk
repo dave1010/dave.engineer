@@ -82,18 +82,40 @@ title: Dave Hulbert - Engineer
               <span class="terminal-dot terminal-dot--zoom" aria-hidden="true"></span>
               <p class="ml-3 text-xs uppercase tracking-[0.4em] text-lime-200/80">Terminal</p>
             </div>
-            <div class="terminal-body">
-              <p>
-                <span class="text-lime-200/80 mr-2">$</span>
-                <span class="text-fuchsia-300">curl -sL dave.engineer | llm <span class="text-sky-200">&quot;links&quot;</span></span>
-              </p>
-              <div class="terminal-links">
-                <a class="terminal-link" href="/blog/">▶ blog</a>
-                <a class="terminal-link" href="/work/">▶ work</a>
-                <a class="terminal-link" href="https://github.com/dave1010" target="_blank" rel="noopener">▶ github</a>
-                <a class="terminal-link" href="https://www.linkedin.com/in/dave1010/" target="_blank" rel="noopener">▶ linkedin</a>
-                <a class="terminal-link" href="https://bsky.app/profile/dave.engineer" target="_blank" rel="noopener">▶ bluesky</a>
+            <div class="terminal-body" data-terminal>
+              <div class="terminal-output" data-terminal-output>
+                <div class="terminal-line">
+                  <span class="terminal-line__prompt">$</span>
+                  <span class="terminal-line__command">curl -sL dave.engineer | llm <span class="text-sky-200">&quot;links&quot;</span></span>
+                </div>
+                <div class="terminal-block">
+                  <div class="terminal-links">
+                    <a class="terminal-link" href="/blog/">▶ blog</a>
+                    <a class="terminal-link" href="/work/">▶ work</a>
+                    <a class="terminal-link" href="https://github.com/dave1010" target="_blank" rel="noopener">▶ github</a>
+                    <a class="terminal-link" href="https://www.linkedin.com/in/dave1010/" target="_blank" rel="noopener">▶ linkedin</a>
+                    <a class="terminal-link" href="https://bsky.app/profile/dave.engineer" target="_blank" rel="noopener">▶ bluesky</a>
+                  </div>
+                </div>
               </div>
+              <form class="terminal-form" data-terminal-form autocomplete="off">
+                <label class="sr-only" for="terminal-input">Enter a command</label>
+                <div class="terminal-input-row">
+                  <span class="terminal-line__prompt">$</span>
+                  <input
+                    id="terminal-input"
+                    class="terminal-input"
+                    type="text"
+                    data-terminal-input
+                    name="command"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    aria-label="Terminal input"
+                  >
+                </div>
+              </form>
             </div>
           </div>
         </div>
