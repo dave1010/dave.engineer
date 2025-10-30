@@ -76,13 +76,36 @@
     @apply flex items-center gap-2 border-b border-lime-400/30 bg-slate-900/60 px-6 py-3;
   }
 
-  .terminal-header span {
-    @apply inline-block h-3 w-3 rounded-full bg-lime-300/80;
-    box-shadow: 0 0 10px rgba(148, 240, 90, 0.8);
+  .terminal-dot {
+    @apply inline-block h-3 w-3 rounded-full;
+    box-shadow: 0 0 10px rgba(148, 240, 90, 0.4);
+  }
+
+  .terminal-dot--close {
+    background-color: #ff5f57;
+    box-shadow: 0 0 8px rgba(255, 95, 87, 0.65);
+  }
+
+  .terminal-dot--minimize {
+    background-color: #febb2e;
+    box-shadow: 0 0 8px rgba(254, 187, 46, 0.65);
+  }
+
+  .terminal-dot--zoom {
+    background-color: #28c840;
+    box-shadow: 0 0 8px rgba(40, 200, 64, 0.65);
   }
 
   .terminal-body {
     @apply space-y-2 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
+  }
+
+  .terminal-links {
+    @apply mt-4 flex flex-col gap-1;
+  }
+
+  .terminal-link {
+    @apply text-sm font-medium text-lime-100 transition hover:text-sky-200;
   }
 
   .skew-panel {
