@@ -1,4 +1,4 @@
-import slugify from "../../../scripts/slugify.js";
+import slugify from "../../../src/slugify.js";
 
 const EXTERNAL_SOURCE_META = {
   medium: {
