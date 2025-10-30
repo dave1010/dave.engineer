@@ -3,6 +3,7 @@ title: "Amazingly Alarming Autonomous AI Agents"
 date: 2023-08-14
 type: external
 externalUrl: https://medium.com/@dave1010/amazingly-alarming-autonomous-ai-agents-62f8a785e4d8
+externalSource: medium
 guid: 62f8a785e4d8
 tags:
   - artificial-intelligence

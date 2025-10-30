@@ -3,6 +3,7 @@ title: "How the inevitable cycle of industrialization can be used to form a tech
 date: 2022-03-31
 type: external
 externalUrl: https://medium.com/@dave1010/how-the-inevitable-cycle-of-industrialization-can-be-used-to-form-a-technology-strategy-9b516aebd533
+externalSource: medium
 guid: 9b516aebd533
 tags:
   - technology-strategy
