@@ -9,3 +9,105 @@
     @apply selection:bg-sky-500/30 selection:text-slate-100;
   }
 }
+
+@layer components {
+  .tech-grid {
+    background-image: linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .glow-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    border: 1px solid rgba(51, 65, 85, 0.55);
+    background: rgba(2, 6, 23, 0.78);
+    box-shadow: 0 45px 120px -60px rgba(56, 189, 248, 0.45);
+    backdrop-filter: blur(18px);
+    transition: transform 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+  }
+
+  .glow-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.35), transparent 55%),
+      radial-gradient(circle at bottom left, rgba(244, 114, 182, 0.25), transparent 50%);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .glow-panel:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(14, 165, 233, 0.55);
+    box-shadow: 0 50px 120px -50px rgba(14, 165, 233, 0.45);
+  }
+
+  .glow-panel:hover::before {
+    opacity: 0.8;
+    transform: scale(1.03);
+  }
+
+  .signal-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: linear-gradient(120deg, rgba(56, 189, 248, 0.16), rgba(14, 116, 144, 0.12));
+    font-size: 0.7rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: rgb(165 243 252);
+  }
+}
+
+@layer utilities {
+  .animate-orbit {
+    animation: orbitPulse 22s ease-in-out infinite;
+  }
+
+  .animate-orbit-slower {
+    animation: orbitPulse 34s ease-in-out infinite;
+  }
+
+  .backdrop-sheen {
+    position: relative;
+  }
+
+  .backdrop-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(130deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .backdrop-sheen:hover::after {
+    opacity: 1;
+  }
+}
+
+@keyframes orbitPulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+
+  45% {
+    opacity: 0.95;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+}
