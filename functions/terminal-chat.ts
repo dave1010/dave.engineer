@@ -95,8 +95,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ error: "At least one user message is required" }, 400);
   }
 
+  const today = new Date().toISOString().slice(0, 10);
+  const systemPrompt = `The current date is ${today}. ${TERMINAL_SYSTEM_PROMPT}`;
+
   const outgoingMessages: ChatMessage[] = [
-    { role: "system", content: TERMINAL_SYSTEM_PROMPT },
+    { role: "system", content: systemPrompt },
     ...recentMessages,
   ];
 
