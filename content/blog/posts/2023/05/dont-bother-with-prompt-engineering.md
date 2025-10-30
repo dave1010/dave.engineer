@@ -3,6 +3,7 @@ title: "Don’t bother with Prompt Engineering"
 date: 2023-05-09
 type: external
 externalUrl: https://medium.com/aimonks/dont-bother-with-prompt-engineering-1c53b52b048e
+externalSource: medium
 guid: 1c53b52b048e
 tags:
   - artificial-intelligence

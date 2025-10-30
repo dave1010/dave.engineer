@@ -3,6 +3,7 @@ title: "Obese II to Normal"
 date: 2017-12-31
 type: external
 externalUrl: https://medium.com/@dave1010/obese-ii-to-normal-621129a8b89b
+externalSource: medium
 guid: 621129a8b89b
 tags:
   - personal

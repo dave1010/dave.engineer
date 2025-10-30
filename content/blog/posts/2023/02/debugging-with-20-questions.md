@@ -3,6 +3,7 @@ title: "Debugging with 20 Questions"
 date: 2023-02-21
 type: external
 externalUrl: https://medium.com/@dave1010/debugging-with-20-questions-91d7ecbb20c5
+externalSource: medium
 guid: 91d7ecbb20c5
 tags:
   - debugging

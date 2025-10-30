@@ -3,6 +3,7 @@ title: "Exploring ChatGPT Code Interpreter"
 date: 2023-08-04
 type: external
 externalUrl: https://medium.com/@dave1010/exploring-chatgpt-code-interpreter-5d0872d67058
+externalSource: medium
 guid: 5d0872d67058
 tags:
   - artificial-intelligence

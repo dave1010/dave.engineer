@@ -3,6 +3,7 @@ title: "The tech stack at Base"
 date: 2014-02-18
 type: external
 externalUrl: https://medium.com/@dave1010/the-tech-stack-at-base-51b25f090bfe
+externalSource: medium
 guid: 51b25f090bfe
 tags:
   - web

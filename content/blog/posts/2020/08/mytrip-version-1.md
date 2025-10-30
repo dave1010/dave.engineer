@@ -3,6 +3,7 @@ title: "myTrip version 1"
 date: 2020-08-12
 type: external
 externalUrl: https://medium.com/@dave1010/mytrip-version-1-79b7da1ca45b
+externalSource: medium
 guid: 79b7da1ca45b
 tags:
   - product-management

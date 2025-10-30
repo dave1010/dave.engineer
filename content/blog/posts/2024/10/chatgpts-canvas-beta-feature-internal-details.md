@@ -3,6 +3,7 @@ title: "ChatGPT’s Canvas Beta Feature — technical details"
 date: 2024-10-05
 type: external
 externalUrl: https://medium.com/@dave1010/chatgpts-canvas-beta-feature-internal-details-a7c1e2477149
+externalSource: medium
 guid: a7c1e2477149
 tags:
   - artificial-intelligence

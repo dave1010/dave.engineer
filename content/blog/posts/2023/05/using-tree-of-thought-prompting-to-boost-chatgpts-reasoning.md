@@ -3,6 +3,7 @@ title: "Using Tree-of-Thought Prompting to boost ChatGPT’s reasoning"
 date: 2023-05-22
 type: external
 externalUrl: https://medium.com/@dave1010/using-tree-of-thought-prompting-to-boost-chatgpts-reasoning-318914eb0e76
+externalSource: medium
 guid: 318914eb0e76
 tags:
   - artificial-intelligence

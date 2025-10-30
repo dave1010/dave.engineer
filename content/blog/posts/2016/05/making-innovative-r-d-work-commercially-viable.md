@@ -3,6 +3,7 @@ title: "Making innovative R&D work commercially viable"
 date: 2016-05-05
 type: external
 externalUrl: https://medium.com/@dave1010/making-innovative-r-d-work-commercially-viable-3f3499b26c5f
+externalSource: medium
 guid: 3f3499b26c5f
 tags:
   - product-management

@@ -3,6 +3,7 @@ title: "What’s it like working for an agency-turned-product company?"
 date: 2018-02-27
 type: external
 externalUrl: https://medium.com/@dave1010/whats-it-like-working-for-an-agency-turned-product-company-419864020221
+externalSource: medium
 guid: 419864020221
 tags:
   - company-culture

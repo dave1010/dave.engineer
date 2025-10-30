@@ -3,6 +3,7 @@ title: "All the databases"
 date: 2018-07-18
 type: external
 externalUrl: https://medium.com/@dave1010/all-the-databases-3beb33adaa80
+externalSource: medium
 guid: 3beb33adaa80
 tags:
   - databases

@@ -3,6 +3,7 @@ title: "5 things we’ve learned (so far) by doubling our engineering team"
 date: 2018-09-07
 type: external
 externalUrl: https://medium.com/@dave1010/5-things-weve-learned-so-far-by-doubling-our-engineering-team-e40ca7d312f6
+externalSource: medium
 guid: e40ca7d312f6
 tags:
   - leadership
