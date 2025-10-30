@@ -16,4 +16,4 @@ run commands, manage Docker containers, send desktop notifications and manage se
 
 ChatGPT plugins have been discontinued and the world has now moved on to MCP.
 
-I wrote more about Pandora in the blog post [Making Pandora, a super-charged coding plugin for ChatGPT](/blog/posts/2023/08/making-pandora-a-super-charged-coding-plugin-for-chatgpt/).
+I wrote more about Pandora in the blog post [Making Pandora, a super-charged coding plugin for ChatGPT](/blog/2023/08/making-pandora-a-super-charged-coding-plugin-for-chatgpt/).
