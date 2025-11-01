@@ -1,7 +1,7 @@
 # Coding agent notes
 
 - Eleventy sources live in `content/`; layouts resolve to `src/layouts` and components/macros share that namespace.
-- Markdown posts belong under `content/blog/`; listing pages pull from Eleventy's collection API (see `content/blog/*.md`). When linking to published posts, use the clean `/blog/YYYY/MM/slug/` URL structure (no `/posts` segment).
+- Markdown posts belong under `content/blog/`, eg `content/blog/posts/YYYY/MM/slug.md`; listing pages pull from Eleventy's collection API (see `content/blog/*.md`). When linking to published posts, use the clean `/blog/YYYY/MM/slug/` URL structure (no `/posts` segment).
 - Tailwind styles are composed in `src/styles/tailwind.css`; build artifacts expect PostCSS via the existing npm scripts.
 - Static assets in `public/` are passthrough-copied verbatim by `eleventy.config.js`—only keep files referenced by the site; prune stale icons instead of archiving them there.
 - Syntax highlighting uses the official `@11ty/eleventy-plugin-syntaxhighlight` and Prism styles in `src/styles/prism.css`.
