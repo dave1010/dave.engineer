@@ -8,3 +8,12 @@
 - Use the Biome toolchain for linting and formatting (`npm run lint`, `npm run format`, or `npm run check`) before committing JS/MD changes; the configuration lives in `biome.json`.
 - Utility JavaScript helpers belong under `src/` (for example `src/slugify.js`); avoid recreating a top-level `scripts/` directory.
 - Python ingestion tools now live in `src/python/`.
+
+<skills>
+
+## Skills
+
+You have new skills. If any skill might be relevant then you MUST read it.
+
+- [writing-skills](.skills/writing-skills/SKILL.md) - Use when creating or updating SKILL.md documentation - Explains how and why to create a skill.
+</skills>
