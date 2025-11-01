@@ -26,7 +26,17 @@ title: Work - Dave Hulbert
       <div class="grid gap-6 sm:grid-cols-2">
         {% for item in collections.workItems %}
           {% if item.data.featured %}
-          <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
+          <article class="flex h-full flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
+            {% if item.data.image %}
+            <div class="overflow-hidden rounded-xl border border-slate-800/80 bg-slate-900/60">
+              <img
+                src="{{ item.data.image }}"
+                alt="{{ item.data.imageAlt or item.data.title }}"
+                class="h-40 w-full object-cover"
+                loading="lazy"
+              >
+            </div>
+            {% endif %}
             <div class="space-y-3">
               <h3 class="text-xl font-semibold text-slate-100">
                 <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
@@ -35,7 +45,7 @@ title: Work - Dave Hulbert
               <p class="text-sm text-slate-300">{{ item.data.description }}</p>
               {% endif %}
             </div>
-            <div class="flex flex-wrap gap-3 text-sm">
+            <div class="mt-auto flex flex-wrap gap-3 text-sm">
               <a
                 class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
                 href="{{ item.url }}"
@@ -76,7 +86,17 @@ title: Work - Dave Hulbert
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {% for item in collections.workItems %}
           {% if not item.data.featured %}
-          <article class="flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-5 transition hover:border-slate-700 hover:bg-slate-900/60">
+          <article class="flex h-full flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-900/40 p-5 transition hover:border-slate-700 hover:bg-slate-900/60">
+            {% if item.data.image %}
+            <div class="overflow-hidden rounded-xl border border-slate-800/80 bg-slate-900/60">
+              <img
+                src="{{ item.data.image }}"
+                alt="{{ item.data.imageAlt or item.data.title }}"
+                class="h-36 w-full object-cover"
+                loading="lazy"
+              >
+            </div>
+            {% endif %}
             <div class="space-y-3">
               <h3 class="text-lg font-semibold text-slate-100">
                 <a class="transition hover:text-sky-300" href="{{ item.url }}">{{ item.data.title }}</a>
