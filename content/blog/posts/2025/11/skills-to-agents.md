@@ -8,7 +8,11 @@ tags:
   - coding-agents
 ---
 
+**tl;dr:** *[skills-to-agents](https://github.com/dave1010/skills-to-agents) automatically compiles SKILL.md into AGENTS.md. Run it as a GitHub action with a step: `uses: dave1010/skills-to-agents@v1`.*
+
 Coding agents benefit from custom instructions and tools. The standard way to do this now is with an [`AGENTS.md`](https://agents.md/) file and [MCP servers](https://modelcontextprotocol.io/docs/getting-started/intro). You can quickly add dozens of useful MCP servers. But filling an LLM's context with all this information, when it isn’t always relevant, just adds noise and leaves the agent with less space to work on the actual problem.
+
+## Where it all came from
 
 In 2023, I made a coding agent called [Pandora](https://dave.engineer/work/pandora/) that worked around this with a top-level [`the-guide.txt`](https://github.com/dave1010/pandora/blob/main/the-guide.txt), given to the LLM along with an [index of other guide files](https://github.com/dave1010/pandora/tree/main/guides). These guides could be dropped in or even symlinked from elsewhere. The [code for this](https://github.com/dave1010/pandora/blob/main/api/getGuide.php) was terrible: worse than what you’d get from vibe coding with an agent today. But it worked! The guide system improved the agent substantially, but since it was early GPT-4 era, it was still less capable than coding agents in 2025.
 
@@ -16,7 +20,11 @@ In October 2025, Anthropic introduced [Claude Skills](https://docs.claude.com/en
 
 Claude also has tooling for managing Skills, making it easy to publish and reuse them across projects and teams. A popular collection is [Superpowers](https://github.com/obra/superpowers/tree/main), which includes skills for things like TDD and git work trees.
 
+## What about other coding agents?
+
 As [Simon Willison](https://simonwillison.net/2025/Oct/16/claude-skills/) says, Claude Skills are awesome. I agree but theyre not so useful at the moment, as they only work with Claude. There are open requests for `SKILL.md` support in other agents, such as [Codex CLI](https://github.com/openai/codex/issues/5291) and [Gemini CLI](https://github.com/google-gemini/gemini-cli/issues/11506). **Wouldn’t it be great if Skills worked with any coding agent, without needing official support?**
+
+## `skills-to-agents`
 
 Having built Pandora, I knew it would be easy to compile Skills into a top-level `AGENTS.md` file. I did this manually as a proof of concept. Knowing it would work, I built **[Skills to Agents](https://github.com/dave1010/skills-to-agents)**, which automates keeping `AGENTS.md` in sync with your Skills.
 
@@ -55,6 +63,8 @@ jobs:
 ```
 
 You can see a working example in [`dave1010/tools`](https://github.com/dave1010/tools), with the generated [`AGENTS.md`](https://github.com/dave1010/tools/blob/main/AGENTS.md#skills) and the [list of skills](https://github.com/dave1010/tools/tree/main/.skills). Feel free to copy my meta [Skill writing skill](https://github.com/dave1010/tools/blob/main/.skills/writing-skills/SKILL.md) to get started.
+
+## Bigger picture
 
 Since releasing `skills-to-agents`, I’ve seen related work like [list-skills](https://www.robert-glaser.de/claude-skills-in-codex-cli/) (released two days ago), which does something similar but tells the agent to run a command to list Skills. The more dynamic approach great for managing lots of tools but I prefer having a static list ready from the start. My approach also works for agents without code-execution privileges.
 
