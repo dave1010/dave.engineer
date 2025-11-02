@@ -1,6 +1,7 @@
 ---
 layout: base.njk
 title: Dave Hulbert - Engineer
+templateEngineOverride: njk,md
 ---
 {% from "components/post-list.njk" import renderPostList %}
 <main class="px-4 pb-24 pt-4 sm:px-10">
