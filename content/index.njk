@@ -222,9 +222,9 @@ title: Dave Hulbert - Engineer
       </div>
     </section>
 
-    {% set recentPosts = collections.blogFeed | default([]) | slice(0, 5) %}
+    {% set recentPosts = collections.blogFeed | take(5) %}
     {% if (recentPosts | length) == 0 and collections.blog %}
-      {% set recentPosts = collections.blog | reverse | slice(0, 5) %}
+      {% set recentPosts = collections.blog | reverse | take(5) %}
     {% endif %}
     {% if recentPosts | length %}
     <section class="relative space-y-8">
