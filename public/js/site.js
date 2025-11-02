@@ -182,7 +182,7 @@ if (terminalForm) {
   if (terminalInput instanceof HTMLInputElement && terminalOutput instanceof HTMLElement) {
     const conversation = [
       { role: "user", content: "ls" },
-      { role: "assistant", content: "hello.txt" },
+      { role: "assistant", content: "hello.txt\nindex.md" },
     ];
     const MAX_HISTORY = 50;
 
