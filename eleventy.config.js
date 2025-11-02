@@ -127,6 +127,15 @@ export default function (eleventyConfig) {
     sortPostsByDate(collectionApi.getFilteredByTag("blog")).slice(0, 20),
   );
 
+  eleventyConfig.addFilter("take", (items, count = 1) => {
+    const limit = Number.isFinite(count) ? Math.max(0, count) : 0;
+    if (!Array.isArray(items) || limit === 0) {
+      return [];
+    }
+
+    return items.slice(0, limit);
+  });
+
   eleventyConfig.addFilter("slugify", slugify);
 
   return {
