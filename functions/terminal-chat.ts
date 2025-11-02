@@ -1,8 +1,9 @@
 // functions/terminal-chat.ts
 import type { PagesFunction } from "@cloudflare/workers-types";
-import { TERMINAL_SYSTEM_PROMPT } from "./terminal-system-prompt";
+import { buildTerminalSystemPrompt } from "./terminal-system-prompt";
+import type { TerminalPromptEnv } from "./terminal-system-prompt";
 
-type Env = {
+type Env = TerminalPromptEnv & {
   CEREBRAS_API_KEY?: string;
   /** Optional: override to point at CF AI Gateway or a mock */
   CEREBRAS_API_URL?: string;
@@ -96,7 +97,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const today = new Date().toISOString().slice(0, 10);
-  const systemPrompt = `The current date is ${today}. ${TERMINAL_SYSTEM_PROMPT}`;
+  const terminalPrompt = await buildTerminalSystemPrompt(env, request);
+  const systemPrompt = `The current date is ${today}. ${terminalPrompt}`;
 
   const outgoingMessages: ChatMessage[] = [
     { role: "system", content: systemPrompt },
