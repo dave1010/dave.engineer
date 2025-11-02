@@ -1,6 +1,7 @@
 ---
 layout: base.njk
 ---
+{% from "components/post-list.njk" import renderPostList %}
 {% set postsToRender = posts | default([]) %}
 {% if (postsToRender | length) == 0 and collections.blog %}
   {% set postsToRender = collections.blog | reverse %}
@@ -99,80 +100,11 @@ layout: base.njk
       <div class="prose prose-invert max-w-none">{{ content | safe }}</div>
     {% endif %}
 
-    <div class="flex flex-col divide-y divide-slate-800/80 border border-slate-800/60 bg-slate-900/40">
-      {% if postsToRender | length %}
-        {% for post in postsToRender %}
-        <article class="group flex flex-col gap-3 px-6 py-6 transition hover:bg-slate-900/70 sm:px-8">
-          <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
-            <div class="flex flex-wrap items-center gap-3">
-              {% set typeClass = "border-sky-400/40 bg-sky-500/10 text-sky-200" %}
-              {% if post.data.type == "til" %}
-                {% set typeClass = "border-lime-400/40 bg-lime-400/10 text-lime-100" %}
-              {% elseif post.data.type == "external" %}
-                {% set typeClass = "border-amber-400/40 bg-amber-400/10 text-amber-100" %}
-              {% endif %}
-              {% set typeLabel = post.data.typeLabel %}
-              {% if not typeLabel %}
-                {% if post.data.type == "til" %}
-                  {% set typeLabel = "Today I Learned" %}
-                {% elseif post.data.type == "external" %}
-                  {% set typeLabel = "Elsewhere" %}
-                {% else %}
-                  {% set typeLabel = "Blog Post" %}
-                {% endif %}
-              {% endif %}
-              <span class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide {{ typeClass }}">
-                {{ typeLabel }}
-              </span>
-              <time datetime="{{ post.data.isoDate }}">{{ post.data.displayDate }}</time>
-            </div>
-            {% if post.data.topicTagLinks and post.data.topicTagLinks | length %}
-            <ul class="flex flex-wrap gap-2">
-              {% for tag in post.data.topicTagLinks %}
-              <li>
-                <a
-                  class="{{ tagLinkClasses }}"
-                  href="{{ tag.url }}"
-                >
-                  {{ tag.name | lower }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-          <h2 class="text-2xl font-semibold tracking-tight text-slate-100">
-            <a class="block transition hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
-          </h2>
-          {% set summary = post.data.excerpt %}
-          {% if not summary and post.templateContent %}
-            {% set summary = post.templateContent | striptags | truncate(220, true, "…") %}
-          {% endif %}
-          {% if summary %}
-          <p class="text-base text-slate-300">{{ summary }}</p>
-          {% endif %}
-          {% set sourceInfo = post.data.externalSourceInfo %}
-          {% set ctaUrl = post.url %}
-          {% set ctaLabel = "Read more" %}
-          {% set ctaAttributes = "" %}
-          {% if post.data.type == "external" and post.data.externalUrl %}
-            {% set ctaUrl = post.data.externalUrl %}
-            {% set ctaLabel = "Read externally" %}
-            {% if sourceInfo and sourceInfo.ctaLabel %}
-              {% set ctaLabel = sourceInfo.ctaLabel %}
-            {% endif %}
-            {% set ctaAttributes = " rel=\"noopener noreferrer\" target=\"_blank\"" %}
-          {% endif %}
-          <a class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" href="{{ ctaUrl }}"{{ ctaAttributes | safe }}>
-            {{ ctaLabel }}
-            <span aria-hidden="true">→</span>
-          </a>
-        </article>
-        {% endfor %}
-      {% else %}
-        <p class="px-6 py-10 text-center text-sm text-slate-400 sm:px-8">No posts found.</p>
-      {% endif %}
-    </div>
+    {{ renderPostList(postsToRender, {
+      tagLinkClasses: tagLinkClasses,
+      showEmptyMessage: true,
+      emptyMessage: "No posts found."
+    }) | safe }}
 
     {% if listingPagination and listingPagination.totalPages > 1 %}
     <nav aria-label="Pagination" class="flex flex-col items-center gap-3 pt-6">
