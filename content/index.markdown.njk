@@ -20,6 +20,15 @@ eleventyExcludeFromCollections: true
 {%- endif %}
 {%- endfor %}
 
+{% if home.hero.ctas and home.hero.ctas | length -%}
+{% for cta in home.hero.ctas -%}
+[{{ cta.label }}]({{ cta.href }}){% if cta.trailingIcon %} {{ cta.trailingIcon }}{% endif %}
+{%- if not loop.last %}
+
+{%- endif %}
+{%- endfor %}
+{%- endif %}
+
 ## {{ home.markdown.readMoreHeading }}
 
 {% for link in home.markdown.readMoreLinks or [] -%}
@@ -34,7 +43,16 @@ eleventyExcludeFromCollections: true
 {% endfor -%}
 {% if featuredItems | length -%}
 
+{% if home.featuredWork.sectionLabel -%}
+**{{ home.featuredWork.sectionLabel }}**
+
+{%- endif %}
 ## {{ home.featuredWork.sectionTitle }}
+
+{% if home.featuredWork.viewAllLabel and home.featuredWork.viewAllHref -%}
+[{{ home.featuredWork.viewAllLabel }}]({{ home.featuredWork.viewAllHref }})
+
+{%- endif %}
 
 {% for item in featuredItems -%}
 ### [{{ item.data.title | trim }}]({{ item.url }})
@@ -62,6 +80,10 @@ Links: {{ linkParts | join(', ') }}
 
 ## {{ home.social.sectionTitle }}
 
+{% if home.social.sectionLabel -%}
+**{{ home.social.sectionLabel }}**
+
+{%- endif %}
 {% for link in social or [] -%}
 - [{{ link.label }}]({{ link.href }})
 {%- endfor %}
@@ -72,8 +94,16 @@ Links: {{ linkParts | join(', ') }}
 {%- endif %}
 {%- if recentPosts | length -%}
 
+{% if home.recentPosts.sectionLabel -%}
+**{{ home.recentPosts.sectionLabel }}**
+
+{%- endif %}
 ## {{ home.recentPosts.sectionTitle }}
 
+{% if home.recentPosts.viewAllLabel and home.recentPosts.viewAllHref -%}
+[{{ home.recentPosts.viewAllLabel }}]({{ home.recentPosts.viewAllHref }})
+
+{%- endif %}
 {% for post in recentPosts -%}
 - [{{ post.data.title | trim }}]({{ post.url }}){% if post.data.description %}: {{ post.data.description | trim }}{% endif %}
 {%- endfor %}
