@@ -1,0 +1,48 @@
+{% macro renderFeaturedWorkSection(items, config) %}
+  {% set featuredItems = [] %}
+  {% for item in items %}
+    {% if item.data.featured %}
+      {% set featuredItems = featuredItems.concat([item]) %}
+    {% endif %}
+  {% endfor %}
+  {% if featuredItems | length %}
+  <section class="space-y-10">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div class="space-y-2">
+        {% if config.sectionLabel %}
+        <p class="text-xs uppercase tracking-[0.45em] text-slate-500">{{ config.sectionLabel }}</p>
+        {% endif %}
+        {% if config.sectionTitle %}
+        <h2 class="text-3xl font-semibold text-slate-100">{{ config.sectionTitle }}</h2>
+        {% endif %}
+      </div>
+      {% if config.viewAllHref and config.viewAllLabel %}
+      <a
+        class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-lime-300 hover:text-lime-200"
+        href="{{ config.viewAllHref }}"
+      >
+        {{ config.viewAllLabel }}
+        <span aria-hidden="true">→</span>
+      </a>
+      {% endif %}
+    </div>
+    <div class="grid gap-6 md:grid-cols-2">
+      {% for item in featuredItems %}
+      {% set roleValue = item.data.role or config.defaultRole %}
+      <work-card
+        variant="featured"
+        href="{{ item.url }}"
+        title="{{ item.data.title | escape }}"
+        primary-label="{{ config.primaryCtaLabel | default('Case file') }}"
+        website-label="{{ config.websiteLabel | default('Live site') }}"
+        github-label="{{ config.githubLabel | default('Source') }}"
+        {% if roleValue %}role="{{ roleValue | escape }}"{% endif %}
+        {% if item.data.description %}description="{{ item.data.description | trim | escape }}"{% endif %}
+        {% if item.data.websiteUrl %}website-url="{{ item.data.websiteUrl }}"{% endif %}
+        {% if item.data.githubUrl %}github-url="{{ item.data.githubUrl }}"{% endif %}
+      ></work-card>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+{% endmacro %}

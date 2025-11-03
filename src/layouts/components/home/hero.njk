@@ -1,0 +1,117 @@
+{% macro renderHomeHero(hero) %}
+  <section class="relative overflow-hidden rounded-[2.75rem] border border-slate-800/60 bg-slate-950/70 p-4 pt-10 shadow-glow sm:p-16 sm:pt-14" data-parallax-root>
+    <div class="pointer-events-none absolute inset-0 opacity-50 parallax" data-parallax>
+      <svg class="absolute -top-32 left-1/2 h-[420px] -translate-x-1/2" viewBox="0 0 600 400" fill="none" data-parallax-depth="0.08">
+        <g stroke="rgba(125,90,240,0.4)" stroke-width="1">
+          <path d="M0 120 L580 0" />
+          <path d="M0 180 L580 60" />
+          <path d="M0 240 L580 120" />
+          <path d="M0 300 L580 180" />
+        </g>
+        <g stroke="rgba(25,255,182,0.25)" stroke-width="1" stroke-dasharray="12 16">
+          <path d="M40 400 L600 40" />
+          <path d="M120 420 L600 120" />
+        </g>
+      </svg>
+      <div class="absolute inset-0 -skew-y-3 bg-gradient-to-br from-slate-900/10 via-fuchsia-500/10 to-sky-500/10 mix-blend-screen" data-parallax-depth="0.05"></div>
+      <div class="absolute -bottom-24 left-12 h-44 w-44 rounded-full bg-sky-400/20 blur-3xl" data-parallax-depth="0.12"></div>
+      <div class="absolute -top-16 right-6 h-56 w-56 -skew-y-12 rounded-3xl border border-sky-300/40" data-parallax-depth="0.18"></div>
+    </div>
+    <div class="relative z-10 grid gap-16 lg:grid-cols-[minmax(0,1.15fr)_380px]">
+      <div class="space-y-10">
+        <div class="space-y-6">
+          {% if hero.badgeLabel %}
+          <p class="inline-flex items-center gap-3 rounded-full border border-lime-400/40 bg-slate-900/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-lime-300">
+            <span class="inline-flex h-2 w-2 rounded-full bg-lime-300 shadow-glow"></span>
+            {{ hero.badgeLabel }}
+          </p>
+          {% endif %}
+          <div class="flex flex-col gap-6 sm:flex-row sm:items-center">
+            <img
+              src="/img/dave.jpg"
+              alt="Dave Hulbert"
+              width="132"
+              height="132"
+              class="h-28 w-28 rounded-full border border-lime-300/40 bg-slate-900/60 object-cover shadow-glow"
+              loading="lazy"
+            >
+            <div class="space-y-4">
+              {% if hero.name %}
+              <h1 class="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-100 sm:text-5xl lg:text-6xl">
+                {{ hero.name }}
+              </h1>
+              {% endif %}
+              {% if hero.subtitle %}
+              <p class="text-lg font-medium uppercase tracking-[0.3em] text-slate-300">{{ hero.subtitle }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% if hero.paragraphs and hero.paragraphs | length %}
+        <div class="space-y-6 text-lg text-slate-300">
+          {% for paragraph in hero.paragraphs %}
+          <p>{{ paragraph }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if hero.ctas and hero.ctas | length %}
+        <div class="flex flex-wrap items-center gap-5">
+          {% for cta in hero.ctas %}
+          <a
+            class="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em] text-sky-300 transition hover:text-lime-200"
+            href="{{ cta.href }}"
+          >
+            {{ cta.label }}
+            {% if cta.trailingIcon %}
+            <span aria-hidden="true" class="text-base">{{ cta.trailingIcon }}</span>
+            {% endif %}
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="relative flex flex-col items-center justify-between gap-6">
+        <div class="perspective-1200 relative h-[340px] w-full max-w-[420px]">
+          <div class="absolute inset-0 rounded-[2rem] border border-slate-800/60 bg-hero-radial"></div>
+          <canvas id="hero-orb" class="relative h-full w-full rounded-[2rem]"></canvas>
+          <div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-fuchsia-500/20"></div>
+        </div>
+        <div class="terminal-panel w-full max-w-[420px]" data-terminal-root>
+          <div class="terminal-header">
+            <span class="terminal-dot terminal-dot--close" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--minimize" aria-hidden="true"></span>
+            <span class="terminal-dot terminal-dot--zoom" aria-hidden="true"></span>
+            <p class="ml-3 text-xs uppercase tracking-[0.4em] text-lime-200/80">Interactive Terminal</p>
+          </div>
+          <div class="terminal-body" data-terminal>
+            <div class="terminal-output" data-terminal-output>
+              <div class="terminal-line">
+                <span class="terminal-line__prompt">$</span>
+                <span class="terminal-line__command">ls</span>
+              </div>
+              <pre class="terminal-block">{{ "hello.txt\nindex.md" }}</pre>
+            </div>
+            <form class="terminal-form" data-terminal-form autocomplete="off">
+              <label class="sr-only" for="terminal-input">Enter a command</label>
+              <div class="terminal-input-row">
+                <span class="terminal-line__prompt">$</span>
+                <input
+                  id="terminal-input"
+                  class="terminal-input"
+                  type="text"
+                  data-terminal-input
+                  name="command"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  aria-label="Terminal input"
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endmacro %}

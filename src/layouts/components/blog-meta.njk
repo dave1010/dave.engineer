@@ -1,0 +1,93 @@
+{% set DEFAULT_TAG_CONTAINER_CLASSES = "flex flex-wrap gap-2" %}
+{% set DEFAULT_TAG_CLASSES = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
+{% set DEFAULT_TYPE_BASE_CLASSES = "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide" %}
+
+{% macro tagContainerClasses(extra = "") %}
+  {{ (DEFAULT_TAG_CONTAINER_CLASSES ~ (" " ~ extra if extra)) | trim }}
+{% endmacro %}
+
+{% macro tagClasses(extra = "") %}
+  {{ (DEFAULT_TAG_CLASSES ~ (" " ~ extra if extra)) | trim }}
+{% endmacro %}
+
+{% macro renderTagPill(tag, options = {}) %}
+  {% set classes = options.classes or DEFAULT_TAG_CLASSES %}
+  <blog-tag-pill
+    label="{{ tag.label }}"
+    {% if tag.url %}href="{{ tag.url }}"{% endif %}
+    class="{{ classes }}"
+  ></blog-tag-pill>
+{% endmacro %}
+
+{% macro renderTagList(tagLinks = [], tagNames = [], options = {}) %}
+  {% set listClasses = options.listClasses or DEFAULT_TAG_CONTAINER_CLASSES %}
+  {% set tagClasses = options.tagClasses or DEFAULT_TAG_CLASSES %}
+  {% set tags = [] %}
+  {% if tagLinks and tagLinks | length %}
+    {% for tag in tagLinks %}
+      {% set tags = tags.concat([{ label: (tag.name | lower), url: tag.url }]) %}
+    {% endfor %}
+  {% elseif tagNames and tagNames | length %}
+    {% for tag in tagNames %}
+      {% set tags = tags.concat([{ label: (tag | lower) }]) %}
+    {% endfor %}
+  {% endif %}
+  {% if tags | length %}
+  <ul class="{{ listClasses }}">
+    {% for tag in tags %}
+    <li>{{ renderTagPill(tag, { classes: tagClasses }) | safe }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endmacro %}
+
+{% macro renderPostHeader(title, isoDate, displayDate, topicTagLinks = [], topicTags = [], options = {}) %}
+  {% set containerClasses = options.containerClasses or "space-y-4" %}
+  {% set headingClasses = options.headingClasses or "text-4xl font-semibold tracking-tight text-slate-100" %}
+  {% set breadcrumbHref = options.breadcrumbHref or "/blog/" %}
+  {% set breadcrumbLabel = options.breadcrumbLabel or "Blog" %}
+  {% set showBreadcrumb = options.showBreadcrumb | default(true) %}
+  {% set dateClasses = options.dateClasses or "text-base text-slate-400" %}
+  <header class="{{ containerClasses }}">
+    {% if showBreadcrumb %}
+    <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="{{ breadcrumbHref }}">{{ breadcrumbLabel }}</a>
+    {% endif %}
+    <h1 class="{{ headingClasses }}">{{ title }}</h1>
+    {% if displayDate %}
+    <p class="{{ dateClasses }}">
+      {% if isoDate %}
+      <time datetime="{{ isoDate }}">{{ displayDate }}</time>
+      {% else %}
+      {{ displayDate }}
+      {% endif %}
+    </p>
+    {% endif %}
+    {{ renderTagList(topicTagLinks, topicTags, options.tagOptions or {}) | safe }}
+  </header>
+{% endmacro %}
+
+{% macro renderPostTypeBadge(type, label = "", options = {}) %}
+  {% set baseClasses = options.baseClasses or DEFAULT_TYPE_BASE_CLASSES %}
+  {% set extraClasses = options.extraClasses or "" %}
+  <blog-type-badge
+    type="{{ type | default('post') }}"
+    {% if label %}label="{{ label }}"{% endif %}
+    base-class="{{ baseClasses }}"
+    extra-class="{{ extraClasses }}"
+  ></blog-type-badge>
+{% endmacro %}
+
+{% macro renderPostCta(url, label, options = {}) %}
+  {% set classes = options.classes or "inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" %}
+  {% set icon = options.icon or "→" %}
+  {% set rel = options.rel %}
+  {% set target = options.target %}
+  <blog-post-cta
+    href="{{ url }}"
+    label="{{ label }}"
+    icon="{{ icon }}"
+    class="{{ classes }}"
+    {% if rel %}rel="{{ rel }}"{% endif %}
+    {% if target %}target="{{ target }}"{% endif %}
+  ></blog-post-cta>
+{% endmacro %}

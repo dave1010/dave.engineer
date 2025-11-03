@@ -1,3 +1,4 @@
+{% from "components/blog-meta.njk" import renderPostTypeBadge, renderTagList, renderPostCta, tagClasses, tagContainerClasses %}
 {% macro renderPostList(posts = [], options = {}) %}
   {% set items = posts | default([]) %}
   {% set containerClasses = options.containerClasses or "flex flex-col divide-y divide-slate-800/80 border border-slate-800/60 bg-slate-900/40" %}
@@ -6,16 +7,12 @@
   {% set truncateLength = options.truncateLength or 220 %}
   {% set showEmptyMessage = options.showEmptyMessage | default(false) %}
   {% set emptyMessage = options.emptyMessage or "No posts found." %}
-  {% set tagLinkClasses = options.tagLinkClasses or "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
+  {% set tagLinkClasses = options.tagLinkClasses or tagClasses() %}
+  {% set tagListClasses = options.tagListClasses or tagContainerClasses() %}
+  {% set ctaClasses = options.ctaClasses or "mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" %}
   <div class="{{ containerClasses }}">
     {% if items | length %}
       {% for post in items %}
-        {% set typeClass = "border-sky-400/40 bg-sky-500/10 text-sky-200" %}
-        {% if post.data.type == "til" %}
-          {% set typeClass = "border-lime-400/40 bg-lime-400/10 text-lime-100" %}
-        {% elseif post.data.type == "external" %}
-          {% set typeClass = "border-amber-400/40 bg-amber-400/10 text-amber-100" %}
-        {% endif %}
         {% set typeLabel = post.data.typeLabel %}
         {% if not typeLabel %}
           {% if post.data.type == "til" %}
@@ -33,34 +30,27 @@
         {% set sourceInfo = post.data.externalSourceInfo %}
         {% set ctaUrl = post.url %}
         {% set ctaLabel = "Read more" %}
-        {% set ctaAttributes = "" %}
+        {% set ctaTarget = "" %}
+        {% set ctaRel = "" %}
         {% if post.data.type == "external" and post.data.externalUrl %}
           {% set ctaUrl = post.data.externalUrl %}
           {% set ctaLabel = "Read externally" %}
           {% if sourceInfo and sourceInfo.ctaLabel %}
             {% set ctaLabel = sourceInfo.ctaLabel %}
           {% endif %}
-          {% set ctaAttributes = " rel=\"noopener noreferrer\" target=\"_blank\"" %}
+          {% set ctaTarget = "_blank" %}
+          {% set ctaRel = "noopener noreferrer" %}
         {% endif %}
         <article class="{{ articleClasses }}">
           <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
             <div class="flex flex-wrap items-center gap-3">
-              <span class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide {{ typeClass }}">
-                {{ typeLabel }}
-              </span>
+              {{ renderPostTypeBadge(post.data.type, typeLabel) | safe }}
               <time datetime="{{ post.data.isoDate }}">{{ post.data.displayDate }}</time>
             </div>
-            {% if post.data.topicTagLinks and post.data.topicTagLinks | length %}
-            <ul class="flex flex-wrap gap-2">
-              {% for tag in post.data.topicTagLinks %}
-              <li>
-                <a class="{{ tagLinkClasses }}" href="{{ tag.url }}">
-                  {{ tag.name | lower }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-            {% endif %}
+            {{ renderTagList(post.data.topicTagLinks, post.data.topicTags, {
+              listClasses: tagListClasses,
+              tagClasses: tagLinkClasses
+            }) | safe }}
           </div>
           <{{ headingLevel }} class="text-2xl font-semibold tracking-tight text-slate-100">
             <a class="block transition hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
@@ -68,10 +58,11 @@
           {% if summary %}
           <p class="text-base text-slate-300">{{ summary }}</p>
           {% endif %}
-          <a class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" href="{{ ctaUrl }}"{{ ctaAttributes | safe }}>
-            {{ ctaLabel }}
-            <span aria-hidden="true">→</span>
-          </a>
+          {{ renderPostCta(ctaUrl, ctaLabel, {
+            classes: ctaClasses,
+            target: ctaTarget,
+            rel: ctaRel
+          }) | safe }}
         </article>
       {% endfor %}
     {% elseif showEmptyMessage %}

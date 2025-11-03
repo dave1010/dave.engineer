@@ -1,5 +1,6 @@
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import pluginWebc from "@11ty/eleventy-plugin-webc";
 import slugify from "./src/slugify.js";
 
 const DEFAULT_TYPE = "post";
@@ -53,6 +54,10 @@ const sortPostsByDate = (items) =>
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(pluginWebc, {
+    components: "src/components/**/*.webc",
+    useTransform: true,
+  });
   eleventyConfig.addPassthroughCopy({ public: "." });
 
   eleventyConfig.addCollection("blogPostsByType", (collectionApi) => {
