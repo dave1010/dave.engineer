@@ -1,6 +1,8 @@
 ---
-layout: base.njk
-title: About - Dave Hulbert
+layout: page.njk
+sectionLabel: "Profile"
+title: "Dave Hulbert"
+description: "Dave Hulbert, Principal Engineer."
 ---
 
 I’m a Principal Engineer at [Passenger](https://passenger.tech/) in Bournemouth, UK, where I help design and scale technology used by millions of people every day.
