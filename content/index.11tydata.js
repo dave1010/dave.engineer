@@ -11,6 +11,10 @@ export default {
       ],
       ctas: [
         {
+          label: "About",
+          href: "/about/",
+        },
+        {
           label: "Read Blog",
           href: "/blog/",
           trailingIcon: "→",
@@ -20,6 +24,7 @@ export default {
     markdown: {
       readMoreHeading: "Read more",
       readMoreLinks: [
+        { label: "About", href: "/about/" },
         { label: "Blog", href: "/blog/" },
         { label: "Work", href: "/work/" },
       ],
