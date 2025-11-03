@@ -2,6 +2,7 @@
 layout: base.njk
 title: Work - Dave Hulbert
 ---
+{% from "components/work-card.njk" import renderWorkCard %}
 {% set featuredItems = [] %}
 {% set otherItems = [] %}
 {% for item in collections.workItems %}
@@ -35,14 +36,16 @@ title: Work - Dave Hulbert
       <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured</h2>
       <div class="grid gap-6 sm:grid-cols-2">
         {% for item in featuredItems %}
-        <work-card
-          variant="showcase"
-          href="{{ item.url }}"
-          title="{{ item.data.title | escape }}"
-          {% if item.data.description %}description="{{ item.data.description | trim | escape }}"{% endif %}
-          {% if item.data.websiteUrl %}website-url="{{ item.data.websiteUrl }}"{% endif %}
-          {% if item.data.githubUrl %}github-url="{{ item.data.githubUrl }}"{% endif %}
-        ></work-card>
+          {{ renderWorkCard(item, {
+            variant: "standard",
+            primaryLabel: "Learn more",
+            websiteLabel: "Visit site",
+            githubLabel: "View source",
+            articleClasses: "flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40",
+            titleClasses: "text-xl font-semibold text-slate-100",
+            titleLinkClasses: "transition hover:text-sky-300",
+            ctaContainerClasses: "flex flex-wrap gap-3 text-sm"
+          }) | safe }}
         {% endfor %}
       </div>
     </section>
@@ -53,14 +56,12 @@ title: Work - Dave Hulbert
       <h2 class="text-2xl font-semibold tracking-tight text-slate-100">More work</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {% for item in otherItems %}
-        <work-card
-          variant="standard"
-          href="{{ item.url }}"
-          title="{{ item.data.title | escape }}"
-          {% if item.data.description %}description="{{ item.data.description | trim | escape }}"{% endif %}
-          {% if item.data.websiteUrl %}website-url="{{ item.data.websiteUrl }}"{% endif %}
-          {% if item.data.githubUrl %}github-url="{{ item.data.githubUrl }}"{% endif %}
-        ></work-card>
+          {{ renderWorkCard(item, {
+            variant: "standard",
+            primaryLabel: "Learn more",
+            websiteLabel: "Visit site",
+            githubLabel: "View source"
+          }) | safe }}
         {% endfor %}
       </div>
     </section>

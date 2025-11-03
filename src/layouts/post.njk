@@ -4,7 +4,16 @@ layout: base.njk
 <main class="px-3 py-8 sm:px-5 sm:py-10">
 {% from "components/blog-meta.njk" import renderPostHeader %}
   <article class="blog-post mx-auto flex max-w-3xl flex-col gap-10 rounded-3xl border border-slate-800/60 bg-slate-900/40 px-3 py-8 sm:px-5 sm:py-6">
-    {{ renderPostHeader(title, isoDate, displayDate, topicTagLinks, topicTags) | safe }}
+    {{
+      renderPostHeader(title, isoDate, displayDate, topicTagLinks, topicTags, {
+        type: type,
+        typeLabel: typeLabel,
+        typeOptions: {
+          variantOverride: "border-slate-700/70 bg-slate-900/70 text-slate-200"
+        }
+      })
+      | safe
+    }}
     <div class="prose prose-invert prose-lg max-w-none">
       {{ content | safe }}
     </div>
