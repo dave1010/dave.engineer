@@ -2,6 +2,7 @@
 layout: base.njk
 ---
 {% from "components/post-list.njk" import renderPostList %}
+{% from "components/blog-meta.njk" import tagClasses, tagContainerClasses %}
 {% set postsToRender = posts | default([]) %}
 {% if (postsToRender | length) == 0 and collections.blog %}
   {% set postsToRender = collections.blog | reverse %}
@@ -12,7 +13,7 @@ layout: base.njk
   {% set totalCount = totalCount + (group.count | default(group.items | length)) %}
 {% endfor %}
 {% set tagList = collections.blogTags | default([]) %}
-{% set tagLinkClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
+{% set tagLinkClasses = tagClasses() %}
 {% set tagCountClasses = "rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400" %}
 {% set paginationButtonClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
 {% set paginationActiveClasses = "border-sky-500/80 text-sky-200" %}
@@ -80,7 +81,7 @@ layout: base.njk
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by tag</p>
         <a class="text-xs font-semibold tracking-wide text-sky-300 transition hover:text-sky-200" href="/blog/tag/">View all tags →</a>
       </div>
-      <div class="flex flex-wrap gap-2">
+      <div class="{{ tagContainerClasses() }}">
         {% for tag in tagPreview %}
         {% set isCurrentTag = currentTagSlug and currentTagSlug == tag.slug %}
         <a

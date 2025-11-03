@@ -1,0 +1,33 @@
+{% from "components/post-list.njk" import renderPostList %}
+
+{% macro renderRecentPostsSection(posts, config) %}
+  {% if posts and posts | length %}
+  <section class="relative space-y-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div class="space-y-2">
+        {% if config.sectionLabel %}
+        <p class="text-xs uppercase tracking-[0.45em] text-slate-500">{{ config.sectionLabel }}</p>
+        {% endif %}
+        {% if config.sectionTitle %}
+        <h2 class="text-3xl font-semibold text-slate-100">{{ config.sectionTitle }}</h2>
+        {% endif %}
+      </div>
+      {% if config.viewAllHref and config.viewAllLabel %}
+      <a
+        class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-lime-300 hover:text-lime-200"
+        href="{{ config.viewAllHref }}"
+      >
+        {{ config.viewAllLabel }}
+        <span aria-hidden="true">→</span>
+      </a>
+      {% endif %}
+    </div>
+    {{ renderPostList(posts, {
+      containerClasses: "flex flex-col divide-y divide-slate-800/80 overflow-hidden rounded-[2rem] border border-slate-800/60 bg-slate-950/40",
+      articleClasses: "group flex flex-col gap-3 px-6 py-6 transition hover:bg-slate-900/70 sm:px-8",
+      headingLevel: "h3",
+      truncateLength: 180
+    }) | safe }}
+  </section>
+  {% endif %}
+{% endmacro %}

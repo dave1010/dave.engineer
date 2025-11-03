@@ -44,10 +44,13 @@
       <a href="/" class="text-sm font-semibold uppercase tracking-[0.35em] text-slate-200 transition hover:text-lime-300">
         dave.engineer
       </a>
+      {% if navigation and navigation | length %}
       <nav class="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-200/90">
-        <a class="hover:text-lime-300" href="/blog/">Blog</a>
-        <a class="hover:text-lime-300" href="/work/">Work</a>
+        {% for link in navigation %}
+        <a class="hover:text-lime-300" href="{{ link.href }}">{{ link.label }}</a>
+        {% endfor %}
       </nav>
+      {% endif %}
     </header>
     <main class="flex-1">
       {{ content | safe }}
@@ -56,8 +59,11 @@
       <div class="mx-auto flex max-w-6xl flex-col gap-5 px-6 py-10 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-10">
         <nav class="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-300">
           <a class="hover:text-lime-300" href="/">dave.engineer</a>
-          <a class="hover:text-lime-300" href="/blog/">Blog</a>
-          <a class="hover:text-lime-300" href="/work/">Work</a>
+          {% if navigation and navigation | length %}
+            {% for link in navigation %}
+            <a class="hover:text-lime-300" href="{{ link.href }}">{{ link.label }}</a>
+            {% endfor %}
+          {% endif %}
         </nav>
         <p class="text-xs text-slate-500">© Dave Hulbert</p>
       </div>

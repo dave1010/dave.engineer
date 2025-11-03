@@ -1,0 +1,37 @@
+<template webc:setup>
+  const DEFAULT_BASE_CLASS =
+    "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide";
+
+  const typeAttr = (this.getAttribute("type") || "post").toLowerCase();
+  const labelAttr = this.getAttribute("label");
+  const baseClassAttr = this.getAttribute("base-class");
+  const extraClassAttr = this.getAttribute("extra-class");
+
+  const variants = new Map(
+    Object.entries({
+      post: "border-sky-400/40 bg-sky-500/10 text-sky-200",
+      til: "border-lime-400/40 bg-lime-400/10 text-lime-100",
+      external: "border-amber-400/40 bg-amber-400/10 text-amber-100",
+    }),
+  );
+
+  const variantClass = variants.get(typeAttr) || variants.get("post");
+
+  const fallbackLabels = new Map(
+    Object.entries({
+      post: "Blog Post",
+      til: "Today I Learned",
+      external: "Elsewhere",
+    }),
+  );
+
+  const label = labelAttr?.trim().length
+    ? labelAttr
+    : fallbackLabels.get(typeAttr) || fallbackLabels.get("post");
+  const baseClass = baseClassAttr ? baseClassAttr.trim() : DEFAULT_BASE_CLASS;
+  const extraClass = extraClassAttr ? extraClassAttr.trim() : "";
+  const className = [baseClass, extraClass, variantClass]
+    .filter((part) => part && part.length)
+    .join(" ");
+</template>
+<span @class="className" @text="label"></span>

@@ -19,39 +19,11 @@ layout: base.njk
   {% endset %}
 {% endif %}
 <main class="px-3 py-8 sm:px-5 sm:py-10">
-  {% set tagLinkClasses = [
-    "inline-flex items-center gap-2",
-    "rounded-full border border-slate-700/60 bg-slate-900/60",
-    "px-3 py-1 text-xs font-semibold tracking-wide text-slate-300",
-    "transition hover:border-slate-600 hover:text-slate-100"
-  ] | join(" ") %}
+{% from "components/blog-meta.njk" import renderPostHeader %}
   <article
     class="blog-post mx-auto flex max-w-3xl flex-col gap-10 rounded-3xl border border-slate-800/60 bg-slate-900/40 px-3 py-8 sm:px-5 sm:py-6"
   >
-    <header class="space-y-4">
-      <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="/blog/">Blog</a>
-      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ title }}</h1>
-      <p class="text-base text-slate-400">
-        <time datetime="{{ isoDate }}">{{ displayDate }}</time>
-      </p>
-      {% if topicTagLinks and topicTagLinks | length %}
-      <ul class="flex flex-wrap gap-2">
-        {% for tag in topicTagLinks %}
-        <li>
-          <a class="{{ tagLinkClasses }}" href="{{ tag.url }}">{{ tag.name | lower }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-      {% elseif topicTags and topicTags | length %}
-      <ul class="flex flex-wrap gap-2">
-        {% for tag in topicTags %}
-        <li>
-          <span class="{{ tagLinkClasses }}">{{ tag | lower }}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </header>
+    {{ renderPostHeader(title, isoDate, displayDate, topicTagLinks, topicTags) | safe }}
     <div class="space-y-6 rounded border border-amber-400/30 bg-amber-400/10 p-6 text-amber-100">
       <p class="text-lg font-medium">{{ externalSourceMessage }}</p>
       <p class="text-base text-amber-50/80">
