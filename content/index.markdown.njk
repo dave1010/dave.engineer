@@ -6,105 +6,105 @@ eleventyExcludeFromCollections: true
 {# Keep this file in sync with content/index.njk #}
 # {{ home.hero.name }}
 
-{% if home.hero.badgeLabel -%}
+{% if home.hero.badgeLabel %}
 **{{ home.hero.badgeLabel }}**
-{%- endif %}
-{% if home.hero.subtitle -%}
+{% endif %}
+{% if home.hero.subtitle %}
 {{ home.hero.subtitle }}
-{%- endif %}
+{% endif %}
 
-{% for paragraph in home.hero.paragraphs or [] -%}
-{{ paragraph }}
-{%- if not loop.last %}
+{% for paragraph in home.hero.paragraphs or [] %}
+{{ paragraph | safe }}
+{% if not loop.last %}
 
-{%- endif %}
-{%- endfor %}
+{% endif %}
+{% endfor %}
 
-{% if home.hero.ctas and home.hero.ctas | length -%}
+{% if home.hero.ctas and home.hero.ctas | length %}
 {% for cta in home.hero.ctas -%}
 [{{ cta.label }}]({{ cta.href }}){% if cta.trailingIcon %} {{ cta.trailingIcon }}{% endif %}
 {%- if not loop.last %}
 
 {%- endif %}
 {%- endfor %}
-{%- endif %}
+{% endif %}
 
 ## {{ home.markdown.readMoreHeading }}
 
 {% for link in home.markdown.readMoreLinks or [] -%}
 - [{{ link.label }}]({{ link.href }})
-{%- endfor %}
+{% endfor %}
 
 {% set featuredItems = [] -%}
 {% for item in collections.workItems -%}
-  {% if item.data.featured -%}
-    {% set featuredItems = featuredItems.concat([item]) -%}
-  {% endif -%}
+{% if item.data.featured -%}
+{% set featuredItems = featuredItems.concat([item]) -%}
+{% endif -%}
 {% endfor -%}
-{% if featuredItems | length -%}
+{% if featuredItems | length %}
 
-{% if home.featuredWork.sectionLabel -%}
+{% if home.featuredWork.sectionLabel %}
 **{{ home.featuredWork.sectionLabel }}**
 
-{%- endif %}
+{% endif %}
 ## {{ home.featuredWork.sectionTitle }}
 
-{% if home.featuredWork.viewAllLabel and home.featuredWork.viewAllHref -%}
+{% if home.featuredWork.viewAllLabel and home.featuredWork.viewAllHref %}
 [{{ home.featuredWork.viewAllLabel }}]({{ home.featuredWork.viewAllHref }})
 
-{%- endif %}
+{% endif %}
 
 {% for item in featuredItems -%}
 ### [{{ item.data.title | trim }}]({{ item.url }})
-{%- if item.data.role %}
+{% if item.data.role %}
 _Role:_ {{ item.data.role }}
-{%- endif %}
-{%- if item.data.description %}
+{% endif %}
+{% if item.data.description %}
 {{ item.data.description | trim }}
-{%- endif %}
+{% endif %}
 {% set linkParts = [] -%}
-{%- if item.data.websiteUrl %}
-  {% set linkParts = linkParts.concat(['[' ~ (home.featuredWork.websiteLabel or 'Live site') ~ '](' ~ item.data.websiteUrl ~ ')']) -%}
-{%- endif %}
-{%- if item.data.githubUrl %}
-  {% set linkParts = linkParts.concat(['[' ~ (home.featuredWork.githubLabel or 'Source') ~ '](' ~ item.data.githubUrl ~ ')']) -%}
-{%- endif %}
-{%- if linkParts | length %}
+{% if item.data.websiteUrl -%}
+{% set linkParts = linkParts.concat(['[' ~ (home.featuredWork.websiteLabel or 'Live site') ~ '](' ~ item.data.websiteUrl ~ ')']) -%}
+{% endif -%}
+{% if item.data.githubUrl -%}
+{% set linkParts = linkParts.concat(['[' ~ (home.featuredWork.githubLabel or 'Source') ~ '](' ~ item.data.githubUrl ~ ')']) -%}
+{% endif -%}
+{% if linkParts | length %}
 Links: {{ linkParts | join(', ') }}
-{%- endif %}
-{%- if not loop.last %}
+{% endif %}
+{% if not loop.last %}
 
-{%- endif %}
-{%- endfor %}
-{%- endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
 
 ## {{ home.social.sectionTitle }}
 
-{% if home.social.sectionLabel -%}
+{% if home.social.sectionLabel %}
 **{{ home.social.sectionLabel }}**
 
-{%- endif %}
+{% endif %}
 {% for link in social or [] -%}
 - [{{ link.label }}]({{ link.href }})
-{%- endfor %}
+{% endfor %}
 
 {% set recentPosts = collections.blogFeed | take(5) -%}
-{%- if (recentPosts | length) == 0 and collections.blog -%}
-  {% set recentPosts = collections.blog | reverse | take(5) -%}
-{%- endif %}
-{%- if recentPosts | length -%}
+{% if (recentPosts | length) == 0 and collections.blog -%}
+{% set recentPosts = collections.blog | reverse | take(5) -%}
+{% endif -%}
+{% if recentPosts | length %}
 
-{% if home.recentPosts.sectionLabel -%}
+{% if home.recentPosts.sectionLabel %}
 **{{ home.recentPosts.sectionLabel }}**
 
-{%- endif %}
+{% endif %}
 ## {{ home.recentPosts.sectionTitle }}
 
-{% if home.recentPosts.viewAllLabel and home.recentPosts.viewAllHref -%}
+{% if home.recentPosts.viewAllLabel and home.recentPosts.viewAllHref %}
 [{{ home.recentPosts.viewAllLabel }}]({{ home.recentPosts.viewAllHref }})
 
-{%- endif %}
+{% endif %}
 {% for post in recentPosts -%}
 - [{{ post.data.title | trim }}]({{ post.url }}){% if post.data.description %}: {{ post.data.description | trim }}{% endif %}
-{%- endfor %}
-{%- endif %}
+{% endfor %}
+{% endif %}
