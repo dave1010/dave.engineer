@@ -1,0 +1,142 @@
+{% set WORK_CARD_VARIANTS = {
+  "featured": {
+    articleClasses: "glow-card flex h-full flex-col justify-between gap-6 border-slate-800/80",
+    metaClasses: "text-xs uppercase tracking-[0.4em] text-slate-500",
+    titleClasses: "text-2xl font-semibold text-slate-100",
+    titleLinkClasses: "transition hover:text-lime-200",
+    descriptionClasses: "text-sm text-slate-300",
+    ctaContainerClasses: "flex flex-wrap gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-slate-300",
+    primaryCtaClasses: "inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold hover:border-lime-300 hover:text-lime-200",
+    websiteCtaClasses: "inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold text-sky-300 hover:border-sky-400 hover:text-sky-200",
+    githubCtaClasses: "inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-3 py-1 font-semibold hover:border-lime-300 hover:text-lime-200"
+  },
+  "standard": {
+    articleClasses: "flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-5 transition hover:border-slate-700 hover:bg-slate-900/60",
+    metaClasses: "text-xs uppercase tracking-[0.3em] text-slate-500",
+    titleClasses: "text-lg font-semibold text-slate-100",
+    titleLinkClasses: "transition hover:text-sky-300",
+    descriptionClasses: "text-sm text-slate-300",
+    ctaContainerClasses: "mt-auto flex flex-wrap gap-3 text-xs sm:text-sm",
+    primaryCtaClasses: "inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300",
+    websiteCtaClasses: "inline-flex items-center gap-2 rounded-full border border-sky-500 px-3 py-1 font-semibold text-sky-300 transition hover:bg-sky-500/10",
+    githubCtaClasses: "inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
+  }
+} %}
+
+{% macro renderWorkCard(item, options = {}) %}
+  {% if not item %}
+    {% set _ = "" %}
+  {% else %}
+  {% set variantKey = (options.variant or "standard") | lower %}
+  {% set variant = WORK_CARD_VARIANTS[variantKey] or WORK_CARD_VARIANTS.standard %}
+  {% set articleClasses = options.articleClasses or variant.articleClasses %}
+  {% set metaClasses = options.metaClasses or variant.metaClasses %}
+  {% set titleClasses = options.titleClasses or variant.titleClasses %}
+  {% set titleLinkClasses = options.titleLinkClasses or variant.titleLinkClasses %}
+  {% set descriptionClasses = options.descriptionClasses or variant.descriptionClasses %}
+  {% set ctaContainerClasses = options.ctaContainerClasses or variant.ctaContainerClasses %}
+  {% set defaultPrimaryClasses = variant.primaryCtaClasses %}
+  {% set defaultWebsiteClasses = variant.websiteCtaClasses %}
+  {% set defaultGithubClasses = variant.githubCtaClasses %}
+  {% set title = item.data.title | default("") %}
+  {% set url = item.url %}
+  {% set description = item.data.description | default("") | trim %}
+  {% set role = item.data.role or options.defaultRole %}
+  {% set primaryLabel = item.data.primaryCtaLabel or options.primaryLabel or "Case file" %}
+  {% set websiteLabel = options.websiteLabel or "Visit site" %}
+  {% set githubLabel = options.githubLabel or "View source" %}
+  {% set additionalLinks = [] %}
+  {% if item.data.links and item.data.links | length %}
+    {% for link in item.data.links %}
+      {% if link.href and link.label %}
+        {% set additionalLinks = additionalLinks.concat([
+            {
+              href: link.href,
+              label: link.label,
+              rel: link.rel,
+              target: link.target,
+              classes: link.classes,
+              icon: link.icon
+            }
+        ]) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set linkItems = [] %}
+  {% if url %}
+    {% set linkItems = linkItems.concat([
+        {
+          href: url,
+          label: primaryLabel,
+          rel: options.primaryRel,
+          target: options.primaryTarget,
+          icon: options.primaryIcon,
+          classes: options.primaryClasses or defaultPrimaryClasses
+        }
+    ]) %}
+  {% endif %}
+  {% if item.data.websiteUrl %}
+    {% set linkItems = linkItems.concat([
+        {
+          href: item.data.websiteUrl,
+          label: websiteLabel,
+          rel: "noopener",
+          target: "_blank",
+          icon: "↗",
+          classes: options.websiteClasses or defaultWebsiteClasses
+        }
+    ]) %}
+  {% endif %}
+  {% if item.data.githubUrl %}
+    {% set linkItems = linkItems.concat([
+        {
+          href: item.data.githubUrl,
+          label: githubLabel,
+          rel: "noopener",
+          target: "_blank",
+          icon: "↗",
+          classes: options.githubClasses or defaultGithubClasses
+        }
+    ]) %}
+  {% endif %}
+  {% if additionalLinks | length %}
+    {% set linkItems = linkItems.concat(additionalLinks) %}
+  {% endif %}
+  <article class="{{ articleClasses }}">
+    <div class="space-y-3">
+      {% if role %}
+      <p class="{{ metaClasses }}">{{ role }}</p>
+      {% endif %}
+      {% if title %}
+      <h3 class="{{ titleClasses }}">
+        {% if url %}
+        <a class="{{ titleLinkClasses }}" href="{{ url }}">{{ title }}</a>
+        {% else %}
+        {{ title }}
+        {% endif %}
+      </h3>
+      {% endif %}
+      {% if description %}
+      <p class="{{ descriptionClasses }}">{{ description }}</p>
+      {% endif %}
+    </div>
+    {% if linkItems | length %}
+    <div class="{{ ctaContainerClasses }}">
+      {% for link in linkItems %}
+      <a
+        class="{{ link.classes }}"
+        href="{{ link.href }}"
+        {% if link.rel %}rel="{{ link.rel }}"{% endif %}
+        {% if link.target %}target="{{ link.target }}"{% endif %}
+      >
+        <span>{{ link.label }}</span>
+        {% if link.icon %}
+        <span aria-hidden="true">{{ link.icon }}</span>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </article>
+  {% endif %}
+{% endmacro %}

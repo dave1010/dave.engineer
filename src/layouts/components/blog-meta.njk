@@ -12,11 +12,11 @@
 
 {% macro renderTagPill(tag, options = {}) %}
   {% set classes = options.classes or DEFAULT_TAG_CLASSES %}
-  <blog-tag-pill
-    label="{{ tag.label }}"
-    {% if tag.url %}href="{{ tag.url }}"{% endif %}
-    class="{{ classes }}"
-  ></blog-tag-pill>
+  {% if tag.url %}
+    <a class="{{ classes }}" href="{{ tag.url }}">{{ tag.label }}</a>
+  {% else %}
+    <span class="{{ classes }}">{{ tag.label }}</span>
+  {% endif %}
 {% endmacro %}
 
 {% macro renderTagList(tagLinks = [], tagNames = [], options = {}) %}
@@ -42,25 +42,35 @@
 {% endmacro %}
 
 {% macro renderPostHeader(title, isoDate, displayDate, topicTagLinks = [], topicTags = [], options = {}) %}
-  {% set containerClasses = options.containerClasses or "space-y-4" %}
+  {% set containerClasses = options.containerClasses or "space-y-5" %}
   {% set headingClasses = options.headingClasses or "text-4xl font-semibold tracking-tight text-slate-100" %}
   {% set breadcrumbHref = options.breadcrumbHref or "/blog/" %}
   {% set breadcrumbLabel = options.breadcrumbLabel or "Blog" %}
   {% set showBreadcrumb = options.showBreadcrumb | default(true) %}
   {% set dateClasses = options.dateClasses or "text-base text-slate-400" %}
+  {% set metadataRowClasses = options.metadataRowClasses or "flex flex-wrap items-center gap-3 text-sm text-slate-400" %}
+  {% set typeOptions = options.typeOptions or {} %}
+  {% set typeValue = options.type or options.postType %}
+  {% set typeLabel = options.typeLabel or options.postTypeLabel %}
+  {% set showType = options.showTypeBadge | default(typeValue or typeLabel) %}
   <header class="{{ containerClasses }}">
     {% if showBreadcrumb %}
     <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="{{ breadcrumbHref }}">{{ breadcrumbLabel }}</a>
     {% endif %}
     <h1 class="{{ headingClasses }}">{{ title }}</h1>
-    {% if displayDate %}
-    <p class="{{ dateClasses }}">
-      {% if isoDate %}
-      <time datetime="{{ isoDate }}">{{ displayDate }}</time>
-      {% else %}
-      {{ displayDate }}
+    {% if displayDate or showType %}
+    <div class="{{ metadataRowClasses }}">
+      {% if showType %}
+        {{ renderPostTypeBadge(typeValue, typeLabel, typeOptions) | safe }}
       {% endif %}
-    </p>
+      {% if displayDate %}
+        {% if isoDate %}
+        <time datetime="{{ isoDate }}">{{ displayDate }}</time>
+        {% else %}
+        <span>{{ displayDate }}</span>
+        {% endif %}
+      {% endif %}
+    </div>
     {% endif %}
     {{ renderTagList(topicTagLinks, topicTags, options.tagOptions or {}) | safe }}
   </header>
@@ -69,12 +79,20 @@
 {% macro renderPostTypeBadge(type, label = "", options = {}) %}
   {% set baseClasses = options.baseClasses or DEFAULT_TYPE_BASE_CLASSES %}
   {% set extraClasses = options.extraClasses or "" %}
-  <blog-type-badge
-    type="{{ type | default('post') }}"
-    {% if label %}label="{{ label }}"{% endif %}
-    base-class="{{ baseClasses }}"
-    extra-class="{{ extraClasses }}"
-  ></blog-type-badge>
+  {% set variants = {
+    "post": "border-sky-400/40 bg-sky-500/10 text-sky-200",
+    "til": "border-lime-400/40 bg-lime-400/10 text-lime-100",
+    "external": "border-amber-400/40 bg-amber-400/10 text-amber-100"
+  } %}
+  {% set typeKey = (type | default('post')) | lower %}
+  {% set labelMap = {
+    "post": "Blog Post",
+    "til": "Today I Learned",
+    "external": "Elsewhere"
+  } %}
+  {% set variantClass = options.variantOverride or variants[typeKey] or variants.post %}
+  {% set resolvedLabel = label | default(labelMap[typeKey] or labelMap.post) %}
+  <span class="{{ (baseClasses ~ ' ' ~ extraClasses ~ ' ' ~ variantClass) | trim }}">{{ resolvedLabel }}</span>
 {% endmacro %}
 
 {% macro renderPostCta(url, label, options = {}) %}
@@ -82,12 +100,8 @@
   {% set icon = options.icon or "→" %}
   {% set rel = options.rel %}
   {% set target = options.target %}
-  <blog-post-cta
-    href="{{ url }}"
-    label="{{ label }}"
-    icon="{{ icon }}"
-    class="{{ classes }}"
-    {% if rel %}rel="{{ rel }}"{% endif %}
-    {% if target %}target="{{ target }}"{% endif %}
-  ></blog-post-cta>
+  <a class="{{ classes }}" href="{{ url }}"{% if rel %} rel="{{ rel }}"{% endif %}{% if target %} target="{{ target }}"{% endif %}>
+    <span>{{ label }}</span>
+    <span aria-hidden="true">{{ icon }}</span>
+  </a>
 {% endmacro %}

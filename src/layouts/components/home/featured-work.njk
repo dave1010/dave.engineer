@@ -1,3 +1,5 @@
+{% from "components/work-card.njk" import renderWorkCard %}
+
 {% macro renderFeaturedWorkSection(items, config) %}
   {% set featuredItems = [] %}
   {% for item in items %}
@@ -28,19 +30,16 @@
     </div>
     <div class="grid gap-6 md:grid-cols-2">
       {% for item in featuredItems %}
-      {% set roleValue = item.data.role or config.defaultRole %}
-      <work-card
-        variant="featured"
-        href="{{ item.url }}"
-        title="{{ item.data.title | escape }}"
-        primary-label="{{ config.primaryCtaLabel | default('Case file') }}"
-        website-label="{{ config.websiteLabel | default('Live site') }}"
-        github-label="{{ config.githubLabel | default('Source') }}"
-        {% if roleValue %}role="{{ roleValue | escape }}"{% endif %}
-        {% if item.data.description %}description="{{ item.data.description | trim | escape }}"{% endif %}
-        {% if item.data.websiteUrl %}website-url="{{ item.data.websiteUrl }}"{% endif %}
-        {% if item.data.githubUrl %}github-url="{{ item.data.githubUrl }}"{% endif %}
-      ></work-card>
+        {{
+          renderWorkCard(item, {
+            variant: "featured",
+            defaultRole: config.defaultRole,
+            primaryLabel: config.primaryCtaLabel or "Case file",
+            websiteLabel: config.websiteLabel or "Live site",
+            githubLabel: config.githubLabel or "Source"
+          })
+          | safe
+        }}
       {% endfor %}
     </div>
   </section>
