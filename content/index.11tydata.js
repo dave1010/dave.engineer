@@ -5,9 +5,9 @@ export default {
       name: "Dave Hulbert",
       subtitle: "AI, Strategy and Compliance",
       paragraphs: [
-        "I design systems and lead teams that deliver software that's trusted by millions. My work spans engineering leadership, AI, strategy, software development and governance.",
-        "I'm currently shaping the future of public transport technology at Passenger in Bournemouth, UK. Outside of work I'm fascinated by the intersection of human systems, automation, and the craft of well-run teams.",
-        "Whether you're exploring responsible AI adoption, scaling engineering organisations, or simply looking for pragmatic advice, I'd love to connect.",
+        "Hi, I'm Dave!",
+        "I'm a Principal Engineer focused on building reliable systems, leading high-performing teams, and shaping the future of public transport technology at Passenger in Bournemouth, UK.",
+        "My work spans engineering leadership, AI, and technology strategy.",
       ],
       ctas: [
         {
