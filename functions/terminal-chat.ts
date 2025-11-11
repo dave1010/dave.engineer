@@ -25,7 +25,7 @@ type ChatPayload = {
 
 const DEFAULT_API_URL = "https://api.cerebras.ai/v1/chat/completions";
 const MAX_HISTORY_MESSAGES = 50;
-const MAX_MESSAGE_LENGTH = 2000;
+export const MAX_MESSAGE_LENGTH = 2000;
 const THINK_PATTERN = /<think>[\s\S]*?<\/think>/g;
 
 type ChatMessage = {
@@ -172,15 +172,15 @@ function json(
   });
 }
 
-function truncateContent(text: string): string {
+export function truncateContent(text: string): string {
   return text.length > MAX_MESSAGE_LENGTH ? text.slice(0, MAX_MESSAGE_LENGTH) : text;
 }
 
-function stripThinkingSegments(text: string): string {
+export function stripThinkingSegments(text: string): string {
   return text.replace(THINK_PATTERN, "").trim();
 }
 
-function sanitizeUpstreamText(raw: string): string {
+export function sanitizeUpstreamText(raw: string): string {
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw) as Record<string, unknown>;
