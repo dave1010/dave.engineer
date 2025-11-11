@@ -10,9 +10,5 @@
     "types": ["vitest/globals"],
     "resolveJsonModule": true
   },
-  "include": [
-    "functions/**/*.ts",
-    "src/**/*.ts",
-    "functions/**/*.test.ts"
-  ]
+  "include": ["functions/**/*.ts", "src/**/*.ts", "functions/**/*.test.ts"]
 }

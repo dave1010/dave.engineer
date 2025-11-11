@@ -40,7 +40,9 @@ export default {
     reverse: true,
   },
   permalink: (data) => {
-    const pageNumber = Number.isFinite(data.pagination?.pageNumber) ? data.pagination.pageNumber : 0;
+    const pageNumber = Number.isFinite(data.pagination?.pageNumber)
+      ? data.pagination.pageNumber
+      : 0;
     if (pageNumber === 0) {
       return "/blog/";
     }

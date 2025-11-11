@@ -8,7 +8,8 @@ const paginateTagGroups = (groups) => {
   return groups.flatMap((group) => {
     const items = Array.isArray(group?.items) ? group.items : [];
     const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
-    const basePermalink = group?.permalink ?? (group?.slug ? `/blog/tag/${group.slug}/` : "/blog/tag/");
+    const basePermalink =
+      group?.permalink ?? (group?.slug ? `/blog/tag/${group.slug}/` : "/blog/tag/");
 
     return Array.from({ length: totalPages }, (_, index) => {
       const pageUrl = index === 0 ? basePermalink : `${basePermalink}page-${index + 1}/`;

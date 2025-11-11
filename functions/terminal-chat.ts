@@ -1,7 +1,7 @@
 // functions/terminal-chat.ts
 import type { PagesFunction } from "@cloudflare/workers-types";
-import { buildTerminalSystemPrompt } from "./terminal-system-prompt";
 import type { TerminalPromptEnv } from "./terminal-system-prompt";
+import { buildTerminalSystemPrompt } from "./terminal-system-prompt";
 
 type Env = TerminalPromptEnv & {
   CEREBRAS_API_KEY?: string;
@@ -47,13 +47,9 @@ const readJSON = async <T>(req: Request): Promise<T | null> => {
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const apiKey = env.CEREBRAS_API_KEY?.trim();
   if (!apiKey) {
-    return json(
-      { error: "Missing binding 'CEREBRAS_API_KEY' on this deployment." },
-      500,
-      {
-        "X-Missing-Binding": "CEREBRAS_API_KEY",
-      }
-    );
+    return json({ error: "Missing binding 'CEREBRAS_API_KEY' on this deployment." }, 500, {
+      "X-Missing-Binding": "CEREBRAS_API_KEY",
+    });
   }
 
   const payload = await readJSON<ChatPayload>(request);
@@ -63,19 +59,17 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const { messages } = payload;
   if (!Array.isArray(messages) || messages.length === 0) {
-    return json(
-      { error: "`messages` must be a non-empty array" },
-      400
-    );
+    return json({ error: "`messages` must be a non-empty array" }, 400);
   }
 
   const sanitizedMessages: ChatMessage[] = [];
 
   for (const entry of messages) {
     if (!entry || typeof entry !== "object") continue;
-    const role = typeof (entry as Record<string, unknown>).role === "string"
-      ? (entry as Record<string, unknown>).role.trim().toLowerCase()
-      : "";
+    const role =
+      typeof (entry as Record<string, unknown>).role === "string"
+        ? (entry as Record<string, unknown>).role.trim().toLowerCase()
+        : "";
     const content = (entry as Record<string, unknown>).content;
     if (role !== "user" && role !== "assistant") continue;
     if (typeof content !== "string" || content.trim() === "") continue;
@@ -111,7 +105,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     stream: false,
   };
 
-  const apiURL = (env.CEREBRAS_API_URL?.trim() || DEFAULT_API_URL);
+  const apiURL = env.CEREBRAS_API_URL?.trim() || DEFAULT_API_URL;
 
   const upstreamInit: RequestInit = {
     method: "POST",
@@ -161,11 +155,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 };
 
 /* ---------- utils ---------- */
-function json(
-  data: unknown,
-  status = 200,
-  headers: Record<string, string> = {}
-): Response {
+function json(data: unknown, status = 200, headers: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(data), {
     status,
     headers: { "content-type": "application/json", ...headers },

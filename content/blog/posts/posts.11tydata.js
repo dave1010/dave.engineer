@@ -94,9 +94,7 @@ const normaliseTagName = (tag) => String(tag || "").toLowerCase();
 
 const getTopicTags = (tags) => {
   if (Array.isArray(tags)) {
-    return tags
-      .filter((tag) => tag !== "blog")
-      .map((tag) => normaliseTagName(tag));
+    return tags.filter((tag) => tag !== "blog").map((tag) => normaliseTagName(tag));
   }
 
   if (typeof tags === "string") {
