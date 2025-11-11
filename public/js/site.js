@@ -19,7 +19,8 @@ const applyParallax = () => {
     if (Number.isNaN(depth)) return;
     const translateX = pointerX * depth * PARALLAX_POINTER_MULTIPLIER;
     const translateY =
-      pointerY * depth * PARALLAX_POINTER_MULTIPLIER + scrollFactor * depth * -PARALLAX_SCROLL_MULTIPLIER;
+      pointerY * depth * PARALLAX_POINTER_MULTIPLIER +
+      scrollFactor * depth * -PARALLAX_SCROLL_MULTIPLIER;
     layer.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
   });
 };
@@ -256,9 +257,10 @@ if (terminalForm) {
       }
 
       if (!response.ok) {
-        const message = typeof parsed === "string"
-          ? parsed
-          : parsed?.error || parsed?.message || `Request failed (${response.status})`;
+        const message =
+          typeof parsed === "string"
+            ? parsed
+            : parsed?.error || parsed?.message || `Request failed (${response.status})`;
         throw new Error(typeof message === "string" ? message : String(message));
       }
 
@@ -266,11 +268,8 @@ if (terminalForm) {
         return parsed;
       }
 
-      const assistantText =
-        parsed?.choices?.[0]?.message?.content ?? parsed?.message ?? "";
-      return typeof assistantText === "string"
-        ? assistantText
-        : String(assistantText ?? "");
+      const assistantText = parsed?.choices?.[0]?.message?.content ?? parsed?.message ?? "";
+      return typeof assistantText === "string" ? assistantText : String(assistantText ?? "");
     };
 
     terminalForm.addEventListener("submit", async (event) => {
@@ -288,7 +287,9 @@ if (terminalForm) {
       const pendingBlock = appendBlock("", "terminal-block--pending");
       pendingBlock.textContent = "▌";
 
-      const payloadMessages = conversation.slice(-MAX_HISTORY).concat({ role: "user", content: command });
+      const payloadMessages = conversation
+        .slice(-MAX_HISTORY)
+        .concat({ role: "user", content: command });
 
       try {
         const response = await fetch("/terminal-chat", {
@@ -311,14 +312,12 @@ if (terminalForm) {
       } catch (error) {
         pendingBlock.classList.remove("terminal-block--pending");
         pendingBlock.classList.add("terminal-block--error");
-        pendingBlock.textContent = error instanceof Error
-          ? `error: ${error.message}`
-          : "error: unexpected failure";
+        pendingBlock.textContent =
+          error instanceof Error ? `error: ${error.message}` : "error: unexpected failure";
       } finally {
         terminalInput.disabled = false;
         focusInput();
       }
     });
-
   }
 }

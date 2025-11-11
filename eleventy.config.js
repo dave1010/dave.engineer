@@ -1,5 +1,5 @@
-import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginWebc from "@11ty/eleventy-plugin-webc";
 import slugify from "./src/slugify.js";
 
@@ -37,8 +37,7 @@ const normaliseType = (type) => {
   return typeMetadata.has(normalised) ? normalised : DEFAULT_TYPE;
 };
 
-const ensureTypeMetadata = (type) =>
-  typeMetadata.get(type) ?? typeMetadata.get(DEFAULT_TYPE);
+const ensureTypeMetadata = (type) => typeMetadata.get(type) ?? typeMetadata.get(DEFAULT_TYPE);
 
 const getTypeGroups = () => {
   const groups = new Map();
@@ -48,8 +47,7 @@ const getTypeGroups = () => {
   return groups;
 };
 
-const sortPostsByDate = (items) =>
-  [...items].sort((a, b) => b.date - a.date);
+const sortPostsByDate = (items) => [...items].sort((a, b) => b.date - a.date);
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);

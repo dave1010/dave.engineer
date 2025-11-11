@@ -35,10 +35,7 @@ describe("terminal chat helpers", () => {
         },
       ],
       response: {
-        output_text: [
-          "Segment<think>analysis</think> one",
-          "Segment two",
-        ],
+        output_text: ["Segment<think>analysis</think> one", "Segment two"],
       },
     });
 
