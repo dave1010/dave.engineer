@@ -6,7 +6,7 @@
 - Static assets in `public/` are passthrough-copied verbatim by `eleventy.config.js`—only keep files referenced by the site; prune stale icons instead of archiving them there.
 - Syntax highlighting uses the official `@11ty/eleventy-plugin-syntaxhighlight` and Prism styles in `src/styles/prism.css`.
 - Use the Biome toolchain for linting and formatting (`npm run lint`, `npm run format`, or `npm run check`) before committing JS/MD changes; the configuration lives in `biome.json`, and CI will fail if `npm run check` does not pass.
-- GitHub Actions (`.github/workflows/test.yml`) runs `npm run check` and `npm test` on pushes and pull requests—keep those commands green locally.
+- GitHub Actions runs Biome in `.github/workflows/biome.yml` and executes `npm test` via `.github/workflows/test.yml` on pushes and pull requests—keep those commands green locally.
 - Utility JavaScript helpers belong under `src/` (for example `src/slugify.js`); avoid recreating a top-level `scripts/` directory.
 - Python ingestion tools now live in `src/python/`.
 
