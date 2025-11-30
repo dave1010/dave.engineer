@@ -81,6 +81,12 @@ So the difference between “works locally” and “fails from CI” was simply
 
 That alone explains the problem. But fixing it requires an actual Android toolchain.
 
+## What is CGO?
+
+CGO is Go’s way to call C code from Go. When you enable `CGO_ENABLED=1`, the Go compiler delegates parts of the build to a C toolchain. That means it uses the target system's C headers, libraries, and linker, rather than Go’s own pure Go substitutes.
+
+For most desktop/server systems this isn’t very noticeable, but sometimes it’s essential. With Android the system resolver, libc implementation (Bionic), and platform headers all live on the C side. Without CGO, Go falls back to its pure-Go implementations for anything relying on system facilities, like DNS, crypto, networking, threading, etc.
+
 ## Why you need to use CGO for Android
 
 Termux gives you a normal `go` compiler, but when you cross-compile on Linux you are building a binary for an OS with:
