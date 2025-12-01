@@ -122,10 +122,11 @@ def write_post(base_dir: Path, data: dict[str, object], overwrite: bool = False)
     excerpt = str(data.get("excerpt", "")).strip()
 
     year_dir = base_dir / f"{date.year:04d}"
-    year_dir.mkdir(parents=True, exist_ok=True)
+    month_dir = year_dir / f"{date.month:02d}"
+    month_dir.mkdir(parents=True, exist_ok=True)
 
     slug = derive_slug(link, guid, title)
-    destination = year_dir / f"{slug}.md"
+    destination = month_dir / f"{slug}.md"
     if destination.exists() and not overwrite:
         return destination
 
@@ -175,7 +176,7 @@ def import_wardley_posts(feed_url: str, output: Path, overwrite: bool = False) -
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("output", nargs="?", type=Path, default=Path("content/blog/posts/external"))
+    parser.add_argument("output", nargs="?", type=Path, default=Path("content/blog/posts"))
     parser.add_argument(
         "--feed-url",
         dest="feed_url",
