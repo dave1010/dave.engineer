@@ -12,7 +12,7 @@ This post explores a (potentially) new idea on how to give real time context to 
 
 Imagine a hybrid of Claude Code's `SKILL.md` convention with your shell's `PS1` prompt.
 
-I've implemented this in my coding agent Jorin https://github.com/dave1010/jorin as a proof of concept.
+I've implemented this in my coding agent [Jorin](https://github.com/dave1010/jorin) as a proof of concept.
 
 ## Prompt Engineering
 
@@ -63,7 +63,7 @@ Even though we're training AI to perform like (super)humans, we think that they 
 
 An agent's system prompt can include more than just static text. A few months ago, Anthropic came up with Skills for Claude Code. Skills are like a table of contents, where the agent can decide if it wants to open a file to read a chapter or not.
 
-I've trivialised them here but Skills are actually pretty cool. I wrote about them here https://dave.engineer/blog/2025/11/skills-to-agents/
+I've trivialised them here but Skills are actually pretty cool. I wrote about them [here](https://dave.engineer/blog/2025/11/skills-to-agents/)
 and support them in my coding agent, Jorin.
 
 Anthropic have shown how simple pluggable extensions to the system prompt can be very effective.
@@ -74,7 +74,7 @@ But the table of contents and the chapters themselves are still static. If you'v
 
 By now you might see where this is going: combining ideas from how we use shell prompts to determine context, with the extensible system prompt idea from Claude's Skills.
 
-I'm calling these **Situations**. This hopefully makes it clearer that they're ephemeral and context specific. "Context Engineering" was the 
+I'm calling these **Situations**. This hopefully makes it clearer that they're ephemeral and context specific. "Context Engineering" was the earlier term I used for the idea.
 
 Just like your shell checks `git status` before rendering the prompt in your terminal, a Situation does the same before generating the agent's system prompt.
 
@@ -84,7 +84,7 @@ Let's jump into how an MVP would work:
 2. Check each Situation
 3. If the situation is applicable then append its context to the system prompt
 
-Situations like in a `situations` directory and come with a `SITUATION.yaml` metadata file.
+Situations live in a `situations` directory and come with a `SITUATION.yaml` metadata file.
 
 The "check" is quite different from Skills, which are manually enabled and disabled. Situations are executed automatically and they decide whether they apply.
 
@@ -95,7 +95,7 @@ Checks are defined in the YAML and could be:
 - determined from environment variables
 - the exit code when running an executable Situation
 
-For now, I've only implemented executable Situations in Jorin. This are the most powerful, but also require the most trust to run.
+For now, I've only implemented executable Situations in Jorin. These are the most powerful, but also require the most trust to run.
 
 Importantly, if the check fails then the context is not loaded at all. This is a big advantage over Skills, which are always loaded. Being selective means that Situations can afford to give more information up front and don't rely on the agent deciding to read more.
 
@@ -146,7 +146,7 @@ This is already working well in Jorin but it could do with:
 - better installation and discovery of third party Situations
 - battle testing different types of Situation checks
 
-Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common situations to [dave1010/agent-situations], licensed CC0 (public domain). I invite other agent developers to iterate and adopt this standard.
+Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common situations to [dave1010/agent-situations](https://github.com/dave1010/agent-situations), licensed CC0 (public domain). I invite other agent developers to iterate and adopt this standard.
 
 I also wonder whether shell auto completions serve a similar problem and whether they could be integrated somehow.
 
