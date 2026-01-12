@@ -115,6 +115,7 @@ run: run
 
 Here, the `run` property means that Jorin should execute `run` as the check and append its output to the system prompt. Here's the `run` executable, which sits in the same directory:
 
+{% raw %}
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
@@ -137,6 +138,7 @@ fi
 joined=$(IFS=,; echo "${tools_list[*]}")
 echo "Tools on PATH: none of ${joined}"
 ```
+{% endraw %}
 
 ## Beyond MVP
 
