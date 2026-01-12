@@ -8,9 +8,7 @@ tags:
   - jorin
 ---
 
-Coding agents are typically given static context for dynamic environments.
-
-This post explores a new idea on how to give adaptive context to a coding agent in an extensible way.
+Coding agents are typically given static context for dynamic environments. This post explores a new idea on how to give _adaptive_ context to a coding agent in an extensible way.
 
 Imagine a hybrid of Claude Code's `SKILL.md` convention with your shell's `PS1` prompt.
 
@@ -89,7 +87,7 @@ Let's jump into how an MVP would work:
 
 1. Loop through all registered Situations
 2. Check each Situation
-3. Only if the Situation is applicable ghen its context is given to the agent. Otherwise it leaves no trace.
+3. Only if the Situation is applicable then its context is given to the agent. Otherwise it leaves no trace.
 
 Situations live in a `situations` directory and come with a `SITUATION.yaml` metadata file.
 
@@ -147,6 +145,13 @@ echo "Tools on PATH: none of ${joined}"
 ```
 {% endraw %}
 
+You could easily make Situations for things like:
+
+- language or framework version, reminding the LLM of key features it can or can't use
+- whether the build is currently passing
+- extensive git information 
+- available task runner tasks or build targets
+
 ## Beyond MVP
 
 This is already working well in Jorin but it could do with:
@@ -158,10 +163,3 @@ This is already working well in Jorin but it could do with:
 Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common Situations to [dave1010/agent-situations](https://github.com/dave1010/agent-situations), licensed CC0 (public domain). I invite other agent developers to experiment with it and consider adopting this standard.
 
 Shell autocompletions may be another example of this pattern of executable, contextual affordances and worth exploring as a further input to agent context.
-
-## Ideas for Situations
-
-- language or framework version, reminding the LLM of key features it can or can't use
-- whether the build is currently passing
-- extensive git information 
-- available task runner tasks or build targets
