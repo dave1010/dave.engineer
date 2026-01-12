@@ -18,7 +18,7 @@ I've implemented this in my coding agent [Jorin](https://github.com/dave1010/jor
 
 ## Shell prompts as dynamic context
 
-Prompts are the bits of information your shell gives you before you type a command. if you said you were "prompt engineering" a few years ago, that used to mean fiddling with ANSI character codes to get a really cool prompt in your terminal.
+Prompts are the bits of information your shell gives you before you type a command. If you said you were "prompt engineering" a few years ago, that used to mean fiddling with ANSI character codes to get a really cool prompt in your terminal.
 
 If you start working on any coding project, chances are, the first thing you'll see is something like this in your terminal:
 
@@ -42,13 +42,13 @@ My prompt came out the box with Oh My Zsh. It isn't especially advanced. If I wa
 
 The shell works out this information automatically in milliseconds, based on the filesystem and current environment. The shell will update this every time you press Enter. It might cache some information and it will know which files to watch for changes, so your prompt doesn't take ages to load all the time.
 
-The balance here is not overloading the prompt with more information than is useful. I've seen some multi-line prompts which looks like they just add noise to the task at hand.
+The balance here is not overloading the prompt with more information than is useful. I've seen some multi-line prompts which look like they just add noise to the task at hand.
 
 ## Anti-drift
 
 What's great about shell prompts is that they're always up to date. Running `git switch feature/foo` will show I'm on the `feature/foo` branch immediately.
 
-This contrasts with documentation, which needs to be manually updated every time something changes. If you're not meticulous with updating documentation then jt becomes stale.
+This contrasts with documentation, which needs to be manually updated every time something changes. If you're not meticulous with updating documentation then it becomes stale.
 
 A project might say "requires Node.js v18" but the authoritative information in package.json might say it requires v22. **The README.md lies but my shell prompt always tells the truth.**
 
@@ -64,8 +64,7 @@ AGENTS.md gets fed into the LLM as a system or developer prompt. This is great f
 
 Every time the project changes, I (or the agent) has to manually edit AGENTS.md.
 
-(Aside: in early 2026, we treat humans and agents as needing different sources of truth, [which I find odd](https://github.com/agentsmd/agents.md/issues/59).)
-
+*(Aside: in early 2026, we treat humans and agents as needing different sources of truth, [which I find odd](https://github.com/agentsmd/agents.md/issues/59).)*
 
 An agent's system prompt can include more than just static text. A few months ago, Anthropic came up with Skills for Claude Code. Skills are like a table of contents, where the agent can decide if it wants to open a file to read a chapter or not.
 
@@ -74,7 +73,7 @@ and support them in my coding agent, Jorin.
 
 Anthropic have shown how **simple pluggable extensions to the system prompt can be very effective**.
 
-But the table of contents and the chapters themselves are still static. If you've installed a React skill for example, you either have to enable it manually per project, or an agent gets told "read skills/react/SKILL.md to learn about React" even if it's not a React project at all.
+But the table of contents and the chapters themselves are still static. If you've installed a React skill for example, you either have to enable it manually per project, or an agent gets told "read skills/react/SKILL.md to learn about React" even if it's not a React project at all. Skills are great for _discovery_ but not necessarily for _relevance_.
 
 ## Situations (Dynamic Context Engineering)
 
@@ -90,7 +89,7 @@ Let's jump into how an MVP would work:
 
 1. Loop through all registered Situations
 2. Check each Situation
-3. If the Situation is applicable then append its context to the system prompt
+3. Only if the Situation is applicable ghen its context is given to the agent. Otherwise it leaves no trace.
 
 Situations live in a `situations` directory and come with a `SITUATION.yaml` metadata file.
 
@@ -152,13 +151,13 @@ echo "Tools on PATH: none of ${joined}"
 
 This is already working well in Jorin but it could do with:
 
-- caching (checks are ran each time)
+- caching (checks are run each time)
 - better installation and discovery of third party Situations
 - battle testing different types of Situation checks
 
 Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common Situations to [dave1010/agent-situations](https://github.com/dave1010/agent-situations), licensed CC0 (public domain). I invite other agent developers to experiment with it and consider adopting this standard.
 
-I also wonder whether shell auto completions serve a similar problem and whether they could be integrated somehow.
+Shell autocompletions may be another example of this pattern of executable, contextual affordances and worth exploring as a further input to agent context.
 
 ## Ideas for Situations
 
