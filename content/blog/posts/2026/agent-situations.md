@@ -10,7 +10,7 @@ tags:
 
 Coding agents are typically given static context for dynamic environments.
 
-This post explores a (potentially) new idea on how to give adaptive context to a coding agent in an extensible way.
+This post explores a new idea on how to give adaptive context to a coding agent in an extensible way.
 
 Imagine a hybrid of Claude Code's `SKILL.md` convention with your shell's `PS1` prompt.
 
@@ -90,7 +90,7 @@ Let's jump into how an MVP would work:
 
 1. Loop through all registered Situations
 2. Check each Situation
-3. If the situation is applicable then append its context to the system prompt
+3. If the Situation is applicable then append its context to the system prompt
 
 Situations live in a `situations` directory and come with a `SITUATION.yaml` metadata file.
 
@@ -156,13 +156,13 @@ This is already working well in Jorin but it could do with:
 - better installation and discovery of third party Situations
 - battle testing different types of Situation checks
 
-Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common situations to [dave1010/agent-situations](https://github.com/dave1010/agent-situations), licensed CC0 (public domain). I invite other agent developers to iterate and adopt this standard.
+Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common Situations to [dave1010/agent-situations](https://github.com/dave1010/agent-situations), licensed CC0 (public domain). I invite other agent developers to experiment with it and consider adopting this standard.
 
 I also wonder whether shell auto completions serve a similar problem and whether they could be integrated somehow.
 
 ## Ideas for Situations
 
-- detect language or framework version and remind the LLM of key features it can or can't use
+- language or framework version, reminding the LLM of key features it can or can't use
 - whether the build is currently passing
 - extensive git information 
-- task runner tasks or build targets
+- available task runner tasks or build targets
