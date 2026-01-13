@@ -163,3 +163,5 @@ This is already working well in Jorin but it could do with:
 Jorin is where I've implemented this to try it out but I don't use Jorin as my day-to-day agent, so I'm hoping that other agents implement this or something similar. I've extracted the specification and a library of common Situations to [dave1010/agent-situations](https://github.com/dave1010/agent-situations), licensed CC0 (public domain). I invite other agent developers to experiment with it and consider adopting this standard.
 
 Shell autocompletions may be another example of this pattern of executable, contextual affordances and worth exploring as a further input to agent context.
+
+Discuss on [Hacker News](https://news.ycombinator.com/item?id=46608740)
