@@ -12,7 +12,7 @@ Coding agents are typically given static context for dynamic environments. This 
 
 Imagine a hybrid of Claude Code's `SKILL.md` convention with your shell's `PS1` prompt.
 
-I've implemented this in my coding agent [Jorin](https://github.com/dave1010/jorin) as a proof of concept.
+If you want to just straight to the code: I've implemented this in my coding agent [Jorin](https://github.com/dave1010/jorin) as a proof of concept and outlined a spec for [Agent Situations](https://github.com/dave1010/agent-situations) that other agents can use.
 
 ## Shell prompts as dynamic context
 
@@ -67,7 +67,7 @@ Every time the project changes, I (or the agent) has to manually edit AGENTS.md.
 An agent's system prompt can include more than just static text. A few months ago, Anthropic came up with Skills for Claude Code. Skills are like a table of contents, where the agent can decide if it wants to open a file to read a chapter or not.
 
 I've trivialised them here but Skills are actually pretty cool. I wrote about them [here](https://dave.engineer/blog/2025/11/skills-to-agents/)
-and support them in my coding agent, Jorin.
+and support them in my coding agent, Jorin. In fact, Jorin even has a [Skill specifically for writing Situations](https://github.com/dave1010/jorin/blob/main/.jorin/skills/situations/SKILL.md).
 
 Anthropic have shown how **simple pluggable extensions to the system prompt can be very effective**.
 
