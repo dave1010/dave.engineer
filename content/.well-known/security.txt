@@ -1,0 +1,8 @@
+---
+permalink: "/.well-known/security.txt"
+eleventyExcludeFromCollections: true
+---
+Contact: https://dave.engineer/contact/
+Preferred-Languages: en
+Expires: 2026-01-01T00:00:00.000Z
+Canonical: https://dave.engineer/.well-known/security.txt

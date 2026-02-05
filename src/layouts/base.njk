@@ -3,7 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or "" }}</title>
+  {% set pageTitle = title or site.title or site.name %}
+  {% set metaDescription = description or site.description %}
+  {% if site.url and page.url %}
+    {% set canonicalUrl = site.url + page.url %}
+  {% else %}
+    {% set canonicalUrl = page.url %}
+  {% endif %}
+  {% set ogImage = ogImage or site.image %}
+  {% if ogImage and (ogImage | slice(0, 1)) == "/" and site.url %}
+    {% set ogImageUrl = site.url + ogImage %}
+  {% else %}
+    {% set ogImageUrl = ogImage %}
+  {% endif %}
+  <title>{{ pageTitle }}</title>
+  {% if metaDescription %}
+  <meta name="description" content="{{ metaDescription }}">
+  {% endif %}
+  {% if canonicalUrl %}
+  <link rel="canonical" href="{{ canonicalUrl }}">
+  {% endif %}
+  <meta property="og:title" content="{{ pageTitle }}">
+  {% if metaDescription %}
+  <meta property="og:description" content="{{ metaDescription }}">
+  {% endif %}
+  {% if canonicalUrl %}
+  <meta property="og:url" content="{{ canonicalUrl }}">
+  {% endif %}
+  <meta property="og:site_name" content="{{ site.title or site.name }}">
+  <meta property="og:type" content="website">
+  {% if ogImageUrl %}
+  <meta property="og:image" content="{{ ogImageUrl }}">
+  <meta property="og:image:alt" content="{{ site.imageAlt or pageTitle }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ ogImageUrl }}">
+  <meta name="twitter:image:alt" content="{{ site.imageAlt or pageTitle }}">
+  {% else %}
+  <meta name="twitter:card" content="summary">
+  {% endif %}
+  <meta name="twitter:title" content="{{ pageTitle }}">
+  {% if metaDescription %}
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  {% endif %}
+  <meta name="theme-color" content="#020617">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -22,6 +64,9 @@
   {% endif %}
 </head>
 <body class="relative min-h-screen overflow-x-hidden">
+  <a class="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-50 focus:rounded-full focus:bg-slate-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-lime-200 focus:shadow-lg focus:shadow-slate-950/50" href="#main-content">
+    Skip to content
+  </a>
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
     <div class="grid-overlay"></div>
     <div class="absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-sky-400/20 blur-3xl"></div>
@@ -52,19 +97,28 @@
       </nav>
       {% endif %}
     </header>
-    <main class="flex-1">
+    <div id="main-content" class="flex-1">
       {{ content | safe }}
-    </main>
+    </div>
     <footer class="border-t border-slate-800/40 bg-slate-950/80">
       <div class="mx-auto flex max-w-6xl flex-col gap-5 px-6 py-10 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-10">
-        <nav class="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-300">
-          <a class="hover:text-lime-300" href="/">dave.engineer</a>
-          {% if navigation and navigation | length %}
-            {% for link in navigation %}
+        <div class="flex flex-col gap-3">
+          <nav class="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-300">
+            <a class="hover:text-lime-300" href="/">dave.engineer</a>
+            {% if navigation and navigation | length %}
+              {% for link in navigation %}
+              <a class="hover:text-lime-300" href="{{ link.href }}">{{ link.label }}</a>
+              {% endfor %}
+            {% endif %}
+          </nav>
+          {% if site.footerLinks and site.footerLinks | length %}
+          <nav class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-400">
+            {% for link in site.footerLinks %}
             <a class="hover:text-lime-300" href="{{ link.href }}">{{ link.label }}</a>
             {% endfor %}
+          </nav>
           {% endif %}
-        </nav>
+        </div>
         <p class="text-xs text-slate-500">© Dave Hulbert</p>
       </div>
     </footer>

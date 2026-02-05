@@ -1,0 +1,16 @@
+---
+permalink: "/sitemap.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for item in collections.all | sort(attribute="url") %}
+    {% if item.url and not item.data.eleventyExcludeFromCollections and not item.data.excludeFromSitemap %}
+      {% set canonical = site.url + item.url %}
+      <url>
+        <loc>{{ canonical }}</loc>
+        {% if item.date %}<lastmod>{{ item.date | dateToRfc3339 }}</lastmod>{% endif %}
+      </url>
+    {% endif %}
+  {% endfor %}
+</urlset>
