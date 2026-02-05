@@ -1,0 +1,17 @@
+---
+permalink: "/humans.txt"
+eleventyExcludeFromCollections: true
+---
+# humanstxt.org/
+
+Site: dave.engineer
+Author: Dave Hulbert
+Location: Bournemouth, UK
+
+Technology:
+- Eleventy
+- Nunjucks
+- Tailwind CSS
+- Prism
+
+Contact: /contact/
