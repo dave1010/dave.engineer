@@ -16,5 +16,5 @@
 
 You have new skills. If any skill might be relevant then you MUST read it.
 
-- [writing-skills](.skills/writing-skills/SKILL.md) - Use when creating or updating SKILL.md documentation - Explains how and why to create a skill.
+- [writing-skills](.agents/skills/writing-skills/SKILL.md) - Use when creating or updating SKILL.md documentation - Explains how and why to create a skill.
 </skills>
