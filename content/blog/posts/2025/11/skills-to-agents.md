@@ -8,7 +8,9 @@ tags:
   - coding-agents
 ---
 
-**tl;dr:** *[skills-to-agents](https://github.com/dave1010/skills-to-agents) automatically compiles SKILL.md into AGENTS.md. Run it as a GitHub action with a step: `uses: dave1010/skills-to-agents@v1`.*
+**tl;dr:** *[skills-to-agents](https://github.com/dave1010/skills-to-agents) automatically compiles SKILL.md into AGENTS.md. Run it as a GitHub action with a step: `uses: dave1010/skills-to-agents@v2`.*
+
+**Update (7 Feb 2026):** Most agents now look for Skills under `.agents/skills/` instead of `.skills`, and `dave1010/skills-to-agents@v2` follows that convention by default.
 
 Coding agents benefit from custom instructions and tools. The standard way to do this now is with an [`AGENTS.md`](https://agents.md/) file and [MCP servers](https://modelcontextprotocol.io/docs/getting-started/intro). You can quickly add dozens of useful MCP servers. But filling an LLM's context with all this information, when it isn’t always relevant, just adds noise and leaves the agent with less space to work on the actual problem.
 
@@ -30,7 +32,7 @@ Having built Pandora, I knew it would be easy to compile Skills into a top-level
 
 The tool:
 
-1. Looks for `.skills/*/SKILL.md` files
+1. Looks for `.agents/skills/*/SKILL.md` files
 2. Parses the Markdown front matter
 3. Compiles the data with a short preamble explaining Skills
 4. Writes the data to `AGENTS.md` inside a `<skills>…</skills>` block
@@ -45,7 +47,7 @@ on:
     branches:
       - main
     paths:
-      - '.skills/**'
+      - '.agents/skills/**'
   workflow_dispatch:
 
 jobs:
@@ -55,14 +57,14 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: dave1010/skills-to-agents@v1
+      - uses: dave1010/skills-to-agents@v2
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'chore: sync AGENTS skills list'
           file_pattern: AGENTS.md
 ```
 
-You can see a working example in [`dave1010/tools`](https://github.com/dave1010/tools), with the generated [`AGENTS.md`](https://github.com/dave1010/tools/blob/main/AGENTS.md#skills) and the [list of skills](https://github.com/dave1010/tools/tree/main/.skills). Feel free to copy my meta [Skill writing skill](https://github.com/dave1010/tools/blob/main/.skills/writing-skills/SKILL.md) to get started.
+You can see a working example in [`dave1010/tools`](https://github.com/dave1010/tools), with the generated [`AGENTS.md`](https://github.com/dave1010/tools/blob/main/AGENTS.md#skills) and the [list of skills](https://github.com/dave1010/tools/tree/main/.agents/skills). Feel free to copy my meta [Skill writing skill](https://github.com/dave1010/tools/blob/main/.agents/skills/writing-skills/SKILL.md) to get started.
 
 ## Bigger picture
 
