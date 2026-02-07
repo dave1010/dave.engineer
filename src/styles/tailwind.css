@@ -27,9 +27,9 @@
     @apply rounded-md bg-slate-900/70 px-1 py-0.5 font-mono text-sky-300;
   }
 
-  .prose :where(code):not(:where([class~="not-prose"], pre code))::before,
-  .prose :where(code):not(:where([class~="not-prose"], pre code))::after {
-    content: "";
+  .prose code::before,
+  .prose code::after {
+    content: none;
   }
 }
 
