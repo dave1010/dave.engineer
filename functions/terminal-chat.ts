@@ -100,7 +100,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   ];
 
   const outgoing: Record<string, unknown> = {
-    model: "qwen-3-32b",
+    model: "gpt-oss-120b",
     messages: outgoingMessages,
     stream: false,
   };
