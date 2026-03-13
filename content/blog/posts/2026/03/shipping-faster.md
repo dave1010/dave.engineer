@@ -34,7 +34,7 @@ If you've ever played a factory sim game then you might have seen this before. Y
 
 If this isn't easy to visualise then give [Shapez.io](https://shapez.io/) a quick play.
 
-![Bottleneck in Shapez.io](shapezio.png)
+![Bottleneck in Shapez.io](/img/shapezio.png)
 
 ## The new bottlenecks
 
