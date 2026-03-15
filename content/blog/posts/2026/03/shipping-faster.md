@@ -101,6 +101,8 @@ When one step is done, how do we quickly and effectively move on to the next? I 
 
 Decisions need to be made throughout the pipeline. They're also needed before it even starts: if we have a software factory, what should we make with it?
 
+I've pretended that the software factory is linear but I'm sure you know that it relies on good **feedback**. The pipeline may be fast without good feedback but it will be brittle. One way to counter this is by shortening the cycle time, so that if a cycle fails then only a few hours have been lost, not weeks or months.
+
 ## Going faster
 
 In this post my aim is to set the scene and highlight the problem. I'm still exploring what solutions might work well. That said, I want to end this post with something that’s often missed.
@@ -110,9 +112,9 @@ We have 2 approaches to making systems go faster:
 1. Look at the **component** that is the bottleneck. We can do this by adding capacity, improving parallelisation or removing waste.
 2. Look at the **system**. This may let us avoid the bottleneck entirely or replace it with something radically different.
 
-The first option is the obvious one and is probably what we're already doing if we follow [Continuous Improvement](https://en.wikipedia.org/wiki/Continual_improvement_process) or [Lean](https://en.wikipedia.org/wiki/Lean_manufacturing) principles.
+The first option is the obvious one and is probably what we're already doing if we follow [Continuous Improvement](https://en.wikipedia.org/wiki/Continual_improvement_process) or [Lean](https://en.wikipedia.org/wiki/Lean_manufacturing) principles. Organisational structures normally incentivize this optimisation too, as it's visible, easy to measure and can be the responsibility of a small team.
 
-The second option is less obvious and only happens when we get to an inflection point with technology.
+The second option is less obvious and only happens when we get to an inflection point with technology. It requires someone with enough perspective and authority to take a risk.
 
 A good historical example of this with software is when we stopped trying to ship CDs to users and instead distributed SaaS over the internet. The growth of broadband and browser capabilities like AJAX caused a paradigm shift. The bottleneck got routed around entirely. Nobody figured out how to ship CDs faster, they just stopped shipping CDs. SaaS with multiple deploys a day is now the norm. Shipping physical disks once a quarter or buying them from a computer store now sounds archaic.
 
