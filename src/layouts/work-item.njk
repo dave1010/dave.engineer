@@ -1,43 +1,19 @@
 ---
 layout: base.njk
 ---
-<main class="px-6 py-16 sm:px-10">
-  <article class="mx-auto flex max-w-3xl flex-col gap-10">
+<main class="px-6 py-12 sm:px-8">
+  <article class="mx-auto flex max-w-3xl flex-col gap-8">
     <header class="space-y-4">
-      <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="/work/">Work</a>
-      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ title }}</h1>
-      {% if description %}
-      <p class="text-lg text-slate-300">{{ description }}</p>
-      {% endif %}
+      <a class="text-sm font-medium text-stone-600 hover:text-stone-900" href="/work/">← Work</a>
+      <h1 class="text-4xl font-semibold tracking-tight text-stone-900">{{ title }}</h1>
+      {% if description %}<p class="text-lg text-stone-700">{{ description }}</p>{% endif %}
       {% if websiteUrl or githubUrl %}
       <div class="flex flex-wrap gap-3 text-sm">
-        {% if websiteUrl %}
-        <a
-          class="inline-flex items-center gap-2 rounded-full border border-sky-500 px-4 py-2 font-semibold text-sky-300 transition hover:bg-sky-500/10"
-          href="{{ websiteUrl }}"
-          target="_blank"
-          rel="noopener"
-        >
-          Visit site
-          <span aria-hidden="true">↗</span>
-        </a>
-        {% endif %}
-        {% if githubUrl %}
-        <a
-          class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-4 py-2 font-semibold text-slate-200 transition hover:border-sky-500 hover:text-sky-300"
-          href="{{ githubUrl }}"
-          target="_blank"
-          rel="noopener"
-        >
-          View source
-          <span aria-hidden="true">↗</span>
-        </a>
-        {% endif %}
+        {% if websiteUrl %}<a class="btn-primary" href="{{ websiteUrl }}" target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>{% endif %}
+        {% if githubUrl %}<a class="btn-secondary" href="{{ githubUrl }}" target="_blank" rel="noopener">View source <span aria-hidden="true">↗</span></a>{% endif %}
       </div>
       {% endif %}
     </header>
-    <div class="prose prose-invert prose-lg max-w-none">
-      {{ content | safe }}
-    </div>
+    <div class="prose prose-stone prose-lg max-w-none">{{ content | safe }}</div>
   </article>
 </main>

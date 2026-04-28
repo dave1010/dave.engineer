@@ -1,22 +1,16 @@
 ---
 layout: base.njk
 ---
-<main class="px-6 py-16 sm:px-10">
+<main class="px-6 py-12 sm:px-8">
   <article class="mx-auto flex max-w-3xl flex-col gap-8">
     {% if title or sectionLabel or description %}
-      <header class="flex flex-col gap-4 text-slate-100">
-        {% if sectionLabel %}
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">{{ sectionLabel }}</p>
-        {% endif %}
-        {% if title %}
-          <h1 class="text-3xl font-semibold text-slate-100 sm:text-4xl">{{ title }}</h1>
-        {% endif %}
-        {% if description %}
-          <p class="text-lg text-slate-300">{{ description }}</p>
-        {% endif %}
+      <header class="space-y-3 text-stone-900">
+        {% if sectionLabel %}<p class="section-kicker">{{ sectionLabel }}</p>{% endif %}
+        {% if title %}<h1 class="text-4xl font-semibold tracking-tight">{{ title }}</h1>{% endif %}
+        {% if description %}<p class="text-lg text-stone-700">{{ description }}</p>{% endif %}
       </header>
     {% endif %}
-    <div class="prose prose-invert prose-lg max-w-none">
+    <div class="prose prose-stone prose-lg max-w-none">
       {{ content | safe }}
     </div>
   </article>
