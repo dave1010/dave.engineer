@@ -18,24 +18,22 @@ layout: base.njk
     <link rel="canonical" href="{{ redirectUrl | escape }}">
   {% endset %}
 {% endif %}
-<main class="px-3 py-8 sm:px-5 sm:py-10">
+<main class="px-4 py-8 sm:px-8 sm:py-10">
 {% from "components/blog-meta.njk" import renderPostHeader %}
-  <article
-    class="blog-post mx-auto flex max-w-3xl flex-col gap-10 rounded-3xl border border-slate-800/60 bg-slate-900/40 px-3 py-8 sm:px-5 sm:py-6"
-  >
+  <article class="blog-post shell-card mx-auto flex max-w-3xl flex-col gap-10 px-4 py-8 sm:px-6 sm:py-6">
     {{
       renderPostHeader(title, isoDate, displayDate, topicTagLinks, topicTags, {
         type: type,
         typeLabel: typeLabel,
         typeOptions: {
-          variantOverride: "border-amber-400/40 bg-amber-500/10 text-amber-100"
+          variantOverride: "border-amber-300 bg-amber-50 text-amber-800"
         }
       })
       | safe
     }}
-    <div class="space-y-6 rounded border border-amber-400/30 bg-amber-400/10 p-6 text-amber-100">
+    <div class="space-y-6 rounded border border-amber-300 bg-amber-50 p-6 text-amber-900">
       <p class="text-lg font-medium">{{ externalSourceMessage }}</p>
-      <p class="text-base text-amber-50/80">
+      <p class="text-base text-amber-900/80">
         {% if excerpt %}
           {{ excerpt }}
         {% else %}
@@ -43,19 +41,14 @@ layout: base.njk
         {% endif %}
       </p>
       {% if redirectUrl %}
-      <a
-        class="inline-flex items-center gap-2 rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-400"
-        href="{{ redirectUrl }}"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <a class="inline-flex items-center gap-2 rounded-md border border-amber-400 bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-900 transition hover:border-amber-500" href="{{ redirectUrl }}" rel="noopener noreferrer" target="_blank">
         {{ externalCtaLabel }}
         <span aria-hidden="true">↗</span>
       </a>
       {% endif %}
     </div>
     {% if content | trim %}
-    <div class="prose prose-invert prose-lg max-w-none">
+    <div class="prose prose-lg max-w-none">
       {{ content | safe }}
     </div>
     {% endif %}
