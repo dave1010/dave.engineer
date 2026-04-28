@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
   <link rel="stylesheet" href="/style.css">
@@ -23,40 +23,30 @@
 </head>
 <body class="relative min-h-screen overflow-x-hidden">
   <div class="relative z-10 flex min-h-screen flex-col">
-    <header class="mx-auto w-full max-w-5xl px-6 pb-4 pt-8 sm:px-8">
-      <div class="paper-panel flex flex-col gap-6 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-        <a href="/" class="text-sm font-semibold uppercase tracking-[0.24em] text-stone-700 hover:text-stone-950">
-          dave.engineer
-        </a>
+    <header class="mx-auto w-full max-w-6xl px-4 pb-4 pt-7 sm:px-8">
+      <div class="paper-panel flex flex-col gap-5 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <a href="/" class="text-lg font-semibold uppercase tracking-[0.2em] text-slate-900 hover:text-blue-700">dave.engineer</a>
         {% if navigation and navigation | length %}
-        <nav class="flex flex-wrap items-center gap-5 text-sm font-medium text-stone-700">
-          {% for link in navigation %}
-          <a class="hover:text-stone-950" href="{{ link.href }}">{{ link.label }}</a>
-          {% endfor %}
+        <nav class="flex flex-wrap items-center gap-4 text-sm font-semibold uppercase tracking-[0.08em] text-slate-800">
+          {% for link in navigation %}<a class="hover:text-blue-700" href="{{ link.href }}">{{ link.label }}</a>{% endfor %}
         </nav>
         {% endif %}
       </div>
     </header>
-    <main class="flex-1">
-      {{ content | safe }}
-    </main>
-    <footer class="mx-auto w-full max-w-5xl px-6 pb-10 pt-2 sm:px-8">
-      <div class="flex flex-col gap-4 border-t border-stone-300 pt-6 text-sm text-stone-600 sm:flex-row sm:items-center sm:justify-between">
-        <nav class="flex flex-wrap items-center gap-4 text-sm font-medium text-stone-700">
-          <a class="hover:text-stone-950" href="/">Home</a>
+    <main class="flex-1">{{ content | safe }}</main>
+    <footer class="mx-auto w-full max-w-6xl px-4 pb-10 pt-2 sm:px-8">
+      <div class="flex flex-col gap-4 border-t-[3px] border-slate-900 pt-5 text-sm text-slate-700 sm:flex-row sm:items-center sm:justify-between">
+        <nav class="flex flex-wrap items-center gap-4 text-sm font-semibold uppercase tracking-[0.08em] text-slate-800">
+          <a class="hover:text-blue-700" href="/">Home</a>
           {% if navigation and navigation | length %}
-            {% for link in navigation %}
-            <a class="hover:text-stone-950" href="{{ link.href }}">{{ link.label }}</a>
-            {% endfor %}
+            {% for link in navigation %}<a class="hover:text-blue-700" href="{{ link.href }}">{{ link.label }}</a>{% endfor %}
           {% endif %}
         </nav>
-        <p class="text-xs text-stone-500">© Dave Hulbert</p>
+        <p class="text-xs font-medium uppercase tracking-[0.12em] text-slate-600">© Dave Hulbert</p>
       </div>
     </footer>
   </div>
-  {% if scripts %}
-    {{ scripts | safe }}
-  {% endif %}
+  {% if scripts %}{{ scripts | safe }}{% endif %}
   <script type="module" src="/js/site.js"></script>
 </body>
 </html>

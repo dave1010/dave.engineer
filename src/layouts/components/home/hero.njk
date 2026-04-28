@@ -1,58 +1,38 @@
 {% macro renderHomeHero(hero) %}
-  <section class="paper-panel grid gap-10 px-6 py-8 sm:px-10 sm:py-10 lg:grid-cols-[minmax(0,1.2fr)_340px]">
-    <div class="space-y-8">
-      <div class="space-y-4">
-        {% if hero.badgeLabel %}
-        <p class="section-kicker">{{ hero.badgeLabel }}</p>
+  <section class="paper-panel grid gap-8 px-5 py-6 sm:px-8 sm:py-8 lg:grid-cols-[1.3fr_0.7fr]">
+    <div class="space-y-7">
+      <div class="space-y-3 border-b-[3px] border-slate-900 pb-5">
+        <p class="section-kicker">Front Page • Special Edition</p>
+        <h1 class="text-5xl font-semibold uppercase leading-[0.92] tracking-tight text-slate-950 sm:text-6xl">
+          {% if hero.name %}{{ hero.name }}{% else %}Dave Hulbert{% endif %}
+        </h1>
+        {% if hero.subtitle %}
+        <p class="text-base font-semibold uppercase tracking-[0.12em] text-blue-700">{{ hero.subtitle }}</p>
         {% endif %}
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <img
-            src="/img/dave.jpg"
-            alt="Dave Hulbert"
-            width="120"
-            height="120"
-            class="h-24 w-24 rounded-2xl border border-stone-300 object-cover"
-            loading="lazy"
-          >
-          <div class="space-y-2">
-            {% if hero.name %}
-            <h1 class="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">{{ hero.name }}</h1>
-            {% endif %}
-            {% if hero.subtitle %}
-            <p class="text-sm font-medium uppercase tracking-[0.2em] text-stone-500">{{ hero.subtitle }}</p>
-            {% endif %}
-          </div>
-        </div>
       </div>
 
-      {% if hero.paragraphs and hero.paragraphs | length %}
-      <div class="space-y-4 text-lg leading-relaxed text-stone-700">
-        {% for paragraph in hero.paragraphs %}
-        <p>{{ paragraph }}</p>
-        {% endfor %}
+      <div class="grid gap-5 md:grid-cols-[120px_minmax(0,1fr)] md:items-start">
+        <img src="/img/dave.jpg" alt="Dave Hulbert" width="120" height="120" class="h-28 w-28 border-[3px] border-slate-900 object-cover" loading="lazy">
+        {% if hero.paragraphs and hero.paragraphs | length %}
+        <div class="space-y-4 text-lg leading-relaxed text-slate-800">
+          {% for paragraph in hero.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
 
       {% if hero.ctas and hero.ctas | length %}
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-3 border-t-[3px] border-slate-900 pt-4">
         {% for cta in hero.ctas %}
-        <a class="{{ 'btn-primary' if loop.index == 1 else 'btn-secondary' }}" href="{{ cta.href }}">
-          {{ cta.label }}
-          {% if cta.trailingIcon %}
-          <span aria-hidden="true">{{ cta.trailingIcon }}</span>
-          {% endif %}
-        </a>
+        <a class="{{ 'btn-primary' if loop.index == 1 else 'btn-secondary' }}" href="{{ cta.href }}">{{ cta.label }}{% if cta.trailingIcon %}<span aria-hidden="true">{{ cta.trailingIcon }}</span>{% endif %}</a>
         {% endfor %}
       </div>
       {% endif %}
     </div>
 
     <aside class="space-y-5">
-      <div class="rounded-2xl border border-stone-300 bg-white/70 p-5">
-        <p class="section-kicker">Design intent</p>
-        <p class="mt-3 text-sm leading-relaxed text-stone-700">
-          Calm, readable, and durable over novelty. Fewer visual effects, more hierarchy, spacing, and useful navigation.
-        </p>
+      <div class="border-[3px] border-slate-900 bg-amber-100 p-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-800">Randomized direction</p>
+        <p class="mt-3 text-sm font-medium text-slate-800">Monochrome newspaper revival + cream/cobalt/orange + condensed headlines + brutal borders.</p>
       </div>
 
       <div class="terminal-panel" data-terminal-root>
@@ -60,22 +40,16 @@
           <span class="terminal-dot terminal-dot--close" aria-hidden="true"></span>
           <span class="terminal-dot terminal-dot--minimize" aria-hidden="true"></span>
           <span class="terminal-dot terminal-dot--zoom" aria-hidden="true"></span>
-          <p class="ml-2 text-xs uppercase tracking-[0.22em] text-stone-500">Ask the site</p>
+          <p class="ml-2 text-xs uppercase tracking-[0.22em] text-amber-200">City Desk Terminal</p>
         </div>
         <div class="terminal-body" data-terminal>
           <div class="terminal-output" data-terminal-output>
-            <div class="terminal-line">
-              <span class="terminal-line__prompt">$</span>
-              <span class="terminal-line__command">help</span>
-            </div>
-            <pre class="terminal-block">Try: blog, work, latest post</pre>
+            <div class="terminal-line"><span class="terminal-line__prompt">$</span><span class="terminal-line__command">headlines</span></div>
+            <pre class="terminal-block">blog • work • now</pre>
           </div>
           <form class="terminal-form" data-terminal-form autocomplete="off">
             <label class="sr-only" for="terminal-input">Enter a command</label>
-            <div class="terminal-input-row">
-              <span class="terminal-line__prompt">$</span>
-              <input id="terminal-input" class="terminal-input" type="text" data-terminal-input name="command" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input">
-            </div>
+            <div class="terminal-input-row"><span class="terminal-line__prompt">$</span><input id="terminal-input" class="terminal-input" type="text" data-terminal-input name="command" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input"></div>
           </form>
         </div>
       </div>
