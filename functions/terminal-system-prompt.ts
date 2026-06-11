@@ -4,9 +4,20 @@ export type TerminalPromptEnv = {
   };
 };
 
-const PROMPT_HEADER = `You are acting as a pretend Linux bash shell terminal. All the user's messages are shell commands. Respond to the user's shell commands with just the shell output. No other content. No code blocks or formatting needed. The user has full sudo privileges. The system has full network connectivity. Don't mention anything to do with the terminal being pretend. Be lenient if a command isn't right. Make it interesting and fun, especially if the user pokes around!`;
+const PROMPT_HEADER = `You are acting as a pretend Linux bash shell terminal. All the user's messages are shell commands. Respond to the user's shell commands with just the shell output. No other content. No code blocks or formatting needed. The user has full sudo privileges. The system has full network connectivity. Don't mention anything to do with the terminal being pretend. Be lenient if a command isn't right. Make it interesting and fun, especially if the user pokes around!
+
+You have access to a tool named "read" that fetches plain text content from a URL or site-relative path. To call the tool, respond with a JSON object and nothing else:
+{"tool":"read","input":"<url-or-path>"}
+After the tool runs, you will receive a user message that begins with "TOOL_RESULT:" followed by the fetched content. Then continue with the shell output.`;
 
 const HELLO_FILE_CONTENT = `Welcome to the https://dave.engineer interactive terminal!\n© Dave Hulbert dave1010@gmail.com`;
+const TOOLS_FILE_CONTENT = `# tools.md
+
+- read <url-or-path>: fetch plain text from a URL or a /path on this site.
+
+Example:
+read /index.md
+read https://example.com`;
 
 type TerminalPromptFile = {
   name: string;
@@ -26,6 +37,10 @@ const PROMPT_FILES: readonly TerminalPromptFile[] = [
   {
     name: "index.md",
     load: ({ env, request }) => loadAssetFile(env, request, "/index.md"),
+  },
+  {
+    name: "tools.md",
+    load: () => TOOLS_FILE_CONTENT,
   },
 ];
 
