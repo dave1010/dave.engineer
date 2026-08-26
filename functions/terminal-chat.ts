@@ -52,8 +52,8 @@ const readJSON = async <T>(req: Request): Promise<T | null> => {
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const apiKey = env.GROK_KEY?.trim() || env.GROQ_API_KEY?.trim();
   if (!apiKey) {
-    return json({ error: "Missing binding 'GROK_KEY' on this deployment." }, 500, {
-      "X-Missing-Binding": "GROK_KEY",
+    return json({ error: "Missing binding 'GROK_KEY' or 'GROQ_API_KEY' on this deployment." }, 500, {
+      "X-Missing-Binding": "GROK_KEY,GROQ_API_KEY",
     });
   }
 
