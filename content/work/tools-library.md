@@ -13,7 +13,7 @@ The Tools Library brings together quick, focused utilities that remove friction 
 
 The site was inspired by [tools.simonwillison.net](https://tools.simonwillison.net/). As with Simon's, it's all open source and the the tools are nearly all *vibe coded*. For me, the site serves as a testbed for trying out different AI coding agents.
 
-One of my favourite tools *is* a coding agent, of sorts: [Prompt to Web Page](https://tools.dave.engineer/tools/prompt-to-web-page/). It uses the GPT-OSS-120B LLM, running on Cerebras. Type something like
+One of my favourite tools *is* a coding agent, of sorts: [Prompt to Web Page](https://tools.dave.engineer/tools/prompt-to-web-page/). It uses the GPT-OSS-120B LLM, running on Groq. Type something like
 
 > Tic tac toe but with animals
 

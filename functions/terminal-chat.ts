@@ -1,15 +1,20 @@
 // functions/terminal-chat.ts
-import type { PagesFunction } from "@cloudflare/workers-types";
 import type { TerminalPromptEnv } from "./terminal-system-prompt";
 import { buildTerminalSystemPrompt } from "./terminal-system-prompt";
 
 type Env = TerminalPromptEnv & {
-  CEREBRAS_API_KEY?: string;
+  GROK_KEY?: string;
+  GROQ_API_KEY?: string;
   /** Optional: override to point at CF AI Gateway or a mock */
-  CEREBRAS_API_URL?: string;
+  GROQ_API_URL?: string;
   /** Optional: set "1" to expose a small debug header */
   DEBUG?: string;
 };
+
+type PagesFunction<FunctionEnv> = (context: {
+  request: Request;
+  env: FunctionEnv;
+}) => Response | Promise<Response>;
 
 type ChatPayload = {
   model?: string;
@@ -23,7 +28,7 @@ type ChatPayload = {
   response_format?: Record<string, unknown>;
 };
 
-const DEFAULT_API_URL = "https://api.cerebras.ai/v1/chat/completions";
+const DEFAULT_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MAX_HISTORY_MESSAGES = 50;
 export const MAX_MESSAGE_LENGTH = 2000;
 const THINK_PATTERN = /<think>[\s\S]*?<\/think>/g;
@@ -43,12 +48,12 @@ const readJSON = async <T>(req: Request): Promise<T | null> => {
   }
 };
 
-/* ---------- POST (proxy to Cerebras) ---------- */
+/* ---------- POST (proxy to Groq) ---------- */
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  const apiKey = env.CEREBRAS_API_KEY?.trim();
+  const apiKey = env.GROK_KEY?.trim() || env.GROQ_API_KEY?.trim();
   if (!apiKey) {
-    return json({ error: "Missing binding 'CEREBRAS_API_KEY' on this deployment." }, 500, {
-      "X-Missing-Binding": "CEREBRAS_API_KEY",
+    return json({ error: "Missing binding 'GROK_KEY' on this deployment." }, 500, {
+      "X-Missing-Binding": "GROK_KEY",
     });
   }
 
@@ -66,11 +71,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   for (const entry of messages) {
     if (!entry || typeof entry !== "object") continue;
+    const message = entry as Record<string, unknown>;
     const role =
-      typeof (entry as Record<string, unknown>).role === "string"
-        ? (entry as Record<string, unknown>).role.trim().toLowerCase()
-        : "";
-    const content = (entry as Record<string, unknown>).content;
+      typeof message.role === "string" ? message.role.trim().toLowerCase() : "";
+    const content = message.content;
     if (role !== "user" && role !== "assistant") continue;
     if (typeof content !== "string" || content.trim() === "") continue;
 
@@ -100,19 +104,18 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   ];
 
   const outgoing: Record<string, unknown> = {
-    model: "gpt-oss-120b",
+    model: "openai/gpt-oss-120b",
     messages: outgoingMessages,
     stream: false,
   };
 
-  const apiURL = env.CEREBRAS_API_URL?.trim() || DEFAULT_API_URL;
+  const apiURL = env.GROQ_API_URL?.trim() || DEFAULT_API_URL;
 
   const upstreamInit: RequestInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // Cerebras auth is a Bearer token
-      Authorization: `Bearer ${apiKey}`, // 3
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify(outgoing),
   };
@@ -121,8 +124,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   try {
     upstream = await fetch(apiURL, upstreamInit);
   } catch (err) {
-    console.error("Cerebras proxy request failed", err);
-    return json({ error: "Failed to reach Cerebras API" }, 502);
+    console.error("Groq proxy request failed", err);
+    return json({ error: "Failed to reach Groq API" }, 502);
   }
 
   // Prepare response headers: pass-through + no-store
@@ -131,7 +134,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   headers.delete("www-authenticate");
 
   // Optional small debug signal (does not leak secrets)
-  if (env.DEBUG === "1") headers.set("X-Has-Cerebras-Key", "1");
+  if (env.DEBUG === "1") headers.set("X-Has-Groq-Key", "1");
 
   // Stream or buffer depending on caller's request
   if (outgoing.stream === true) {

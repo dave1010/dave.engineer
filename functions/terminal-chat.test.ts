@@ -1,10 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   MAX_MESSAGE_LENGTH,
+  onRequestPost,
   sanitizeUpstreamText,
   stripThinkingSegments,
   truncateContent,
 } from "./terminal-chat";
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 describe("terminal chat helpers", () => {
   it("removes <think> segments from assistant output", () => {
@@ -59,5 +64,51 @@ describe("terminal chat helpers", () => {
   it("sanitizes plain string payloads", () => {
     const raw = "Hello<think>trace</think> world";
     expect(sanitizeUpstreamText(raw)).toBe("Hello world");
+  });
+
+  it("proxies chat requests to Groq using the configured key and model", async () => {
+    const upstreamFetch = vi.fn(async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      return new Response(JSON.stringify({ choices: [{ message: { content: "ok" } }] }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      });
+    });
+    vi.stubGlobal("fetch", upstreamFetch);
+
+    const assetFetch = vi.fn(async () => {
+      return new Response("Home page content", { status: 200 });
+    });
+
+    const response = await onRequestPost({
+      request: new Request("https://dave.engineer/terminal-chat", {
+        method: "POST",
+        body: JSON.stringify({ messages: [{ role: "user", content: "echo hi" }] }),
+      }),
+      env: {
+        ASSETS: { fetch: assetFetch },
+        GROK_KEY: "test-groq-key",
+      },
+    } as Parameters<typeof onRequestPost>[0]);
+
+    expect(response.status).toBe(200);
+    expect(upstreamFetch).toHaveBeenCalledOnce();
+    const [url, init] = upstreamFetch.mock.calls[0];
+    expect(url).toBe("https://api.groq.com/openai/v1/chat/completions");
+    expect(init?.headers).toMatchObject({
+      "Content-Type": "application/json",
+      Authorization: "Bearer test-groq-key",
+    });
+
+    const body = JSON.parse(String(init?.body)) as {
+      model: string;
+      messages: Array<{ role: string; content: string }>;
+      stream: boolean;
+    };
+    expect(body.model).toBe("openai/gpt-oss-120b");
+    expect(body.stream).toBe(false);
+    expect(body.messages[body.messages.length - 1]).toEqual({
+      role: "user",
+      content: "echo hi",
+    });
   });
 });
