@@ -3,7 +3,7 @@ import type { TerminalPromptEnv } from "./terminal-system-prompt";
 import { buildTerminalSystemPrompt } from "./terminal-system-prompt";
 
 type Env = TerminalPromptEnv & {
-  GROQ_API_KEY?: string;
+  GROQ_API_KEY2?: string;
   /** Optional: override to point at CF AI Gateway or a mock */
   GROQ_API_URL?: string;
   /** Optional: set "1" to expose a small debug header */
@@ -49,10 +49,10 @@ const readJSON = async <T>(req: Request): Promise<T | null> => {
 
 /* ---------- POST (proxy to Groq) ---------- */
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  const apiKey = env.GROQ_API_KEY?.trim();
+  const apiKey = env.GROQ_API_KEY2?.trim();
   if (!apiKey) {
-    return json({ error: "Missing binding 'GROQ_API_KEY' on this deployment." }, 500, {
-      "X-Missing-Binding": "GROQ_API_KEY",
+    return json({ error: "Missing binding 'GROQ_API_KEY2' on this deployment." }, 500, {
+      "X-Missing-Binding": "GROQ_API_KEY2",
     });
   }
 

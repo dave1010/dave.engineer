@@ -86,7 +86,7 @@ describe("terminal chat helpers", () => {
       }),
       env: {
         ASSETS: { fetch: assetFetch },
-        GROQ_API_KEY: "test-groq-key",
+        GROQ_API_KEY2: "test-groq-key",
       },
     } as Parameters<typeof onRequestPost>[0]);
 
