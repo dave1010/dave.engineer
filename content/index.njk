@@ -6,8 +6,8 @@ title: Dave Hulbert - Engineer
 {% from "components/home/featured-work.njk" import renderFeaturedWorkSection %}
 {% from "components/home/social.njk" import renderSocialSection %}
 {% from "components/home/recent-posts.njk" import renderRecentPostsSection %}
-<main class="px-4 pb-24 pt-4 sm:px-10">
-  <div class="mx-auto max-w-6xl space-y-24">
+<main class="px-6 pb-24 sm:px-10">
+  <div class="mx-auto max-w-6xl space-y-20">
     {{ renderHomeHero(home.hero) | safe }}
     {{ renderFeaturedWorkSection(collections.workItems, home.featuredWork) | safe }}
     {{ renderSocialSection(home.social, social) | safe }}

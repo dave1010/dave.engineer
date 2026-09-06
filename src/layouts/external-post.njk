@@ -21,21 +21,21 @@ layout: base.njk
 <main class="px-3 py-8 sm:px-5 sm:py-10">
 {% from "components/blog-meta.njk" import renderPostHeader %}
   <article
-    class="blog-post mx-auto flex max-w-3xl flex-col gap-10 rounded-3xl border border-slate-800/60 bg-slate-900/40 px-3 py-8 sm:px-5 sm:py-6"
+    class="blog-post mx-auto flex max-w-3xl flex-col gap-10 border-t border-stone-800 px-1 py-8 sm:px-2 sm:py-10"
   >
     {{
       renderPostHeader(title, isoDate, displayDate, topicTagLinks, topicTags, {
         type: type,
         typeLabel: typeLabel,
         typeOptions: {
-          variantOverride: "border-amber-400/40 bg-amber-500/10 text-amber-100"
+          variantOverride: "text-amber-300"
         }
       })
       | safe
     }}
-    <div class="space-y-6 rounded border border-amber-400/30 bg-amber-400/10 p-6 text-amber-100">
+    <div class="space-y-6 border-y border-stone-700 py-6 text-stone-300">
       <p class="text-lg font-medium">{{ externalSourceMessage }}</p>
-      <p class="text-base text-amber-50/80">
+      <p class="text-base text-stone-400">
         {% if excerpt %}
           {{ excerpt }}
         {% else %}
@@ -44,7 +44,7 @@ layout: base.njk
       </p>
       {% if redirectUrl %}
       <a
-        class="inline-flex items-center gap-2 rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-amber-400"
+        class="text-link"
         href="{{ redirectUrl }}"
         rel="noopener noreferrer"
         target="_blank"

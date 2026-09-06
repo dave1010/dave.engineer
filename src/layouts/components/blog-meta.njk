@@ -1,6 +1,6 @@
 {% set DEFAULT_TAG_CONTAINER_CLASSES = "flex flex-wrap gap-2" %}
-{% set DEFAULT_TAG_CLASSES = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-xs font-semibold tracking-wide text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
-{% set DEFAULT_TYPE_BASE_CLASSES = "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide" %}
+{% set DEFAULT_TAG_CLASSES = "text-xs text-stone-500 underline decoration-stone-700 underline-offset-4 transition hover:text-orange-200" %}
+{% set DEFAULT_TYPE_BASE_CLASSES = "text-xs font-medium" %}
 
 {% macro tagContainerClasses(extra = "") %}
   {{ (DEFAULT_TAG_CONTAINER_CLASSES ~ (" " ~ extra if extra)) | trim }}
@@ -43,19 +43,19 @@
 
 {% macro renderPostHeader(title, isoDate, displayDate, topicTagLinks = [], topicTags = [], options = {}) %}
   {% set containerClasses = options.containerClasses or "space-y-5" %}
-  {% set headingClasses = options.headingClasses or "text-4xl font-semibold tracking-tight text-slate-100" %}
+  {% set headingClasses = options.headingClasses or "font-serif text-4xl font-semibold tracking-tight text-stone-100" %}
   {% set breadcrumbHref = options.breadcrumbHref or "/blog/" %}
   {% set breadcrumbLabel = options.breadcrumbLabel or "Blog" %}
   {% set showBreadcrumb = options.showBreadcrumb | default(true) %}
-  {% set dateClasses = options.dateClasses or "text-base text-slate-400" %}
-  {% set metadataRowClasses = options.metadataRowClasses or "flex flex-wrap items-center gap-3 text-sm text-slate-400" %}
+  {% set dateClasses = options.dateClasses or "text-base text-stone-500" %}
+  {% set metadataRowClasses = options.metadataRowClasses or "flex flex-wrap items-center gap-3 text-sm text-stone-500" %}
   {% set typeOptions = options.typeOptions or {} %}
   {% set typeValue = options.type or options.postType %}
   {% set typeLabel = options.typeLabel or options.postTypeLabel %}
   {% set showType = options.showTypeBadge | default(typeValue or typeLabel) %}
   <header class="{{ containerClasses }}">
     {% if showBreadcrumb %}
-    <a class="text-sm font-medium uppercase tracking-wide text-slate-400 hover:text-slate-200" href="{{ breadcrumbHref }}">{{ breadcrumbLabel }}</a>
+    <a class="text-sm text-stone-500 hover:text-orange-200" href="{{ breadcrumbHref }}">← {{ breadcrumbLabel }}</a>
     {% endif %}
     <h1 class="{{ headingClasses }}">{{ title }}</h1>
     {% if displayDate or showType %}
@@ -80,9 +80,9 @@
   {% set baseClasses = options.baseClasses or DEFAULT_TYPE_BASE_CLASSES %}
   {% set extraClasses = options.extraClasses or "" %}
   {% set variants = {
-    "post": "border-sky-400/40 bg-sky-500/10 text-sky-200",
-    "til": "border-lime-400/40 bg-lime-400/10 text-lime-100",
-    "external": "border-amber-400/40 bg-amber-400/10 text-amber-100"
+    "post": "text-orange-300",
+    "til": "text-emerald-300",
+    "external": "text-amber-300"
   } %}
   {% set typeKey = (type | default('post')) | lower %}
   {% set labelMap = {
@@ -96,7 +96,7 @@
 {% endmacro %}
 
 {% macro renderPostCta(url, label, options = {}) %}
-  {% set classes = options.classes or "inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" %}
+  {% set classes = options.classes or "text-link" %}
   {% set icon = options.icon or "→" %}
   {% set rel = options.rel %}
   {% set target = options.target %}
