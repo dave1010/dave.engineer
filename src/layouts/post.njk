@@ -1,20 +1,20 @@
 ---
 layout: base.njk
 ---
-<main class="px-3 py-8 sm:px-5 sm:py-10">
+<main class="px-4 py-8 sm:px-8 sm:py-10">
 {% from "components/blog-meta.njk" import renderPostHeader %}
-  <article class="blog-post mx-auto flex max-w-3xl flex-col gap-10 rounded-3xl border border-slate-800/60 bg-slate-900/40 px-3 py-8 sm:px-5 sm:py-6">
+  <article class="blog-post mx-auto flex max-w-3xl flex-col gap-10 shell-card px-3 py-8 sm:px-5 sm:py-6">
     {{
       renderPostHeader(title, isoDate, displayDate, topicTagLinks, topicTags, {
         type: type,
         typeLabel: typeLabel,
         typeOptions: {
-          variantOverride: "border-slate-700/70 bg-slate-900/70 text-slate-200"
+          variantOverride: "border-stone-300 bg-stone-100 text-stone-700"
         }
       })
       | safe
     }}
-    <div class="prose prose-invert prose-lg max-w-none">
+    <div class="prose prose-lg max-w-none">
       {{ content | safe }}
     </div>
 
@@ -28,7 +28,7 @@ layout: base.njk
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="dark"
+        data-theme="light"
         data-lang="en"
         crossorigin="anonymous"
         async>

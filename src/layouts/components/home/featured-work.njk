@@ -8,23 +8,19 @@
     {% endif %}
   {% endfor %}
   {% if featuredItems | length %}
-  <section class="space-y-10">
+  <section class="space-y-8">
     <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div class="space-y-2">
         {% if config.sectionLabel %}
-        <p class="text-xs uppercase tracking-[0.45em] text-slate-500">{{ config.sectionLabel }}</p>
+        <p class="text-xs uppercase tracking-[0.35em] text-stone-500">{{ config.sectionLabel }}</p>
         {% endif %}
         {% if config.sectionTitle %}
-        <h2 class="text-3xl font-semibold text-slate-100">{{ config.sectionTitle }}</h2>
+        <h2 class="text-3xl font-semibold text-stone-900">{{ config.sectionTitle }}</h2>
         {% endif %}
       </div>
       {% if config.viewAllHref and config.viewAllLabel %}
-      <a
-        class="inline-flex items-center gap-2 rounded-full border border-slate-700/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-lime-300 hover:text-lime-200"
-        href="{{ config.viewAllHref }}"
-      >
-        {{ config.viewAllLabel }}
-        <span aria-hidden="true">→</span>
+      <a class="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-stone-100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 hover:border-stone-500 hover:text-stone-900" href="{{ config.viewAllHref }}">
+        {{ config.viewAllLabel }}<span aria-hidden="true">→</span>
       </a>
       {% endif %}
     </div>

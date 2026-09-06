@@ -1,15 +1,15 @@
 {% from "components/blog-meta.njk" import renderPostTypeBadge, renderTagList, renderPostCta, tagClasses, tagContainerClasses %}
 {% macro renderPostList(posts = [], options = {}) %}
   {% set items = posts | default([]) %}
-  {% set containerClasses = options.containerClasses or "flex flex-col divide-y divide-slate-800/80 border border-slate-800/60 bg-slate-900/40" %}
-  {% set articleClasses = options.articleClasses or "group flex flex-col gap-3 px-6 py-6 transition hover:bg-slate-900/70 sm:px-8" %}
+  {% set containerClasses = options.containerClasses or "flex flex-col divide-y divide-stone-200 border border-stone-300 bg-stone-50/80" %}
+  {% set articleClasses = options.articleClasses or "group flex flex-col gap-3 px-6 py-6 transition hover:bg-stone-100/70 sm:px-8" %}
   {% set headingLevel = options.headingLevel or "h2" %}
   {% set truncateLength = options.truncateLength or 220 %}
   {% set showEmptyMessage = options.showEmptyMessage | default(false) %}
   {% set emptyMessage = options.emptyMessage or "No posts found." %}
   {% set tagLinkClasses = options.tagLinkClasses or tagClasses() %}
   {% set tagListClasses = options.tagListClasses or tagContainerClasses() %}
-  {% set ctaClasses = options.ctaClasses or "mt-2 inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300" %}
+  {% set ctaClasses = options.ctaClasses or "mt-2 inline-flex items-center gap-2 text-sm font-semibold text-stone-700 hover:text-stone-950" %}
   <div class="{{ containerClasses }}">
     {% if items | length %}
       {% for post in items %}
@@ -42,7 +42,7 @@
           {% set ctaRel = "noopener noreferrer" %}
         {% endif %}
         <article class="{{ articleClasses }}">
-          <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-400">
+          <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-stone-500">
             <div class="flex flex-wrap items-center gap-3">
               {{ renderPostTypeBadge(post.data.type, typeLabel) | safe }}
               <time datetime="{{ post.data.isoDate }}">{{ post.data.displayDate }}</time>
@@ -52,11 +52,11 @@
               tagClasses: tagLinkClasses
             }) | safe }}
           </div>
-          <{{ headingLevel }} class="text-2xl font-semibold tracking-tight text-slate-100">
-            <a class="block transition hover:text-sky-300" href="{{ post.url }}">{{ post.data.title }}</a>
+          <{{ headingLevel }} class="text-2xl font-semibold tracking-tight text-stone-900">
+            <a class="block transition hover:text-stone-600" href="{{ post.url }}">{{ post.data.title }}</a>
           </{{ headingLevel }}>
           {% if summary %}
-          <p class="text-base text-slate-300">{{ summary }}</p>
+          <p class="text-base text-stone-700">{{ summary }}</p>
           {% endif %}
           {{ renderPostCta(ctaUrl, ctaLabel, {
             classes: ctaClasses,
@@ -66,7 +66,7 @@
         </article>
       {% endfor %}
     {% elseif showEmptyMessage %}
-      <p class="px-6 py-10 text-center text-sm text-slate-400 sm:px-8">{{ emptyMessage }}</p>
+      <p class="px-6 py-10 text-center text-sm text-stone-500 sm:px-8">{{ emptyMessage }}</p>
     {% endif %}
   </div>
 {% endmacro %}
