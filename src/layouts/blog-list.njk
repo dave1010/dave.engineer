@@ -14,59 +14,59 @@ layout: base.njk
 {% endfor %}
 {% set tagList = collections.blogTags | default([]) %}
 {% set tagLinkClasses = tagClasses() %}
-{% set tagCountClasses = "rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400" %}
-{% set paginationButtonClasses = "inline-flex items-center gap-2 rounded-full border border-slate-700/60 bg-slate-900/60 px-3 py-1 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-slate-100" %}
-{% set paginationActiveClasses = "border-sky-500/80 text-sky-200" %}
+{% set tagCountClasses = "rounded-full border border-stone-300 bg-stone-100 px-2 py-0.5 text-[0.65rem] font-medium text-stone-500" %}
+{% set paginationButtonClasses = "inline-flex items-center gap-2 rounded-full border border-stone-300 bg-stone-100 px-3 py-1 text-sm font-medium text-stone-700 transition hover:border-stone-700 hover:text-stone-900" %}
+{% set paginationActiveClasses = "border-stone-800 text-stone-900" %}
 <main class="px-6 py-16 sm:px-10">
   <div class="mx-auto flex max-w-4xl flex-col gap-12">
     <header class="space-y-4">
       <a
-        class="inline-flex items-center gap-2 text-sm font-medium text-sky-400 hover:text-sky-300"
+        class="inline-flex items-center gap-2 text-sm font-medium text-stone-600 hover:text-stone-900"
         href="/"
       >
         <span aria-hidden="true">←</span>
         Back to home
       </a>
-      <p class="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Archive</p>
-      <h1 class="text-4xl font-semibold tracking-tight text-slate-100">{{ listTitle or "Writing" }}</h1>
+      <p class="eyebrow">Archive</p>
+      <h1 class="text-4xl font-semibold tracking-tight text-stone-900">{{ listTitle or "Writing" }}</h1>
       {% if listDescription %}
-        <p class="text-lg text-slate-300">{{ listDescription }}</p>
+        <p class="text-lg text-stone-600">{{ listDescription }}</p>
       {% endif %}
     </header>
 
     {% if typeGroups | length %}
     <nav aria-label="Filter posts by type" class="flex flex-col gap-3">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Filter by type</p>
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Filter by type</p>
       <ul class="flex flex-wrap gap-2">
         <li>
           {% set isAllActive = not currentType %}
           <a
             href="/blog/"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-800/70 bg-slate-900/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition hover:border-slate-700 hover:text-slate-100 {{ "border-sky-500/80 text-sky-200" if isAllActive }}"
+            class="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-stone-100 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition hover:border-stone-700 hover:text-stone-900 {{ "border-stone-800 text-stone-900" if isAllActive }}"
             {% if isAllActive %}aria-current="page"{% endif %}
           >
             All
-            <span class="rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400">{{ totalCount }}</span>
+            <span class="{{ tagCountClasses }}">{{ totalCount }}</span>
           </a>
         </li>
         {% for group in typeGroups %}
         <li>
           {% set isActive = currentType == group.type %}
-          {% set badgeClasses = "" %}
-          {% if group.type == "post" %}
-            {% set badgeClasses = "border-sky-500/80 text-sky-200" %}
-          {% elseif group.type == "til" %}
-            {% set badgeClasses = "border-lime-500/80 text-lime-200" %}
-          {% elseif group.type == "external" %}
-            {% set badgeClasses = "border-amber-500/80 text-amber-200" %}
-          {% endif %}
+            {% set badgeClasses = "" %}
+            {% if group.type == "post" %}
+            {% set badgeClasses = "border-stone-800 text-stone-900" %}
+            {% elseif group.type == "til" %}
+            {% set badgeClasses = "border-amber-400 text-amber-800" %}
+            {% elseif group.type == "external" %}
+            {% set badgeClasses = "border-blue-300 text-blue-800" %}
+            {% endif %}
           <a
             href="{{ group.permalink }}"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-800/70 bg-slate-900/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition hover:border-slate-700 hover:text-slate-100 {{ badgeClasses if isActive }}"
+            class="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-stone-100 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition hover:border-stone-700 hover:text-stone-900 {{ badgeClasses if isActive }}"
             {% if isActive %}aria-current="page"{% endif %}
           >
             {{ group.label }}
-            <span class="rounded-full border border-slate-700/60 bg-slate-950/60 px-2 py-0.5 text-[0.65rem] font-medium text-slate-400">{{ group.count }}</span>
+            <span class="{{ tagCountClasses }}">{{ group.count }}</span>
           </a>
         </li>
         {% endfor %}
@@ -78,15 +78,15 @@ layout: base.njk
     {% set tagPreview = tagList.slice(0, 12) %}
     <section class="space-y-3">
       <div class="flex items-center justify-between gap-4">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Browse by tag</p>
-        <a class="text-xs font-semibold tracking-wide text-sky-300 transition hover:text-sky-200" href="/blog/tag/">View all tags →</a>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Browse by tag</p>
+        <a class="text-xs font-semibold tracking-wide text-stone-700 transition hover:text-stone-900" href="/blog/tag/">View all tags →</a>
       </div>
       <div class="{{ tagContainerClasses() }}">
         {% for tag in tagPreview %}
         {% set isCurrentTag = currentTagSlug and currentTagSlug == tag.slug %}
         <a
           href="{{ tag.permalink }}"
-          class="{{ tagLinkClasses }} {{ "border-sky-500/80 text-sky-200" if isCurrentTag }}"
+          class="{{ tagLinkClasses }} {{ "border-stone-800 text-stone-900" if isCurrentTag }}"
           {% if isCurrentTag %}aria-current="page"{% endif %}
         >
           {{ tag.name | lower }}
@@ -98,7 +98,7 @@ layout: base.njk
     {% endif %}
 
     {% if content | trim %}
-      <div class="prose prose-invert max-w-none">{{ content | safe }}</div>
+      <div class="prose max-w-none">{{ content | safe }}</div>
     {% endif %}
 
     {{ renderPostList(postsToRender, {
@@ -109,7 +109,7 @@ layout: base.njk
 
     {% if listingPagination and listingPagination.totalPages > 1 %}
     <nav aria-label="Pagination" class="flex flex-col items-center gap-3 pt-6">
-      <p class="text-sm text-slate-400">Page {{ listingPagination.currentPage }} of {{ listingPagination.totalPages }}</p>
+      <p class="text-sm text-stone-500">Page {{ listingPagination.currentPage }} of {{ listingPagination.totalPages }}</p>
       <div class="flex flex-wrap items-center justify-center gap-3">
         {% if listingPagination.previous %}
         <a class="{{ paginationButtonClasses }}" href="{{ listingPagination.previous.url }}">
