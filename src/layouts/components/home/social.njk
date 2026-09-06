@@ -1,23 +1,22 @@
 {% macro renderSocialSection(config, links) %}
   {% if links and links | length %}
-  <section class="relative rounded-[2.75rem] border border-slate-800/60 bg-slate-950/70 p-4 shadow-glow sm:p-16">
-    <div class="absolute inset-0 dot-matrix rounded-[2.75rem] opacity-20"></div>
-    <div class="relative z-10 space-y-6">
+  <section class="paper-frame p-6 sm:p-10">
+    <div class="space-y-6">
       {% if config.sectionLabel %}
-      <p class="text-xs uppercase tracking-[0.45em] text-slate-500">{{ config.sectionLabel }}</p>
+      <p class="section-kicker">{{ config.sectionLabel }}</p>
       {% endif %}
       {% if config.sectionTitle %}
-      <h2 class="text-3xl font-semibold text-slate-100">{{ config.sectionTitle }}</h2>
+      <h2 class="font-serif text-4xl text-stone-900">{{ config.sectionTitle }}</h2>
       {% endif %}
-      <div class="grid gap-4 sm:grid-cols-2">
+      <div class="grid gap-3 sm:grid-cols-2">
         {% for link in links %}
         <a
           href="{{ link.href }}"
           target="_blank"
           rel="noopener"
-          class="glow-card flex flex-col gap-2 border-slate-700/60"
+          class="rounded-2xl border border-stone-300 bg-stone-100/70 px-5 py-4 text-base font-medium text-stone-700 hover:border-stone-500 hover:text-stone-950"
         >
-          <h3 class="text-lg font-semibold text-slate-100">{{ link.label }}</h3>
+          {{ link.label }}
         </a>
         {% endfor %}
       </div>
