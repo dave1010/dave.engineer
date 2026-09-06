@@ -52,9 +52,13 @@ const readJSON = async <T>(req: Request): Promise<T | null> => {
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const apiKey = env.GROK_KEY?.trim() || env.GROQ_API_KEY?.trim();
   if (!apiKey) {
-    return json({ error: "Missing binding 'GROK_KEY' or 'GROQ_API_KEY' on this deployment." }, 500, {
-      "X-Missing-Binding": "GROK_KEY,GROQ_API_KEY",
-    });
+    return json(
+      { error: "Missing binding 'GROK_KEY' or 'GROQ_API_KEY' on this deployment." },
+      500,
+      {
+        "X-Missing-Binding": "GROK_KEY,GROQ_API_KEY",
+      },
+    );
   }
 
   const payload = await readJSON<ChatPayload>(request);
@@ -72,8 +76,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   for (const entry of messages) {
     if (!entry || typeof entry !== "object") continue;
     const message = entry as Record<string, unknown>;
-    const role =
-      typeof message.role === "string" ? message.role.trim().toLowerCase() : "";
+    const role = typeof message.role === "string" ? message.role.trim().toLowerCase() : "";
     const content = message.content;
     if (role !== "user" && role !== "assistant") continue;
     if (typeof content !== "string" || content.trim() === "") continue;
