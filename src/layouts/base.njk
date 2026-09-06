@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-950">
+<html lang="en" class="h-full bg-stone-950">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap"
     rel="stylesheet"
   >
   <link rel="stylesheet" href="/style.css">
@@ -21,51 +21,34 @@
     {{ headExtra | safe }}
   {% endif %}
 </head>
-<body class="relative min-h-screen overflow-x-hidden">
-  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
-    <div class="grid-overlay"></div>
-    <div class="absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-sky-400/20 blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-fuchsia-500/20 blur-3xl"></div>
-    <svg class="absolute -top-20 right-0 h-[540px] w-[540px] opacity-40" viewBox="0 0 400 400" fill="none">
-      <defs>
-        <linearGradient id="diagonalGradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#7D5AF0" stop-opacity="0.6" />
-          <stop offset="50%" stop-color="#13C2C2" stop-opacity="0.3" />
-          <stop offset="100%" stop-color="#19FFB6" stop-opacity="0.2" />
-        </linearGradient>
-      </defs>
-      <path d="M0 140 L400 0 L400 260 L0 400 Z" fill="url(#diagonalGradient)" />
-      <path d="M-40 120 L400 -20" stroke="#13C2C2" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="10 14" />
-      <path d="M-60 220 L420 60" stroke="#7D5AF0" stroke-width="1.5" stroke-opacity="0.5" stroke-dasharray="6 12" />
-    </svg>
-  </div>
-  <div class="relative z-10 flex min-h-screen flex-col">
-    <header class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 pb-8 pt-10 sm:flex-row sm:items-center sm:justify-between sm:px-10">
-      <a href="/" class="text-sm font-semibold uppercase tracking-[0.35em] text-slate-200 transition hover:text-lime-300">
+<body class="min-h-screen">
+  <div class="flex min-h-screen flex-col">
+    <header class="mx-auto flex w-full max-w-6xl flex-col items-start gap-4 border-b border-stone-800 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+      <a href="/" class="font-serif text-lg font-semibold text-stone-100 transition hover:text-orange-300">
         dave.engineer
       </a>
       {% if navigation and navigation | length %}
-      <nav class="flex flex-wrap items-center gap-6 text-sm font-medium text-slate-200/90">
+      <nav class="flex flex-wrap items-center gap-5 text-sm text-stone-400">
         {% for link in navigation %}
-        <a class="hover:text-lime-300" href="{{ link.href }}">{{ link.label }}</a>
+        <a class="hover:text-stone-100" href="{{ link.href }}">{{ link.label }}</a>
         {% endfor %}
       </nav>
       {% endif %}
     </header>
-    <main class="flex-1">
+    <div class="flex-1">
       {{ content | safe }}
-    </main>
-    <footer class="border-t border-slate-800/40 bg-slate-950/80">
-      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-6 py-10 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-10">
-        <nav class="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-300">
-          <a class="hover:text-lime-300" href="/">dave.engineer</a>
+    </div>
+    <footer class="border-t border-stone-800">
+      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-6 py-8 text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <nav class="flex flex-wrap items-center gap-5 text-sm text-stone-400">
+          <a class="hover:text-stone-100" href="/">dave.engineer</a>
           {% if navigation and navigation | length %}
             {% for link in navigation %}
-            <a class="hover:text-lime-300" href="{{ link.href }}">{{ link.label }}</a>
+            <a class="hover:text-stone-100" href="{{ link.href }}">{{ link.label }}</a>
             {% endfor %}
           {% endif %}
         </nav>
-        <p class="text-xs text-slate-500">© Dave Hulbert</p>
+        <p class="text-xs">© Dave Hulbert</p>
       </div>
     </footer>
   </div>

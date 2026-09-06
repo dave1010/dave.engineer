@@ -10,106 +10,71 @@
   }
 
   body {
-    @apply min-h-screen bg-slate-950 font-sans text-slate-100 antialiased selection:bg-sky-500/30 selection:text-slate-100;
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(125, 90, 240, 0.15), rgba(14, 23, 42, 0.1) 45%),
-      radial-gradient(circle at 80% 10%, rgba(19, 194, 194, 0.25), rgba(6, 11, 19, 0.05) 50%),
-      radial-gradient(circle at 50% 90%, rgba(148, 240, 90, 0.14), rgba(15, 23, 42, 0.1) 55%),
-      linear-gradient(180deg, rgba(10, 10, 20, 0.95), rgba(5, 9, 18, 0.92));
-    background-attachment: fixed;
+    @apply min-h-screen bg-stone-950 font-sans text-stone-200 antialiased selection:bg-orange-300 selection:text-stone-950;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
   }
 
   a {
     @apply transition-colors duration-150;
   }
 
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-orange-300;
+  }
+
   code {
-    @apply rounded-md bg-slate-900/70 px-1 py-0.5 font-mono text-sky-300;
+    @apply rounded-sm bg-stone-900 px-1 py-0.5 font-mono text-orange-200;
   }
 
   .prose code::before,
   .prose code::after {
     content: none;
   }
+
+  .prose {
+    @apply text-stone-300;
+  }
+
+  .prose :where(h1, h2, h3, h4, strong, th) {
+    @apply text-stone-100;
+  }
+
+  .prose :where(a) {
+    @apply text-orange-200 decoration-orange-400/60 underline-offset-4 hover:text-orange-100;
+  }
+
+  .prose :where(blockquote) {
+    @apply border-stone-700 text-stone-400;
+  }
 }
 
 @layer components {
-  .glow-card {
-    @apply relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 p-6 shadow-glow transition-transform duration-300 ease-out;
+  .section-heading {
+    @apply font-serif text-3xl font-semibold tracking-tight text-stone-100 sm:text-4xl;
   }
 
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    inset: -40% -20%;
-    background: conic-gradient(
-      from 90deg,
-      rgba(125, 90, 240, 0.35),
-      rgba(19, 194, 194, 0.25),
-      rgba(25, 255, 182, 0.2),
-      rgba(125, 90, 240, 0.35)
-    );
-    opacity: 0.35;
-    filter: blur(60px);
-    transform: rotate(15deg);
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  .glow-card:hover {
-    transform: translateY(-6px) scale(1.01);
-  }
-
-  .glow-card:hover::before {
-    opacity: 0.6;
+  .text-link {
+    @apply inline-flex items-center gap-2 border-b border-orange-400/60 pb-1 text-sm font-medium text-stone-100 transition hover:border-orange-300 hover:text-orange-200;
   }
 
   .terminal-panel {
-    @apply relative overflow-hidden rounded-3xl border border-lime-400/40 bg-slate-950/80 font-mono text-lime-200 shadow-glow;
-    box-shadow:
-      inset 0 0 40px rgba(56, 189, 248, 0.1),
-      0 0 80px rgba(125, 90, 240, 0.25);
-  }
-
-  .terminal-panel::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(148, 240, 90, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 240, 90, 0.03) 1px, transparent 1px);
-    background-size: 0.75rem 0.75rem;
-    mix-blend-mode: screen;
-    opacity: 0.8;
-    pointer-events: none;
+    @apply overflow-hidden border border-stone-700 bg-[#0b0d0c] font-mono text-stone-300;
   }
 
   .terminal-header {
-    @apply flex items-center gap-2 border-b border-lime-400/30 bg-slate-900/60 px-6 py-3;
-  }
-
-  .terminal-dot {
-    @apply inline-block h-3 w-3 rounded-full;
-    box-shadow: 0 0 10px rgba(148, 240, 90, 0.4);
-  }
-
-  .terminal-dot--close {
-    background-color: #ff5f57;
-    box-shadow: 0 0 8px rgba(255, 95, 87, 0.65);
-  }
-
-  .terminal-dot--minimize {
-    background-color: #febb2e;
-    box-shadow: 0 0 8px rgba(254, 187, 46, 0.65);
-  }
-
-  .terminal-dot--zoom {
-    background-color: #28c840;
-    box-shadow: 0 0 8px rgba(40, 200, 64, 0.65);
+    @apply border-b border-stone-800 px-5 py-3 text-xs text-stone-500;
   }
 
   .terminal-body {
-    @apply flex flex-col gap-0 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
+    @apply flex min-h-64 max-h-[32rem] flex-col gap-0 overflow-y-auto px-5 py-5 text-sm leading-relaxed;
   }
 
   .terminal-output {
@@ -121,15 +86,15 @@
   }
 
   .terminal-line__prompt {
-    @apply select-none text-lime-200/80;
+    @apply select-none text-orange-300;
   }
 
   .terminal-line__command {
-    @apply text-fuchsia-300;
+    @apply text-stone-100;
   }
 
   .terminal-block {
-    @apply whitespace-pre-wrap break-words text-lime-100/90;
+    @apply whitespace-pre-wrap break-words text-stone-400;
     margin: 0;
   }
 
@@ -143,8 +108,8 @@
   }
 
   .terminal-input {
-    @apply flex-1 bg-transparent font-mono text-sm text-lime-100 placeholder:text-lime-100/40 focus:outline-none;
-    caret-color: rgba(186, 230, 253, 0.9);
+    @apply flex-1 bg-transparent font-mono text-sm text-stone-100 placeholder:text-stone-600 focus:outline-none;
+    caret-color: #fdba74;
   }
 
   .terminal-block--pending {
@@ -160,66 +125,6 @@
   }
 
   .terminal-link {
-    @apply text-sm font-medium text-lime-100 transition hover:text-sky-200;
-  }
-
-  .skew-panel {
-    clip-path: polygon(0% 6%, 100% 0%, 100% 94%, 0% 100%);
-  }
-
-  .grid-overlay {
-    position: absolute;
-    inset: -50% -50%;
-    background-image:
-      linear-gradient(rgba(125, 90, 240, 0.2) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(19, 194, 194, 0.2) 1px, transparent 1px);
-    background-size: 90px 90px;
-    opacity: 0.15;
-    animation: gridShift 16s linear infinite;
-    pointer-events: none;
-  }
-
-  .accent-stripe {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .accent-stripe::before {
-    content: "";
-    position: absolute;
-    inset: -20px -40px;
-    background: linear-gradient(135deg, rgba(125, 90, 240, 0.6), rgba(19, 194, 194, 0.3));
-    filter: blur(60px);
-    opacity: 0.55;
-    transform: skewY(-6deg);
-    z-index: -1;
-  }
-}
-
-@layer utilities {
-  .perspective-1200 {
-    perspective: 1200px;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-
-  .parallax {
-    position: relative;
-    transform-style: preserve-3d;
-  }
-
-  .parallax-layer {
-    position: absolute;
-    inset: 0;
-    will-change: transform;
-    pointer-events: none;
-  }
-
-  .dot-matrix {
-    background-image: radial-gradient(rgba(148, 240, 90, 0.35) 1px, transparent 1px);
-    background-size: 8px 8px;
-    opacity: 0.5;
+    @apply text-sm font-medium text-orange-200 transition hover:text-orange-100;
   }
 }
