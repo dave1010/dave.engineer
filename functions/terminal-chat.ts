@@ -3,7 +3,6 @@ import type { TerminalPromptEnv } from "./terminal-system-prompt";
 import { buildTerminalSystemPrompt } from "./terminal-system-prompt";
 
 type Env = TerminalPromptEnv & {
-  GROK_KEY?: string;
   GROQ_API_KEY?: string;
   /** Optional: override to point at CF AI Gateway or a mock */
   GROQ_API_URL?: string;
@@ -50,10 +49,10 @@ const readJSON = async <T>(req: Request): Promise<T | null> => {
 
 /* ---------- POST (proxy to Groq) ---------- */
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  const apiKey = env.GROK_KEY?.trim() || env.GROQ_API_KEY?.trim();
+  const apiKey = env.GROQ_API_KEY?.trim();
   if (!apiKey) {
-    return json({ error: "Missing binding 'GROK_KEY' or 'GROQ_API_KEY' on this deployment." }, 500, {
-      "X-Missing-Binding": "GROK_KEY,GROQ_API_KEY",
+    return json({ error: "Missing binding 'GROQ_API_KEY' on this deployment." }, 500, {
+      "X-Missing-Binding": "GROQ_API_KEY",
     });
   }
 
@@ -72,8 +71,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   for (const entry of messages) {
     if (!entry || typeof entry !== "object") continue;
     const message = entry as Record<string, unknown>;
-    const role =
-      typeof message.role === "string" ? message.role.trim().toLowerCase() : "";
+    const role = typeof message.role === "string" ? message.role.trim().toLowerCase() : "";
     const content = message.content;
     if (role !== "user" && role !== "assistant") continue;
     if (typeof content !== "string" || content.trim() === "") continue;
