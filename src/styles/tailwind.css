@@ -6,25 +6,31 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    @apply min-h-screen bg-slate-950 font-sans text-slate-100 antialiased selection:bg-sky-500/30 selection:text-slate-100;
+    @apply min-h-screen bg-amber-50 font-sans text-slate-950 antialiased selection:bg-blue-200;
     background-image:
-      radial-gradient(circle at 20% 20%, rgba(125, 90, 240, 0.15), rgba(14, 23, 42, 0.1) 45%),
-      radial-gradient(circle at 80% 10%, rgba(19, 194, 194, 0.25), rgba(6, 11, 19, 0.05) 50%),
-      radial-gradient(circle at 50% 90%, rgba(148, 240, 90, 0.14), rgba(15, 23, 42, 0.1) 55%),
-      linear-gradient(180deg, rgba(10, 10, 20, 0.95), rgba(5, 9, 18, 0.92));
-    background-attachment: fixed;
+      linear-gradient(rgba(30, 41, 59, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 41, 59, 0.04) 1px, transparent 1px),
+      radial-gradient(circle at 95% 0%, rgba(249, 115, 22, 0.18), transparent 28%),
+      radial-gradient(circle at 0% 20%, rgba(37, 99, 235, 0.13), transparent 30%),
+      linear-gradient(180deg, #fffaf0, #fff7e6);
+    background-size:
+      24px 24px,
+      24px 24px,
+      auto,
+      auto,
+      auto;
   }
 
   a {
-    @apply transition-colors duration-150;
+    @apply transition-colors duration-100;
   }
 
   code {
-    @apply rounded-md bg-slate-900/70 px-1 py-0.5 font-mono text-sky-300;
+    @apply rounded-sm border border-slate-300 bg-white px-1 py-0.5 font-mono text-blue-700;
   }
 
   .prose code::before,
@@ -34,82 +40,57 @@
 }
 
 @layer components {
-  .glow-card {
-    @apply relative overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 p-6 shadow-glow transition-transform duration-300 ease-out;
+  .paper-panel {
+    @apply rounded-none border-[3px] border-slate-900 bg-white shadow-[8px_8px_0_0_#1e293b];
   }
 
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    inset: -40% -20%;
-    background: conic-gradient(
-      from 90deg,
-      rgba(125, 90, 240, 0.35),
-      rgba(19, 194, 194, 0.25),
-      rgba(25, 255, 182, 0.2),
-      rgba(125, 90, 240, 0.35)
-    );
-    opacity: 0.35;
-    filter: blur(60px);
-    transform: rotate(15deg);
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+  .section-kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.26em] text-blue-700;
   }
 
-  .glow-card:hover {
-    transform: translateY(-6px) scale(1.01);
+  .text-link {
+    @apply text-blue-700 underline decoration-blue-700 underline-offset-4 hover:text-orange-600 hover:decoration-orange-600;
   }
 
-  .glow-card:hover::before {
-    opacity: 0.6;
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-none border-[3px] border-slate-900 bg-blue-700 px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-white hover:bg-orange-600;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-none border-[3px] border-slate-900 bg-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-slate-900 hover:bg-slate-900 hover:text-white;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-none border-2 border-slate-900 bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-900;
   }
 
   .terminal-panel {
-    @apply relative overflow-hidden rounded-3xl border border-lime-400/40 bg-slate-950/80 font-mono text-lime-200 shadow-glow;
-    box-shadow:
-      inset 0 0 40px rgba(56, 189, 248, 0.1),
-      0 0 80px rgba(125, 90, 240, 0.25);
-  }
-
-  .terminal-panel::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(148, 240, 90, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 240, 90, 0.03) 1px, transparent 1px);
-    background-size: 0.75rem 0.75rem;
-    mix-blend-mode: screen;
-    opacity: 0.8;
-    pointer-events: none;
+    @apply rounded-none border-[3px] border-slate-900 bg-slate-950 font-mono text-amber-100;
+    box-shadow: 8px 8px 0 #f97316;
   }
 
   .terminal-header {
-    @apply flex items-center gap-2 border-b border-lime-400/30 bg-slate-900/60 px-6 py-3;
+    @apply flex items-center gap-2 border-b-2 border-slate-700 bg-slate-900 px-5 py-3;
   }
 
   .terminal-dot {
-    @apply inline-block h-3 w-3 rounded-full;
-    box-shadow: 0 0 10px rgba(148, 240, 90, 0.4);
+    @apply inline-block h-2.5 w-2.5 rounded-full;
   }
 
   .terminal-dot--close {
-    background-color: #ff5f57;
-    box-shadow: 0 0 8px rgba(255, 95, 87, 0.65);
+    @apply bg-orange-500;
   }
 
   .terminal-dot--minimize {
-    background-color: #febb2e;
-    box-shadow: 0 0 8px rgba(254, 187, 46, 0.65);
+    @apply bg-amber-300;
   }
 
   .terminal-dot--zoom {
-    background-color: #28c840;
-    box-shadow: 0 0 8px rgba(40, 200, 64, 0.65);
+    @apply bg-blue-500;
   }
 
   .terminal-body {
-    @apply flex flex-col gap-0 px-6 py-6 text-sm leading-relaxed text-lime-200/90;
+    @apply flex flex-col gap-1 px-5 py-5 text-sm leading-relaxed;
   }
 
   .terminal-output {
@@ -121,21 +102,16 @@
   }
 
   .terminal-line__prompt {
-    @apply select-none text-lime-200/80;
+    @apply select-none text-orange-300;
   }
 
   .terminal-line__command {
-    @apply text-fuchsia-300;
+    @apply text-white;
   }
 
   .terminal-block {
-    @apply whitespace-pre-wrap break-words text-lime-100/90;
+    @apply whitespace-pre-wrap break-words text-amber-100;
     margin: 0;
-  }
-
-  .terminal-form {
-    @apply pt-0;
-    border-top-width: 0;
   }
 
   .terminal-input-row {
@@ -143,8 +119,7 @@
   }
 
   .terminal-input {
-    @apply flex-1 bg-transparent font-mono text-sm text-lime-100 placeholder:text-lime-100/40 focus:outline-none;
-    caret-color: rgba(186, 230, 253, 0.9);
+    @apply flex-1 bg-transparent font-mono text-sm text-white placeholder:text-slate-400 focus:outline-none;
   }
 
   .terminal-block--pending {
@@ -152,74 +127,6 @@
   }
 
   .terminal-block--error {
-    @apply text-red-300;
-  }
-
-  .terminal-links {
-    @apply mt-4 flex flex-col gap-1;
-  }
-
-  .terminal-link {
-    @apply text-sm font-medium text-lime-100 transition hover:text-sky-200;
-  }
-
-  .skew-panel {
-    clip-path: polygon(0% 6%, 100% 0%, 100% 94%, 0% 100%);
-  }
-
-  .grid-overlay {
-    position: absolute;
-    inset: -50% -50%;
-    background-image:
-      linear-gradient(rgba(125, 90, 240, 0.2) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(19, 194, 194, 0.2) 1px, transparent 1px);
-    background-size: 90px 90px;
-    opacity: 0.15;
-    animation: gridShift 16s linear infinite;
-    pointer-events: none;
-  }
-
-  .accent-stripe {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .accent-stripe::before {
-    content: "";
-    position: absolute;
-    inset: -20px -40px;
-    background: linear-gradient(135deg, rgba(125, 90, 240, 0.6), rgba(19, 194, 194, 0.3));
-    filter: blur(60px);
-    opacity: 0.55;
-    transform: skewY(-6deg);
-    z-index: -1;
-  }
-}
-
-@layer utilities {
-  .perspective-1200 {
-    perspective: 1200px;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-
-  .parallax {
-    position: relative;
-    transform-style: preserve-3d;
-  }
-
-  .parallax-layer {
-    position: absolute;
-    inset: 0;
-    will-change: transform;
-    pointer-events: none;
-  }
-
-  .dot-matrix {
-    background-image: radial-gradient(rgba(148, 240, 90, 0.35) 1px, transparent 1px);
-    background-size: 8px 8px;
-    opacity: 0.5;
+    @apply text-red-400;
   }
 }

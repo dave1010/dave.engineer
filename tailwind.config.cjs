@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: [
-          '"Space Grotesk"',
+          '"Barlow Condensed"',
           '"Poppins"',
           "ui-sans-serif",
           "system-ui",

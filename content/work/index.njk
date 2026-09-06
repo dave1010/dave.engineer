@@ -12,56 +12,33 @@ title: Work - Dave Hulbert
     {% set otherItems = otherItems.concat([item]) %}
   {% endif %}
 {% endfor %}
-<main class="px-6 py-16 sm:px-10">
-  <div class="mx-auto flex max-w-5xl flex-col gap-16">
-    <header class="space-y-6 text-center sm:text-left">
-      <a
-        class="mx-auto inline-flex items-center gap-2 text-sm font-medium text-sky-400 transition hover:text-sky-300 sm:mx-0"
-        href="/"
-      >
-        <span aria-hidden="true">←</span>
-        Back to home
-      </a>
-      <div class="space-y-4">
-        <h1 class="text-4xl font-semibold tracking-tight text-slate-100">Selected work</h1>
-        <p class="text-lg text-slate-300">
-          A collection of experiments, products, and collaborations. Featured projects showcase the tools I'm most
-          excited about right now, with more explorations listed below.
-        </p>
+<main class="px-6 py-12 sm:px-8">
+  <div class="mx-auto flex max-w-5xl flex-col gap-12">
+    <header class="space-y-5">
+      <a class="text-sm font-medium text-stone-600 transition hover:text-stone-900" href="/">← Back to home</a>
+      <div class="space-y-3">
+        <h1 class="text-4xl font-semibold tracking-tight text-stone-900">Selected work</h1>
+        <p class="text-lg text-stone-700">A collection of products, experiments, and collaborations.</p>
       </div>
     </header>
 
     {% if featuredItems | length %}
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">Featured</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
+    <section class="space-y-5">
+      <h2 class="text-2xl font-semibold tracking-tight text-stone-900">Featured</h2>
+      <div class="grid gap-5 sm:grid-cols-2">
         {% for item in featuredItems %}
-          {{ renderWorkCard(item, {
-            variant: "standard",
-            primaryLabel: "Learn more",
-            websiteLabel: "Visit site",
-            githubLabel: "View source",
-            articleClasses: "flex h-full flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40",
-            titleClasses: "text-xl font-semibold text-slate-100",
-            titleLinkClasses: "transition hover:text-sky-300",
-            ctaContainerClasses: "flex flex-wrap gap-3 text-sm"
-          }) | safe }}
+          {{ renderWorkCard(item, { variant: "featured", primaryLabel: "Learn more", websiteLabel: "Visit site", githubLabel: "View source" }) | safe }}
         {% endfor %}
       </div>
     </section>
     {% endif %}
 
     {% if otherItems | length %}
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold tracking-tight text-slate-100">More work</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <section class="space-y-5">
+      <h2 class="text-2xl font-semibold tracking-tight text-stone-900">More work</h2>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {% for item in otherItems %}
-          {{ renderWorkCard(item, {
-            variant: "standard",
-            primaryLabel: "Learn more",
-            websiteLabel: "Visit site",
-            githubLabel: "View source"
-          }) | safe }}
+          {{ renderWorkCard(item, { variant: "standard", primaryLabel: "Learn more", websiteLabel: "Visit site", githubLabel: "View source" }) | safe }}
         {% endfor %}
       </div>
     </section>
